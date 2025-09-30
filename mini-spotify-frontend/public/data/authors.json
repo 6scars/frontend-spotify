@@ -4,5 +4,11 @@
         "author":"Kevin MacLeod",
         "biograph":"making music",
         "image":"Kevin-MacLeod.jpg"
+    },
+        {
+        "id":2,
+        "author":"human gazpacho",
+        "biograph":"human gazpacho is an ambient music project that came about when  I needed specific music for a TTRPG game. I'd used FMA before in the past for video projects, and thought they were the obvious place to give some modicum of talent back as a thanks of sorts. Some day, I'd like to score a film or a video game. If you've got a project going and you like my sound, please reach out at clay@claylomneth.com Also, love to see what people do with my work, so send me a link to your project at the email above. But most of all, thank you for listening. It means the world.",
+        "image":"human gazpacho.jpg"
     }
 ]

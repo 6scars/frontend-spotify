@@ -7,10 +7,11 @@ import Play from "./Play/Play.jsx";
 import "./App.css";
 
 export default function MiniSpotify() {
+  console.log()
   const [song, setSong] = useState(null);
   const [author, setAuthor] = useState(null);
   const [show, setShow] = useState(false);
-  const [latest, setLatest] = useState([]);
+  const [latest, setLatest] = useState(JSON.parse(localStorage.getItem('latest'))|| []);
   
 
   return (

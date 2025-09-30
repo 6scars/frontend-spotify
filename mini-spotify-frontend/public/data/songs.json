@@ -5,8 +5,12 @@
     "songName": "That Zen Moment",
     "type": ["Calming", "Mystical", "Relaxed"],
     "file": "That-Zen-Moment.mp3",
-    "songImage":"That-Zen-Moment.png",
-    "credit": " \"That Zen Moment \" Kevin MacLeod (incompetech.com) Licensed under Creative Commons: By Attribution 4.0 License http://creativecommons.org/licenses/by/4.0/"
+    "songImage": "That-Zen-Moment.png",
+    "credit": " \"That Zen Moment \" Kevin MacLeod (incompetech.com) Licensed under Creative Commons: By Attribution 4.0 License http://creativecommons.org/licenses/by/4.0/",
+    "album": {
+      "albumName": "",
+      "albumId": null
+    }
   },
   {
     "id": 2,
@@ -14,8 +18,12 @@
     "songName": "Sergio's Magic Dustbin",
     "type": ["Calming", "Mystical", "Relaxed"],
     "file": "Sergio-s-Magic-Dustbin.mp3",
-    "songImage":"Sergio-s-Magic-Dustbin.png",
-    "credit": "\"Sergio's Magic Dustbin \" Kevin MacLeod (incompetech.com) Licensed under Creative Commons: By Attribution 4.0 License http://creativecommons.org/licenses/by/4.0/"
+    "songImage": "Sergio-s-Magic-Dustbin.png",
+    "credit": "\"Sergio's Magic Dustbin \" Kevin MacLeod (incompetech.com) Licensed under Creative Commons: By Attribution 4.0 License http://creativecommons.org/licenses/by/4.0/",
+    "album": {
+      "albumName": "",
+      "albumId": null
+    }
   },
   {
     "id": 3,
@@ -23,8 +31,12 @@
     "songName": "Mesmerizing Galaxy",
     "type": ["Calming", "Mystical", "Relaxed"],
     "file": "Mesmerizing-Galaxy-Loop.mp3",
-    "songImage":"Mesmerizing-Galaxy.png",
-    "credit": "\"Mesmerizing Galaxy \" Kevin MacLeod (incompetech.com) Licensed under Creative Commons: By Attribution 4.0 License http://creativecommons.org/licenses/by/4.0/"
+    "songImage": "Mesmerizing-Galaxy.png",
+    "credit": "\"Mesmerizing Galaxy \" Kevin MacLeod (incompetech.com) Licensed under Creative Commons: By Attribution 4.0 License http://creativecommons.org/licenses/by/4.0/",
+    "album": {
+      "albumName": "",
+      "albumId": null
+    }
   },
   {
     "id": 4,
@@ -32,7 +44,50 @@
     "songName": "Lord of the Rangs",
     "type": ["Calming", "Mystical", "Relaxed"],
     "file": "Lord-of-the-Rangs.mp3",
-    "songImage":"Lord-of-the-Rangs.png",
-    "credit": "\"Lord of the Rangs \" Kevin MacLeod (incompetech.com) Licensed under Creative Commons: By Attribution 4.0 License http://creativecommons.org/licenses/by/4.0/"
+    "songImage": "Lord-of-the-Rangs.png",
+    "credit": "\"Lord of the Rangs \" Kevin MacLeod (incompetech.com) Licensed under Creative Commons: By Attribution 4.0 License http://creativecommons.org/licenses/by/4.0/",
+    "album": {
+      "albumName": "",
+      "albumId": null
+    }
+  },
+  {
+    "id": 5,
+    "authors": [2],
+    "songName": "The Road to the Black Rose Tavern",
+    "type": ["Electronic", "Ambient Electronic", "Minimal Electronic"],
+    "file": "human-gazpacho-The-Road-to-the-Black-Rose-Tavern.mp3",
+    "songImage": "Arcane-Resonance.jpg",
+    "credit": "The Road to the Black Rose Tavern by human gazpacho is licensed under a Attribution 4.0 International License.",
+    "album": {
+      "albumName": "Arcane Resonance",
+      "albumId": 1
+    }
+  },
+  {
+    "id": 6,
+    "authors": [2],
+    "songName": "Planes of Purple Dust",
+    "type": ["Electronic", "Ambient Electronic", "Minimal Electronic"],
+    "file": "human gazpacho - Planes of Purple Dust.mp3",
+    "songImage": "Arcane-Resonance.jpg",
+    "credit": "Planes of Purple Dust by human gazpacho is licensed under a Attribution 4.0 International License.",
+    "album": {
+      "albumName": "Arcane Resonance",
+      "albumId": 1
+    }
+  },
+  {
+    "id": 7,
+    "authors": [2],
+    "songName": "A Storm at Camp",
+    "type": ["Electronic", "Ambient Electronic", "Minimal Electronic"],
+    "file": "human gazpacho - A Storm at Camp.mp3",
+    "songImage": "Arcane-Resonance.jpg",
+    "credit": "A Storm at Camp by human gazpacho is licensed under a Attribution 4.0 International License.",
+    "album": {
+      "albumName": "Arcane Resonance",
+      "albumId": 1
+    }
   }
 ]

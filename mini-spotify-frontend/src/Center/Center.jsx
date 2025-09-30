@@ -1,4 +1,4 @@
-import Music from "./Music.jsx";
+import Music from "./Music/Music.jsx";
 import Description from "./Description.jsx";
 import "./Center.css";
 
