@@ -3,12 +3,12 @@
         "id":1,
         "userId":1,
         "name":"favourite",
-        "songs":[2,3]
+        "songsId":[2,6]
     },
     {
         "id":2,
         "userId":1,
         "name":"helps me sleep",
-        "songs":[1,4]
+        "songsId":[1,4,5,7,2]
     }
 ]

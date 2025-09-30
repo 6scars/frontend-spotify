@@ -2,12 +2,13 @@ import Music from "./Music/Music.jsx";
 import Description from "./Description.jsx";
 import "./Center.css";
 
-import songs from "../../public/data/songs.json";
-import authors from "../../public/data/authors.json";
+
 
 export default function Center({
   song,
   author,
+  songs,
+  authors,
   setSong,
   setAuthor,
   show,
