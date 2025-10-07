@@ -74,11 +74,12 @@ export default function Music({
 
       <div className="main-songs ">
         <Latest latest={latest} />
+        
         {Array.from({ length: 4 }).map((_, i) => {
           return (
             <div key={i} className="songs cursor-pointer">
               <div className="songs-title-container text-white font-bold">
-                <p className="songs__title">Preapared for You</p>
+                <p className="songs__title">Prepared for You</p>
               </div>
               <Songs songs={songs} authors={authors} chooseSong={chooseSong} />
             </div>

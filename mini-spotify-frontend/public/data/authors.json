@@ -1,14 +1,50 @@
 [
-    {
-        "id":1,
-        "author":"Kevin MacLeod",
-        "biograph":"making music",
-        "image":"Kevin-MacLeod.jpg"
-    },
-        {
-        "id":2,
-        "author":"human gazpacho",
-        "biograph":"human gazpacho is an ambient music project that came about when  I needed specific music for a TTRPG game. I'd used FMA before in the past for video projects, and thought they were the obvious place to give some modicum of talent back as a thanks of sorts. Some day, I'd like to score a film or a video game. If you've got a project going and you like my sound, please reach out at clay@claylomneth.com Also, love to see what people do with my work, so send me a link to your project at the email above. But most of all, thank you for listening. It means the world.",
-        "image":"human gazpacho.jpg"
-    }
+  {
+    "id": 1,
+    "author": "Kevin MacLeod",
+    "biograph": "making music",
+    "image": "Kevin-MacLeod.jpg"
+  },
+  {
+    "id": 2,
+    "author": "human gazpacho",
+    "biograph": "human gazpacho is an ambient music project that came about when  I needed specific music for a TTRPG game. I'd used FMA before in the past for video projects, and thought they were the obvious place to give some modicum of talent back as a thanks of sorts. Some day, I'd like to score a film or a video game. If you've got a project going and you like my sound, please reach out at clay@claylomneth.com Also, love to see what people do with my work, so send me a link to your project at the email above. But most of all, thank you for listening. It means the world.",
+    "image": "human gazpacho.jpg"
+  },
+  {
+    "id": 3,
+    "author": "Albert Beger",
+    "biograph": "Born in Turkey in 1959 and raised in Israel, Albert Beger’s musical sensibilities were informed from a young age by the vast cultural melting pot that surrounded him. The deeply diverse and eclectic range of sounds he heard offered a rich musical landscape upon which to draw continuing inspiration – a colorful palette of melody, harmony and rhythm that would impact his future direction as a composer and improviser.Albert’s eclectic tastes are evident in his own compositions. Listening to his energetic, soulful pieces one hears a confluence of styles. A “World Music” that the term “world music” simply doesn’t do justice to – bebop, hard bop and free jazz, contemporary classical and ethnic music, progressive rock and electronica – delivered in an indefinable style that is pure Albert Beger. And of course there’s that sound: free of border or limitations…a spark reaching beyond to grasp the fire of the Divine …a fearless, joyful noise that embraces experimentalism and tradition, and lyricism and frenzy, with equal passion, love and respect. Albert has spent years wood-shedding his instrument, a reflection of his penchant for self-discipline and auto-didactic study and an uncanny love for the saxophone and its seemingly endless aural possibilities. His formal education consists of a BA earned in Composition and Performance from the Berklee College of Music in Boston and a Masters in Music from the Rubin Academy of Music and Dance in Jerusalem. He currently holds teaching positions at the Rubin Academy and Haifa University and heads the Instrument and Performance Department at Muzik - School of Creation and Production in Tel Aviv.Albert Beger has recorded eight albums of original compositions since launching his professional career in 1991. He has also collaborated on numerous projects with both local and internationally acclaimed jazz musicians, playing in a wide range of challenging improvisational settings. The long list of musicians with whom he has traded riffs both on stage and in the studio include master instrumentalists such as William Parker and Hammid Drake; Harold Rubin, Asaf Sirkis and Gabriel Meyer; John Bostock, Hagi Fershtman, and Joelle Leandre; James Newton and Roman Kontzman; and composer Eric Shapira.Albert is the recipient of the Landau Award for Performing Arts (2005) and Israel’s highest honor for musicians, the prestigious Prime Minister’s Award for Composers (2009). Albert's new album Peacemaker is out on Anova Music at 2010.",
+    "image": "Albert Beger.jpg"
+  },
+  {
+    "id": 4,
+    "author": "Till Paradiso",
+    "biograph": "\"Till Paradiso\" Some musicians from the Band \"Checkie Brown\" playing jamming jazzy. Many Songs from \"Lobo Loco\" Saxophon: Till Kaz…",
+    "image": "Till Paradiso.jpg"
+  },
+  {
+    "id": 5,
+    "author": "Scott Fields",
+    "biograph": "Fields was born and raised in Chicago, Illinois. He started as a self-taught rock musician but soon was influenced by the musicians of the Association for the Advancement for Creative Musicians, which was active in the Hyde Park neighborhood in which he grew up. Later he studied classical guitar, jazz guitar, music composition and music theory. In 1970 Fields co-founded the power avant-jazz trio Life Rhythms. When the group disbanded two years later he played sporadically, but soon all but quit music until 1989. Since then he has performed and composed actively. His ensembles and partnerships have included such musicians as Marilyn Crispell, Hamid Drake, John Hollenbeck, Joseph Jarman, Myra Melford, Jeff Parker, and Elliott Sharp",
+    "image": "Scott-Fields.jpg"
+  },
+  {
+    "id": 6,
+    "author": "Koi-discovery",
+    "biograph": "",
+    "image": "Scott-Fields.jpg"
+  },
+  {
+    "id": 7,
+    "author": "pavlove.",
+    "biograph": "",
+    "image": "pavlove.jpg"
+  },
+  {
+    "id": 8,
+    "author": "BLACKBOX",
+    "biograph": "When using this music, please give proper credit. Example:[Music: BLACK BOX - Bird]. You are allowed to use the music without attribution, but you won’t be eligible to earn ad revenue from your video. If you want to monetize your content, make sure to include the credit in your YouTube video title or description. Not giving credit may result in the music distributor (who owns the rights) rejecting your YouTube Content ID dispute.",
+    "image": "21-35-14-309_250x250.jpg"
+  }
 ]

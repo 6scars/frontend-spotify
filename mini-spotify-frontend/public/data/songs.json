@@ -78,15 +78,133 @@
     }
   },
   {
-    "id": 7,
-    "authors": [2],
-    "songName": "A Storm at Camp",
-    "type": ["Electronic", "Ambient Electronic", "Minimal Electronic"],
-    "file": "human gazpacho - A Storm at Camp.mp3",
-    "songImage": "Arcane-Resonance.jpg",
-    "credit": "A Storm at Camp by human gazpacho is licensed under a Attribution 4.0 International License.",
+    "id": 8,
+    "authors": [3],
+    "songName": "What A Day",
+    "type": ["Jazz", "Free-Jazz", "Nu-Jazz"],
+    "file": "Albert Beger - What A Day.mp3",
+    "songImage": "Albert-Beger.jpg",
+    "credit": "What A Day by Albert Beger is licensed under a Attribution-NonCommercial-NoDerivatives (aka Music Sharing) 3.0 International License.",
     "album": {
-      "albumName": "Arcane Resonance",
+      "albumName": "Albert Beger's 5: Listening",
+      "albumId": 1
+    }
+  },
+  {
+    "id": 9,
+    "authors": [3],
+    "songName": "Shasha",
+    "type": ["Jazz", "Free-Jazz", "Nu-Jazz"],
+    "file": "Albert Beger - Shasha.mp3",
+    "songImage": "Albert-Beger.jpg",
+    "credit": "Shasha by Albert Beger is licensed under a Attribution-NonCommercial-NoDerivatives (aka Music Sharing) 3.0 International License.",
+    "album": {
+      "albumName": "Albert Beger's 5: Listening",
+      "albumId": 1
+    }
+  },
+  {
+    "id": 10,
+    "authors": [4],
+    "songName": "Did You see My Budgie (TP 062)",
+    "type": ["Jazz", "Free-Jazz", "Modern Jazz"],
+    "file": "Till Paradiso - Did You see My Budgie (TP 062).mp3",
+    "songImage": "Did you see My Budgie.jpg",
+    "credit": "Did You see My Budgie (TP 062) by Till Paradiso is licensed under a Attribution-NonCommercial-ShareAlike 4.0 International License.",
+    "album": {
+      "albumName": "Funny Around the Lake",
+      "albumId": 1
+    }
+  },
+  {
+    "id": 11,
+    "authors": [5],
+    "songName": "Santa on a Segway",
+    "type": ["Jazz", "Free-Jazz", "Jazz: Out"],
+    "file": "Scott Fields - Santa on a Segway.mp3",
+    "songImage": "Scott Fields.jpg",
+    "credit": "Santa on a Segway by Scott Fields is licensed under a Attribution-NonCommercial-NoDerivatives (aka Music Sharing) 3.0 International License.",
+    "album": {
+      "albumName": "Minaret Minuets",
+      "albumId": 1
+    }
+  },
+  {
+    "id": 12,
+    "authors": [5],
+    "songName": "Arana",
+    "type": ["Jazz", "Jazz:Vocal", "Jazz: Out"],
+    "file": "Jazz at Mladost Club - Arana.mp3",
+    "songImage": "Aranaa.jpg",
+    "credit": "Arana by Jazz at Mladost Club is licensed under a Attribution-NonCommercial-ShareAlike 3.0 International License.",
+    "album": {
+      "albumName": "Jazz Night",
+      "albumId": 1
+    }
+  },
+  {
+    "id": 13,
+    "authors": [6],
+    "songName": "Beer-Blues",
+    "type": ["Blues", "Instrumental"],
+    "file": "Koi-discovery - Beer-Blues.mp3",
+    "songImage": "Beer-Blues.jpg",
+    "credit": "Beer-Blues by Koi-discovery is licensed under a CC0 1.0 Universal License.",
+    "album": {
+      "albumName": "Gaz Mask",
+      "albumId": 1
+    }
+  },
+  {
+    "id": 14,
+    "authors": [7],
+    "songName": "Тоска",
+    "type": ["Blues", "Instrumental"],
+    "file": "pavlove. - Тоска.mp3",
+    "songImage": "Тоска.jpg",
+    "credit": "Тоска by pavlove. is licensed under a Attribution-NonCommercial-ShareAlike License.",
+    "album": {
+      "albumName": "#2",
+      "albumId": 1
+    }
+  },
+  {
+    "id": 15,
+    "authors": [7],
+    "songName": "Forever Away",
+    "type": ["Blues", "Instrumental"],
+    "file": "pavlove. - Forever Away.mp3",
+    "songImage": "Тоска.jpg",
+    "credit": "Тоска by pavlove. is licensed under a Attribution-NonCommercial-ShareAlike License.",
+    "album": {
+      "albumName": "#2",
+      "albumId": 1
+    }
+  },
+
+  {
+    "id": 16,
+    "authors": [7],
+    "songName": "Разговор",
+    "type": ["Blues", "Instrumental"],
+    "file": "pavlove. - Разговор.mp3",
+    "songImage": "Тоска.jpg",
+    "credit": "Тоска by pavlove. is licensed under a Attribution-NonCommercial-ShareAlike License.",
+    "album": {
+      "albumName": "#2",
+      "albumId": 1
+    }
+  },
+  {
+    "id": 17,
+    "authors": [8],
+    "songName": "BLACK BOX - Legendary",
+    "type": ["Electronic"],
+    "file": "black-box-legendary-9509.mp3",
+    "songImage": "15-31-24-824_200x200.jpg",
+    "credit": "Legendary by BLACK BOX (CC BY 4.0)",
+    "album": {
+      "albumName": "#2",
       "albumId": 1
     }
   }
