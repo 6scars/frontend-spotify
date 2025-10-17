@@ -91,7 +91,7 @@ export default function ProgressBar({
         </div>
         <audio
           ref={audioRef}
-          src={`mini-spotify/data/songs/${song.file}`}
+          src={`https://rgmmwhkixprkskznqjcy.supabase.co/storage/v1/object/public/spotify/songs/${song.file}`}
           preload="metadata"
         />
         <div className="text-red-500  min-w-[50px]">{formatTime(duration)}</div>
