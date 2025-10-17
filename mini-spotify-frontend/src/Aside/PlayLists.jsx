@@ -20,7 +20,7 @@ export default function PlayLists({ playlist, choosePlaylist, songs }) {
             <img
               key={i}
               alt="playlist"
-              src={`mini-spotify/images/songPictures/${songsFinded[i].songImage}`}
+              src={`https://rgmmwhkixprkskznqjcy.supabase.co/storage/v1/object/public/spotify/images/songPictures/${songsFinded[i].songImage}`}
               className="h-full w-full object-cover"
             />
           ) : null;

@@ -9,7 +9,7 @@ export default function PlayLeftSection({song,author}) {
       >
         <img
           alt="song-image"
-          src={`mini-spotify/images/songPictures/${song.songImage}`}
+          src={`https://rgmmwhkixprkskznqjcy.supabase.co/storage/v1/object/public/spotify/images/songPictures/${song.songImage}`}
           className=" h-full w-full object-cover rounded-md"
         />
       </div>
@@ -30,7 +30,7 @@ export default function PlayLeftSection({song,author}) {
         <img
             className="h-[35px] cursor-pointer"
           alt="add-to-favorite"
-          src="mini-spotify/images/logos/addToFavoriteSong.svg"
+          src="https://rgmmwhkixprkskznqjcy.supabase.co/storage/v1/object/public/spotify/images/logos/addToFavoriteSong.svg"
         />
       </div>
     </div>

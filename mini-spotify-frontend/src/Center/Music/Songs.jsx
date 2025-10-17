@@ -17,7 +17,7 @@ export default function Songs({ songs, authors, chooseSong }) {
               <div className="song-image-container h-[75%] ">
                 <img
                   className="song__image"
-                  src={`mini-spotify/images/songPictures/${song.songImage}`}
+                  src={`https://rgmmwhkixprkskznqjcy.supabase.co/storage/v1/object/public/spotify/images/songPictures/${song.songImage}`}
                 ></img>
               </div>
 

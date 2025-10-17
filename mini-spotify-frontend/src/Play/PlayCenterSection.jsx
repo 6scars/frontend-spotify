@@ -38,7 +38,7 @@ export default function ProgressBar({
             onClick={handleLoop}
             className="h-[35px]  cursor-pointer"
             alt="loop-song"
-            src={`./mini-spotify/images/logos/loop${
+            src={`https://rgmmwhkixprkskznqjcy.supabase.co/storage/v1/object/public/spotify/images/logos/loop${
               loop ? "" : "Crossed"
             }Song.svg`}
           />
@@ -46,14 +46,14 @@ export default function ProgressBar({
         <button>
           <img
             alt="start-music"
-            src="/mini-spotify/images/logos/previousSong.svg"
+            src="https://rgmmwhkixprkskznqjcy.supabase.co/storage/v1/object/public/spotify/images/logos/previousSong.svg"
             className="w-10 h-full cursor-pointer"
           />
         </button>
         <button onClick={handlePlay}>
           <img
             alt="start-music"
-            src={`/mini-spotify/images/logos/${
+            src={`https://rgmmwhkixprkskznqjcy.supabase.co/storage/v1/object/public/spotify/images/logos/${
               play ? "pause" : "start"
             }Song.svg`}
             className="w-10 h-full cursor-pointer"
@@ -62,7 +62,7 @@ export default function ProgressBar({
         <button>
           <img
             alt="start-music"
-            src={`/mini-spotify/images/logos/nextSong.svg`}
+            src={`https://rgmmwhkixprkskznqjcy.supabase.co/storage/v1/object/public/spotify/images/logos/nextSong.svg`}
             className="w-10 h-full cursor-pointer"
           />
         </button>
@@ -71,7 +71,7 @@ export default function ProgressBar({
             onClick={handleLoop}
             className="h-[35px]  cursor-pointer"
             alt="loop-song"
-            src={`./mini-spotify/images/logos/loop${
+            src={`https://rgmmwhkixprkskznqjcy.supabase.co/storage/v1/object/public/spotify/images/logos/loop${
               loop ? "" : "Crossed"
             }Song.svg`}
           />
