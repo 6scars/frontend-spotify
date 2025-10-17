@@ -161,7 +161,7 @@
     "songName": "Тоска",
     "type": ["Blues", "Instrumental"],
     "file": "pavlove. - Тоска.mp3",
-    "songImage": "Тоска.jpg",
+    "songImage": "Tocka.jpg",
     "credit": "Тоска by pavlove. is licensed under a Attribution-NonCommercial-ShareAlike License.",
     "album": {
       "albumName": "#2",
@@ -174,7 +174,7 @@
     "songName": "Forever Away",
     "type": ["Blues", "Instrumental"],
     "file": "pavlove. - Forever Away.mp3",
-    "songImage": "Тоска.jpg",
+    "songImage": "Tocka.jpg",
     "credit": "Тоска by pavlove. is licensed under a Attribution-NonCommercial-ShareAlike License.",
     "album": {
       "albumName": "#2",
@@ -188,8 +188,8 @@
     "songName": "Разговор",
     "type": ["Blues", "Instrumental"],
     "file": "pavlove. - Разговор.mp3",
-    "songImage": "Тоска.jpg",
-    "credit": "Тоска by pavlove. is licensed under a Attribution-NonCommercial-ShareAlike License.",
+    "songImage": "Tocka.jpg",
+    "credit": "Разговор by pavlove. is licensed under a Attribution-NonCommercial-ShareAlike License.",
     "album": {
       "albumName": "#2",
       "albumId": 1
