@@ -5,6 +5,7 @@ import PlayLeftSection from "./PlayLeftSection.jsx";
 import "./Play.css";
 
 export default function Play( {song, author}) {
+  /*---------------- PLAYER CONTROLLER ----------------*/
   const audioRef = useRef(null);
 
   const [play, setPlay] = useState(false);
@@ -67,7 +68,6 @@ export default function Play( {song, author}) {
       setMuted(false);
       a.muted = false;
     }
-    console.log(a.muted);
   }
 
   function handleLoop() {
