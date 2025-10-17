@@ -1,9 +1,9 @@
-export default function Latest({latest}) {
+export default function Latest({latest, chooseSong}) {
   return (
     <div className="play-lists gap-2 grid grid-cols-3">
       {(latest || []).map((l) => {
         return (
-          <div key={l.id} className="playlist">
+          <div key={l.id} className="playlist" onClick={()=>{chooseSong(l.id)}}>
             <div className="playlist-image-container">
               <img
                 className="playlist__image"
