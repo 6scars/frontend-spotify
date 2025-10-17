@@ -1,6 +1,6 @@
 import "./Music.css";
-import Songs from "./Songs.jsx";
-import Latest from "./Latest.jsx";
+import Songs from "./Songs/Songs.jsx";
+import Latest from "./Songs/Latest.jsx";
 export default function Music({
   songs,
   authors,
@@ -34,10 +34,10 @@ export default function Music({
         if (prev.length === 6) {
           const newArray = [...prev];
           newArray.pop();
-          localStorage.setItem('latest',JSON.stringify([newSong, ...newArray]));
+          localStorage.setItem('latest', JSON.stringify([newSong, ...newArray]));
           return [newSong, ...newArray];
         }
-         localStorage.setItem('latest',JSON.stringify([newSong, ...prev]));
+        localStorage.setItem('latest', JSON.stringify([newSong, ...prev]));
         return [newSong, ...prev];
         /*if finded song in previous*/
       } else {
@@ -46,13 +46,13 @@ export default function Music({
           const newArray = [...prev];
           newArray.splice(index, 1);
           newArray.pop();
-          localStorage.setItem('latest',JSON.stringify([newSong, ...newArray]));
+          localStorage.setItem('latest', JSON.stringify([newSong, ...newArray]));
           return [newSong, ...newArray];
         }
 
         const newArray = [...prev];
         newArray.splice(index, 1);
-        localStorage.setItem('latest',JSON.stringify([newSong, ...newArray]));
+        localStorage.setItem('latest', JSON.stringify([newSong, ...newArray]));
         return [newSong, ...newArray];
       }
     });
@@ -71,20 +71,14 @@ export default function Music({
         <button>MUSIC</button>
         <button>PODCASTS</button>
       </div>
-
       <div className="main-songs ">
         <Latest latest={latest} chooseSong={chooseSong} />
-        
-        {Array.from({ length: 4 }).map((_, i) => {
-          return (
-            <div key={i} className="songs cursor-pointer">
-              <div className="songs-title-container text-white font-bold">
-                <p className="songs__title">Prepared for You</p>
-              </div>
-              <Songs songs={songs} authors={authors} chooseSong={chooseSong} />
-            </div>
-          );
-        })}
+        <div className="songs cursor-pointer">
+          <div className="songs-title-container text-white font-bold">
+            <p className="songs__title">Prepared for You</p>
+          </div>
+          <Songs songs={songs} authors={authors} chooseSong={chooseSong} />
+        </div>
       </div>
     </div>
   );
