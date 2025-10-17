@@ -73,7 +73,7 @@ export default function Music({
       </div>
 
       <div className="main-songs ">
-        <Latest latest={latest} />
+        <Latest latest={latest} chooseSong={chooseSong} />
         
         {Array.from({ length: 4 }).map((_, i) => {
           return (
