@@ -19,7 +19,7 @@ export default function PlayRightSection({ volume, handleVolume, muted,  handleM
             className="cursor-pointer"
             onClick={handleMute}
             alt="speaker-volume"
-            src={`/mini-spotify/images/logos/speaker${muted ? 'Crossed' : ''}Song.svg`}
+            src={`https://rgmmwhkixprkskznqjcy.supabase.co/storage/v1/object/public/spotify/images/logos/speaker${muted ? 'Crossed' : ''}Song.svg`}
           />
         </div>
         <div

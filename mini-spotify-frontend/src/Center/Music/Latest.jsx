@@ -7,7 +7,7 @@ export default function Latest({latest}) {
             <div className="playlist-image-container">
               <img
                 className="playlist__image"
-                src={`mini-spotify/images/songPictures/${l.songImage}`}
+                src={`https://rgmmwhkixprkskznqjcy.supabase.co/storage/v1/object/public/spotify/images/songPictures/${l.songImage}`}
               ></img>
             </div>
             <div className="playlist-title-container">

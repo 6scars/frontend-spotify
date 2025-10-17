@@ -1,7 +1,0 @@
-<svg xmlns="http://www.w3.org/2000/svg" width="44" height="44" viewBox="0 0 44 44" role="img" aria-label="Dodano do ulubionych">
-  <title>Dodano</title>
-  <!-- tło przeźroczyste -->
-  <circle cx="22" cy="22" r="20" fill="transparent" stroke="none" />
-  <!-- czerwony ptaszek -->
-  <path d="M30 16L20 28l-6-6" fill="none" stroke="#E53935" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/>
-</svg>
