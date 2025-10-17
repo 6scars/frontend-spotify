@@ -3,7 +3,7 @@ export default function Latest({latest}) {
     <div className="play-lists gap-2 grid grid-cols-3">
       {(latest || []).map((l) => {
         return (
-          <div key={l.id} className="playlist ">
+          <div key={l.id} className="playlist">
             <div className="playlist-image-container">
               <img
                 className="playlist__image"
