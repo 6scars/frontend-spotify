@@ -109,7 +109,7 @@
 }
 
 .song-image-container {
-  height: 150px;
+  height: 75%;
   /* or min-height */
     overflow: hidden;
   position: relative;
