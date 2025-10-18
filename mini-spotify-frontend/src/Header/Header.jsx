@@ -1,10 +1,9 @@
-
 import './Header.css'
 import playlists from "../../public/data/playlists.json"
+import Sing from './Sing'
 
 
-export default function Header() {
-  console.log(playlists)
+export default function Header( {setSigning, signForm}) {
   return (
     <header
       className="fixed top-0 flex justify-betwen
@@ -29,13 +28,13 @@ export default function Header() {
             <img alt="home" src="https://rgmmwhkixprkskznqjcy.supabase.co/storage/v1/object/public/spotify/images/logos/logohome.svg" className="h-[75%]"></img>
           </div>
           <div className="h-full flex justify-center items-center">
-            <input type="text" placeholder="Search" className="search__bar"/>
+            <input type="text" placeholder="Search" className="search__bar" />
           </div>
         </div>
       </div>
       <div className="right-header  min-w-[300px] h-full">
         <div className=" flex justify-end items-center h-full">
-          <img alt="account" src="https://rgmmwhkixprkskznqjcy.supabase.co/storage/v1/object/public/spotify/images/logos/logoaccount.svg" className="h-[90%]" />
+          <Sing setSigning={setSigning} signForm={signForm}/>
         </div>
       </div>
     </header>
