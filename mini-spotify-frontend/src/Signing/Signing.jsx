@@ -1,13 +1,21 @@
-import {useState} from 'react'
+import { useState } from 'react'
 import "./Signing.css"
 
-export default function Signing({ signForm }) {
+export default function Signing({ clickedAccount }) {
     const [xd, setXd] = useState({
-        email:'',
-        password:''
+        email: '',
+        password: ''
     })
 
-    
+    const signForm = (e) => {
+        console.log(e.target.name)
+        setXd((prev) => ({
+            ...prev,
+            [e.target.name] : e.target.value
+        }))
+
+        console.log(xd)
+    }
 
     return (
         (
@@ -33,12 +41,14 @@ export default function Signing({ signForm }) {
                                         name="email"
                                         placeholder="Email"
                                         className="form__input "
+                                        onChange={() => signForm(event)}
                                     />
                                     <input
                                         type="password"
                                         name="password"
                                         placeholder="Password"
                                         className="form__input "
+                                        onChange={() => signForm(event)}
                                     />
                                     <button
                                         type="submit"
@@ -48,7 +58,7 @@ export default function Signing({ signForm }) {
                                     </button>
                                     <button
                                         type="button"
-                                        onClick={signForm}
+                                        onClick={clickedAccount}
                                         className="form__button__cancel "
                                     >
                                         Cancel
