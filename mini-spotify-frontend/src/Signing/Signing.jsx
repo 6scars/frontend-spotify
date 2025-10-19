@@ -1,6 +1,6 @@
 import { useState } from 'react'
-import SignIn from './SignIn'
-import SignUp from './SignUp'
+import SignIn from './SignIn.jsx'
+import SignUp from './SignUp.jsx'
 import "./Signing.css"
 
 export default function Signing({ clickedAccount }) {
@@ -8,7 +8,6 @@ export default function Signing({ clickedAccount }) {
         email: '',
         password: ''
     })
-
     const [switchForm, setSwitchForm] = useState(false);
 
     const signForm = (e) => {
@@ -17,11 +16,43 @@ export default function Signing({ clickedAccount }) {
             [e.target.name]: e.target.value
         }))
     }
+    const sendForm = async (e) => {
+        e.preventDefault();
+        const { email, password } = formValue;
+        let response;
+        if (switchForm) {
+            response = await fetch("http://localhost:3005/api/newAccount", {
+                "method": "POST",
+                "headers": {
+                    "Content-Type": "application/json"
+                },
+                "body": JSON.stringify({
+                    email,
+                    password
+                })
+            })
+        } else {
+             response = await fetch("http://localhost:3005/api/signin", {
+                "method": "post",
+                "headers": {
+                    "Content-Type": "application/json"
+                },
+                "body": JSON.stringify({
+                    email,
+                    password
+                })
+            })
+        }
+
+
+        const data = await response.json();
+        console.log(data.message)
+    }
 
     return (
         <>
             {
-                !switchForm ? <SignIn signForm={signForm} setSwitchForm={setSwitchForm} clickedAccount={clickedAccount} /> : <SignUp signForm={signForm} setSwitchForm={setSwitchForm} clickedAccount={clickedAccount} />
+                !switchForm ? <SignIn signForm={signForm} setSwitchForm={setSwitchForm} clickedAccount={clickedAccount} sendForm={sendForm}/> : <SignUp signForm={signForm} setSwitchForm={setSwitchForm} clickedAccount={clickedAccount} sendForm={sendForm} />
             }
         </>
 
