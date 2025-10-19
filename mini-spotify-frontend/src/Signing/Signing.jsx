@@ -1,5 +1,14 @@
+import {useState} from 'react'
 import "./Signing.css"
+
 export default function Signing({ signForm }) {
+    const [xd, setXd] = useState({
+        email:'',
+        password:''
+    })
+
+    
+
     return (
         (
             <>
@@ -21,11 +30,13 @@ export default function Signing({ signForm }) {
                                 <form className="flex flex-col gap-5">
                                     <input
                                         type="email"
+                                        name="email"
                                         placeholder="Email"
                                         className="form__input "
                                     />
                                     <input
                                         type="password"
+                                        name="password"
                                         placeholder="Password"
                                         className="form__input "
                                     />
