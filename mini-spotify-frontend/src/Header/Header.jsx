@@ -1,9 +1,8 @@
 import './Header.css'
-import playlists from "../../public/data/playlists.json"
 import Sing from './Sing'
 
 
-export default function Header( {setSigning, signForm}) {
+export default function Header( { clickedAccount}) {
   return (
     <header
       className="fixed top-0 flex justify-betwen
@@ -34,7 +33,7 @@ export default function Header( {setSigning, signForm}) {
       </div>
       <div className="right-header  min-w-[300px] h-full">
         <div className=" flex justify-end items-center h-full">
-          <Sing setSigning={setSigning} signForm={signForm}/>
+          <Sing clickedAccount={clickedAccount}/>
         </div>
       </div>
     </header>

@@ -17,14 +17,14 @@ export default function MiniSpotify() {
   const [latest, setLatest] = useState(JSON.parse(localStorage.getItem('latest')) || []);
   const [signing, setSigning] = useState(false)
 
-  const signForm = () => {
+  const clickedAccount = () => {
     signing ? setSigning(false) : setSigning(true)
   }
 
   return (
     <>
 
-      <Header setSigning={setSigning} signForm={signForm} />
+      <Header setSigning={setSigning} clickedAccount={clickedAccount} />
 
       <Center
         song={song}
@@ -40,7 +40,7 @@ export default function MiniSpotify() {
       />
       {song ? <Play song={song} author={author} /> : ""}
       <Aside show={show} songs={songs} />
-      {signing && <Signing signForm={signForm}/>}
+      {signing && <Signing clickedAccount={clickedAccount}/>}
 
     </>
   );
