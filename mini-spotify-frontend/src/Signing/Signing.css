@@ -14,7 +14,7 @@
 
 
 .form__input{
-    @apply border border-gray-300 rounded px-4 py-2 focus:outline-none focus:ring-2 focus:ring-blue-500;
+    @apply border min-w-[100%] border-gray-300 rounded px-4 py-2 focus:outline-none focus:ring-2 focus:ring-blue-500;
 }
 
 .form__button{
