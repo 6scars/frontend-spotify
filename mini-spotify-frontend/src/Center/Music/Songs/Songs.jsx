@@ -27,7 +27,7 @@ export default function Songs({ songs, authors, chooseSong }) {
                   {song.songName}
                 </div>
                 <p className="  text-[0.7rem] authors__text ">
-                  {aut.map((author) => author.author + ",")}
+                  {aut.map((author) => author.author)}
                 </p>
               </div>
             </div>
