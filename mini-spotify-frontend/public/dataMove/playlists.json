@@ -1,12 +1,10 @@
 [
     {
         "id":1,
-        "userId":1,
         "name":"favourite"
     },
     {
         "id":2,
-        "userId":1,
         "name":"helps me sleep"
     }
 ]
