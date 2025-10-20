@@ -1,0 +1,59 @@
+[
+  { "songId": 1, "typeId": 1 },
+  { "songId": 1, "typeId": 2 },
+  { "songId": 1, "typeId": 3 },
+
+  { "songId": 2, "typeId": 1 },
+  { "songId": 2, "typeId": 2 },
+  { "songId": 2, "typeId": 3 },
+
+  { "songId": 3, "typeId": 1 },
+  { "songId": 3, "typeId": 2 },
+  { "songId": 3, "typeId": 3 },
+
+  { "songId": 4, "typeId": 1 },
+  { "songId": 4, "typeId": 2 },
+  { "songId": 4, "typeId": 3 },
+
+  { "songId": 5, "typeId": 4 },
+  { "songId": 5, "typeId": 5 },
+  { "songId": 5, "typeId": 6 },
+
+  { "songId": 6, "typeId": 4 },
+  { "songId": 6, "typeId": 5 },
+  { "songId": 6, "typeId": 6 },
+
+  { "songId": 8, "typeId": 7 },
+  { "songId": 8, "typeId": 8 },
+  { "songId": 8, "typeId": 9 },
+
+  { "songId": 9, "typeId": 7 },
+  { "songId": 9, "typeId": 8 },
+  { "songId": 9, "typeId": 9 },
+
+  { "songId": 10, "typeId": 7 },
+  { "songId": 10, "typeId": 8 },
+  { "songId": 10, "typeId": 10 },
+
+  { "songId": 11, "typeId": 7 },
+  { "songId": 11, "typeId": 8 },
+  { "songId": 11, "typeId": 11 },
+
+  { "songId": 12, "typeId": 7 },
+  { "songId": 12, "typeId": 12 },
+  { "songId": 12, "typeId": 11 },
+
+  { "songId": 13, "typeId": 13 },
+  { "songId": 13, "typeId": 14 },
+
+  { "songId": 14, "typeId": 13 },
+  { "songId": 14, "typeId": 14 },
+
+  { "songId": 15, "typeId": 13 },
+  { "songId": 15, "typeId": 14 },
+
+  { "songId": 16, "typeId": 13 },
+  { "songId": 16, "typeId": 14 },
+
+  { "songId": 17, "typeId": 4 }
+]

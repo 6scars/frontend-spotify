@@ -1,0 +1,16 @@
+[
+  { "id": 1, "typeName": "Calming" },
+  { "id": 2, "typeName": "Mystical" },
+  { "id": 3, "typeName": "Relaxed" },
+  { "id": 4, "typeName": "Electronic" },
+  { "id": 5, "typeName": "Ambient Electronic" },
+  { "id": 6, "typeName": "Minimal Electronic" },
+  { "id": 7, "typeName": "Jazz" },
+  { "id": 8, "typeName": "Free-Jazz" },
+  { "id": 9, "typeName": "Nu-Jazz" },
+  { "id": 10, "typeName": "Modern Jazz" },
+  { "id": 11, "typeName": "Jazz: Out" },
+  { "id": 12, "typeName": "Jazz:Vocal" },
+  { "id": 13, "typeName": "Blues" },
+  { "id": 14, "typeName": "Instrumental" }
+]

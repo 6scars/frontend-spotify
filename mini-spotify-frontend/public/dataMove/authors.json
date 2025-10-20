@@ -5,11 +5,6 @@
     "firstName":"Admin",
     "lastName": "Michoń",
     "email": "marcin.michon6@o2.pl",
-    "playlists": [
-      1,
-      2
-    ],
-    
     "biograph": "making music",
     "image": "Kevin-MacLeod.jpg"
   }
