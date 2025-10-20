@@ -1,0 +1,14 @@
+[
+  { "id_album": 1, "id_song": 5 },
+  { "id_album": 1, "id_song": 6 },
+  { "id_album": 2, "id_song": 8 },
+  { "id_album": 2, "id_song": 9 },
+  { "id_album": 3, "id_song": 10 },
+  { "id_album": 4, "id_song": 11 },
+  { "id_album": 5, "id_song": 12 },
+  { "id_album": 6, "id_song": 13 },
+  { "id_album": 7, "id_song": 14 },
+  { "id_album": 7, "id_song": 15 },
+  { "id_album": 7, "id_song": 16 },
+  { "id_album": 7, "id_song": 17 }
+]

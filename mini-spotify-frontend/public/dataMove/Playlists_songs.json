@@ -1,0 +1,26 @@
+[
+    {
+        "idPlaylist": 1,
+        "idSongs": 1
+    },
+    {
+        "idPlaylist": 1,
+        "idSongs": 2
+    },
+    {
+        "idPlaylist": 2,
+        "idSongs": 1
+    },
+    {
+        "idPlaylist": 2,
+        "idSongs": 2
+    },
+    {
+        "idPlaylist": 2,
+        "idSongs": 3
+    },
+    {
+        "idPlaylist": 2,
+        "idSongs": 4
+    }
+]
