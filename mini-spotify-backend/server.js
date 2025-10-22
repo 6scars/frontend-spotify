@@ -17,24 +17,25 @@ app.use(cors());
 app.use("/api", router);
 
 // list only tables in the "public" schema
-const listTables = async () => {
+const getAllAuthors = async () => {
   try {
-    const tables = await sql`
-      SELECT table_name 
-      FROM information_schema.tables
-      WHERE table_schema = 'public'
-        AND table_type = 'BASE TABLE'
-      ORDER BY table_name;
+    const authors = await sql`
+      SELECT * 
+      FROM authors 
+      INNER JOIN authors_songs 
+      ON  authors.id = authors_songs.author_id
+      INNER JOIN songs
+      ON songs.id = authors_songs.song_id;
+      
     `;
-    console.log("✅ Tables in public schema:");
-    tables.forEach(t => console.log(t.table_name));
+    console.log(authors);
   } catch (err) {
-    console.error("❌ Error fetching tables:", err);
+    console.error("❌ Error fetching authors:", err);
   }
 };
 
-// call it on startup
-listTables();
+// Usage
+await getAllAuthors();
 
 app.listen(PORT, () => {
   console.log(`Server is running on http://localhost:${PORT}`);
