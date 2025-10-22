@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 
 import Header from "./Header/Header.jsx";
 import Aside from "./Aside/Aside.jsx";
@@ -16,6 +16,24 @@ export default function MiniSpotify() {
   const [show, setShow] = useState(false);
   const [latest, setLatest] = useState(JSON.parse(localStorage.getItem('latest')) || []);
   const [signing, setSigning] = useState(false)
+  let data;
+
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+        const response = await fetch('http://localhost:3005/api/getData');
+        const data = await response.json();
+        console.log(data);
+      } catch (error) {
+        console.error('Error fetching data:', error);
+      }
+    };
+
+    fetchData();
+  }, []);
+
+
+
 
   const clickedAccount = () => {
     signing ? setSigning(false) : setSigning(true)
@@ -40,7 +58,7 @@ export default function MiniSpotify() {
       />
       {song ? <Play song={song} author={author} /> : ""}
       <Aside show={show} songs={songs} />
-      {signing && <Signing clickedAccount={clickedAccount}/>}
+      {signing && <Signing clickedAccount={clickedAccount} />}
 
     </>
   );
