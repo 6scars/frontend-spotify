@@ -16,20 +16,26 @@ export default function MiniSpotify() {
   const [show, setShow] = useState(false);
   const [latest, setLatest] = useState(JSON.parse(localStorage.getItem('latest')) || []);
   const [signing, setSigning] = useState(false)
-  let data;
+  const [playlists, setPlaylists] = useState(null);
+
+
 
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const response = await fetch('http://localhost:3005/api/getData');
-        const data = await response.json();
-        console.log(data);
+        const playlistsResponse = await fetch('http://localhost:3005/api/playlists');
+        const data = await playlistsResponse.json();
+        const d = await data.data
+        setPlaylists(d)
+        
       } catch (error) {
         console.error('Error fetching data:', error);
       }
     };
-
+    
     fetchData();
+
+    
   }, []);
 
 
@@ -57,7 +63,7 @@ export default function MiniSpotify() {
         setLatest={setLatest}
       />
       {song ? <Play song={song} author={author} /> : ""}
-      <Aside show={show} songs={songs} />
+      {playlists ? <Aside show={show} songs={songs} playlists={playlists}/> : null}  
       {signing && <Signing clickedAccount={clickedAccount} />}
 
     </>

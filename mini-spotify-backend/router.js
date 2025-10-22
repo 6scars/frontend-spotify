@@ -5,6 +5,6 @@ const router = express.Router();
 
 router.post("/newAccount", controller.signUp)
 router.post('/signin', controller.signIn)
-router.get('/getData', controller.getData)
+router.get('/playlists', controller.playlists)
 
 export default router;

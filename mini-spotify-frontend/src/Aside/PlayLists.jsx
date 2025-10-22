@@ -1,7 +1,6 @@
-export default function PlayLists({ playlist, choosePlaylist, songs }) {
-  const songsCompounds = playlist.songsId;
-  const songsFinded = songs.filter((song) => songsCompounds.includes(song.id));
-  console.log(songsFinded);
+export default function PlayLists({ playlist, choosePlaylist}) {
+
+  const len = playlist.songsId.length;
   return (
     <div
       key={playlist.id}
@@ -13,18 +12,28 @@ export default function PlayLists({ playlist, choosePlaylist, songs }) {
             "
     >
       <div className="img-container h-[70px] grid grid-rows-2 grid-cols-2 gap-[1px]">
-        {Array.from({ length: 4 }).map((_, i) => {
-          const song = songsFinded[i];
+        {Array.from({ length: len }).map((_, i) => (
+          <img
+            key={playlist.songsId[i]}
+            alt="playlist"
+            src={`https://rgmmwhkixprkskznqjcy.supabase.co/storage/v1/object/public/spotify/images/songPictures/${playlist.songsImages[i]}`}
+            className="h-full w-full object-cover"
+          />
+        ))}
 
-          return song ? (
+
+        {/* {[playlist].map((_, i) => (
             <img
-              key={i}
+              key={playlist.songsId[i]}
               alt="playlist"
-              src={`https://rgmmwhkixprkskznqjcy.supabase.co/storage/v1/object/public/spotify/images/songPictures/${songsFinded[i].songImage}`}
+              src={`https://rgmmwhkixprkskznqjcy.supabase.co/storage/v1/object/public/spotify/images/songPictures/${playlist.songsImages[i]}`}
               className="h-full w-full object-cover"
             />
-          ) : null;
-        })}
+          ))} */}
+
+
+
+
       </div>
       <div className="playlist-paragraph-container w-full">
         <p className="playlist__paragraph text-white text-[12px] font-bold text-bold text-center w-full">
