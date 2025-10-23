@@ -12,7 +12,7 @@ export default function Aside({ show, songs, playlists }) {
             overflow-y-auto
             ${show ? "show" : ""}`}
     >
-       {playlists.map((playlist) => (
+       {playlists?.map((playlist) => (
         <Playlists
           key={playlist.id}
           playlist={playlist}
