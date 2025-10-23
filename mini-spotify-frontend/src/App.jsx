@@ -11,7 +11,6 @@ import songs from "../public/data/songs.json";
 import authors from "../public/data/authors.json";
 
 export default function MiniSpotify() {
-  const [token, setToken] = useState(null);
   const [song, setSong] = useState(null);
   const [author, setAuthor] = useState(null);
   const [show, setShow] = useState(false);
@@ -33,9 +32,6 @@ export default function MiniSpotify() {
         });
         const data = await dataUserResponse.json();
         console.log(data)
-        if(data.token){
-          setToken(data.token)
-        }
       } catch (error) {
         console.error('Error fetching  dataUser:', error);
       }

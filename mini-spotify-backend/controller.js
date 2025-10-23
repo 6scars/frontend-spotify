@@ -6,16 +6,46 @@ env.config()
 
 let controller;
 
-function signIn(req, res, next) {
-    
+async function signIn(req, res, next) {
+    const { email, password } = req.body;
+    console.log(req.body)
+    try {
+        const data = await sql`
+            SELECT id, email, password
+            FROM authors
+            WHERE authors.email = ${email}
+        `;
+        // const id = data[0].id;
+        // const email = data[0].email;
+        const userPassword = data[0].password;
+        const userId = data[0].id
+        const userEmail = data[0].email
+
+        const isMatch = await bcrypt.compare(password, userPassword);
+        if (isMatch) {
+            const token = await jwt.sign({
+                id: userId,
+                email: userEmail
+            },
+                process.env.JWT_SECRET,
+                { expiresIn: '1h' }
+            )
+            return res.status(201).json({ message: 'logedIn' ,token})
+        } else {
+            throw 'wrong password'
+        }
+
+    } catch (err) {
+        return res.status(401).json({ message: 'wrongPassword' })
+    }
     return res.status(202).json({ message: "accomplished" })
 }
 async function signUp(req, res, next) {
     const saltRounds = 10;
-    const {email, password} = req.body
-    try{
+    const { email, password } = req.body
+    try {
         const hashed = await bcrypt.hash(password, saltRounds)
-        
+
         const newUser = await sql`
             INSERT INTO authors (email,password)
             VALUES (${email}, ${hashed})
@@ -23,9 +53,9 @@ async function signUp(req, res, next) {
             RETURNING *
         `;
         console.log(newUser)
-        return res.status(201).json({message: 'User Created'})
-    }catch(err){
-        console.error('SINGUP error:',err)
+        return res.status(201).json({ message: 'User Created' })
+    } catch (err) {
+        console.error('SINGUP error:', err)
     }
     return res.status(202).json({ message: "accomplished" })
 }
@@ -77,6 +107,7 @@ async function checkIsLogedIn(req, res, next) {
         return res.status(401).json({ message: 'NOT VALID TOKEN' })
     }
 }
+
 
 
 export default controller = {
