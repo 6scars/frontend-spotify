@@ -5,6 +5,6 @@ const router = express.Router();
 
 router.post("/newAccount", controller.signUp)
 router.post('/signin', controller.signIn)
-router.get('/playlists', controller.playlists)
-
+router.post('/playlists', controller.playlists)
+router.post('/checkIsLogedIn', controller.checkIsLogedIn)
 export default router;
