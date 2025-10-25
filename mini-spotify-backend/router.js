@@ -7,4 +7,5 @@ router.post("/newAccount", controller.signUp)
 router.post('/signin', controller.signIn)
 router.post('/playlists', controller.playlists)
 router.post('/checkToken', controller.checkToken)
+router.get('/fetchSongs',controller.fetchSongs)
 export default router;

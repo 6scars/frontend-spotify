@@ -4,7 +4,8 @@ import Header from "./Header/Header.jsx";
 import Aside from "./Aside/Aside.jsx";
 import Center from "./Center/Center.jsx";
 import Play from "./Play/Play.jsx";
-import Signing from "./Signing/Signing.jsx"
+import Signing from "./Signing/Signing.jsx";
+import { fetchSongs } from "./scripts/someScript.jsx";
 import "./App.css";
 
 import songs from "../public/data/songs.json";
@@ -64,6 +65,7 @@ export default function MiniSpotify() {
         console.error('Error fetching dataPlaylists:', error);
       }
     };
+    fetchSongs();
     checkToken();
     fetchPlaylists();
 
