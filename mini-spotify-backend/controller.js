@@ -19,7 +19,6 @@ async function signIn(req, res, next) {
         const userEmail = data[0].email
         
         const isMatch = await bcrypt.compare(password, userPassword);
-        console.log(data)
         if (isMatch) {
             const token = await jwt.sign({
                 id: userId,
@@ -38,6 +37,7 @@ async function signIn(req, res, next) {
         return res.status(401).json({ message: 'wrongPassword' })
     }
 }
+
 async function signUp(req, res, next) {
     const saltRounds = 10;
     const { email, password } = req.body
@@ -89,6 +89,28 @@ async function playlists(req, res, next) {
 
 }
 
+async function fetchSongs(req,res,next){
+    const data = await sql`
+        SELECT 
+            author_id, 
+            song_id, 
+            "song_Name" AS song_name,
+            "song_Image" AS song_image, 
+            author,
+            file,
+            credit,
+            album_id,
+            image AS author_image,
+            biograph,
+            songs.created_at
+        FROM songs
+        INNER JOIN authors_songs ON authors_songs.author_id = songs.id 
+        INNER JOIN authors ON authors.id = authors_songs.author_id
+        LIMIT 10
+    `
+    console.log(data)
+}
+
 async function checkToken(req, res, next) {
     const authHeader = req.headers.authorization;
     if (!authHeader) return res.status(401).json({ error: 'Missing token' });
@@ -114,5 +136,6 @@ export default controller = {
     signIn,
     signUp,
     playlists,
-    checkToken
+    checkToken,
+    fetchSongs
 }
