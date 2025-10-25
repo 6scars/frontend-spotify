@@ -1,7 +1,6 @@
 export default function PlayLists({ playlist, choosePlaylist }) {
 
   const len = playlist.song_ids.length;
-  console.log(playlist)
   return (
     <div
       key={playlist.id}
@@ -14,7 +13,7 @@ export default function PlayLists({ playlist, choosePlaylist }) {
     >
       <div className="img-container h-[70px] grid grid-rows-2 grid-cols-2 gap-[1px]">
         {Array.from({ length: len }).map((_, i) => (
-          <>
+          
             <img
               key={playlist.song_ids[i]}
               alt="playlist"
@@ -22,7 +21,7 @@ export default function PlayLists({ playlist, choosePlaylist }) {
               className="h-full w-full object-cover"
             />
             
-          </>
+          
         ))}
 
 

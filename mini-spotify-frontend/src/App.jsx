@@ -17,13 +17,14 @@ export default function MiniSpotify() {
   const [latest, setLatest] = useState(JSON.parse(localStorage.getItem('latest')) || []);
   const [signing, setSigning] = useState(false)
   const [playlists, setPlaylists] = useState([]);
+  const [isLogedIn, setIsLogedIn] = useState(false);
 
 
 
   useEffect(() => {
-    const fetchUser = async () => {
+    const checkToken = async () => {
       try {
-        const dataUserResponse = await fetch('http://localhost:3005/api/checkIsLogedIn', {
+        const dataUserResponse = await fetch('http://localhost:3005/api/checkToken', {
           method: 'POST',
           headers: {
             'Authorization': `Bearer ${localStorage.getItem('jwt')}`,
@@ -31,7 +32,12 @@ export default function MiniSpotify() {
           }
         });
         const data = await dataUserResponse.json();
-        console.log(data)
+        if(data.token)
+        {
+          setIsLogedIn(true);
+          
+
+        }
       } catch (error) {
         console.error('Error fetching  dataUser:', error);
       }
@@ -51,7 +57,6 @@ export default function MiniSpotify() {
 
         });
         const data = await playlistsResponse.json();
-        console.log(data)
         const d = data.data
         setPlaylists(d)
 
@@ -59,7 +64,7 @@ export default function MiniSpotify() {
         console.error('Error fetching dataPlaylists:', error);
       }
     };
-    fetchUser();
+    checkToken();
     fetchPlaylists();
 
 
@@ -75,7 +80,7 @@ export default function MiniSpotify() {
   return (
     <>
 
-      <Header setSigning={setSigning} clickedAccount={clickedAccount} />
+      <Header  clickedAccount={clickedAccount} isLogedIn={isLogedIn} setIsLogedIn={setIsLogedIn} />
 
       <Center
         song={song}

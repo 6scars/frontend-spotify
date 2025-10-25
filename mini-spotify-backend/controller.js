@@ -8,20 +8,18 @@ let controller;
 
 async function signIn(req, res, next) {
     const { email, password } = req.body;
-    console.log(req.body)
     try {
         const data = await sql`
             SELECT id, email, password
             FROM authors
             WHERE authors.email = ${email}
         `;
-        // const id = data[0].id;
-        // const email = data[0].email;
         const userPassword = data[0].password;
         const userId = data[0].id
         const userEmail = data[0].email
-
+        
         const isMatch = await bcrypt.compare(password, userPassword);
+        console.log(data)
         if (isMatch) {
             const token = await jwt.sign({
                 id: userId,
@@ -30,6 +28,7 @@ async function signIn(req, res, next) {
                 process.env.JWT_SECRET,
                 { expiresIn: '1h' }
             )
+            
             return res.status(201).json({ message: 'logedIn', token })
         } else {
             throw 'wrong password'
@@ -38,7 +37,6 @@ async function signIn(req, res, next) {
     } catch (err) {
         return res.status(401).json({ message: 'wrongPassword' })
     }
-    return res.status(202).json({ message: "accomplished" })
 }
 async function signUp(req, res, next) {
     const saltRounds = 10;
@@ -91,12 +89,11 @@ async function playlists(req, res, next) {
 
 }
 
-async function checkIsLogedIn(req, res, next) {
+async function checkToken(req, res, next) {
     const authHeader = req.headers.authorization;
     if (!authHeader) return res.status(401).json({ error: 'Missing token' });
 
     const token = authHeader.split(' ')[1];
-    console.log(token)
     try {
         const decoded = jwt.verify(token, process.env.JWT_SECRET)
         if (decoded) {
@@ -112,9 +109,10 @@ async function checkIsLogedIn(req, res, next) {
 
 
 
+
 export default controller = {
     signIn,
     signUp,
     playlists,
-    checkIsLogedIn
+    checkToken
 }
