@@ -2,7 +2,7 @@ import './Header.css'
 import Sing from './Sing'
 
 
-export default function Header( { clickedAccount}) {
+export default function Header({ clickedAccount, isLogedIn, setIsLogedIn }) {
   return (
     <header
       className="fixed top-0 flex justify-betwen
@@ -32,8 +32,12 @@ export default function Header( { clickedAccount}) {
         </div>
       </div>
       <div className="right-header  min-w-[300px] h-full">
-        <div className=" flex justify-end items-center h-full">
-          <Sing clickedAccount={clickedAccount}/>
+        <div className=" flex justify-end items-center h-full text-white">
+          {isLogedIn ? (
+            <button className="cursor-pointer" onClick={() => {setIsLogedIn(false); localStorage.removeItem('jwt',null);window.location.reload();}}>Logout</button>
+          ) : 'login'}
+
+          <Sing clickedAccount={clickedAccount} />
         </div>
       </div>
     </header>
