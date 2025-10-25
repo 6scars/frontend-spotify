@@ -14,7 +14,7 @@ export default function Aside({ show, songs, playlists }) {
     >
        {playlists?.map((playlist) => (
         <Playlists
-          key={playlist.id}
+          key={playlist.playlist_id}
           playlist={playlist}
           choosePlaylist={choosePlaylist}
           songs={songs}
