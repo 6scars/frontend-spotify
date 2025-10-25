@@ -47,9 +47,11 @@ export default function MiniSpotify() {
           body: JSON.stringify(
             { id: 1 }
           )
+          
 
         });
         const data = await playlistsResponse.json();
+        console.log(data)
         const d = data.data
         setPlaylists(d)
 

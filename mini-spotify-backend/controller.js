@@ -30,7 +30,7 @@ async function signIn(req, res, next) {
                 process.env.JWT_SECRET,
                 { expiresIn: '1h' }
             )
-            return res.status(201).json({ message: 'logedIn' ,token})
+            return res.status(201).json({ message: 'logedIn', token })
         } else {
             throw 'wrong password'
         }
@@ -64,24 +64,26 @@ async function playlists(req, res, next) {
     try {
         const { id } = req.body
         const data = await sql`
-        SELECT
-            ROW_NUMBER() OVER () AS id,
-            playlists.id AS playlist_id,
-            playlists.name,
+        SELECT 
             authors.id AS author_id,
-            array_agg(songs.id) AS "songsId",
-            array_agg(songs."song_Image") AS "songsImages"
-        FROM playlists
-        INNER JOIN playlists_songs ON playlists.id = playlists_songs.playlist_id
-        INNER JOIN songs ON songs.id = playlists_songs.song_id
-        INNER JOIN authors_songs ON songs.id = authors_songs.song_id
-        INNER JOIN authors ON authors.id = authors_songs.author_id
+            authors.author AS author_name,
+            authors.email,
+            playlists.id AS playlist_id,
+            playlists.name AS playlist_name,
+            ARRAY_AGG(DISTINCT songs.id) AS song_ids,
+            ARRAY_AGG(DISTINCT songs."song_Image") AS song_images
+        FROM authors
+        INNER JOIN authors_playlists ON authors.id = authors_playlists.author_id
+        INNER JOIN playlists ON playlists.id = authors_playlists.playlist_id
+        INNER JOIN playlists_songs ON playlists_songs.playlist_id = playlists.id
+        INNER JOIN authors_songs ON playlists_songs.song_id = authors_songs.song_id
+        LEFT JOIN songs ON authors_songs.song_id = songs.id
         WHERE authors.id = ${id}
-        GROUP BY playlists.id, playlists.name, authors.id;
+        GROUP BY authors.id, authors.author, authors.email, playlists.id, playlists.name;
 
         `;
 
-        // console.log(data)
+        console.log(data)
         return res.status(202).json({ message: "accomplished", data: data })
     } catch (err) {
         console.error("❌ Error fetching authors:", err);
