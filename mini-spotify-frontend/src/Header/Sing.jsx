@@ -1,9 +1,16 @@
 
-export default function Sign({clickedAccount}) {
+export default function Sign({ isLogedIn, clickedAccount }) {
 
     return (
         <>
-            <img alt="account" src="https://rgmmwhkixprkskznqjcy.supabase.co/storage/v1/object/public/spotify/images/logos/logoaccount.svg" className="h-[90%] cursor-pointer" onClick={clickedAccount} />
+            {isLogedIn ?
+                <button alt="account" className="flex items-center h-[90%] cursor-pointer" onClick={clickedAccount}> ACCOUNT</button>
+                :
+                <button alt="account" className="flex items-center h-[90%] cursor-pointer" onClick={clickedAccount}> SIGN UP</button>
+
+
+            }
+
 
         </>
     )

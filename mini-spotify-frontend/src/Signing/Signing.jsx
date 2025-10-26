@@ -4,7 +4,7 @@ import SignUp from './SignUp.jsx'
 import AccountOptions from "./AccountOptions/AccountOptions"
 import "./Signing.css"
 
-export default function Signing({ clickedAccount, isLogedIn }) {
+export default function Signing({ setIsLogedIn, clickedAccount, isLogedIn }) {
     const [formValue, setFormValue] = useState({
         email: '',
         password: ''
@@ -64,7 +64,10 @@ export default function Signing({ clickedAccount, isLogedIn }) {
     return (
         <>
             {
-                isLogedIn ? <AccountOptions clickedAccount={clickedAccount}/> :
+                isLogedIn ? <AccountOptions
+                    setIsLogedIn={setIsLogedIn}
+                    clickedAccount={clickedAccount}
+                /> :
                     !switchForm ? (
                         <SignIn
                             signForm={signForm}
@@ -78,10 +81,6 @@ export default function Signing({ clickedAccount, isLogedIn }) {
                             clickedAccount={clickedAccount}
                             sendForm={sendForm}
                         />)
-
-
-
-
             }
         </>
 
