@@ -4,7 +4,7 @@ import PlayRightSection from "./PlayRightSection.jsx";
 import PlayLeftSection from "./PlayLeftSection.jsx";
 import "./Play.css";
 
-export default function Play( {song, author}) {
+export default function Play( {currentSong, song, author}) {
   /*---------------- PLAYER CONTROLLER ----------------*/
   const audioRef = useRef(null);
 
@@ -89,7 +89,7 @@ export default function Play( {song, author}) {
     "
     >
 
-      <PlayLeftSection song={song} author={author}/>
+      <PlayLeftSection currentSong={currentSong} song={song} author={author}/>
 
       <PlayCenterSection
         audioRef={audioRef}
@@ -101,7 +101,7 @@ export default function Play( {song, author}) {
         progressBar={progressBar}
         loop={loop}
         handleLoop={handleLoop}
-        song={song}
+        currentSong={currentSong}
       />
 
       <PlayRightSection

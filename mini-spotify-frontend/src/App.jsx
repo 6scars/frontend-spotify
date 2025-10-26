@@ -13,8 +13,6 @@ import authors from "../public/data/authors.json";
 
 export default function MiniSpotify() {
   const [currentSong, setCurrentSong] = useState(null);
-  const [song, setSong] = useState(null);
-  const [author, setAuthor] = useState(null);
   const [show, setShow] = useState(false);
   const [signing, setSigning] = useState(false)
   const [playlists, setPlaylists] = useState([]);
@@ -52,7 +50,7 @@ export default function MiniSpotify() {
         show={show}
         setShow={setShow}
       />
-      {song ? <Play song={song} author={author} /> : ""}
+      {currentSong ? <Play currentSong={currentSong}  /> : ""}
       {playlists ? <Aside show={show} songs={songs} playlists={playlists} /> : null}
       {signing && <Signing clickedAccount={clickedAccount} />}
 
