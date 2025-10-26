@@ -1,21 +1,33 @@
 import Music from "./Music/Music.jsx";
 import Description from "./Description.jsx";
 import "./Center.css";
+import { useState, useEffect } from "react";
+import { fetchSongs } from "../scripts/Fetches.jsx";
 
 
 
 export default function Center({
-  song,
-  author,
-  songs,
-  authors,
+  setCurrentSong,
+  currentSong,
   setSong,
   setAuthor,
   show,
   setShow,
-  latest,
-  setLatest
+
 }) {
+  const [SONGS, setSONGS] = useState([]);
+  useEffect(() => {
+    const fetches = async () => {
+      setSONGS(await fetchSongs());
+    }
+
+    fetches();
+
+  }, [])
+
+
+
+
   return (
     <main
       className={`Center fixed left-[116px] top-[89px] right-0  bottom-[0px] rounded-md 
@@ -24,15 +36,14 @@ export default function Center({
         `}
     >
       <Music
-        songs={songs}
-        authors={authors}
+        setCurrentSong={setCurrentSong}
+        SONGS={SONGS}
         setSong={setSong}
         setAuthor={setAuthor}
         setShow={setShow}
-        latest={latest}
-        setLatest={setLatest}
+
       />
-      {show ? <Description song={song} author={author} /> : ""}
+      {show ? <Description currentSong={currentSong} /> : ""}
     </main>
   );
 }
