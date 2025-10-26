@@ -8,8 +8,6 @@ import Signing from "./Signing/Signing.jsx";
 import { checkToken, fetchPlaylists } from "./scripts/Fetches.jsx";
 import "./App.css";
 
-import songs from "../public/data/songs.json";
-import authors from "../public/data/authors.json";
 
 export default function MiniSpotify() {
   const [currentSong, setCurrentSong] = useState(null);
@@ -18,15 +16,15 @@ export default function MiniSpotify() {
   const [playlists, setPlaylists] = useState([]);
   const [isLogedIn, setIsLogedIn] = useState(false);
 
+  const user_id = Number(localStorage.getItem('user_id'))
   
 
 
 
   useEffect(() => {
-    const id = 1;
     const fetches = async () => {
       setIsLogedIn(await checkToken());
-      setPlaylists(await fetchPlaylists(id))
+      setPlaylists(await fetchPlaylists(user_id))
     }
 
     fetches()
@@ -37,6 +35,7 @@ export default function MiniSpotify() {
 
 
   const clickedAccount = () => {
+    console.log(signing)
     signing ? setSigning(false) : setSigning(true)
   }
 
@@ -51,8 +50,8 @@ export default function MiniSpotify() {
         setShow={setShow}
       />
       {currentSong ? <Play currentSong={currentSong}  /> : ""}
-      {playlists ? <Aside show={show} songs={songs} playlists={playlists} /> : null}
-      {signing && <Signing clickedAccount={clickedAccount} />}
+      {playlists ? <Aside show={show} playlists={playlists} /> : null}
+      {signing && <Signing clickedAccount={clickedAccount} isLogedIn={isLogedIn} />}
 
     </>
   );

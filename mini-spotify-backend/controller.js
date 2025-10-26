@@ -28,7 +28,7 @@ async function signIn(req, res, next) {
                 { expiresIn: '1h' }
             )
 
-            return res.status(201).json({ message: 'logedIn', token })
+            return res.status(201).json({ message: 'logedIn', user_id : userId, token })
         } else {
             throw 'wrong password'
         }

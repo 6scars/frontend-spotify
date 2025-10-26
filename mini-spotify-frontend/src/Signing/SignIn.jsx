@@ -1,7 +1,8 @@
-export default function SingIn({ signForm, setSwitchForm, clickedAccount, sendForm}) {
-    return (
-        (<>
+export default function SingIn({ signForm, setSwitchForm, clickedAccount, sendForm }) {
+    console.log(localStorage.getItem('jwt'))
 
+    return (
+        <>
             <div className="fixed inset-0 bg-black opacity-50 flex items-center justify-center z-[20]" />
             <div className="flex w-[100%] h-[100%]">
                 <div className="fixed left-0 top-0 right-0 bottom-0  bg-transparent rounded-2xl shadow-lg p-8 w-full  z-[25]
@@ -10,8 +11,16 @@ export default function SingIn({ signForm, setSwitchForm, clickedAccount, sendFo
                     <div className="Sign-container w-[50%] h-[50%] bg-[var(--background-color)] rounded-xl
                             text-white
                         ">
-                        <div className="Sign_in_text_wrapper h-[20%]">
-                            <h3 className="sign_in  ">Sign In</h3>
+                        <div className="Sign_in_text_container h-[20%]">
+                            <div className="h-full flex-1 text-[2rem]gap-[10px]
+                            "></div>
+                            <h3 className="sign_in  h-full flex-10">Sign In</h3>
+                            <div onClick={() => clickedAccount(false)} className="cancel-button-wrapper cursor-pointer hover:bg-[var(--help-color2)] h-full flex-1 text-[2rem]
+                                flex justify-center items-center gap-[10px]
+                            ">X</div>
+
+
+
                         </div>
 
                         <div className="devider" />
@@ -54,6 +63,6 @@ export default function SingIn({ signForm, setSwitchForm, clickedAccount, sendFo
                 </div>
             </div>
 
-        </>)
+        </>
     )
 }
