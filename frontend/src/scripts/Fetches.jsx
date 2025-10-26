@@ -50,3 +50,8 @@ export async function checkToken() {
 };
 
 
+export async function addView(id){
+    fetch(`http://localhost:3005/api/${id}/addView`);
+    return 
+}
+

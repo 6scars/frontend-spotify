@@ -1,5 +1,6 @@
 import "./Description.css";
 export default function Description({ currentSong }) {
+  console.log(currentSong)
   return (
     <div
       className="description red-scroll-bar h-full flex-1 min-w-[500px] overflow-y-auto grow
@@ -16,6 +17,7 @@ export default function Description({ currentSong }) {
       <div className="author-title w-full rounded-xl">
         <p className="title__paragraph font-bold">{currentSong.song_name}</p>
         <p className="aritst__name__paragraph font-bold">{currentSong.author}</p>
+        <p className="aritst__name__paragraph font-bold text-black">{currentSong.views} views</p>
       </div>
 
       <div className="description-about w-full rounded-xl ">
@@ -33,7 +35,7 @@ export default function Description({ currentSong }) {
           </div>
           <div className="artist-follow flex">
             <div className="followers flex-1 flex items-center">
-              50000 right now follows
+              {currentSong.follows} right now follows
             </div>
             <div className="follow flex-1 flex justify-center">
               <button className="follow__button border-1 border-white rounded-full">

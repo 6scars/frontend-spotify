@@ -28,7 +28,7 @@ async function signIn(req, res, next) {
                 { expiresIn: '1h' }
             )
 
-            return res.status(201).json({ message: 'logedIn', user_id : userId, token })
+            return res.status(201).json({ message: 'logedIn', user_id: userId, token })
         } else {
             throw 'wrong password'
         }
@@ -50,7 +50,6 @@ async function signUp(req, res, next) {
             ON CONFLICT (email) DO NOTHING
             RETURNING *
         `;
-        console.log(newUser)
         return res.status(201).json({ message: 'User Created' })
     } catch (err) {
         console.error('SINGUP error:', err)
@@ -91,29 +90,30 @@ async function playlists(req, res, next) {
 async function fetchSongs(req, res, next) {
     try {
         const data = await sql`
-        SELECT 
-            author_id, 
+        SELECT  
             song_id, 
             "song_Name" AS song_name,
-            songs."song_Image" AS song_image, 
-            author,
+            songs."song_Image" AS song_image,
+            songs.created_at,
+            songs.views,
+            authors.follows,
             file,
             credit,
             album_id,
-            image AS author_image,
-            biograph,
-            songs.created_at
+            author_image AS author_image,
+            author,
+            author_id,
+            biograph
         FROM songs
         INNER JOIN authors_songs ON authors_songs.song_id = songs.id 
         INNER JOIN authors ON authors.id = authors_songs.author_id
         LIMIT 10
     `
-        console.log(data)
         return res.status(201).json({ message: "accompllished", data })
 
-    }catch(err){
-        console.error('FETCH SONG FAILURE');
-        return res.status(401).json({message:'FETCH SONG FAILURE', error:err})
+    } catch (err) {
+        console.error('FETCH SONG FAILURE', err);
+        return res.status(401).json({ message: 'FETCH SONG FAILURE', error: err })
     }
 }
 
@@ -136,6 +136,24 @@ async function checkToken(req, res, next) {
 }
 
 
+async function addView(req, res, next) {
+    const song_id = req.params.id;
+
+    try {
+        const data = await sql`
+        UPDATE songs
+        SET views = views + 1
+        WHERE id = ${song_id}
+        RETURNING views
+    `
+        console.log(data)
+        return null
+    }catch(err){
+        console.error('FUNCTION ERORR addView', err)
+    }
+
+}
+
 
 
 export default controller = {
@@ -143,5 +161,6 @@ export default controller = {
     signUp,
     playlists,
     checkToken,
-    fetchSongs
+    fetchSongs,
+    addView
 }

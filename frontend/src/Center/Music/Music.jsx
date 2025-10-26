@@ -1,7 +1,8 @@
 import "./Music.css";
 import Songs from "./Songs/Songs.jsx";
 import Latest from "./Songs/Latest.jsx";
-import {useState} from "react"
+import { addView } from "../../scripts/Fetches.jsx";
+import { useState } from "react"
 export default function Music({
   setCurrentSong,
   SONGS,
@@ -11,13 +12,15 @@ export default function Music({
 }) {
   const [latest, setLatest] = useState(JSON.parse(localStorage.getItem('latest')) || []);
 
-  
+
   function chooseSong(e) {
     const findedSong = SONGS.find((song) => song.song_id === e);
-    setCurrentSong(findedSong)
-    setShow(true)
-    latestListened(findedSong)
-
+    if (findedSong) {
+      addView(e)
+      setCurrentSong(findedSong)
+      setShow(true)
+      latestListened(findedSong)
+    }
   }
 
 
@@ -71,7 +74,7 @@ export default function Music({
         <button>PODCASTS</button>
       </div>
       <div className="main-songs ">
-        <Latest latest={latest} chooseSong={chooseSong} /> 
+        <Latest latest={latest} chooseSong={chooseSong} />
         <div className="songs cursor-pointer">
           <div className="songs-title-container text-white font-bold">
             <p className="songs__title">Prepared for You</p>
