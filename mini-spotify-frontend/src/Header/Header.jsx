@@ -33,16 +33,8 @@ export default function Header({ clickedAccount, isLogedIn, setIsLogedIn }) {
       </div>
       <div className="right-header  min-w-[300px] h-full">
         <div className=" flex justify-end items-center h-full text-white">
-          {isLogedIn ? (
-            <button className="cursor-pointer" onClick={() => {
-              setIsLogedIn(false);
-              localStorage.removeItem('user_id', null);
-              localStorage.removeItem('jwt', null);
-              window.location.reload();
-            }}>Logout</button>
-          ) : 'login'}
 
-          <Sing clickedAccount={clickedAccount} />
+          <Sing clickedAccount={clickedAccount} isLogedIn={isLogedIn}/>
         </div>
       </div>
     </header>

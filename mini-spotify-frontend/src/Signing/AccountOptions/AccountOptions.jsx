@@ -1,5 +1,5 @@
 import './AccountOptions.css'
-export default function AccountOptions({clickedAccount}) {
+export default function AccountOptions({ setIsLogedIn, clickedAccount }) {
     return (
         <>
             <div className="fixed inset-0 bg-black opacity-50 flex items-center justify-center z-[20]" />
@@ -28,6 +28,12 @@ export default function AccountOptions({clickedAccount}) {
                             <a>Add song</a>
                             <a>Personalize account</a>
                             <a>Settings</a>
+                            <button className="cursor-pointer" onClick={() => {
+                                setIsLogedIn(false);
+                                localStorage.removeItem('user_id', null);
+                                localStorage.removeItem('jwt', null);
+                                window.location.reload();
+                            }}>Logout</button>
                         </div>
 
 

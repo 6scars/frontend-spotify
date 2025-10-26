@@ -17,7 +17,7 @@ export default function MiniSpotify() {
   const [isLogedIn, setIsLogedIn] = useState(false);
 
   const user_id = Number(localStorage.getItem('user_id'))
-  
+
 
 
 
@@ -26,32 +26,33 @@ export default function MiniSpotify() {
       setIsLogedIn(await checkToken());
       setPlaylists(await fetchPlaylists(user_id))
     }
-
     fetches()
-    
   }, []);
 
 
 
 
   const clickedAccount = () => {
-    console.log(signing)
     signing ? setSigning(false) : setSigning(true)
   }
 
   return (
     <>
 
-      <Header clickedAccount={clickedAccount} isLogedIn={isLogedIn} setIsLogedIn={setIsLogedIn} />
-      <Center 
-        currentSong = {currentSong}
-        setCurrentSong = {setCurrentSong}
+      <Header
+        clickedAccount={clickedAccount}
+        isLogedIn={isLogedIn}
+        setIsLogedIn={setIsLogedIn}
+      />
+      <Center
+        currentSong={currentSong}
+        setCurrentSong={setCurrentSong}
         show={show}
         setShow={setShow}
       />
-      {currentSong ? <Play currentSong={currentSong}  /> : ""}
+      {currentSong ? <Play currentSong={currentSong} /> : ""}
       {playlists ? <Aside show={show} playlists={playlists} /> : null}
-      {signing && <Signing clickedAccount={clickedAccount} isLogedIn={isLogedIn} />}
+      {signing && <Signing setIsLogedIn={setIsLogedIn} clickedAccount={clickedAccount} isLogedIn={isLogedIn} />}
 
     </>
   );
