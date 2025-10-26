@@ -1,4 +1,8 @@
 @import "tailwindcss";
+.Sign_in_text_container{
+    display:flex;
+
+}
 
 .sign_in {
     @apply text-2xl font-bold flex justify-center items-center;

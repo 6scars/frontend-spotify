@@ -3,28 +3,8 @@ export async function fetchSongs() {
     const data = await response.json();
     return data.data
 }
-export async function checkToken() {
-    try {
-        const dataUserResponse = await fetch('http://localhost:3005/api/checkToken', {
-            method: 'POST',
-            headers: {
-                'Authorization': `Bearer ${localStorage.getItem('jwt')}`,
-                'Content-Type': 'application/json'
-            }
-        });
-        const data = await dataUserResponse.json();
-        if (data.token) {
-            return true
-        }
-        return false
-    } catch (error) {
-        console.error('Error fetching  dataUser:', error);
-        return false
-    }
 
-};
-
-export async function fetchPlaylists(id){
+export async function fetchPlaylists(id) {
     try {
         const playlistsResponse = await fetch('http://localhost:3005/api/playlists', {
             method: 'POST',
@@ -45,4 +25,29 @@ export async function fetchPlaylists(id){
         console.error('Error fetching dataPlaylists:', error);
     }
 };
+
+export async function checkToken() {
+    try {
+        const dataUserResponse = await fetch('http://localhost:3005/api/checkToken', {
+            method: 'POST',
+            headers: {
+                'Authorization': `Bearer ${localStorage.getItem('jwt')}`,
+                'Content-Type': 'application/json'
+            }
+        });
+        const data = await dataUserResponse.json();
+        if (data.token) {
+            console.log(data)
+            return true
+        }
+        localStorage.removeItem('jwt');
+        localStorage.removeItem('user_id')
+        return false
+    } catch (error) {
+        console.error('Error fetching  dataUser:', error);
+        return false
+    }
+
+};
+
 

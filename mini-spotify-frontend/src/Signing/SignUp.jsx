@@ -1,4 +1,4 @@
-export default function SignUp({ signForm, setSwitchForm, clickedAccount, sendForm}) {
+export default function SignUp({ signForm, setSwitchForm, clickedAccount, sendForm }) {
 
     return (
         (<>
@@ -11,8 +11,16 @@ export default function SignUp({ signForm, setSwitchForm, clickedAccount, sendFo
                     <div className="Sign-container w-[50%] h-[50%] bg-[var(--background-color)] rounded-xl
                             text-white
                         ">
-                        <div className="Sign_in_text_wrapper h-[20%]">
-                            <h3 className="sign_in  ">Register up</h3>
+                        <div className="Sign_in_text_container h-[20%]">
+                            <div className="h-full flex-1 text-[2rem]gap-[10px]
+                            "></div>
+                            <h3 className="sign_in  h-full flex-10">Register</h3>
+                            <div onClick={() => clickedAccount(false)} className="cancel-button-wrapper cursor-pointer hover:bg-[var(--help-color2)] h-full flex-1 text-[2rem]
+                                flex justify-center items-center gap-[10px]
+                            ">X</div>
+
+
+
                         </div>
 
                         <div className="devider" />
@@ -46,7 +54,7 @@ export default function SignUp({ signForm, setSwitchForm, clickedAccount, sendFo
                                     Cancel
                                 </button>
                                 <div>
-                                    Don't you have account? <a onClick={() =>  setSwitchForm(false)} className="text-blue-500 cursor-pointer hover:text-amber-500">LoginIn</a>
+                                    Don't you have account? <a onClick={() => setSwitchForm(false)} className="text-blue-500 cursor-pointer hover:text-amber-500">LoginIn</a>
 
                                 </div>
                             </form>
