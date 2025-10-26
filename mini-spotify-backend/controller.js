@@ -17,7 +17,7 @@ async function signIn(req, res, next) {
         const userPassword = data[0].password;
         const userId = data[0].id
         const userEmail = data[0].email
-        
+
         const isMatch = await bcrypt.compare(password, userPassword);
         if (isMatch) {
             const token = await jwt.sign({
@@ -27,7 +27,7 @@ async function signIn(req, res, next) {
                 process.env.JWT_SECRET,
                 { expiresIn: '1h' }
             )
-            
+
             return res.status(201).json({ message: 'logedIn', token })
         } else {
             throw 'wrong password'
@@ -81,7 +81,6 @@ async function playlists(req, res, next) {
 
         `;
 
-        console.log(data)
         return res.status(202).json({ message: "accomplished", data: data })
     } catch (err) {
         console.error("❌ Error fetching authors:", err);
@@ -89,13 +88,14 @@ async function playlists(req, res, next) {
 
 }
 
-async function fetchSongs(req,res,next){
-    const data = await sql`
+async function fetchSongs(req, res, next) {
+    try {
+        const data = await sql`
         SELECT 
             author_id, 
             song_id, 
             "song_Name" AS song_name,
-            "song_Image" AS song_image, 
+            songs."song_Image" AS song_image, 
             author,
             file,
             credit,
@@ -104,11 +104,17 @@ async function fetchSongs(req,res,next){
             biograph,
             songs.created_at
         FROM songs
-        INNER JOIN authors_songs ON authors_songs.author_id = songs.id 
+        INNER JOIN authors_songs ON authors_songs.song_id = songs.id 
         INNER JOIN authors ON authors.id = authors_songs.author_id
         LIMIT 10
     `
-    console.log(data)
+        console.log(data)
+        return res.status(201).json({ message: "accompllished", data })
+
+    }catch(err){
+        console.error('FETCH SONG FAILURE');
+        return res.status(401).json({message:'FETCH SONG FAILURE', error:err})
+    }
 }
 
 async function checkToken(req, res, next) {

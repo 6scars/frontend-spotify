@@ -1,31 +1,30 @@
 import "./Music.css";
 import Songs from "./Songs/Songs.jsx";
 import Latest from "./Songs/Latest.jsx";
+import {useState} from "react"
 export default function Music({
+  setCurrentSong,
+  SONGS,
   songs,
   authors,
-  setSong,
-  setAuthor,
-  setShow,
-  latest,
-  setLatest,
+  setShow
 }) {
+  const [latest, setLatest] = useState(JSON.parse(localStorage.getItem('latest')) || []);
+
+  
   function chooseSong(e) {
-    const findedSong = songs.find((song) => song.id === e);
-    const findedAuthor = authors.find(
-      (author) => author.id === findedSong.authors[0]
-    );
-    setSong(findedSong);
-    setAuthor(findedAuthor);
-    setShow(true);
-    latestListened(findedSong);
+    const findedSong = SONGS.find((song) => song.song_id === e);
+    setCurrentSong(findedSong)
+    setShow(true)
+    latestListened(findedSong)
+
   }
 
 
   function latestListened(newSong) {
     if (!latest) setLatest([newSong]);
 
-    const index = latest.findIndex((s) => s.id === newSong.id);
+    const index = latest.findIndex((s) => s.song_id === newSong.song_id);
 
     setLatest((prev) => {
       /*if NOT finded song in previous*/
@@ -72,12 +71,12 @@ export default function Music({
         <button>PODCASTS</button>
       </div>
       <div className="main-songs ">
-        <Latest latest={latest} chooseSong={chooseSong} />
+        <Latest latest={latest} chooseSong={chooseSong} /> 
         <div className="songs cursor-pointer">
           <div className="songs-title-container text-white font-bold">
             <p className="songs__title">Prepared for You</p>
           </div>
-          <Songs songs={songs} authors={authors} chooseSong={chooseSong} />
+          <Songs SONGS={SONGS} songs={songs} authors={authors} chooseSong={chooseSong} />
         </div>
       </div>
     </div>
