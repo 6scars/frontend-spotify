@@ -1,5 +1,7 @@
+import { useNavigate } from 'react-router';
 import './AccountOptions.css'
 export default function AccountOptions({ setIsLogedIn, clickedAccount }) {
+    const navigate = useNavigate();
     return (
         <>
             <div className="fixed inset-0 bg-black opacity-50 flex items-center justify-center z-[20]" />
@@ -25,7 +27,7 @@ export default function AccountOptions({ setIsLogedIn, clickedAccount }) {
                         <div className="devider" />
                         <div className="account-options">
                             <a>Your account</a>
-                            <a>Add song</a>
+                            <a onClick={()=>{navigate('/addSong')}}>Add song</a>
                             <a>Personalize account</a>
                             <a>Settings</a>
                             <button className="cursor-pointer" onClick={() => {
