@@ -5,6 +5,9 @@ export async function fetchSongs() {
 }
 
 export async function fetchPlaylists(id) {
+    if(!id){
+        return []
+    }
     try {
         const playlistsResponse = await fetch('http://localhost:3005/api/playlists', {
             method: 'POST',
