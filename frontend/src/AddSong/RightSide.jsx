@@ -2,9 +2,9 @@ import Information from "./RightSide/Information";
 import Preview from "./RightSide/Preview";
 import File from "./RightSide/File";
 
-export default function RightSide({tabName}) {
+export default function RightSide({tabName, inputFile, dragAndDropEl, imgUrl,setImgUrl, informationForm, setInformationForm}) {
     const tabs = {
-        INFORMATION: <Information />,
+        INFORMATION: <Information tabName={tabName} inputFile={inputFile} dragAndDropEl={dragAndDropEl} imgUrl={imgUrl} setImgUrl={setImgUrl} informationForm={informationForm} setInformationForm={setInformationForm} />,
         FILE: <File />,
         PREVIEW: <Preview />
     }

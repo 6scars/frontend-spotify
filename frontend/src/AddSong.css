@@ -87,10 +87,16 @@ body {
 
 .left-tab {
   @apply 
+  w-full
+    flex items-center justify-center 
+    cursor-pointer
+    text-[1.3rem]
+    transition
+    duration-75 text-white bg-[var(--accent-color3)] hover:bg-[var(--accent-color2)]
 
-;
+; 
 
-}
+} 
 .back-tab{
   @apply     
   w-full
@@ -99,4 +105,16 @@ body {
     text-[1.3rem]
     transition
     duration-75 text-white bg-[var(--accent-color3)] w-full h-[10%] hover:bg-[var(--accent-color2)]
+}
+
+
+
+/*--------------RIGHT SIDE -----------*/
+.right-side{
+  @apply  flex-10 p-10;
+}
+
+/*----------------ACTIVE TAB---------------*/
+.active-tab{
+  @apply bg-[var(--background-color)]
 }
