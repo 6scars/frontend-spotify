@@ -1,0 +1,43 @@
+<!-- import-mp3-2.svg -->
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 360 120" width="360" height="120" role="img" aria-labelledby="impMp3Title">
+  <title id="impMp3Title">Import MP3 File</title>
+
+  <!-- background rounded card -->
+  <rect x="2" y="2" width="356" height="116" rx="14"  fill="#000000" stroke="#350a0a" stroke-width="2"/>
+
+  <!-- left file icon -->
+  <g transform="translate(26,16)" fill="none" stroke="white" stroke-linecap="round" stroke-linejoin="round">
+    <!-- file paper -->
+    <path d="M0 0h64v88H0z" fill="#fff0" stroke="white" stroke-width="2"/>
+    <!-- folded corner -->
+    <path d="M44 0v18h18" stroke="white" stroke-width="2" fill="none"/>
+    <!-- music note inside file -->
+    <g transform="translate(12,18)" fill="white" stroke="none">
+      <circle cx="10" cy="40" r="6"/>
+      <rect x="16" y="10" width="6" height="34" rx="3"/>
+      <path d="M22 10 L38 6" stroke="white" stroke-width="3" stroke-linecap="round"/>
+    </g>
+  </g>
+
+  <!-- center arrow (upload) -->
+  <g transform="translate(120,16)">
+    <rect x="0" y="0" width="44" height="88" rx="8" fill="#b71c1c"/>
+    <path d="M22 18 v28" stroke="white" stroke-width="3" stroke-linecap="round"/>
+    <path d="M12 28 L22 18 L32 28" stroke="white" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" fill="none"/>
+  </g>
+
+  <!-- right text / details -->
+  <g transform="translate(190,30)">
+    <text x="0" y="0" fill="white" font-family="Inter, Arial, sans-serif" font-size="20" font-weight="700">
+      Import MP3 File
+    </text>
+    <text x="0" y="28" fill="rgba(255,255,255,0.9)" font-family="Inter, Arial, sans-serif" font-size="10">
+      Click or drop to upload mp3 file
+    </text>
+    <!-- small hint pill -->
+    <rect x="0" y="40" rx="10" height="24" width="110" fill="rgba(255,255,255,0.08)"/>
+    <text x="12" y="56" fill="white" font-family="Inter, Arial, sans-serif" font-size="12">
+      .mp3 • up to 10 MB
+    </text>
+  </g>
+</svg>
