@@ -1,18 +1,26 @@
-import { useState, useEffect } from 'react'
+import { useState, useEffect, useRef } from 'react'
 import Image from './Image';
-export default function DragAndDrop({ inputFile, dragAndDropEl, imgUrl, setImgUrl, addSongForm }) {
+export default function DragAndDrop({ addSongForm, setAddSongForm }) {
+    const inputFile = useRef(null);
+    const dragAndDropEl = useRef(null);
 
     useEffect(() => {
         /*-----Change or add mp3 file-------*/
         const handleFileChange = () => {
             let imgLink = URL.createObjectURL(inputFile.current.files[0]);
-            setImgUrl(imgLink);
+            setAddSongForm(prev => ({
+                ...prev,
+                imgUrl: imgLink
+            }));
         }
         /*-----Change or add mp3 file by drop-------*/
         const handleDrop = (e) => {
             e.preventDefault()
             let imgLink = URL.createObjectURL(e.dataTransfer.files[0]);
-            setImgUrl(imgLink) 
+            setAddSongForm(prev => ({
+                ...prev,
+                imgUrl: imgLink
+            }));
         }
         /*------Do nothing if is over the element-------*/
         const handleDragOver = (e) => { e.preventDefault() }
@@ -36,7 +44,7 @@ export default function DragAndDrop({ inputFile, dragAndDropEl, imgUrl, setImgUr
         >
             <label className="h-full w-full" htmlFor="input-file" id="img-view">
                 <div className="song-container-inner w-full h-full  flex items-center justify-center flex-col rounded-xl ">
-                    <Image imgUrl={imgUrl} />
+                    <Image imgUrl={addSongForm.imgUrl} />
 
                     <div
                         className="authors-container  h-[25%] text-gray-700 font-bold flex items-center flex flex-col" >
