@@ -4,18 +4,16 @@ import LeftSide from "./AddSong/LeftSide.jsx"
 import RightSide from "./AddSong/RightSide.jsx"
 export default function AddSong() {
     const [tabName, setTabName] = useState('INFORMATION');
-    const [imgUrl, setImgUrl] = useState("https://rgmmwhkixprkskznqjcy.supabase.co/storage/v1/object/public/spotify/images/logos/import-here.svg")
     const [addSongForm, setAddSongForm] = useState({
         song_name: '',
         credit: '',
         album_id: '',
         album_name: '',
+        imgUrl:'https://rgmmwhkixprkskznqjcy.supabase.co/storage/v1/object/public/spotify/images/logos/import-here.svg',
         importedSongUrlBlob:'',
         importedSongNameFile:''
     })
-    const [importedSong, setImportedSong] = useState(null)
-    const inputFile = useRef(null);
-    const dragAndDropEl = useRef(null);
+
 
 
     return (
@@ -26,13 +24,7 @@ export default function AddSong() {
                 ">
                     <LeftSide tabName={tabName} setTabName={setTabName} addSongForm={addSongForm} />
                     <RightSide
-                        setImportedSong={setImportedSong}
-                        importedSong={importedSong}
                         tabName={tabName}
-                        inputFile={inputFile}
-                        dragAndDropEl={dragAndDropEl}
-                        imgUrl={imgUrl}
-                        setImgUrl={setImgUrl}
                         addSongForm={addSongForm}
                         setAddSongForm={setAddSongForm}
                     />
