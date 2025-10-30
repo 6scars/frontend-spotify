@@ -1,20 +1,24 @@
-import {useState, useEffect} from 'react'
+import { useState, useEffect } from 'react'
 import Image from './Image';
-export default function DragAndDrop({inputFile,dragAndDropEl,imgUrl,setImgUrl,informationForm }) {
+export default function DragAndDrop({ inputFile, dragAndDropEl, imgUrl, setImgUrl, addSongForm }) {
 
     useEffect(() => {
+        /*-----Change or add mp3 file-------*/
         const handleFileChange = () => {
             let imgLink = URL.createObjectURL(inputFile.current.files[0]);
             setImgUrl(imgLink);
         }
-        const handleDragOver = (e) => { e.preventDefault() }
+        /*-----Change or add mp3 file by drop-------*/
         const handleDrop = (e) => {
             e.preventDefault()
             let imgLink = URL.createObjectURL(e.dataTransfer.files[0]);
-            setImgUrl(imgLink)
+            setImgUrl(imgLink) 
         }
+        /*------Do nothing if is over the element-------*/
+        const handleDragOver = (e) => { e.preventDefault() }
 
 
+        /*---------Event listener on elements-------------*/
         inputFile.current.addEventListener("change", handleFileChange)
         dragAndDropEl.current.addEventListener('dragover', handleDragOver)
         dragAndDropEl.current.addEventListener('drop', handleDrop)
@@ -35,19 +39,20 @@ export default function DragAndDrop({inputFile,dragAndDropEl,imgUrl,setImgUrl,in
                     <Image imgUrl={imgUrl} />
 
                     <div
-                        className="authors-container  h-[25%] text-gray-700 font-bold flex items-center
-                                                            flex flex-col"
-                    >
+                        className="authors-container  h-[25%] text-gray-700 font-bold flex items-center flex flex-col" >
                         <div className=" text-[0.8rem] text-[var(--main-color)]">
-                            {informationForm.song_name || 'title'}
+                            {addSongForm.song_name || 'title'}
                         </div>
                         <p className="  text-[0.7rem] authors__text ">
                             author_name
                         </p>
-                        <p className="text-[0.7rem] text-white font-thin"> {`${informationForm.credit || 'credit'}`}</p>
+                        <p className="text-[0.7rem] text-white font-thin">
+                            {`${addSongForm.credit || 'credit'}`}
+                        </p>
                     </div>
                 </div>
             </label>
+
             <input ref={inputFile} className="hidden" type="file" id="input-file" />
         </div>
     )
