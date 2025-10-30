@@ -10,7 +10,6 @@ export default function ImportedMp3({ addSongForm }) {
 
 
     useEffect(() => {
-        console.log(addSongForm)
         const a = audioRef.current;
         const onLoaded = () => {
             setDuration(a.duration || 0);
@@ -80,11 +79,11 @@ export default function ImportedMp3({ addSongForm }) {
 
         <div
             className="play-center-section h-full w-[400px] min-w-[200px] max-w-[600px]
-        flex flex-col items-center
+        flex flex-col items-center text-white
       "
         >
             <div>{addSongForm.importedSongNameFile}</div>
-            <span>Saved</span>
+           {addSongForm.importedSongUrlBlob ? <span>Saved</span> : ''}
             <div className="w-full flex-1 flex justify-center items-center gap-5">
                 <button>
                     <img
