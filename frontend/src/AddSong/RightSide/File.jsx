@@ -1,15 +1,13 @@
 import { useState } from 'react';
 import ImportedMp3 from './File/ImportedMp3';
-export default function File({ setImportedSong }) {
-    const [mp3File, setMp3File] = useState(null)
+export default function File({importedSong, setImportedSong }) {
     const [mp3FileName, setMp3FileName] = useState(null)
     const handleChangeFile = (e) => {
         e.preventDefault()
         if (e.target.files[0].type === "audio/mpeg") {
             const mp3Url = URL.createObjectURL(e.target.files[0])
-            setMp3File(mp3Url)
-            setImportedSong(mp3File)
-            console.log(e.target.files[0].name)
+
+            setImportedSong(mp3Url)
             setMp3FileName(e.target.files[0].name)
         }
     }
@@ -22,7 +20,7 @@ export default function File({ setImportedSong }) {
         e.preventDefault();
         if (e.dataTransfer.files[0]) {
             const mp3Url = URL.createObjectURL(e.dataTransfer.files[0])
-            setMp3File(mp3Url)
+            setImportedSong(mp3Url)
             setMp3FileName(e.dataTransfer.files[0].name)
         }
         
@@ -42,7 +40,7 @@ export default function File({ setImportedSong }) {
                 <input className="hidden" onChange={handleChangeFile} type="file" id="input-mp3-file" accept=".mp3" />
                 <div className="flex flex-col items-center justify-center text-white">
                     
-                    {!mp3File ? '' : <ImportedMp3 mp3File={mp3File} mp3FileName={mp3FileName} />}
+                    {!importedSong ? '' : <ImportedMp3 importedSong={importedSong} mp3FileName={mp3FileName} />}
                 </div>
 
 

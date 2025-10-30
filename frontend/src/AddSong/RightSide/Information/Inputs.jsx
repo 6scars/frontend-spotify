@@ -1,7 +1,7 @@
-export default function Inputs({ informationForm, setInformationForm }) {
+export default function Inputs({ addSongForm, setAddSongForm }) {
 
-    const handleInformationForm = (e) => {
-        setInformationForm((prev) => ({
+    const handleAddSongForm = (e) => {
+        setAddSongForm((prev) => ({
             ...prev,
             [e.target.name]: e.target.value
         }))
@@ -10,17 +10,17 @@ export default function Inputs({ informationForm, setInformationForm }) {
         <div className="details  flex flex-1 flex-col justify-evenly">
             <div>
                 <span className="text-[1.6rem]">Title Of Your Song</span>
-                <input onChange={() => handleInformationForm(event)} name="song_name" type="text" placeholder={`${informationForm.song_name || 'Title'}`} />
+                <input onChange={() => handleAddSongForm(event)} name="song_name" type="text" placeholder={`${addSongForm.song_name || 'Title'}`} />
 
             </div>
             <div>
                 <span className="text-[1.6rem]">Credit</span>
-                <input onChange={() => handleInformationForm(event)} name="credit" type="text" placeholder={`${informationForm.credit || 'Credit'}`} />
+                <input onChange={() => handleAddSongForm(event)} name="credit" type="text" placeholder={`${addSongForm.credit || 'Credit'}`} />
 
             </div>
             <div>
                 <span className="text-[1.6rem]">Choose Your Album If You Want</span>
-                <select name="album_id" onChange={() => handleInformationForm(event)} value={`${informationForm.album_id || null}`}>
+                <select name="album_id" onChange={() => handleAddSongForm(event)} value={`${addSongForm.album_id || null}`}>
 
                     <option value="" disabled hidden>--choose album you want to connect---</option>
                     <option value="dont connect">don't connect</option>

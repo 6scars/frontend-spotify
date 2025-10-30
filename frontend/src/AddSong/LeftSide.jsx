@@ -1,23 +1,25 @@
 import { useNavigate } from 'react-router'
 import { useEffect, useState } from 'react'
 
-export default function LeftSide({ tabName, setTabName, informationForm }) {
+export default function LeftSide({ tabName, setTabName, addSongForm }) {
   const navigate = useNavigate()
   const [currentTab, setCurrentTab] = useState(null)
-  console.log(informationForm)
 
+  /*--------choose Tab function add/remove style-------*/
   const chooseTab = (e) => {
     const clickedDiv = e.currentTarget // <-- use currentTarget
     setTabName(clickedDiv.innerText)
 
-    if (currentTab) {
+    if (currentTab) 
       currentTab.classList.remove('active-tab')
-    }
+    
     clickedDiv.classList.add('active-tab')
     setCurrentTab(clickedDiv)
   }
 
+  
   useEffect(() => {
+    /*------Choose Tab function for INFORMATION div at start-------*/
     setCurrentTab(document.querySelector('.INFORMATION'))
   }, [])
 
