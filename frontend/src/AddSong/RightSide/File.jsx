@@ -1,30 +1,41 @@
 import { useState } from 'react';
 import ImportedMp3 from './File/ImportedMp3';
-export default function File({importedSong, setImportedSong }) {
-    const [mp3FileName, setMp3FileName] = useState(null)
+export default function File({ addSongForm, setAddSongForm }) {
+
+    /*-------Change or input mp3 file------*/
     const handleChangeFile = (e) => {
         e.preventDefault()
         if (e.target.files[0].type === "audio/mpeg") {
             const mp3Url = URL.createObjectURL(e.target.files[0])
 
-            setImportedSong(mp3Url)
-            setMp3FileName(e.target.files[0].name)
+            setAddSongForm(prev => ({
+                ...prev,
+                importedSongUrlBlob: mp3Url,
+                importedSongNameFile: e.target.files[0].name
+            }))
+
         }
     }
+    /*-------Change or input mp3 file by drop------*/
+    const handleOnDrop = (e) => {
+        e.preventDefault();
 
+        if (e.dataTransfer.files[0]) {
+            const mp3Url = URL.createObjectURL(e.dataTransfer.files[0])
+            setAddSongForm(prev => ({
+                ...prev,
+                importedSongUrlBlob: mp3Url,
+                importedSongNameFile: e.dataTransfer.files[0].name
+            }))
+        }
+
+    }
+    /*--------if over div elemtn do nothing -------*/
     const handleDragOver = (e) => {
         e.preventDefault();
     }
 
-    const handleOnDrop = (e) => {
-        e.preventDefault();
-        if (e.dataTransfer.files[0]) {
-            const mp3Url = URL.createObjectURL(e.dataTransfer.files[0])
-            setImportedSong(mp3Url)
-            setMp3FileName(e.dataTransfer.files[0].name)
-        }
-        
-    }
+
 
 
     return (
@@ -39,8 +50,8 @@ export default function File({importedSong, setImportedSong }) {
                 </label>
                 <input className="hidden" onChange={handleChangeFile} type="file" id="input-mp3-file" accept=".mp3" />
                 <div className="flex flex-col items-center justify-center text-white">
-                    
-                    {!importedSong ? '' : <ImportedMp3 importedSong={importedSong} mp3FileName={mp3FileName} />}
+
+                    {!addSongForm.importedSongUrlBlob ? '' : <ImportedMp3 addSongForm={addSongForm} />}
                 </div>
 
 

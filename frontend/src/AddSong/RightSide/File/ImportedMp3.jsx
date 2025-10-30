@@ -1,5 +1,5 @@
 import { useState, useRef, useEffect } from 'react'
-export default function ImportedMp3({ importedSong, mp3FileName }) {
+export default function ImportedMp3({ addSongForm }) {
     const audioRef = useRef(null);
 
     const [play, setPlay] = useState(false);
@@ -10,7 +10,7 @@ export default function ImportedMp3({ importedSong, mp3FileName }) {
 
 
     useEffect(() => {
-        console.log(importedSong)
+        console.log(addSongForm)
         const a = audioRef.current;
         const onLoaded = () => {
             setDuration(a.duration || 0);
@@ -83,7 +83,7 @@ export default function ImportedMp3({ importedSong, mp3FileName }) {
         flex flex-col items-center
       "
         >
-            <div>{mp3FileName}</div>
+            <div>{addSongForm.importedSongNameFile}</div>
             <span>Saved</span>
             <div className="w-full flex-1 flex justify-center items-center gap-5">
                 <button>
@@ -141,7 +141,7 @@ export default function ImportedMp3({ importedSong, mp3FileName }) {
                 </div>
                 <audio
                     ref={audioRef}
-                    src={importedSong}
+                    src={addSongForm.importedSongUrlBlob}
                     preload="metadata"
                 />
                 <div className="text-red-500  min-w-[50px]">{formatTime(duration)}</div>
