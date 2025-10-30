@@ -10,6 +10,8 @@ export default function AddSong() {
         credit: '',
         album_id: '',
         album_name: '',
+        importedSongUrlBlob:'',
+        importedSongNameFile:''
     })
     const [importedSong, setImportedSong] = useState(null)
     const inputFile = useRef(null);
