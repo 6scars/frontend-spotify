@@ -1,4 +1,4 @@
-import { useState, useRef } from 'react'
+import { useState, useRef, useEffect } from 'react'
 import "./AddSong.css";
 import LeftSide from "./AddSong/LeftSide.jsx"
 import RightSide from "./AddSong/RightSide.jsx"
@@ -9,11 +9,22 @@ export default function AddSong() {
         credit: '',
         album_id: '',
         album_name: '',
-        imgUrl:'https://rgmmwhkixprkskznqjcy.supabase.co/storage/v1/object/public/spotify/images/logos/import-here.svg',
-        importedSongUrlBlob:'',
-        importedSongNameFile:''
+        imgUrl: 'https://rgmmwhkixprkskznqjcy.supabase.co/storage/v1/object/public/spotify/images/logos/import-here.svg',
+        importedSongUrlBlob: '',
+        importedSongNameFile: ''
     })
 
+    useEffect(() => {
+        const getAuthorsAlbums = async () => {
+            const response = await fetch('http://localhost:3005/api/getAuthorsAlbums', {
+                method: "GET",
+                headers: {
+                    "Authorization": `Bearer ${localStorage.getItem('jwt')}`,
+                    "Content-Type": "application/json"
+                }
+            })
+        }
+    }, [])
 
 
     return (
