@@ -1,0 +1,9 @@
+@import "tailwindcss";
+
+.Preview .button-container {
+    margin-top:50px
+}
+
+.Preview .button-container button{
+    @apply p-2 rounded-xl bg-[var(--accent-color)] hover:bg-[var(--accent-color2)]
+}
