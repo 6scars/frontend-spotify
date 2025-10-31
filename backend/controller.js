@@ -148,7 +148,7 @@ async function addView(req, res, next) {
     `
         console.log(data)
         return null
-    }catch(err){
+    } catch (err) {
         console.error('FUNCTION ERORR addView', err)
     }
 
@@ -156,11 +156,41 @@ async function addView(req, res, next) {
 
 
 
+async function getDataFromToken(req, res, next) {
+    try {
+        const authHeader = req.headers.authorization;
+
+        if (!authHeader || !authHeader.startsWith("Bearer ")) {
+            return res.status(401).json({ message: "Missing or invalid token" });
+        }
+
+        const token = authHeader.split(" ")[1];
+
+        const decodedData = jwt.decode(token);
+        req.decodedData = decodedData;
+
+        next();
+       
+    } catch (error) {
+        console.error(error);
+        return res.status(500).json({ message: "Server error" });
+    }
+}
+
+async function getAuthorsAlbums(req, res, next) {
+    console.log(req.decodedData)
+     return res.status(200).json({ message: "good", user: req.decodedData });
+    
+
+}
+
 export default controller = {
     signIn,
     signUp,
     playlists,
     checkToken,
     fetchSongs,
-    addView
+    addView,
+    getDataFromToken,
+    getAuthorsAlbums
 }
