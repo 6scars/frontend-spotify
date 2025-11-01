@@ -13,6 +13,7 @@ export default function AddSong() {
         importedSongUrlBlob: '',
         importedSongNameFile: ''
     })
+    const [albumsInfo, setAlbumsInfo] = useState(null);
 
     useEffect(() => {
         const getAuthorsAlbums = async () => {
@@ -23,6 +24,8 @@ export default function AddSong() {
                     "Content-Type": "application/json"
                 }
             })
+            const data = await response.json();
+            setAlbumsInfo(data.data)
         }
         getAuthorsAlbums()
     }, [])
