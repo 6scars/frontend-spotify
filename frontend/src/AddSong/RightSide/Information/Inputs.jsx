@@ -25,7 +25,7 @@ export default function Inputs({ albumsInfo, addSongForm, setAddSongForm }) {
                     <option value="" disabled hidden>--choose album you want to connect---</option>
                     <option value="dont connect">don't connect</option>
                     {albumsInfo?.map((albumInfo) => (
-                        <option value={`${albumInfo.id}`}>
+                        <option key={albumInfo.id} value={`${albumInfo.id}`}>
                             {`${albumInfo.album_name}`}
                         </option>
                     ))}

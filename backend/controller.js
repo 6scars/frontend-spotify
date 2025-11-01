@@ -195,6 +195,12 @@ async function getAuthorsAlbums(req, res, next) {
 
 }
 
+async function saveSongInBase(req,res,next){
+    
+    console.log(req)
+    return res.status(201).json({message:'hello'});
+}
+
 export default controller = {
     signIn,
     signUp,
@@ -203,5 +209,6 @@ export default controller = {
     fetchSongs,
     addView,
     getDataFromToken,
-    getAuthorsAlbums
+    getAuthorsAlbums,
+    saveSongInBase
 }
