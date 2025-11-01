@@ -39,6 +39,7 @@ export default function AddSong() {
                 ">
                     <LeftSide tabName={tabName} setTabName={setTabName} addSongForm={addSongForm} />
                     <RightSide
+                        albumsInfo={albumsInfo}
                         tabName={tabName}
                         addSongForm={addSongForm}
                         setAddSongForm={setAddSongForm}
