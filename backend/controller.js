@@ -176,15 +176,16 @@ async function getDataFromToken(req, res, next) {
 }
 
 async function getAuthorsAlbums(req, res, next) {
-    const { user_id, email } = req.decodedData;
+    const { id, email } = req.decodedData;
+    console.log(id)
     try {
         const response = await sql`
         SELECT album_name, album.id
         FROM album
         INNER JOIN authors
         ON album.author_id = authors.id
+        WHERE authors.id = ${id}
     `
-        console.log(response);
         return res.status(200).json({ message: "good", data: response });
 
     }catch(err){
@@ -195,11 +196,25 @@ async function getAuthorsAlbums(req, res, next) {
 
 }
 
-async function saveSongInBase(req,res,next){
-    
-    console.log(req)
-    return res.status(201).json({message:'hello'});
+// do NOT call multer here. Just consume req.files / req.body.
+export async function saveSongInBase(req, res, next) {
+  try {
+    console.log('req.body:', req.body);   // form fields
+    console.log('req.files:', req.files); // files parsed by multer
+
+    const mp3File = req.files?.mp3?.[0];
+    const imageFile = req.files?.image?.[0];
+
+    // mp3File.path -> temporary path on disk (multer dest)
+    // do DB save / move / rename / validate etc.
+
+    return res.status(201).json({ message: 'Files uploaded', files: { mp3File, imageFile } });
+  } catch (err) {
+    return res.status(500).json({ message: err });
+
+  }
 }
+
 
 export default controller = {
     signIn,

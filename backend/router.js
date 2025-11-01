@@ -15,12 +15,11 @@ router.get('/fetchSongs', controller.fetchSongs)
 router.get('/:id/addView', controller.addView)
 router.get('/getAuthorsAlbums', controller.getDataFromToken, controller.getAuthorsAlbums)
 router.post(
-    '/saveSongInBase',
-    upload.fields([
-        { name: 'mp3', maxCount: 1 },
-        { name: 'image', maxCount: 1 }
-    ]),
-    controller.saveSongInBase
+  '/saveSongInBase',
+  upload.fields([
+    { name: 'mp3',   maxCount: 1 },
+    { name: 'img', maxCount: 1 }
+  ]),
+  controller.saveSongInBase
 );
-
 export default router;
