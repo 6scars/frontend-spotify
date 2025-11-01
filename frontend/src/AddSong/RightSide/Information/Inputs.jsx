@@ -1,4 +1,4 @@
-export default function Inputs({ addSongForm, setAddSongForm }) {
+export default function Inputs({ albumsInfo, addSongForm, setAddSongForm }) {
 
     const handleAddSongForm = (e) => {
         setAddSongForm((prev) => ({
@@ -24,12 +24,15 @@ export default function Inputs({ addSongForm, setAddSongForm }) {
 
                     <option value="" disabled hidden>--choose album you want to connect---</option>
                     <option value="dont connect">don't connect</option>
-                    <option value="1">dark nights</option>
-                    <option value="2">sunny freestyles</option>
+                    {albumsInfo?.map((albumInfo) => (
+                        <option value={`${albumInfo.id}`}>
+                            {`${albumInfo.album_name}`}
+                        </option>
+                    ))}
 
                 </select>
 
             </div>
-        </div>
+        </div >
     )
 }
