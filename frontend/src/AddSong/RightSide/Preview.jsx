@@ -7,9 +7,16 @@ export default function Preview({ addSongForm }) {
         return await res.blob();
     }
     async function saveSongInBase() {
+        if(addSongForm.song_name.length < 5){
+            return {message: 'Song must have at least 6 characters'}
+        }else if(!addSongForm.importedSongUrlBlob){
+            return {message: 'Song must have music file'}
+        }else if(!addSongForm.imgUrl){
+            return {message: 'Song must have image'}
+        }
+
         const mp3Blob = await blobFromUrl(addSongForm.importedSongUrlBlob)
         const imgBlob = await blobFromUrl(addSongForm.imgUrl)
-
 
         const formData = new FormData();
 
@@ -23,14 +30,13 @@ export default function Preview({ addSongForm }) {
         formData.append('img', imgBlob, 'cover.jpg');
         formData.append('addSongForm', JSON.stringify(addSongForm))
         formData.append('token', localStorage.getItem('jwt'))
-        console.log(formData)
-        await fetch('http://localhost:3005/api/saveSongInBase', {
+        const response = await fetch('http://localhost:3005/api/saveSongInBase', {
             method: 'POST',
             body: formData
 
         })
-        
-        return
+        const data = response.json()
+        return data;
     }
 
     return (
