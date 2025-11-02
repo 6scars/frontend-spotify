@@ -5,7 +5,7 @@ export default function PlayLists({ playlist, choosePlaylist }) {
     <div
       key={playlist.id}
       onClick={() => {
-        choosePlaylist(playlist.id);
+        choosePlaylist(playlist.playlist_id);
       }}
       className="playlists-container bg-red-700 w-[75%] h-[150px] cursor-pointer
             flex flex-col

@@ -1,0 +1,9 @@
+@import 'tailwindcss';
+.music .create-playlist{
+    @apply w-full flex justify-center items-start
+}
+
+
+.music .create__playlist__form .name__input{
+    @apply pl-10 h-[100px] w-full rounded-xl bg-black/30 text-[1.6rem] 
+}

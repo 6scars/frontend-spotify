@@ -1,9 +1,17 @@
 import "./Aside.css";
 import Playlists from './PlayLists'
 
-export default function Aside({ show, songs, playlists }) {
-  const choosePlaylist = (playlistId) => {
-    console.log(playlistId);
+export default function Aside({ show, songs, playlists, showCreatePlaylistWindow, setShowCreatePlaylistWindow }) {
+  const displayCreatingPlaylistWindow = () => {
+    if (showCreatePlaylistWindow) {
+      setShowCreatePlaylistWindow(false)
+    } else {
+      setShowCreatePlaylistWindow(true)
+    }
+  }
+
+  const choosePlaylist = (playlist_id) => {
+    console.log(playlist_id);
   };
   return (
     <aside
@@ -12,14 +20,17 @@ export default function Aside({ show, songs, playlists }) {
             overflow-y-auto
             ${show ? "show" : ""}`}
     >
-       {playlists?.map((playlist) => (
+      <div onClick={displayCreatingPlaylistWindow} className="text-red-500 hover:text-white cursor-pointer">
+        add playlist
+      </div>
+      {playlists?.map((playlist) => (
         <Playlists
           key={playlist.playlist_id}
           playlist={playlist}
           choosePlaylist={choosePlaylist}
           songs={songs}
         />
-      ))} 
+      ))}
     </aside>
   );
 }

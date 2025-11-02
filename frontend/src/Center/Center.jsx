@@ -1,5 +1,6 @@
 import Music from "./Music/Music.jsx";
 import Description from "./Description.jsx";
+import CreatePlaylist from "./CreatePlaylist.jsx"
 import "./Center.css";
 import { useState, useEffect } from "react";
 import { fetchSongs } from "../scripts/Fetches.jsx";
@@ -13,6 +14,7 @@ export default function Center({
   setAuthor,
   show,
   setShow,
+  showCreatePlaylistWindow
 
 }) {
   const [SONGS, setSONGS] = useState([]);
@@ -34,7 +36,7 @@ export default function Center({
         flex items-center gap-3  
         ${show ? "show" : ""}
         `}
-    >
+    >{showCreatePlaylistWindow ? <CreatePlaylist SONGS={SONGS}/> :
       <Music
         setCurrentSong={setCurrentSong}
         SONGS={SONGS}
@@ -42,7 +44,7 @@ export default function Center({
         setAuthor={setAuthor}
         setShow={setShow}
 
-      />
+      /> }
       {show ? <Description currentSong={currentSong} /> : ""}
     </main>
   );
