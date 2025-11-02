@@ -1,9 +1,20 @@
 import express from 'express';
 import multer from 'multer';
 import controller from './controller.js';
+import path from 'path';
 
 const router = express.Router();
-const upload = multer({ dest: 'uploads/' }); // note: dest, not desc
+const storage = multer.diskStorage({
+  destination: function (req, file, cb) {
+    cb(null, 'uploads/')
+  },
+  filename: function (req, file, cb) {
+    const ext = path.extname(file.originalname)
+    const baseName = path.basename(file.originalname, ext);
+    cb(null, `${baseName}-${Date.now()}${ext}`)
+  }
+})
+const upload = multer({ storage }); // note: dest, not desc
 
 
 
@@ -17,7 +28,7 @@ router.get('/getAuthorsAlbums', controller.getDataFromToken, controller.getAutho
 router.post(
   '/saveSongInBase',
   upload.fields([
-    { name: 'mp3',   maxCount: 1 },
+    { name: 'mp3', maxCount: 1 },
     { name: 'img', maxCount: 1 }
   ]),
   controller.saveSongInBase

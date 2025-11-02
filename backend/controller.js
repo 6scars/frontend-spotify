@@ -1,11 +1,18 @@
 import jwt from 'jsonwebtoken'
 import env from 'dotenv'
 import bcrypt from 'bcrypt'
+import fs from 'fs'
+import path from 'path'
 import { sql } from './db.js'
+import { createClient } from '@supabase/supabase-js'
 env.config()
 
 let controller;
 const JWT_SECRET = process.env.JWT_SECRET;
+const supabase = createClient(
+    process.env.SUPABASE_URL,
+    process.env.SUPABASE_KEY
+)
 
 async function signIn(req, res, next) {
     const { email, password } = req.body;
@@ -108,7 +115,7 @@ async function fetchSongs(req, res, next) {
         FROM songs
         INNER JOIN authors_songs ON authors_songs.song_id = songs.id 
         INNER JOIN authors ON authors.id = authors_songs.author_id
-        LIMIT 10
+        
     `
         return res.status(201).json({ message: "accompllished", data })
 
@@ -188,32 +195,117 @@ async function getAuthorsAlbums(req, res, next) {
     `
         return res.status(200).json({ message: "good", data: response });
 
-    }catch(err){
+    } catch (err) {
         console.error(err)
-        return res.status(200).json({message:"getAuthorsAlbums ERROR"})
+        return res.status(200).json({ message: "getAuthorsAlbums ERROR" })
     }
 
 
 }
 
-// do NOT call multer here. Just consume req.files / req.body.
 export async function saveSongInBase(req, res, next) {
-  try {
-    console.log('req.body:', req.body);   // form fields
-    console.log('req.files:', req.files); // files parsed by multer
+    const fsp = fs.promises; // use promises on the existing fs import
 
-    const mp3File = req.files?.mp3?.[0];
-    const imageFile = req.files?.image?.[0];
+    // Helper to safely unlink a path if it exists
+    const safeUnlink = async (p) => {
+        try {
+            if (!p) return;
+            await fsp.unlink(p);
+        } catch (err) {
+            // log but don't throw (we don't want cleanup failure to mask the real error)
+            console.error('unlink error', p, err?.message ?? err);
+        }
+    };
 
-    // mp3File.path -> temporary path on disk (multer dest)
-    // do DB save / move / rename / validate etc.
+    let mp3File, imgFile;
+    try {
+        // parse addSongForm
+        if (!req.body?.addSongForm) {
+            return res.status(400).json({ message: 'Missing addSongForm' });
+        }
+        const addSongForm = JSON.parse(req.body.addSongForm);
 
-    return res.status(201).json({ message: 'Files uploaded', files: { mp3File, imageFile } });
-  } catch (err) {
-    return res.status(500).json({ message: err });
+        if (!addSongForm.song_name) {
+            return res.status(400).json({ message: 'Input song Name' });
+        }
 
-  }
+        // files (names must match router: 'mp3' and 'img')
+        mp3File = req.files?.mp3?.[0];
+        imgFile = req.files?.img?.[0];
+        if (!mp3File || !imgFile) {
+            return res.status(400).json({ message: 'Missing files' });
+        }
+
+        // read files as buffers using promise API
+        const mp3Buffer = await fsp.readFile(mp3File.path);
+        const imgBuffer = await fsp.readFile(imgFile.path);
+
+        const mp3Name = path.basename(mp3File.filename);
+        const imgName = path.basename(imgFile.filename);
+
+        // Upload MP3
+        const { data: mp3Data, error: mp3Error } = await supabase.storage
+            .from('spotify')
+            .upload(`songs/${mp3Name}`, mp3Buffer, {
+                contentType: mp3File.mimetype,
+                upsert: true
+            });
+        if (mp3Error) throw mp3Error;
+
+        // Upload image
+        const { data: imgData, error: imgError } = await supabase.storage
+            .from('spotify')
+            .upload(`images/songPictures/${imgName}`, imgBuffer, {
+                contentType: imgFile.mimetype,
+                upsert: true
+            });
+        if (imgError) throw imgError;
+
+        // Get public URLs (use correct filenames)
+        const { data: { publicUrl: mp3Url } } = supabase.storage
+            .from('spotify')
+            .getPublicUrl(`songs/${mp3Name}`);
+
+        const { data: { publicUrl: imgUrl } } = supabase.storage
+            .from('spotify')
+            .getPublicUrl(`images/songPictures/${imgName}`);
+
+        // Insert metadata into DB
+        const decodedToken = jwt.decode(req.body.token); // use verify if you need to validate signature
+        const { song_name, credit, album_id } = addSongForm;
+        const albumIdValue = album_id && album_id !== '' ? album_id : null;
+
+        const insertSongs = await sql`
+      INSERT INTO songs ("song_Name", file, "song_Image", credit, album_id)
+      VALUES (${song_name}, ${mp3Name}, ${imgName}, ${credit}, ${albumIdValue})
+      RETURNING id;
+    `;
+
+        const song_id = insertSongs?.[0]?.id;
+        if (!song_id) throw new Error('Failed to insert song (no id returned)');
+
+        // Insert into authors_songs junction table
+        await sql`
+      INSERT INTO authors_songs (author_id, song_id)
+      VALUES (${decodedToken.id}, ${song_id});
+    `;
+
+        // success response
+        return res.status(201).json({
+            message: 'Uploaded to Supabase and saved to DB',
+            urls: { mp3Url, imgUrl },
+            song_id
+        });
+    } catch (err) {
+        console.error('saveSongInBase error:', err);
+        return res.status(500).json({ message: err?.message ?? String(err) });
+    } finally {
+        // Always try to delete local uploads (won't throw due to safeUnlink)
+        await safeUnlink(mp3File?.path);
+        await safeUnlink(imgFile?.path);
+    }
 }
+
 
 
 export default controller = {
