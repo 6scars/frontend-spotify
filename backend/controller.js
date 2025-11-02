@@ -261,16 +261,18 @@ export async function saveSongInBase(req, res, next) {
             });
         if (imgError) throw imgError;
 
-        // Get public URLs (use correct filenames)
-        const { data: { publicUrl: mp3Url } } = supabase.storage
-            .from('spotify')
-            .getPublicUrl(`songs/${mp3Name}`);
+        // // Get public URLs (use correct filenames)
+        // const { data: { publicUrl: mp3Url } } = supabase.storage
+        //     .from('spotify')
+        //     .getPublicUrl(`songs/${mp3Name}`);
 
-        const { data: { publicUrl: imgUrl } } = supabase.storage
-            .from('spotify')
-            .getPublicUrl(`images/songPictures/${imgName}`);
+        // const { data: { publicUrl: imgUrl } } = supabase.storage
+        //     .from('spotify')
+        //     .getPublicUrl(`images/songPictures/${imgName}`);
 
         // Insert metadata into DB
+        jwt.verify(req.body.token, JWT_SECRET)
+
         const decodedToken = jwt.decode(req.body.token); // use verify if you need to validate signature
         const { song_name, credit, album_id } = addSongForm;
         const albumIdValue = album_id && album_id !== '' ? album_id : null;
@@ -292,9 +294,7 @@ export async function saveSongInBase(req, res, next) {
 
         // success response
         return res.status(201).json({
-            message: 'Uploaded to Supabase and saved to DB',
-            urls: { mp3Url, imgUrl },
-            song_id
+            message: 'Songs have been uploaded!',
         });
     } catch (err) {
         console.error('saveSongInBase error:', err);
@@ -306,7 +306,9 @@ export async function saveSongInBase(req, res, next) {
     }
 }
 
-
+async function createPlaylist(req,res,next){
+    return res.status(201).json({message:'createPlaylist function'})
+}
 
 export default controller = {
     signIn,
@@ -317,5 +319,6 @@ export default controller = {
     addView,
     getDataFromToken,
     getAuthorsAlbums,
-    saveSongInBase
+    saveSongInBase,
+    createPlaylist
 }
