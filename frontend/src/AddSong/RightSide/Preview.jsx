@@ -18,16 +18,18 @@ export default function Preview({ addSongForm }) {
                 formData.append(key, addSongForm[key])
             }
         }
-        console.log(mp3Blob)
-        console.log(imgBlob)
 
         formData.append('mp3', mp3Blob, addSongForm.importedSongNameFile || 'song.mp3')
         formData.append('img', imgBlob, 'cover.jpg');
+        formData.append('addSongForm', JSON.stringify(addSongForm))
+        formData.append('token', localStorage.getItem('jwt'))
         console.log(formData)
         await fetch('http://localhost:3005/api/saveSongInBase', {
             method: 'POST',
             body: formData
+
         })
+        
         return
     }
 
