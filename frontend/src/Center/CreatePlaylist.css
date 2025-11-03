@@ -1,9 +1,25 @@
 @import 'tailwindcss';
-.music .create-playlist{
-    @apply w-full flex justify-center items-start
+
+.music .create-playlist {
+    @apply w-full flex justify-center items-start mt-5 mb-15
 }
 
 
-.music .create__playlist__form .name__input{
-    @apply pl-10 h-[100px] w-full rounded-xl bg-black/30 text-[1.6rem] 
+.music .create__playlist__form .name__input {
+    @apply pl-10 h-[70px] w-full rounded-xl bg-black/30 text-[1.2rem]
+}
+
+
+.music .songs-to-add .song-desc {
+    @apply pl-5
+}
+
+
+/*-----if added song || if not added song------*/
+.music .added-song {
+    @apply hover:bg-[var(--help-color3)] bg-[var(--accent-color)]
+}
+
+.music .not-added-song {
+    @apply bg-[var(--help-color3)] hover:bg-[var(--accent-color)]
 }
