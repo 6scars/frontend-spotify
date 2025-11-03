@@ -80,11 +80,12 @@ async function playlists(req, res, next) {
         FROM authors
         INNER JOIN authors_playlists ON authors.id = authors_playlists.author_id
         INNER JOIN playlists ON playlists.id = authors_playlists.playlist_id
-        INNER JOIN playlists_songs ON playlists_songs.playlist_id = playlists.id
-        INNER JOIN authors_songs ON playlists_songs.song_id = authors_songs.song_id
+        FULL  OUTER JOIN playlists_songs ON playlists_songs.playlist_id = playlists.id
+        FULL OUTER JOIN authors_songs ON playlists_songs.song_id = authors_songs.song_id
         LEFT JOIN songs ON authors_songs.song_id = songs.id
         WHERE authors.id = ${id}
         GROUP BY authors.id, authors.author, authors.email, playlists.id, playlists.name;
+
 
         `;
 
@@ -277,6 +278,7 @@ export async function saveSongInBase(req, res, next) {
         const { song_name, credit, album_id } = addSongForm;
         const albumIdValue = album_id && album_id !== '' ? album_id : null;
 
+
         const insertSongs = await sql`
       INSERT INTO songs ("song_Name", file, "song_Image", credit, album_id)
       VALUES (${song_name}, ${mp3Name}, ${imgName}, ${credit}, ${albumIdValue})
@@ -310,7 +312,6 @@ async function createPlaylist(req, res, next) {
     try {
         const authHeader = req.headers.authorization
         const { playlistName, songsToAddArray } = req.body
-
         /*----verify-----*/
         if (!authHeader || !authHeader.startsWith('Bearer '))
             return res.status(400).json({ message: `You are not loged in` })
@@ -318,35 +319,35 @@ async function createPlaylist(req, res, next) {
         const token = authHeader.split(' ')[1]
         const { id: authorId } = jwt.verify(token, JWT_SECRET);
 
-        /*-----3 sql queries-----*/
-        const insertPlaylists = await sql`
-            INSERT INTO playlists (name)
-            VALUES (${playlistName})
-            RETURNING *
-        `
-        console.log(insertPlaylists)
-        const newPlaylistId = insertPlaylists[0].id;
+        /*-----sql queries-----*/
+        await sql.begin(async tx => {
+            let newPlaylistId;
+            const insertPlaylists = await sql`
+                INSERT INTO playlists (name)
+                VALUES (${playlistName})
+                RETURNING *
+            `
 
-        const insertAuthorsPlaylists = await sql`
-            INSERT INTO authors_playlists (author_id,playlist_id)
-            VALUES (${authorId},${newPlaylistId})
-            RETURNING *
-        `
-        console.log(insertAuthorsPlaylists)
-        // build a single sql fragment of tuples: ($1,$2),($1,$3)...
-        const tuples = songsToAddArray
-            .map((id) => sql`(${newPlaylistId}, ${id})`)
-            .reduce((prev, curr) => (prev ? sql`${prev}, ${curr}` : curr), null);
+            newPlaylistId = insertPlaylists[0].id
+            await tx`
+                INSERT INTO authors_playlists (author_id,playlist_id)
+                VALUES (${authorId},${newPlaylistId})
+            `
 
-        const insertPlaylistsSongs = await sql`
-            INSERT INTO playlists_songs (playlist_id, song_id)
-            VALUES ${tuples}
-            RETURNING *
-        `;
+            let tuples
+            if (songsToAddArray.length > 0) {
+                tuples = songsToAddArray
+                    .map((id) => tx`(${newPlaylistId},${id})`)
+                    .reduce((acc, curr) => tx`${acc}, ${curr}`)
 
-
-        console.log(insertPlaylistsSongs)
-
+            }
+            if (tuples) {
+                await tx`
+                    INSERT INTO playlists_songs (playlist_id, song_id)
+                    VALUES ${tuples}
+                `;
+            }
+        })
         return res.status(201).json({ message: 'createPlaylist function' })
     } catch (err) {
         console.error(err)
