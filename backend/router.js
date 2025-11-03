@@ -33,4 +33,6 @@ router.post(
   ]),
   controller.saveSongInBase
 );
+
+router.post('/createPlaylist',controller.createPlaylist)
 export default router;
