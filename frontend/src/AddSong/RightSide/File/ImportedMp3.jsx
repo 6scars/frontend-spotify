@@ -79,7 +79,7 @@ export default function ImportedMp3({ addSongForm }) {
 
         <div
             className="play-center-section h-full w-[400px] min-w-[200px] max-w-[600px]
-        flex flex-col items-center text-white
+        flex flex-col items-center text-[var(--main-color)]
       "
         >
             <div>{addSongForm.importedSongNameFile}</div>

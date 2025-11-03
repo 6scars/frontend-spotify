@@ -20,8 +20,8 @@ export default function Aside({ show, songs, playlists, showCreatePlaylistWindow
             overflow-y-auto
             ${show ? "show" : ""}`}
     >
-      <div onClick={displayCreatingPlaylistWindow} className="text-red-500 hover:text-white cursor-pointer">
-        add playlist
+      <div onClick={displayCreatingPlaylistWindow} className="text-nowrap text-[0.8rem] text-red-500 hover:text-white cursor-pointer">
+        <span>create playlist</span>
       </div>
       {playlists?.map((playlist) => (
         <Playlists

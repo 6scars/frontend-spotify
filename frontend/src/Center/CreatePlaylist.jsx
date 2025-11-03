@@ -1,6 +1,8 @@
+import {useState} from 'react'
 import './CreatePlaylist.css'
+import RenderSongsToAdd from './CreatePlaylist/RenderSongsToAdd'
 export default function CreatePlaylist({ SONGS }) {
-    console.log(SONGS)
+    const [songsToAdd, setSongsToAdd] = useState(new Set())
     return (
         <>
             <div
@@ -10,24 +12,20 @@ export default function CreatePlaylist({ SONGS }) {
             >
                 <div className="create-playlist">
                     <form className="create__playlist__form">
-                        <div className="flex  justify-center items-center gap-5 text-[1.8rem]">
-                            <label className="text-white">
-                                NAME
+                        <div className="flex flex-row justify-center items-center gap-5 text-[1.2rem]">
+                            <label className="text-[var(--main-color)]">
+                                NAME:
                             </label>
-                            <input className="name__input bg-black text-white" name="name" placeholder="name" type='text' />
+                            <input className="name__input bg-black text-[var(--main-color)]" name="name" placeholder="name" type='text' />
+                            <button className="text-[var(--main-color)] cursor-pointer">create</button>
                         </div>
+
                     </form>
                 </div>
-                <div className="songs-to-addition flex flex-col justify-center items-center gap-5">
+                <div className="songs-to-add flex flex-col justify-center items-center gap-5">
+                    <span className="text-[var(--main-color)] text-[1.2rem]"> Proposed Songs For you</span>
                     {SONGS.map((song) => (
-                        <div key={song.song_id} className="bg-black/80 rounded-xl w-100 h-30 flex items-center">
-                            <div className="img-container relative h-full w-[35%] overflow-hidden">
-                                <img className="object-contain" src={`https://rgmmwhkixprkskznqjcy.supabase.co/storage/v1/object/public/spotify/images/songPictures/${song.song_image}`} />
-                            </div>
-                            <div className="text-white">
-                                {song.song_name}
-                            </div>
-                        </div>
+                        <RenderSongsToAdd key={song.song_id} song={song} songsToAdd={songsToAdd} setSongsToAdd={setSongsToAdd}/>
                     ))}
 
                 </div>
