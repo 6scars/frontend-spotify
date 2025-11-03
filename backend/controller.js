@@ -131,8 +131,8 @@ async function checkToken(req, res, next) {
 
     const token = authHeader.split(' ')[1];
     try {
-        const decoded = jwt.verify(token, JWT_SECRET)
-        if (decoded) {
+        const verifiedToken = jwt.verify(token, JWT_SECRET)
+        if (verifiedToken) {
             return res.status(201).json({ message: "accomplished", token: token })
         } else {
             return res.status(401).json({ message: 'NOT VALID TOKEN' })
@@ -306,8 +306,52 @@ export async function saveSongInBase(req, res, next) {
     }
 }
 
-async function createPlaylist(req,res,next){
-    return res.status(201).json({message:'createPlaylist function'})
+async function createPlaylist(req, res, next) {
+    try {
+        const authHeader = req.headers.authorization
+        const { playlistName, songsToAddArray } = req.body
+
+        /*----verify-----*/
+        if (!authHeader || !authHeader.startsWith('Bearer '))
+            return res.status(400).json({ message: `You are not loged in` })
+
+        const token = authHeader.split(' ')[1]
+        const { id: authorId } = jwt.verify(token, JWT_SECRET);
+
+        /*-----3 sql queries-----*/
+        const insertPlaylists = await sql`
+            INSERT INTO playlists (name)
+            VALUES (${playlistName})
+            RETURNING *
+        `
+        console.log(insertPlaylists)
+        const newPlaylistId = insertPlaylists[0].id;
+
+        const insertAuthorsPlaylists = await sql`
+            INSERT INTO authors_playlists (author_id,playlist_id)
+            VALUES (${authorId},${newPlaylistId})
+            RETURNING *
+        `
+        console.log(insertAuthorsPlaylists)
+        // build a single sql fragment of tuples: ($1,$2),($1,$3)...
+        const tuples = songsToAddArray
+            .map((id) => sql`(${newPlaylistId}, ${id})`)
+            .reduce((prev, curr) => (prev ? sql`${prev}, ${curr}` : curr), null);
+
+        const insertPlaylistsSongs = await sql`
+            INSERT INTO playlists_songs (playlist_id, song_id)
+            VALUES ${tuples}
+            RETURNING *
+        `;
+
+
+        console.log(insertPlaylistsSongs)
+
+        return res.status(201).json({ message: 'createPlaylist function' })
+    } catch (err) {
+        console.error(err)
+        return res.status(500).json({ message: `Creating Playlist ERORR$`, err })
+    }
 }
 
 export default controller = {
