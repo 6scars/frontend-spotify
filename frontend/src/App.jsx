@@ -18,9 +18,7 @@ export default function MiniSpotify() {
   const [showCreatePlaylistWindow, setShowCreatePlaylistWindow] = useState(false);
 
   const user_id = Number(localStorage.getItem('user_id'))
-
-
-
+  
   useEffect(() => {
     const fetches = async () => {
       setIsLogedIn(await checkToken());
