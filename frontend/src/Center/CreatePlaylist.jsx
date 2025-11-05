@@ -1,7 +1,7 @@
 import { useState } from 'react'
 import './CreatePlaylist.css'
 import RenderSongsToAdd from './CreatePlaylist/RenderSongsToAdd'
-export default function CreatePlaylist({ SONGS }) {
+export default function CreatePlaylist({ SONGS,setReloadAside }) {
     const [songsToAdd, setSongsToAdd] = useState(new Set());
     const [playlistName, setPlaylistName] = useState('')
     const handleCreateNewPlaylist = async (e) => {
@@ -26,9 +26,13 @@ export default function CreatePlaylist({ SONGS }) {
                 })
             })
             const data = await responde.json();
+            if(responde.ok){
+                setReloadAside(prev=> !prev)
+            }
             console.log(data.message)
         } catch (err) {
-
+            console.err("HANDLECREATE NEW PLAYLIST ERROR", err)
+            return {message: err}
         }
     }
     return (
