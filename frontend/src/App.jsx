@@ -52,7 +52,7 @@ export default function MiniSpotify() {
         setReloadAside={setReloadAside}
       />
       {currentSong ? <Play currentSong={currentSong} /> : ""}
-      {playlists ? <Aside show={show} playlists={playlists} showCreatePlaylistWindow={showCreatePlaylistWindow} setShowCreatePlaylistWindow={setShowCreatePlaylistWindow} /> : null}
+      {playlists ? <Aside show={show} playlists={playlists} showCreatePlaylistWindow={showCreatePlaylistWindow} setShowCreatePlaylistWindow={setShowCreatePlaylistWindow} isLogedIn={isLogedIn} setSigning={setSigning}/> : null}
       {signing && <Signing setIsLogedIn={setIsLogedIn} clickedAccount={clickedAccount} isLogedIn={isLogedIn} />}
 
     </>
