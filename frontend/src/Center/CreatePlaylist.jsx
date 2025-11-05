@@ -1,7 +1,9 @@
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
 import './CreatePlaylist.css'
 import RenderSongsToAdd from './CreatePlaylist/RenderSongsToAdd'
-export default function CreatePlaylist({ SONGS,setReloadAside }) {
+import Signing from '../Signing/Signing';
+
+export default function CreatePlaylist({ SONGS, setReloadAside, isLogedIn }) {
     const [songsToAdd, setSongsToAdd] = useState(new Set());
     const [playlistName, setPlaylistName] = useState('')
     const handleCreateNewPlaylist = async (e) => {
@@ -35,6 +37,8 @@ export default function CreatePlaylist({ SONGS,setReloadAside }) {
             return {message: err}
         }
     }
+
+
     return (
         <>
             <div

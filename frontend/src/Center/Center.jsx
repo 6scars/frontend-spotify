@@ -15,7 +15,8 @@ export default function Center({
   show,
   setShow,
   showCreatePlaylistWindow,
-  setReloadAside
+  setReloadAside,
+  setSigning
 
 }) {
   const [SONGS, setSONGS] = useState([]);
