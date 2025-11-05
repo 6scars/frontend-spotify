@@ -14,7 +14,8 @@ export default function Center({
   setAuthor,
   show,
   setShow,
-  showCreatePlaylistWindow
+  showCreatePlaylistWindow,
+  setReloadAside
 
 }) {
   const [SONGS, setSONGS] = useState([]);
@@ -36,7 +37,7 @@ export default function Center({
         flex items-center gap-3  
         ${show ? "show" : ""}
         `}
-    >{showCreatePlaylistWindow ? <CreatePlaylist SONGS={SONGS}/> :
+    >{showCreatePlaylistWindow ? <CreatePlaylist SONGS={SONGS} setReloadAside={setReloadAside}/> :
       <Music
         setCurrentSong={setCurrentSong}
         SONGS={SONGS}

@@ -16,7 +16,7 @@ export default function MiniSpotify() {
   const [playlists, setPlaylists] = useState([]);
   const [isLogedIn, setIsLogedIn] = useState(false);
   const [showCreatePlaylistWindow, setShowCreatePlaylistWindow] = useState(false);
-
+  const [reloadAside , setReloadAside] = useState(false)
   const user_id = Number(localStorage.getItem('user_id'))
   
   useEffect(() => {
@@ -25,7 +25,7 @@ export default function MiniSpotify() {
       setPlaylists(await fetchPlaylists(user_id))
     }
     fetches()
-  }, []);
+  }, [reloadAside]);
 
 
 
@@ -48,6 +48,7 @@ export default function MiniSpotify() {
         show={show}
         setShow={setShow}
         showCreatePlaylistWindow={showCreatePlaylistWindow}
+        setReloadAside={setReloadAside}
       />
       {currentSong ? <Play currentSong={currentSong} /> : ""}
       {playlists ? <Aside show={show} playlists={playlists} showCreatePlaylistWindow={showCreatePlaylistWindow} setShowCreatePlaylistWindow={setShowCreatePlaylistWindow} /> : null}
