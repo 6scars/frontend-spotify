@@ -16,13 +16,14 @@ export default function MiniSpotify() {
   const [playlists, setPlaylists] = useState([]);
   const [isLogedIn, setIsLogedIn] = useState(false);
   const [showCreatePlaylistWindow, setShowCreatePlaylistWindow] = useState(false);
-  const [reloadAside , setReloadAside] = useState(false)
+  const [reloadAside, setReloadAside] = useState(false)
   const user_id = Number(localStorage.getItem('user_id'))
-  
+
   useEffect(() => {
     const fetches = async () => {
-      setIsLogedIn(await checkToken());
-      setPlaylists(await fetchPlaylists(user_id))
+      const isValidToken = await checkToken();
+      setIsLogedIn(isValidToken);
+      isValidToken ? setPlaylists(await fetchPlaylists(user_id)) : setPlaylists([])
     }
     fetches()
   }, [reloadAside]);
