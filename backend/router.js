@@ -36,4 +36,5 @@ router.post(
 
 router.post('/createPlaylist',controller.createPlaylist)
 router.get('/getPlaylistData',controller.getPlaylistData)
+router.get('/getSong',controller.getSong);
 export default router;
