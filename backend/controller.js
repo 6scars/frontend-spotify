@@ -363,12 +363,11 @@ async function createPlaylist(req, res, next) {
 async function getPlaylistData(req, res, next) {
     try {
         const id = req.query.id;
-        console.log(id)
-        if(!id){
+        if (!id) {
             throw 'SERVER ERROR GET PLAYLISTS DATA, BAD ID'
         }
         const dataPlaylist = await sql`
-            SELECT playlists.id, playlists.name, songs.id, songs."song_Name",songs."song_Image", songs.album_id, songs.views ,authors.id, authors.author
+            SELECT playlists.id, playlists.name, songs.id AS song_id,  songs."song_Name" AS song_name, songs."song_Image" AS song_image, songs.album_id, songs.views ,authors.id AS author_id, authors.author
             FROM playlists
             INNER JOIN playlists_songs
             ON playlists_songs.playlist_id = playlists.id
@@ -388,6 +387,43 @@ async function getPlaylistData(req, res, next) {
 
 }
 
+export async function getSong(req, res, next) {
+    try {
+        const id = req.query.id;
+        if (id) {
+            const data = await sql`
+                SELECT  
+                    songs.id, 
+                    "song_Name" AS song_name,
+                    songs."song_Image" AS song_image,
+                    songs.created_at,
+                    songs.views,
+                    authors.follows,
+                    file,
+                    credit,
+                    album_id,
+                    author_image AS author_image,
+                    author,
+                    author_id,
+                    biograph
+                FROM songs
+                INNER JOIN authors_songs ON authors_songs.song_id = songs.id 
+                INNER JOIN authors ON authors.id = authors_songs.author_id
+                WHERE songs.id = ${id}
+            `
+            if(data){
+                return res.status(200).json({message:"", data: data})
+            }
+        } else {
+            console.error("GET SONG ERROR, IDSONG",err)
+            throw 'getSong ERROR ID SONG'
+        }
+    } catch (err) {
+        console.error(err)
+        return res.status(500).json({ message: "SERVER ERROR GETSONG FUNCTION", err })
+    }
+}
+
 export default controller = {
     signIn,
     signUp,
@@ -399,5 +435,6 @@ export default controller = {
     getAuthorsAlbums,
     saveSongInBase,
     createPlaylist,
-    getPlaylistData
+    getPlaylistData,
+    getSong
 }

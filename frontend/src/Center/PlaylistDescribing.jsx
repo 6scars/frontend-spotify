@@ -1,7 +1,7 @@
 import { useState, useEffect } from 'react'
 import SongInThePlaylist from "./PlaylistDescribing/SongInThePlaylist"
 import './PlaylistDescribing.css'
-export default function PlaylistDescribing({ playlist_id, setCurrentSong }) {
+export default function PlaylistDescribing({ playlist_id, chooseSong }) {
     const [playlist, setPlaylist] = useState([])
     const [isLoading, setIsLoading] = useState(true);
 
@@ -12,6 +12,7 @@ export default function PlaylistDescribing({ playlist_id, setCurrentSong }) {
             const data = await response.json();
             setPlaylist(data.data)
             setIsLoading(false);
+            console.log(data)
         }
         if (playlist_id) fetchThePlaylistData();
 
@@ -42,7 +43,7 @@ export default function PlaylistDescribing({ playlist_id, setCurrentSong }) {
                         <div className="devider" />
                         <div className="playlist-songs-container flex justify-center items-center w-full">
                             {playlist.map((song) => (
-                                <SongInThePlaylist key={song.id} song={song} setCurrentSong={setCurrentSong}/>
+                                <SongInThePlaylist key={song.id} song={song}  chooseSong={chooseSong}/>
                             )
                             )}
                         </div>
