@@ -43,7 +43,7 @@ export default function Center({
   function latestListened(newSong) {
     if (!latest) setLatest([newSong]);
 
-    const index = latest.findIndex((s) => s.song_id === newSong.song_id);
+    const index = latest.findIndex((s) => s.id === newSong.id);
 
     setLatest((prev) => {
       /*if NOT finded song in previous*/
