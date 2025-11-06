@@ -14,7 +14,7 @@ export default function SongInThePlaylist({ song }) {
                         <span className="text-[var(--help-color)]"> {song.author}</span>
                     </div>
                     <div className="song-controll-container w-[10%] h-full flex justify-center items-center">
-                        <button onClick={} className="song_button w-full ">PLAY</button>
+                        <button  className="song_button w-full ">PLAY</button>
                     </div>
                 </div>
             }
