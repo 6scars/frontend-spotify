@@ -68,6 +68,10 @@ async function signUp(req, res, next) {
 async function playlists(req, res, next) {
     try {
         const { id } = req.body
+        if(typeof id != 'number'){
+            throw 'playlists function, not valid input'
+        }
+
         const data = await sql`
         SELECT 
             authors.id AS author_id,
@@ -280,19 +284,19 @@ export async function saveSongInBase(req, res, next) {
 
 
         const insertSongs = await sql`
-      INSERT INTO songs ("song_Name", file, "song_Image", credit, album_id)
-      VALUES (${song_name}, ${mp3Name}, ${imgName}, ${credit}, ${albumIdValue})
-      RETURNING id;
-    `;
+            INSERT INTO songs ("song_Name", file, "song_Image", credit, album_id)
+            VALUES (${song_name}, ${mp3Name}, ${imgName}, ${credit}, ${albumIdValue})
+            RETURNING id;
+            `;
 
         const song_id = insertSongs?.[0]?.id;
         if (!song_id) throw new Error('Failed to insert song (no id returned)');
 
         // Insert into authors_songs junction table
         await sql`
-      INSERT INTO authors_songs (author_id, song_id)
-      VALUES (${decodedToken.id}, ${song_id});
-    `;
+            INSERT INTO authors_songs (author_id, song_id)
+            VALUES (${decodedToken.id}, ${song_id});
+            `;
 
         // success response
         return res.status(201).json({
