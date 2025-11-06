@@ -4,9 +4,8 @@ export default function PlayLeftSection({ currentSong }) {
   useEffect(() => {
     if (!currentSong) setIsloading(true);
     if (currentSong) setIsloading(false);
-  }, [currentSong])
+  }, [currentSong.id])
   const render = () => {
-    console.log(currentSong)
     if (isLoading) {
       <div className="text-white text-20">
         is loading ...
