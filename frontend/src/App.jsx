@@ -10,13 +10,21 @@ import "./App.css";
 
 
 export default function MiniSpotify() {
+  /*currentSong keeps data about playling right now a song*/
   const [currentSong, setCurrentSong] = useState(null);
+  /*show allows to controling when the Describe and Play Component is displayed*/
   const [show, setShow] = useState(false);
+  /*signing allows to controling when the Signing Component is displayed, similar to "show" */
   const [signing, setSigning] = useState(false)
+  /*playlists keeps information about the user' playlists rendered in Aside Component */
   const [playlists, setPlaylists] = useState([]);
+  /*isLogedIn variable says does the user is loged in*/
   const [isLogedIn, setIsLogedIn] = useState(false);
+  /*showCreatePlaylistWindow allows to controling when the CreatePlaylist Component is displayed, similar to "show" */
   const [showCreatePlaylistWindow, setShowCreatePlaylistWindow] = useState(false);
+  /*reloadAside reload Aside Component*/
   const [reloadAside, setReloadAside] = useState(false)
+  /*user_id keeps user's id*/
   const user_id = Number(localStorage.getItem('user_id'))
 
   useEffect(() => {
@@ -52,7 +60,7 @@ export default function MiniSpotify() {
         setReloadAside={setReloadAside}
       />
       {currentSong ? <Play currentSong={currentSong} /> : ""}
-      {playlists ? <Aside show={show} playlists={playlists} showCreatePlaylistWindow={showCreatePlaylistWindow} setShowCreatePlaylistWindow={setShowCreatePlaylistWindow} isLogedIn={isLogedIn} setSigning={setSigning}/> : null}
+      {playlists ? <Aside show={show} playlists={playlists} showCreatePlaylistWindow={showCreatePlaylistWindow} setShowCreatePlaylistWindow={setShowCreatePlaylistWindow} isLogedIn={isLogedIn} setSigning={setSigning} /> : null}
       {signing && <Signing setIsLogedIn={setIsLogedIn} clickedAccount={clickedAccount} isLogedIn={isLogedIn} />}
 
     </>
