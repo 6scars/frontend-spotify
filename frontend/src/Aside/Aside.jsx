@@ -1,7 +1,7 @@
 import "./Aside.css";
 import Playlists from './PlayLists'
 
-export default function Aside({ show, songs, playlists, showCreatePlaylistWindow, setShowCreatePlaylistWindow, setShowPlaylistDescribing, isLogedIn, setSigning }) {
+export default function Aside({ setPlaylists_id, show, songs, playlists, showCreatePlaylistWindow, setShowCreatePlaylistWindow, setShowPlaylistDescribing, isLogedIn, setSigning }) {
   const displayCreatingPlaylistWindow = () => {
     if (showCreatePlaylistWindow) {
       setShowCreatePlaylistWindow(false)
@@ -16,7 +16,7 @@ export default function Aside({ show, songs, playlists, showCreatePlaylistWindow
   }
 
   const choosePlaylist = (playlist_id) => {
-    console.log(playlist_id);
+    setPlaylists_id(playlist_id);
     setShowPlaylistDescribing(true)
   };
   return (

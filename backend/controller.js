@@ -68,7 +68,7 @@ async function signUp(req, res, next) {
 async function playlists(req, res, next) {
     try {
         const { id } = req.body
-        if(typeof id != 'number'){
+        if (typeof id != 'number') {
             throw 'playlists function, not valid input'
         }
 
@@ -359,6 +359,35 @@ async function createPlaylist(req, res, next) {
     }
 }
 
+
+async function getPlaylistData(req, res, next) {
+    try {
+        const id = req.query.id;
+        console.log(id)
+        if(!id){
+            throw 'SERVER ERROR GET PLAYLISTS DATA, BAD ID'
+        }
+        const dataPlaylist = await sql`
+            SELECT playlists.id, playlists.name, songs.id, songs."song_Name",songs."song_Image", songs.album_id, songs.views ,authors.id, authors.author
+            FROM playlists
+            INNER JOIN playlists_songs
+            ON playlists_songs.playlist_id = playlists.id
+            INNER JOIN songs
+            ON playlists_songs.song_id = songs.id
+            INNER JOIN authors_songs
+            ON songs.id = authors_songs.song_id
+            INNER JOIN authors
+            ON authors_songs.author_id = authors.id
+            WHERE playlists.id =${id}
+        `
+        return res.status(201).json({ message: "fetchThePlaylistData", data: dataPlaylist })
+    } catch (err) {
+        console.error(err)
+        return res.status(500).json({ message: "FETCHPLAYLIST ERROR", err })
+    }
+
+}
+
 export default controller = {
     signIn,
     signUp,
@@ -369,5 +398,6 @@ export default controller = {
     getDataFromToken,
     getAuthorsAlbums,
     saveSongInBase,
-    createPlaylist
+    createPlaylist,
+    getPlaylistData
 }
