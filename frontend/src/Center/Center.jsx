@@ -9,6 +9,7 @@ import { fetchSongs } from "../scripts/Fetches.jsx";
 
 
 export default function Center({
+  playlist_id,
   setCurrentSong,
   currentSong,
   setSong,
@@ -34,7 +35,7 @@ export default function Center({
     if (showCreatePlaylistWindow) {
       return (<CreatePlaylist SONGS={SONGS} setReloadAside={setReloadAside} />)
     } else if (showPlaylistDescribing) {
-      return (<PlaylistDescribing />)
+      return (<PlaylistDescribing playlist_id={playlist_id} />)
     } else {
       return (<Music
         setCurrentSong={setCurrentSong}
