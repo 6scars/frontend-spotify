@@ -1,6 +1,7 @@
 import Music from "./Music/Music.jsx";
 import Description from "./Description.jsx";
 import CreatePlaylist from "./CreatePlaylist.jsx"
+import PlaylistDescribing from "./PlaylistDescribing.jsx";
 import "./Center.css";
 import { useState, useEffect } from "react";
 import { fetchSongs } from "../scripts/Fetches.jsx";
@@ -15,8 +16,8 @@ export default function Center({
   show,
   setShow,
   showCreatePlaylistWindow,
-  setReloadAside,
-  setSigning
+  showPlaylistDescribing,
+  setReloadAside
 
 }) {
   const [SONGS, setSONGS] = useState([]);
@@ -29,7 +30,22 @@ export default function Center({
 
   }, [])
 
+  function choosenComponent() {
+    if (showCreatePlaylistWindow) {
+      return (<CreatePlaylist SONGS={SONGS} setReloadAside={setReloadAside} />)
+    } else if (showPlaylistDescribing) {
+      return (<PlaylistDescribing />)
+    } else {
+      return (<Music
+        setCurrentSong={setCurrentSong}
+        SONGS={SONGS}
+        setSong={setSong}
+        setAuthor={setAuthor}
+        setShow={setShow}
+      />)
+    }
 
+  }
 
 
   return (
@@ -38,15 +54,7 @@ export default function Center({
         flex items-center gap-3  
         ${show ? "show" : ""}
         `}
-    >{showCreatePlaylistWindow ? <CreatePlaylist SONGS={SONGS} setReloadAside={setReloadAside}/> :
-      <Music
-        setCurrentSong={setCurrentSong}
-        SONGS={SONGS}
-        setSong={setSong}
-        setAuthor={setAuthor}
-        setShow={setShow}
-
-      /> }
+    >{choosenComponent()}
       {show ? <Description currentSong={currentSong} /> : ""}
     </main>
   );
