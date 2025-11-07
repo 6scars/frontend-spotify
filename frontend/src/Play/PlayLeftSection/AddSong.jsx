@@ -2,7 +2,6 @@ import Playlist from "./Playlist"
 export default function AddSong({ currentSong, showAddSong, playlists }) {
     async function handleAddSong(song_id, playlist_id ) {
         try {
-            console.log(playlist_id, song_id)
             const response = await fetch('http://localhost:3005/api/addSongToPlaylist', {
                 "method": "POST",
                 "headers": {
