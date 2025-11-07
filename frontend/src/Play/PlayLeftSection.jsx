@@ -56,7 +56,7 @@ export default function PlayLeftSection({ currentSong, playlists }) {
               src="https://rgmmwhkixprkskznqjcy.supabase.co/storage/v1/object/public/spotify/images/logos/addToFavoriteSong.svg"
             />
             
-              <AddSong showAddSong={showAddSong} playlists={playlists}/>
+              <AddSong currentSong={currentSong} showAddSong={showAddSong} playlists={playlists}/>
             
           </div>
         </div>
