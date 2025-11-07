@@ -18,6 +18,7 @@ export default function Aside({ setPlaylists_id, show, songs, playlists, showCre
   const choosePlaylist = (playlist_id) => {
     setPlaylists_id(playlist_id);
     setShowPlaylistDescribing(true)
+    /*--remove previous songs*/
   };
   return (
     <aside

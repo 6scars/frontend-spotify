@@ -1,11 +1,11 @@
 import Playlist from "./Playlist"
-export default function AddSong({ showAddSong, playlists }) {
+export default function AddSong({ currentSong, showAddSong, playlists }) {
     const render = () => {
         if (showAddSong) {
             return (
                 <div className="show-add-song-container">
                     {playlists.map((playlist) => (
-                        <Playlist playlist={playlist}/>
+                        <Playlist key={playlist.playlist_id} playlist={playlist}/>
                     ))}
                 </div>
             )

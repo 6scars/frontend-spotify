@@ -6,7 +6,8 @@ export default function PlaylistDescribing({ playlist_id, chooseSong }) {
     const [isLoading, setIsLoading] = useState(true);
 
     useEffect(() => {
-
+        setPlaylist([])
+        setIsLoading(true) 
         const fetchThePlaylistData = async () => {
             const response = await fetch(`http://localhost:3005/api/getPlaylistData?id=${playlist_id}`);
             const data = await response.json();
@@ -41,7 +42,7 @@ export default function PlaylistDescribing({ playlist_id, chooseSong }) {
                             <img alt="play button" className="h-12" src={`https://rgmmwhkixprkskznqjcy.supabase.co/storage/v1/object/public/spotify/images/logos/startSong.svg`} />
                         </div>
                         <div className="devider" />
-                        <div className="playlist-songs-container flex justify-center items-center w-full">
+                        <div className="playlist-songs-container flex flex-col justify-center items-center w-full">
                             {playlist.map((song) => (
                                 <SongInThePlaylist key={song.id} song={song}  chooseSong={chooseSong}/>
                             )
