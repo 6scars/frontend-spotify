@@ -2,7 +2,8 @@ import './Header.css'
 import Sing from './Sing'
 
 
-export default function Header({ clickedAccount, isLogedIn, setIsLogedIn }) {
+export default function Header({ clickedAccount, isLogedIn, setIsLogedIn, setReloadApp }) {
+  const handleHomeClick = ()=>{setReloadApp(prev => !prev)}
   return (
     <header
       className="fixed top-0 flex justify-betwen
@@ -10,7 +11,7 @@ export default function Header({ clickedAccount, isLogedIn, setIsLogedIn }) {
     >
       <div className="left-header">
         <div className="logo-container h-full w-[96px] flex justify-center items-center">
-          <img alt="logo" src="https://rgmmwhkixprkskznqjcy.supabase.co/storage/v1/object/public/spotify/images/logos/logo1.svg" className="h-[90%] " />
+          <img  alt="logo" src="https://rgmmwhkixprkskznqjcy.supabase.co/storage/v1/object/public/spotify/images/logos/logo1.svg" className="h-[90%] " />
         </div>
       </div>
       <div
@@ -24,7 +25,7 @@ export default function Header({ clickedAccount, isLogedIn, setIsLogedIn }) {
         "
         >
           <div className="h-full flex justify-center items-center">
-            <img alt="home" src="https://rgmmwhkixprkskznqjcy.supabase.co/storage/v1/object/public/spotify/images/logos/logohome.svg" className="h-[75%]"></img>
+            <img onClick={handleHomeClick} alt="home" src="https://rgmmwhkixprkskznqjcy.supabase.co/storage/v1/object/public/spotify/images/logos/logohome.svg" className="h-[75%] cursor-pointer"></img>
           </div>
           <div className="h-full flex justify-center items-center">
             <input type="text" placeholder="Search" className="search__bar" />
