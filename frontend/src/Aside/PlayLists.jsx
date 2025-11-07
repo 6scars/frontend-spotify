@@ -1,5 +1,4 @@
 export default function PlayLists({ playlist, choosePlaylist }) {
-
   const song_ids = playlist.song_ids;
   return (
     <div
