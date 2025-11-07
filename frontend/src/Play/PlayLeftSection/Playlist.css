@@ -1,5 +1,0 @@
-@import 'tailwindcss';
-
-.show-add-song-container .add-song-playlist .included{
-    @apply border-red-500
-}

@@ -28,22 +28,20 @@ export default function MiniSpotify() {
   const [showPlaylistDescribing, setShowPlaylistDescribing] = useState(false);
   /*reloadAside reload Aside Component*/
   const [reloadAside, setReloadAside] = useState(false)
-  /*reloadPlay reload Play Component*/
-  const [reloadPlay, setReloadPlay] = useState(false);
   /*playlist_id allows to sending data from Aside Component to PlaylistDescripting Component, keeps playlist_id user have clicked*/
   const [playlist_id, setPlaylists_id] = useState(null);
   /*user_id keeps user's id*/
   const user_id = Number(localStorage.getItem('user_id'))
 
+  const fetches = async () => {
+    const isValidToken = await checkToken();
+    setIsLogedIn(isValidToken);
+    isValidToken ? setPlaylists(await fetchPlaylists(user_id)) : setPlaylists([])
+  }
+
   useEffect(() => {
-    const fetches = async () => {
-      const isValidToken = await checkToken();
-      setIsLogedIn(isValidToken);
-      isValidToken ? setPlaylists(await fetchPlaylists(user_id)) : setPlaylists([])
-    }
     fetches()
   }, [reloadAside]);
-
 
 
 
@@ -69,7 +67,7 @@ export default function MiniSpotify() {
         showPlaylistDescribing={showPlaylistDescribing}
         setReloadAside={setReloadAside}
       />
-      {currentSong ? <Play currentSong={currentSong} playlists={playlists}/> : ""}
+      {currentSong ? <Play currentSong={currentSong} playlists={playlists} setPlaylists={setPlaylists} fetches={fetches}/> : ""}
       {playlists ? <Aside setPlaylists_id={setPlaylists_id}
         show={show}
         playlists={playlists}
