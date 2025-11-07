@@ -42,7 +42,6 @@ export default function MiniSpotify() {
 
   useEffect(() => {
     setIsLogedIn(false);
-    setShow(false)
     setShowCreatePlaylistWindow(false)
     setShowPlaylistDescribing(false)
     fetches()
