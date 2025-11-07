@@ -67,7 +67,7 @@ export default function MiniSpotify() {
         showPlaylistDescribing={showPlaylistDescribing}
         setReloadAside={setReloadAside}
       />
-      {currentSong ? <Play currentSong={currentSong} /> : ""}
+      {currentSong ? <Play currentSong={currentSong} playlists={playlists}/> : ""}
       {playlists ? <Aside setPlaylists_id={setPlaylists_id}
         show={show}
         playlists={playlists}
