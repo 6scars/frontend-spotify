@@ -1,6 +1,5 @@
 import "./Description.css";
 export default function Description({ currentSong }) {
-  console.log(currentSong)
   return (
     <div
       className="description red-scroll-bar h-full flex-1 min-w-[500px] overflow-y-auto grow
