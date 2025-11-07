@@ -73,7 +73,7 @@ async function playlists(req, res, next) {
         }
 
         const data = await sql`
-        SELECT 
+        SELECT
             authors.id AS author_id,
             authors.author AS author_name,
             authors.email,
@@ -92,7 +92,6 @@ async function playlists(req, res, next) {
 
 
         `;
-
         return res.status(202).json({ message: "accomplished", data: data })
     } catch (err) {
         console.error("❌ Error fetching authors:", err);
@@ -103,8 +102,8 @@ async function playlists(req, res, next) {
 async function fetchSongs(req, res, next) {
     try {
         const data = await sql`
-        SELECT  
-            song_id, 
+        SELECT
+            song_id,
             "song_Name" AS song_name,
             songs."song_Image" AS song_image,
             songs.created_at,
@@ -118,9 +117,9 @@ async function fetchSongs(req, res, next) {
             author_id,
             biograph
         FROM songs
-        INNER JOIN authors_songs ON authors_songs.song_id = songs.id 
+        INNER JOIN authors_songs ON authors_songs.song_id = songs.id
         INNER JOIN authors ON authors.id = authors_songs.author_id
-        
+
     `
         return res.status(201).json({ message: "accompllished", data })
 
@@ -159,7 +158,6 @@ async function addView(req, res, next) {
         WHERE id = ${song_id}
         RETURNING views
     `
-        console.log(data)
         return null
     } catch (err) {
         console.error('FUNCTION ERORR addView', err)
@@ -189,7 +187,6 @@ async function getDataFromToken(req, res, next) {
 
 async function getAuthorsAlbums(req, res, next) {
     const { id, email } = req.decodedData;
-    console.log(id)
     try {
         const response = await sql`
         SELECT album_name, album.id
@@ -379,6 +376,7 @@ async function getPlaylistData(req, res, next) {
             ON authors_songs.author_id = authors.id
             WHERE playlists.id =${id}
         `
+
         return res.status(201).json({ message: "fetchThePlaylistData", data: dataPlaylist })
     } catch (err) {
         console.error(err)
@@ -392,8 +390,8 @@ export async function getSong(req, res, next) {
         const id = req.query.id;
         if (id) {
             const data = await sql`
-                SELECT  
-                    songs.id, 
+                SELECT
+                    songs.id,
                     "song_Name" AS song_name,
                     songs."song_Image" AS song_image,
                     songs.created_at,
@@ -407,15 +405,15 @@ export async function getSong(req, res, next) {
                     author_id,
                     biograph
                 FROM songs
-                INNER JOIN authors_songs ON authors_songs.song_id = songs.id 
+                INNER JOIN authors_songs ON authors_songs.song_id = songs.id
                 INNER JOIN authors ON authors.id = authors_songs.author_id
                 WHERE songs.id = ${id}
             `
-            if(data){
-                return res.status(200).json({message:"", data: data})
+            if (data) {
+                return res.status(200).json({ message: "", data: data })
             }
         } else {
-            console.error("GET SONG ERROR, IDSONG",err)
+            console.error("GET SONG ERROR, IDSONG", err)
             throw 'getSong ERROR ID SONG'
         }
     } catch (err) {
@@ -424,7 +422,43 @@ export async function getSong(req, res, next) {
     }
 }
 
+
+export function verifyToken(req, res, next) {
+    try {
+        const authHeader = req.headers.authorization;
+        if (!authHeader)
+            return res.status(401).json({ error: 'Missing token' });
+        const token = authHeader.split(' ')[1];
+        const d = jwt.verify(token, JWT_SECRET)
+        req.d = d;
+        next()
+    } catch (err) {
+        console.err(err)
+        return res.status(500).json({ message: 'SERVER PROBLEM' })
+    }
+}
+
+export async function addSongToPlaylist(req, res, next) {
+    try {
+        const {playlist_id, song_id} = req.body
+        console.log(playlist_id)
+        console.log(song_id)
+        await sql`
+            INSERT INTO playlists_songs (playlist_id, song_id)
+            VALUES (${playlist_id}, ${song_id})
+        `
+        return res.status(201).json({ message: 'addSongToPlaylist accomplished! song has been added to the playlist.' })
+    } catch (err) {
+        console.err(err)
+        return res.status(500).jsono({ message: "server error" })
+    }
+
+}
+
 export default controller = {
+    verifyToken,
+
+    addSongToPlaylist,
     signIn,
     signUp,
     playlists,

@@ -1,8 +1,8 @@
 import { useState, useEffect } from 'react'
-export default function Playlist({ currentSong, playlist }) {
-       
+export default function Playlist({ currentSong, playlist, handleAddSong }) {
        const [isLoading, setIsloading] = useState(true);
        const [isSongIncluded, setIsSongIncluded] = useState(false);
+
        useEffect(() => {
               setIsSongIncluded(false)
               setIsloading(true)
@@ -18,12 +18,12 @@ export default function Playlist({ currentSong, playlist }) {
                      setIsloading(false)
               }
 
-       }, [currentSong, playlist.playlist_id])
+       }, [])
 
        const render = () => {
               if (!isLoading) {
                      return (
-                            <div className={`add-song-playlist ${isSongIncluded ? 'include' : ''}`}> {playlist.playlist_name}</div>
+                            <div onClick={()=>handleAddSong(currentSong.id, playlist.playlist_id )} className={`add-song-playlist ${isSongIncluded ? 'include' : ''}`}> {playlist.playlist_name}</div>
                      )
 
               } else {
