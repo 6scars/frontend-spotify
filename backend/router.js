@@ -38,4 +38,5 @@ router.post('/createPlaylist',controller.createPlaylist)
 router.get('/getPlaylistData',controller.getPlaylistData)
 router.get('/getSong',controller.getSong);
 router.post('/addSongToPlaylist',controller.verifyToken, controller.addSongToPlaylist)
+router.post('/handleRemoveSong',controller.verifyToken, controller.handleRemoveSong)
 export default router;

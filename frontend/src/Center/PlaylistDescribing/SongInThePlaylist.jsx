@@ -1,7 +1,6 @@
 import { useState, useEffect } from "react"
 
 export default function SongInThePlaylist({ song, chooseSong }) {
-    console.log(song)
     return (
         <>
             {

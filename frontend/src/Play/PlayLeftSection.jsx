@@ -1,7 +1,7 @@
 import { useState, useEffect } from 'react';
 import AddSong from './PlayLeftSection/AddSong';
 import './PlayLeftSection.css'
-export default function PlayLeftSection({ currentSong, playlists }) {
+export default function PlayLeftSection({ currentSong, playlists, fetches }) {
   const [isLoading, setIsloading] = useState(false)
   const [showAddSong, setShowAddSong] = useState(false)
 
@@ -11,10 +11,10 @@ export default function PlayLeftSection({ currentSong, playlists }) {
   }, [currentSong.id])
 
   function handleShowAddSong() {
-    console.log(showAddSong)
     if (showAddSong) setShowAddSong(false)
     if (!showAddSong) setShowAddSong(true)
   }
+
   const render = () => {
     if (isLoading) {
       <div className="text-white text-20">
@@ -56,7 +56,7 @@ export default function PlayLeftSection({ currentSong, playlists }) {
               src="https://rgmmwhkixprkskznqjcy.supabase.co/storage/v1/object/public/spotify/images/logos/addToFavoriteSong.svg"
             />
             
-              <AddSong currentSong={currentSong} showAddSong={showAddSong} playlists={playlists}/>
+              <AddSong  fetches={fetches} currentSong={currentSong} showAddSong={showAddSong} playlists={playlists}/>
             
           </div>
         </div>

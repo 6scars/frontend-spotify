@@ -440,7 +440,7 @@ export function verifyToken(req, res, next) {
 
 export async function addSongToPlaylist(req, res, next) {
     try {
-        const {playlist_id, song_id} = req.body
+        const { playlist_id, song_id } = req.body
         console.log(playlist_id)
         console.log(song_id)
         await sql`
@@ -455,9 +455,24 @@ export async function addSongToPlaylist(req, res, next) {
 
 }
 
+export async function handleRemoveSong(req, res, next) {
+    try {
+        const { playlist_id, song_id } = req.body
+        await sql`
+            DELETE FROM playlists_songs
+            WHERE playlist_id = ${playlist_id} AND song_id = ${song_id}
+        `
+        return res.status(201).json({ message: 'addSongToPlaylist accomplished! song has been removed from the playlist.' })
+    } catch (err) {
+        console.err(err)
+        return res.status(500).jsono({ message: "server error" })
+    }
+}
+
 export default controller = {
     verifyToken,
 
+    handleRemoveSong,
     addSongToPlaylist,
     signIn,
     signUp,
