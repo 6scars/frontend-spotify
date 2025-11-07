@@ -12,3 +12,8 @@
     @apply cursor-pointer w-[90%] p-1 flex justify-center items-center  border-1 border-solid border-[var(--help-color2)] rounded-md 
         hover:border-[var(--accent-color)] active:border-[var(--accent-color3)]
 }
+
+
+.play-left-section .include{
+    @apply border-red-500
+}

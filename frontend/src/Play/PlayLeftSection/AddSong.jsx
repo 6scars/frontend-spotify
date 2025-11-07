@@ -5,7 +5,7 @@ export default function AddSong({ currentSong, showAddSong, playlists }) {
             return (
                 <div className="show-add-song-container">
                     {playlists.map((playlist) => (
-                        <Playlist key={playlist.playlist_id} playlist={playlist}/>
+                        <Playlist key={playlist.playlist_id} currentSong={currentSong} playlist={playlist}/>
                     ))}
                 </div>
             )
