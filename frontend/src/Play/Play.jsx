@@ -4,7 +4,7 @@ import PlayRightSection from "./PlayRightSection.jsx";
 import PlayLeftSection from "./PlayLeftSection.jsx";
 import "./Play.css";
 
-export default function Play( {currentSong, song, author}) {
+export default function Play( {currentSong, song, author, playlists}) {
   /*---------------- PLAYER CONTROLLER ----------------*/
   const audioRef = useRef(null);
 
@@ -89,7 +89,7 @@ export default function Play( {currentSong, song, author}) {
     "
     >
 
-      <PlayLeftSection currentSong={currentSong} song={song} author={author}/>
+      <PlayLeftSection currentSong={currentSong} song={song} author={author} playlists={playlists}/>
 
       <PlayCenterSection
         audioRef={audioRef}
