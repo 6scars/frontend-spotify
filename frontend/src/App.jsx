@@ -28,6 +28,8 @@ export default function MiniSpotify() {
   const [showPlaylistDescribing, setShowPlaylistDescribing] = useState(false);
   /*reloadAside reload Aside Component*/
   const [reloadAside, setReloadAside] = useState(false)
+  /*reloadPlay reload Play Component*/
+  const [reloadPlay, setReloadPlay] = useState(false);
   /*playlist_id allows to sending data from Aside Component to PlaylistDescripting Component, keeps playlist_id user have clicked*/
   const [playlist_id, setPlaylists_id] = useState(null);
   /*user_id keeps user's id*/

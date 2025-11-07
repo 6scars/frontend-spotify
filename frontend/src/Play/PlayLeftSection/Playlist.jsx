@@ -18,7 +18,7 @@ export default function Playlist({ currentSong, playlist, handleAddSong }) {
                      setIsloading(false)
               }
 
-       }, [])
+       }, [currentSong])
 
        const render = () => {
               if (!isLoading) {
