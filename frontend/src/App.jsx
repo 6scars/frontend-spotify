@@ -28,6 +28,7 @@ export default function MiniSpotify() {
   const [showPlaylistDescribing, setShowPlaylistDescribing] = useState(false);
   /*reloadAside reload Aside Component*/
   const [reloadAside, setReloadAside] = useState(false)
+  const [reloadApp, setReloadApp] = useState(false)
   /*playlist_id allows to sending data from Aside Component to PlaylistDescripting Component, keeps playlist_id user have clicked*/
   const [playlist_id, setPlaylists_id] = useState(null);
   /*user_id keeps user's id*/
@@ -40,8 +41,12 @@ export default function MiniSpotify() {
   }
 
   useEffect(() => {
+    setIsLogedIn(false);
+    setShow(false)
+    setShowCreatePlaylistWindow(false)
+    setShowPlaylistDescribing(false)
     fetches()
-  }, [reloadAside]);
+  }, [reloadAside,reloadApp]);
 
 
 
@@ -56,6 +61,7 @@ export default function MiniSpotify() {
         clickedAccount={clickedAccount}
         isLogedIn={isLogedIn}
         setIsLogedIn={setIsLogedIn}
+        setReloadApp={setReloadApp}
       />
       <Center
         playlist_id={playlist_id}
