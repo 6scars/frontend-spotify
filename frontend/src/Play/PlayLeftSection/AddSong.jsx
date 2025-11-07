@@ -19,7 +19,6 @@ export default function AddSong({ currentSong, showAddSong, playlists, fetches }
             const data = await response.json();
             console.log(data)
             fetches()
-            setRerenderPlaylist(prev => !prev)
             return null
         } catch (err) {
             console.error(err)
