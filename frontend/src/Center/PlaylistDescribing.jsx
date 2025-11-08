@@ -1,7 +1,7 @@
 import { useState, useEffect } from 'react'
 import SongInThePlaylist from "./PlaylistDescribing/SongInThePlaylist"
 import './PlaylistDescribing.css'
-export default function PlaylistDescribing({ playlist_id, chooseSong }) {
+export default function PlaylistDescribing({ playlist_id, chooseSong, setCurrentPlaylist, setCurrentSong }) {
     const [playlist, setPlaylist] = useState([])
     const [isLoading, setIsLoading] = useState(true);
 
@@ -19,6 +19,11 @@ export default function PlaylistDescribing({ playlist_id, chooseSong }) {
 
     }, [playlist_id])
 
+    function handleStartPlaylist(){
+        setCurrentPlaylist(playlist)
+        chooseSong(playlist[0].song_id)
+        // setCurrentSong
+    }
 
     const render = () => {
         if (isLoading) {
@@ -39,7 +44,7 @@ export default function PlaylistDescribing({ playlist_id, chooseSong }) {
 
                         <div className="playlist-controlls flex justify-start items-center ">
                             <span className="text-[var(--main-color)] "> play as playlist </span>
-                            <img alt="play button" className="h-12" src={`https://rgmmwhkixprkskznqjcy.supabase.co/storage/v1/object/public/spotify/images/logos/startSong.svg`} />
+                            <img onClick={handleStartPlaylist}alt="play button" className="h-12" src={`https://rgmmwhkixprkskznqjcy.supabase.co/storage/v1/object/public/spotify/images/logos/startSong.svg`} />
                         </div>
                         <div className="devider" />
                         <div className="playlist-songs-container flex flex-col justify-center items-center w-full">

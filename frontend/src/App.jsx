@@ -12,7 +12,7 @@ import "./App.css";
 export default function MiniSpotify() {
   /*currentSong keeps data about playling right now a song, shows Play Component*/
   const [currentSong, setCurrentSong] = useState(null);
-  /*currentPlaylist keeps data about songs in the playlists allows to play it in Play Component*/
+  /*currentPlaylist keeps data about songs in the playlists, allows to play it in Play Component*/
   const [currentPlaylist, setCurrentPlaylist] = useState([]);
   /*show allows to controling when the Describe Component is displayed, changes styles in Center Component*/
   const [show, setShow] = useState(false);
@@ -26,10 +26,14 @@ export default function MiniSpotify() {
   const [showCreatePlaylistWindow, setShowCreatePlaylistWindow] = useState(false);
   /* showContentOfPlaylist allows to controling when the PlaylistDescribing Component is displayed*/
   const [showPlaylistDescribing, setShowPlaylistDescribing] = useState(false);
-  /*reloadAside reload Aside Component*/
+  /*reloadAside reloads Aside Component*/
   const [reloadAside, setReloadAside] = useState(false)
+  /*reloadApp reloads App Component */
   const [reloadApp, setReloadApp] = useState(false)
-  /*playlist_id allows to sending data from Aside Component to PlaylistDescripting Component, keeps playlist_id user have clicked*/
+  /*
+    playlist_id allows to sending data from Aside Component to PlaylistDescripting Component,
+    keeps playlist_id user have clicked
+  */
   const [playlist_id, setPlaylists_id] = useState(null);
   /*user_id keeps user's id*/
   const user_id = Number(localStorage.getItem('user_id'))
@@ -45,7 +49,7 @@ export default function MiniSpotify() {
     setShowCreatePlaylistWindow(false)
     setShowPlaylistDescribing(false)
     fetches()
-  }, [reloadAside,reloadApp]);
+  }, [reloadAside, reloadApp]);
 
 
 
@@ -71,8 +75,17 @@ export default function MiniSpotify() {
         showCreatePlaylistWindow={showCreatePlaylistWindow}
         showPlaylistDescribing={showPlaylistDescribing}
         setReloadAside={setReloadAside}
+        setCurrentPlaylist={setCurrentPlaylist}
       />
-      {currentSong ? <Play currentSong={currentSong} playlists={playlists} setPlaylists={setPlaylists} fetches={fetches}/> : ""}
+      {currentSong
+        ? <Play
+          currentSong={currentSong}
+          playlists={playlists}
+          setPlaylists={setPlaylists}
+          fetches={fetches}
+          currentPlaylist={currentPlaylist} />
+        : ""
+      }
       {playlists ? <Aside setPlaylists_id={setPlaylists_id}
         show={show}
         playlists={playlists}
@@ -80,9 +93,7 @@ export default function MiniSpotify() {
         setShowCreatePlaylistWindow={setShowCreatePlaylistWindow}
         isLogedIn={isLogedIn}
         setSigning={setSigning}
-        setShowPlaylistDescribing={setShowPlaylistDescribing}
-        currentPlaylist={currentPlaylist}
-        setCurrentPlaylist={setCurrentPlaylist} /> : null}
+        setShowPlaylistDescribing={setShowPlaylistDescribing} /> : null}
       {signing && <Signing setIsLogedIn={setIsLogedIn} clickedAccount={clickedAccount} isLogedIn={isLogedIn} />}
 
     </>
