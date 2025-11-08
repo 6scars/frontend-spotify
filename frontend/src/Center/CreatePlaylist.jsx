@@ -1,7 +1,6 @@
-import { useState, useEffect } from 'react'
+import { useState } from 'react'
 import './CreatePlaylist.css'
 import RenderSongsToAdd from './CreatePlaylist/RenderSongsToAdd'
-import Signing from '../Signing/Signing';
 
 export default function CreatePlaylist({ SONGS, setReloadAside, isLogedIn }) {
     const [songsToAdd, setSongsToAdd] = useState(new Set());
@@ -9,7 +8,6 @@ export default function CreatePlaylist({ SONGS, setReloadAside, isLogedIn }) {
     const handleCreateNewPlaylist = async (e) => {
         e.preventDefault();
         if (!playlistName?.length) {
-
             console.log('Input name of the playlist')
             return { message: 'Input name of the playlist' }
 
