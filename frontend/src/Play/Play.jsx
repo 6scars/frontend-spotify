@@ -4,9 +4,8 @@ import PlayRightSection from "./PlayRightSection.jsx";
 import PlayLeftSection from "./PlayLeftSection.jsx";
 import "./Play.css";
 
-export default function Play( {currentSong, song, author, playlists, fetches, currentPlaylist}) {
-  const [currentSongPlaylist_id, setCurrentSongPlaylist_id] = useState([])
-  
+export default function Play({ chooseSong, currentSong, song, author, playlists, fetches, currentPlaylist }) {
+  const [currentPlaylistI, setCurrentPlaylistI] = useState(0);
   /*---------------- PLAYER CONTROLLER ----------------*/
   const audioRef = useRef(null);
 
@@ -23,13 +22,20 @@ export default function Play( {currentSong, song, author, playlists, fetches, cu
     const onLoaded = () => {
       setDuration(a.duration || 0);
     };
+    const onEnded = () => {
+      const a = currentPlaylistI;
+      chooseSong(currentPlaylist[a+1].song_id)
+      setCurrentSongId(prev => prev + 1)
+    };
     const onPlay = () => setPlay(true);
     const onPause = () => setPlay(false);
     const onCurrent = () => setCurrent(a.currentTime);
+
     a.addEventListener("loadedmetadata", onLoaded);
     a.addEventListener("play", onPlay);
     a.addEventListener("pause", onPause);
     a.addEventListener("timeupdate", onCurrent);
+    a.addEventListener("ended", onEnded);
 
     return () => {
       a.removeEventListener("loadedmetadata", onLoaded);
@@ -91,7 +97,7 @@ export default function Play( {currentSong, song, author, playlists, fetches, cu
     "
     >
 
-      <PlayLeftSection currentSong={currentSong} song={song} author={author} playlists={playlists} fetches={fetches}/>
+      <PlayLeftSection currentSong={currentSong} song={song} author={author} playlists={playlists} fetches={fetches} />
 
       <PlayCenterSection
         audioRef={audioRef}

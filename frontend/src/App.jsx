@@ -6,6 +6,8 @@ import Center from "./Center/Center.jsx";
 import Play from "./Play/Play.jsx";
 import Signing from "./Signing/Signing.jsx";
 import { checkToken, fetchPlaylists } from "./scripts/Fetches.jsx";
+import { fetchSongs } from "./scripts/Fetches.jsx";
+import { addView } from "./scripts/Fetches.jsx";
 import "./App.css";
 
 
@@ -38,6 +40,67 @@ export default function MiniSpotify() {
   /*user_id keeps user's id*/
   const user_id = Number(localStorage.getItem('user_id'))
 
+  const [SONGS, setSONGS] = useState([]);
+  const [latest, setLatest] = useState(JSON.parse(localStorage.getItem('latest')) || []);
+
+  async function chooseSong(song_id) {
+    const responde = await fetch(`http://localhost:3005/api/getSong?id=${song_id}`)
+    const data = await responde.json();
+    const findedSong = data.data[0];
+    if (findedSong) {
+      addView(song_id)
+      setCurrentSong(findedSong)
+      setShow(true)
+      latestListened(findedSong)
+    }
+  }
+
+
+  function latestListened(newSong) {
+    if (!latest) setLatest([newSong]);
+
+    const index = latest.findIndex((s) => s.id === newSong.id);
+
+    setLatest((prev) => {
+      /*if NOT finded song in previous*/
+      if (index === -1) {
+        /*if NOT finded song and length equals 6*/
+        if (prev.length === 6) {
+          const newArray = [...prev];
+          newArray.pop();
+          localStorage.setItem('latest', JSON.stringify([newSong, ...newArray]));
+          return [newSong, ...newArray];
+        }
+        localStorage.setItem('latest', JSON.stringify([newSong, ...prev]));
+        return [newSong, ...prev];
+        /*if finded song in previous*/
+      } else {
+        /*if finded song and length equals 6*/
+        if (prev.length === 6) {
+          const newArray = [...prev];
+          newArray.splice(index, 1);
+          newArray.pop();
+          localStorage.setItem('latest', JSON.stringify([newSong, ...newArray]));
+          return [newSong, ...newArray];
+        }
+
+        const newArray = [...prev];
+        newArray.splice(index, 1);
+        localStorage.setItem('latest', JSON.stringify([newSong, ...newArray]));
+        return [newSong, ...newArray];
+      }
+    });
+  }
+  useEffect(() => {
+    const fetches = async () => {
+      setSONGS(await fetchSongs());
+
+    }
+
+    fetches();
+
+  }, [])
+
   const fetches = async () => {
     const isValidToken = await checkToken();
     setIsLogedIn(isValidToken);
@@ -51,7 +114,7 @@ export default function MiniSpotify() {
     fetches()
   }, [reloadAside, reloadApp]);
 
-
+  console.log(currentPlaylist)
 
   const clickedAccount = () => {
     signing ? setSigning(false) : setSigning(true)
@@ -67,6 +130,9 @@ export default function MiniSpotify() {
         setReloadApp={setReloadApp}
       />
       <Center
+        chooseSong={chooseSong}
+        latest={latest}
+        SONGS={SONGS}
         playlist_id={playlist_id}
         currentSong={currentSong}
         setCurrentSong={setCurrentSong}
