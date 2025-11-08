@@ -23,7 +23,7 @@ export default function RenderSongsToAdd({ song, songsToAdd, setSongsToAdd }) {
 
     }
     return (
-        <div className="overflow-hidden bg-black/80 rounded-xl w-100 h-20 flex flex-col items-center ">
+        <div className="overflow-hidden bg-black/80 rounded-xl w-100 h-20 flex items-center ">
             <div className="img-container relative h-full w-[35%] overflow-hidden">
                 <img className="img_song w-full h-full object-cover object-center " src={`https://rgmmwhkixprkskznqjcy.supabase.co/storage/v1/object/public/spotify/images/songPictures/${song.song_image}`} />
             </div>
