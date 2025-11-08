@@ -4,7 +4,9 @@ import PlayRightSection from "./PlayRightSection.jsx";
 import PlayLeftSection from "./PlayLeftSection.jsx";
 import "./Play.css";
 
-export default function Play( {currentSong, song, author, playlists, fetches}) {
+export default function Play( {currentSong, song, author, playlists, fetches, currentPlaylist}) {
+  const [currentSongPlaylist_id, setCurrentSongPlaylist_id] = useState([])
+  
   /*---------------- PLAYER CONTROLLER ----------------*/
   const audioRef = useRef(null);
 
@@ -24,7 +26,6 @@ export default function Play( {currentSong, song, author, playlists, fetches}) {
     const onPlay = () => setPlay(true);
     const onPause = () => setPlay(false);
     const onCurrent = () => setCurrent(a.currentTime);
-
     a.addEventListener("loadedmetadata", onLoaded);
     a.addEventListener("play", onPlay);
     a.addEventListener("pause", onPause);
@@ -79,6 +80,7 @@ export default function Play( {currentSong, song, author, playlists, fetches}) {
       return !prev;
     });
   }
+  currentPlaylist
 
   const progressBar = (current / duration) * 100;
 
@@ -102,6 +104,7 @@ export default function Play( {currentSong, song, author, playlists, fetches}) {
         loop={loop}
         handleLoop={handleLoop}
         currentSong={currentSong}
+        currentPlaylist={currentPlaylist}
       />
 
       <PlayRightSection

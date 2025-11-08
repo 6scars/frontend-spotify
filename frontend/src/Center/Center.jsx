@@ -20,7 +20,8 @@ export default function Center({
   setShow,
   showCreatePlaylistWindow,
   showPlaylistDescribing,
-  setReloadAside
+  setReloadAside,
+  setCurrentPlaylist
 
 }) {
   const [SONGS, setSONGS] = useState([]);
@@ -29,7 +30,7 @@ export default function Center({
 
   async function chooseSong(song_id) {
     const responde = await fetch(`http://localhost:3005/api/getSong?id=${song_id}`)
-    const data =  await responde.json();
+    const data = await responde.json();
     const findedSong = data.data[0];
     if (findedSong) {
       addView(song_id)
@@ -78,7 +79,7 @@ export default function Center({
   useEffect(() => {
     const fetches = async () => {
       setSONGS(await fetchSongs());
-    
+
     }
 
     fetches();
@@ -89,7 +90,11 @@ export default function Center({
     if (showCreatePlaylistWindow) {
       return (<CreatePlaylist SONGS={SONGS} setReloadAside={setReloadAside} />)
     } else if (showPlaylistDescribing) {
-      return (<PlaylistDescribing playlist_id={playlist_id} chooseSong={chooseSong}/>)
+      return (<PlaylistDescribing
+        playlist_id={playlist_id}
+        chooseSong={chooseSong}
+        setCurrentPlaylist={setCurrentPlaylist}
+        setCurrentSong={setCurrentSong} />)
     } else {
       return (<Music
         setCurrentSong={setCurrentSong}
