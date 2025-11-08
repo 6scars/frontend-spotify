@@ -13,7 +13,6 @@ export default function PlaylistDescribing({ playlist_id, chooseSong, setCurrent
             const data = await response.json();
             setPlaylist(data.data)
             setIsLoading(false);
-            console.log(data)
         }
         if (playlist_id) fetchThePlaylistData();
 
@@ -22,7 +21,6 @@ export default function PlaylistDescribing({ playlist_id, chooseSong, setCurrent
     function handleStartPlaylist(){
         setCurrentPlaylist(playlist)
         chooseSong(playlist[0].song_id)
-        // setCurrentSong
     }
 
     const render = () => {

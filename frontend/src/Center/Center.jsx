@@ -3,11 +3,15 @@ import Description from "./Description.jsx";
 import CreatePlaylist from "./CreatePlaylist.jsx"
 import PlaylistDescribing from "./PlaylistDescribing.jsx";
 import "./Center.css";
+import { fetchSongs } from "../scripts/Fetches.jsx";
+
+import { useEffect } from "react";
 
 
 
 
 export default function Center({
+  setSONGS,
   latest,
   SONGS,
   chooseSong,
@@ -27,7 +31,15 @@ export default function Center({
 
 
 
+  useEffect(() => {
+    const fetches = async () => {
+      setSONGS(await fetchSongs());
 
+    }
+
+    fetches();
+
+  }, [])
 
   function choosenComponent() {
     if (showCreatePlaylistWindow) {
