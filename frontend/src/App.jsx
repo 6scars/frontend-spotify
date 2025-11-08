@@ -91,15 +91,7 @@ export default function MiniSpotify() {
       }
     });
   }
-  useEffect(() => {
-    const fetches = async () => {
-      setSONGS(await fetchSongs());
 
-    }
-
-    fetches();
-
-  }, [])
 
   const fetches = async () => {
     const isValidToken = await checkToken();
@@ -130,6 +122,7 @@ export default function MiniSpotify() {
         setReloadApp={setReloadApp}
       />
       <Center
+        setSONGS={setSONGS}
         chooseSong={chooseSong}
         latest={latest}
         SONGS={SONGS}
