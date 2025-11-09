@@ -2,6 +2,11 @@ import "./Description.css";
 export default function Description({ currentSong }) {
   return (
     <>
+          <div
+        className="description red-scroll-bar h-full flex-1 min-w-[500px] overflow-y-auto grow
+        flex flex-col gap-[1.5rem]
+      "
+      >
       <div className="description-img-container w-full max-h-[521px] flex justify-center">
         <img
           alt="description-img"
@@ -50,6 +55,7 @@ export default function Description({ currentSong }) {
         <div className="font-thin">
           {currentSong.credit}
         </div>
+      </div>
       </div>
     </>
   );
