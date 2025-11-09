@@ -71,8 +71,22 @@ export default function Center({
         flex items-center gap-3  
         ${show ? "show" : ""}
         `}
-    >{choosenComponent()}
-      {show ? <Description currentSong={currentSong} /> : ""}
-    </main>
+    >
+      <div
+        className="music red-scroll-bar space-y-4 bg-[#232323] flex-[2] h-full min-w-[500px] overflow-y-auto  rounded-md
+          relative
+        "
+      >
+        {choosenComponent()}
+      </div>
+
+      <div
+        className="description red-scroll-bar h-full flex-1 min-w-[500px] overflow-y-auto grow
+        flex flex-col gap-[1.5rem]
+      "
+      >
+        {show ? <Description currentSong={currentSong} /> : ""}
+      </div>
+    </main >
   );
 }
