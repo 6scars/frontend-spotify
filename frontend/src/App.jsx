@@ -6,7 +6,6 @@ import Center from "./Center/Center.jsx";
 import Play from "./Play/Play.jsx";
 import Signing from "./Signing/Signing.jsx";
 import { checkToken, fetchPlaylists } from "./scripts/Fetches.jsx";
-import { fetchSongs } from "./scripts/Fetches.jsx";
 import { addView } from "./scripts/Fetches.jsx";
 import "./App.css";
 
@@ -142,7 +141,9 @@ export default function MiniSpotify() {
           playlists={playlists}
           setPlaylists={setPlaylists}
           fetches={fetches}
-          currentPlaylist={currentPlaylist} />
+          currentPlaylist={currentPlaylist}
+          chooseSong={chooseSong}
+           />
         : ""
       }
       {playlists ? <Aside setPlaylists_id={setPlaylists_id}
