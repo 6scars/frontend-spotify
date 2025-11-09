@@ -31,18 +31,8 @@ export default function Play({
 
     const onLoaded = () => setDuration(a.duration || 0);
 
-    const onEnded = () => {
-      if (!currentPlaylist || currentPlaylist.length === 0) return;
+    const onEnded = () => {goToNextSong()};
 
-      const isLast = currentPlaylistI === currentPlaylist.length - 1;
-      const nextIndex = isLast ? 0 : currentPlaylistI + 1;
-
-      const nextSong = currentPlaylist[nextIndex];
-      if (nextSong && nextSong.song_id) {
-        chooseSong(nextSong.song_id);
-        setCurrentPlaylistI(nextIndex);
-      }
-    };
 
     const onPlay = () => setPlay(true);
     const onPause = () => setPlay(false);
@@ -106,28 +96,45 @@ export default function Play({
       const nextSongId = currentPlaylist[nextIndex].song_id
       chooseSong(nextSongId)
       setCurrentPlaylistI(nextIndex)
+      setPlay(true)
 
     }
     if (currentPlaylistI === currentPlaylist.length - 1) {
-      chooseSong(currentPlaylist[0].song_id)
-      setCurrentPlaylistI(0)
+      const nextIndex = 0;
+      const nextSongId = currentPlaylist[nextIndex].song_id
+      chooseSong(nextSongId)
+      setCurrentPlaylistI(nextIndex)
+      setPlay(true)
+    }
+
+    const a = audioRef.current
+    if(a){
+      const onLoaded = ()=>{
+        a.play();
+        setPlay(true);
+        a.removeEventListener("loadedmetadata", onLoaded);
+      }
+      a.addEventListener("loadedmetadata", onLoaded)
     }
   }
 
   function goToPreviousSong() {
-    if (!currentPlaylist || currentPlaylist.length <= 0 ) return
+    if (!currentPlaylist || currentPlaylist.length <= 0) return
 
     let previousIndex = currentPlaylistI - 1;
     previousIndex = previousIndex < 0
       ? previousIndex = currentPlaylist.length - 1
       : previousIndex;
 
-    if(previousIndex >= 0){
+    if (previousIndex > currentPlaylist.length - 1) return
+
+    if (previousIndex >= 0) {
       chooseSong(currentPlaylist[previousIndex].song_id);
       setCurrentPlaylistI(previousIndex)
+      setPlay(true)
     }
 
-    if(previousIndex >= currentPlaylist.length - 1) return
+
   }
 
   const progressBar = duration > 0 ? (current / duration) * 100 : 0;
