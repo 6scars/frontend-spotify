@@ -79,13 +79,12 @@ export default function Center({
         {choosenComponent()}
       </div>
 
-      <div
-        className="description red-scroll-bar h-full flex-1 min-w-[500px] overflow-y-auto grow
-        flex flex-col gap-[1.5rem]
-      "
-      >
-        {show ? <Description currentSong={currentSong} /> : ""}
-      </div>
+
+      {show ?
+        <Description currentSong={currentSong} />
+        :
+        ""}
+
     </main >
   );
 }
