@@ -8,7 +8,9 @@ export default function ProgressBar({
   progressBar,
   loop,
   handleLoop,
-  currentSong
+  currentSong,
+  goToNextSong,
+  goToPreviousSong
 }) {
   function formatTime(time) {
     const mins = Math.floor(time / 60);
@@ -38,12 +40,11 @@ export default function ProgressBar({
             onClick={handleLoop}
             className="h-[35px]  cursor-pointer"
             alt="loop-song"
-            src={`https://rgmmwhkixprkskznqjcy.supabase.co/storage/v1/object/public/spotify/images/logos/loop${
-              loop ? "" : "Crossed"
-            }Song.svg`}
+            src={`https://rgmmwhkixprkskznqjcy.supabase.co/storage/v1/object/public/spotify/images/logos/loop${loop ? "" : "Crossed"
+              }Song.svg`}
           />
         </button>
-        <button>
+        <button onClick={goToPreviousSong}>
           <img
             alt="start-music"
             src="https://rgmmwhkixprkskznqjcy.supabase.co/storage/v1/object/public/spotify/images/logos/previousSong.svg"
@@ -53,13 +54,12 @@ export default function ProgressBar({
         <button onClick={handlePlay}>
           <img
             alt="start-music"
-            src={`https://rgmmwhkixprkskznqjcy.supabase.co/storage/v1/object/public/spotify/images/logos/${
-              play ? "pause" : "start"
-            }Song.svg`}
+            src={`https://rgmmwhkixprkskznqjcy.supabase.co/storage/v1/object/public/spotify/images/logos/${play ? "pause" : "start"
+              }Song.svg`}
             className="w-10 h-full cursor-pointer"
           />
         </button>
-        <button>
+        <button onClick={goToNextSong}>
           <img
             alt="start-music"
             src={`https://rgmmwhkixprkskznqjcy.supabase.co/storage/v1/object/public/spotify/images/logos/nextSong.svg`}
@@ -71,9 +71,8 @@ export default function ProgressBar({
             onClick={handleLoop}
             className="h-[35px]  cursor-pointer"
             alt="loop-song"
-            src={`https://rgmmwhkixprkskznqjcy.supabase.co/storage/v1/object/public/spotify/images/logos/loop${
-              loop ? "" : "Crossed"
-            }Song.svg`}
+            src={`https://rgmmwhkixprkskznqjcy.supabase.co/storage/v1/object/public/spotify/images/logos/loop${loop ? "" : "Crossed"
+              }Song.svg`}
           />
         </button>
       </div>

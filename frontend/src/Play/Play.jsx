@@ -37,7 +37,6 @@ export default function Play({
       const isLast = currentPlaylistI === currentPlaylist.length - 1;
       const nextIndex = isLast ? 0 : currentPlaylistI + 1;
 
-      // Change song to next in playlist
       const nextSong = currentPlaylist[nextIndex];
       if (nextSong && nextSong.song_id) {
         chooseSong(nextSong.song_id);
@@ -99,6 +98,38 @@ export default function Play({
     setLoop(!loop);
   }
 
+  function goToNextSong() {
+    if (!currentPlaylist || currentPlaylist.length <= 0) return
+
+    if (currentPlaylistI < currentPlaylist.length - 1) {
+      const nextIndex = currentPlaylistI + 1;
+      const nextSongId = currentPlaylist[nextIndex].song_id
+      chooseSong(nextSongId)
+      setCurrentPlaylistI(nextIndex)
+
+    }
+    if (currentPlaylistI === currentPlaylist.length - 1) {
+      chooseSong(currentPlaylist[0].song_id)
+      setCurrentPlaylistI(0)
+    }
+  }
+
+  function goToPreviousSong() {
+    if (!currentPlaylist || currentPlaylist.length <= 0 ) return
+
+    let previousIndex = currentPlaylistI - 1;
+    previousIndex = previousIndex < 0
+      ? previousIndex = currentPlaylist.length - 1
+      : previousIndex;
+
+    if(previousIndex >= 0){
+      chooseSong(currentPlaylist[previousIndex].song_id);
+      setCurrentPlaylistI(previousIndex)
+    }
+
+    if(previousIndex >= currentPlaylist.length - 1) return
+  }
+
   const progressBar = duration > 0 ? (current / duration) * 100 : 0;
 
   return (
@@ -126,6 +157,8 @@ export default function Play({
         handleLoop={handleLoop}
         currentSong={currentSong}
         currentPlaylist={currentPlaylist}
+        goToNextSong={goToNextSong}
+        goToPreviousSong={goToPreviousSong}
       />
 
       <PlayRightSection
