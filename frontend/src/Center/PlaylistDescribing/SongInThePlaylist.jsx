@@ -1,6 +1,6 @@
 import { useState, useEffect } from "react"
 
-export default function SongInThePlaylist({ song, chooseSong }) {
+export default function SongInThePlaylist({ song, handleStartPlaylist }) {
     return (
         <>
             {
@@ -13,7 +13,7 @@ export default function SongInThePlaylist({ song, chooseSong }) {
                         <span className="text-[var(--help-color)]"> {song.author}</span>
                     </div>
                     <div className="song-controll-container w-[10%] h-full flex justify-center items-center">
-                        <button  onClick={() =>chooseSong(song.song_id)} className="song_button w-full ">PLAY</button>
+                        <button onClick={() => { handleStartPlaylist(song.song_id) }} className="song_button w-full ">PLAY</button>
                     </div>
                 </div>
             }

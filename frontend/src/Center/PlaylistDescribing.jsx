@@ -1,37 +1,53 @@
 import { useState, useEffect } from 'react'
 import SongInThePlaylist from "./PlaylistDescribing/SongInThePlaylist"
 import './PlaylistDescribing.css'
-export default function PlaylistDescribing({ playlist_id, chooseSong, setCurrentPlaylist, setCurrentSong }) {
+export default function PlaylistDescribing({ playlist_id, chooseSong, setCurrentPlaylist, setCurrentPlaylistI }) {
     const [playlist, setPlaylist] = useState([])
     const [isLoading, setIsLoading] = useState(true);
 
     useEffect(() => {
         setPlaylist([])
-        setIsLoading(true) 
+        setIsLoading(true)
         const fetchThePlaylistData = async () => {
             const response = await fetch(`http://localhost:3005/api/getPlaylistData?id=${playlist_id}`);
             const data = await response.json();
             setPlaylist(data.data)
             setIsLoading(false);
         }
-        if (playlist_id) fetchThePlaylistData();
+        if (playlist_id !== null && playlist_id !== undefined) {
+            fetchThePlaylistData();
+        }
 
     }, [playlist_id])
 
-    function handleStartPlaylist(){
+    function handleStartPlaylist(playlist_I = null) {
         setCurrentPlaylist(playlist)
-        chooseSong(playlist[0].song_id)
+        if (playlist_I) {
+            const findedSongI = playlist.findIndex((data) => (playlist_I === data.song_id))
+            chooseSong(playlist[findedSongI].song_id)
+            setCurrentPlaylistI(findedSongI)
+        }
+
+        if (!playlist_I) {
+            chooseSong(playlist[0].song_id)
+            setCurrentPlaylistI(0)
+        }
+
+
     }
 
     const render = () => {
+        console.log(playlist)
+        console.log(playlist_id)
         if (isLoading) {
             return (
-                <div>
+                <div className="text-white">
                     is loading...
                 </div>
             )
         }
         if (!isLoading) {
+            console.log(playlist)
             return (
                 <div className="music red-scroll-bar space-y-4 bg-[#232323] flex-[2] h-full min-w-[500px] overflow-y-auto  rounded-md
                     relative  flex justify-center items-center playlist-describing" >
@@ -42,12 +58,12 @@ export default function PlaylistDescribing({ playlist_id, chooseSong, setCurrent
 
                         <div className="playlist-controlls flex justify-start items-center ">
                             <span className="text-[var(--main-color)] "> play as playlist </span>
-                            <img onClick={handleStartPlaylist}alt="play button" className="h-12" src={`https://rgmmwhkixprkskznqjcy.supabase.co/storage/v1/object/public/spotify/images/logos/startSong.svg`} />
+                            <img onClick={() => handleStartPlaylist()} alt="play button" className="h-12" src={`https://rgmmwhkixprkskznqjcy.supabase.co/storage/v1/object/public/spotify/images/logos/startSong.svg`} />
                         </div>
                         <div className="devider" />
                         <div className="playlist-songs-container flex flex-col justify-center items-center w-full">
                             {playlist.map((song) => (
-                                <SongInThePlaylist key={song.id} song={song}  chooseSong={chooseSong}/>
+                                <SongInThePlaylist key={song.song_id} song={song} handleStartPlaylist={handleStartPlaylist} />
                             )
                             )}
                         </div>

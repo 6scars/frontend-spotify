@@ -1,5 +1,5 @@
 import Image from './Image'
-export default function Songs({ SONGS, chooseSong }) {
+export default function Songs({ SONGS, chooseSong, handleSwitchCurrentPlaylist }) {
   return (
     <div className="songs-container red-scroll-bar h-full">
       {SONGS.map((song) => {
@@ -8,6 +8,7 @@ export default function Songs({ SONGS, chooseSong }) {
           <div
             onClick={() => {
               chooseSong(song.song_id);
+              handleSwitchCurrentPlaylist()
             }}
             key={song.song_id}
             className="song-container-outer bg-transparent flex justify-center"

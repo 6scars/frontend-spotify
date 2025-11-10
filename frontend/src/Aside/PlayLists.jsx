@@ -11,7 +11,7 @@ export default function PlayLists({ playlist, choosePlaylist }) {
             "
     >
       <div className="img-container h-[70px] grid grid-rows-2 grid-cols-2 gap-[1px]">
-        {song_ids[0] != 'NULL' ? Array.from({ length: song_ids.length }).map((_, i) => (
+        {song_ids[0] != 'NULL' ? song_ids.slice(0,4).map((_, i) => (
             <img
               key={playlist.song_ids[i]}
               alt="playlist"

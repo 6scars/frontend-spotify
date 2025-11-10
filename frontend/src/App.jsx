@@ -15,6 +15,8 @@ export default function MiniSpotify() {
   const [currentSong, setCurrentSong] = useState(null);
   /*currentPlaylist keeps data about songs in the playlists, allows to play it in Play Component*/
   const [currentPlaylist, setCurrentPlaylist] = useState([]);
+  /*currentPlaylistI saves current iteration/position in the currentPlaylist*/
+  const [currentPlaylistI, setCurrentPlaylistI] = useState(null);
   /*show allows to controling when the Describe Component is displayed, changes styles in Center Component*/
   const [show, setShow] = useState(false);
   /*signing allows to controling when the Signing Component is displayed*/
@@ -43,6 +45,7 @@ export default function MiniSpotify() {
   const [latest, setLatest] = useState(JSON.parse(localStorage.getItem('latest')) || []);
 
   async function chooseSong(song_id) {
+    console.log(song_id)
     const responde = await fetch(`http://localhost:3005/api/getSong?id=${song_id}`)
     const data = await responde.json();
     const findedSong = data.data[0];
@@ -105,7 +108,6 @@ export default function MiniSpotify() {
     fetches()
   }, [reloadAside, reloadApp]);
 
-  console.log(currentPlaylist)
 
   const clickedAccount = () => {
     signing ? setSigning(false) : setSigning(true)
@@ -134,6 +136,7 @@ export default function MiniSpotify() {
         showPlaylistDescribing={showPlaylistDescribing}
         setReloadAside={setReloadAside}
         setCurrentPlaylist={setCurrentPlaylist}
+        setCurrentPlaylistI={setCurrentPlaylistI}
       />
       {currentSong
         ? <Play
@@ -143,7 +146,9 @@ export default function MiniSpotify() {
           fetches={fetches}
           currentPlaylist={currentPlaylist}
           chooseSong={chooseSong}
-           />
+          setCurrentPlaylistI={setCurrentPlaylistI}
+          currentPlaylistI={currentPlaylistI}
+        />
         : ""
       }
       {playlists ? <Aside setPlaylists_id={setPlaylists_id}

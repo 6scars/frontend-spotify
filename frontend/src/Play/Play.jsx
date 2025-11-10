@@ -12,8 +12,10 @@ export default function Play({
   playlists,
   fetches,
   currentPlaylist,
+  setCurrentPlaylistI,
+  currentPlaylistI
 }) {
-  const [currentPlaylistI, setCurrentPlaylistI] = useState(0);
+
 
   /*---------------- PLAYER CONTROLLER ----------------*/
   const audioRef = useRef(null);
@@ -31,7 +33,7 @@ export default function Play({
 
     const onLoaded = () => setDuration(a.duration || 0);
 
-    const onEnded = () => {goToNextSong()};
+    const onEnded = () => { goToNextSong() };
 
 
     const onPlay = () => setPlay(true);
@@ -89,7 +91,8 @@ export default function Play({
   }
 
   function goToNextSong() {
-    if (!currentPlaylist || currentPlaylist.length <= 0) return
+    console.log(currentPlaylistI)
+    if (!currentPlaylist || currentPlaylist.length <= 0 || currentPlaylistI === null || currentPlaylistI === undefined || currentPlaylistI < 0) return
 
     if (currentPlaylistI < currentPlaylist.length - 1) {
       const nextIndex = currentPlaylistI + 1;
@@ -97,7 +100,6 @@ export default function Play({
       chooseSong(nextSongId)
       setCurrentPlaylistI(nextIndex)
       setPlay(true)
-
     }
     if (currentPlaylistI === currentPlaylist.length - 1) {
       const nextIndex = 0;
@@ -108,8 +110,8 @@ export default function Play({
     }
 
     const a = audioRef.current
-    if(a){
-      const onLoaded = ()=>{
+    if (a) {
+      const onLoaded = () => {
         a.play();
         setPlay(true);
         a.removeEventListener("loadedmetadata", onLoaded);
@@ -119,7 +121,8 @@ export default function Play({
   }
 
   function goToPreviousSong() {
-    if (!currentPlaylist || currentPlaylist.length <= 0) return
+    console.log(currentPlaylistI)
+    if (!currentPlaylist || currentPlaylist.length <= 0 || currentPlaylistI === null || currentPlaylistI === undefined || currentPlaylistI < 0) return
 
     let previousIndex = currentPlaylistI - 1;
     previousIndex = previousIndex < 0

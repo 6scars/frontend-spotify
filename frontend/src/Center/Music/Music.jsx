@@ -7,8 +7,15 @@ export default function Music({
   songs,
   authors,
   latest,
-  chooseSong
+  chooseSong,
+  setCurrentPlaylist,
+  setCurrentPlaylistI
 }) {
+
+  function handleSwitchCurrentPlaylist() {
+    setCurrentPlaylistI(null);
+    setCurrentPlaylist([])
+  }
 
 
   return (
@@ -21,12 +28,12 @@ export default function Music({
         <button>PODCASTS</button>
       </div>
       <div className="main-songs ">
-        <Latest latest={latest} chooseSong={chooseSong} />
+        <Latest latest={latest} chooseSong={chooseSong} handleSwitchCurrentPlaylist={handleSwitchCurrentPlaylist}/>
         <div className="songs cursor-pointer">
           <div className="songs-title-container text-white font-bold">
             <p className="songs__title">Prepared for You</p>
           </div>
-          <Songs SONGS={SONGS} songs={songs} authors={authors} chooseSong={chooseSong} />
+          <Songs SONGS={SONGS} songs={songs} authors={authors} chooseSong={chooseSong} handleSwitchCurrentPlaylist={handleSwitchCurrentPlaylist}/>
         </div>
       </div>
     </>
