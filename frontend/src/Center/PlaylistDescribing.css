@@ -1,17 +1,27 @@
 @import 'tailwindcss';
 
-.playlist-describing-wrapper{
+.playlist-describing-wrapper {
     @apply px-10 pt-5
 }
 
-.playlist-describing-wrapper .playlist-songs-container{
-    @apply my-10
+.playlist-describing-wrapper .playlist-songs-container {
+    @apply mt-10  pb-20;
 }
 
-.playlist-describing-wrapper .song-information-container{
+.playlist-describing-wrapper .song-information-container {
     @apply ml-3
 }
 
-.playlist-describing-wrapper .song_button{
-    @apply   cursor-pointer bg-[var(--accent-color3)] hover:bg-[var(--accent-color)] active:bg-[var(--accent-color3)];
+.playlist-describing-wrapper .song_button {
+    @apply cursor-pointer bg-[var(--accent-color3)] hover:bg-[var(--accent-color)] active:bg-[var(--accent-color3)];
+}
+
+.playlist-describing-wrapper .song-description-container {
+    @apply w-full h-15 rounded-md text-[var(--main-color)] overflow-hidden my-1 bg-[var(--background-color2)]/80
+    
+    flex justify-between items-center;
+}
+
+.playlist-describing-wrapper .song-controll-container{
+    @apply mr-3;
 }

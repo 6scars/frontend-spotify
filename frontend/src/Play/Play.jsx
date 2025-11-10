@@ -36,9 +36,7 @@ export default function Play({
       a.play()
     };
 
-    const onEnded = () => { goToNextSong() };
-
-
+    const onEnded = () => goToNextSong() ;
     const onPlay = () => setPlay(true);
     const onPause = () => setPlay(false);
     const onCurrent = () => setCurrent(a.currentTime);
