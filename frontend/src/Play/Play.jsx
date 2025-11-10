@@ -136,6 +136,16 @@ export default function Play({
       setCurrentPlaylistI(previousIndex)
       setPlay(true)
     }
+    const a = audioRef.current
+    if(a){
+      const onloaded = ()=>{
+        a.play()
+        setPlay(true)
+        a.removeEventListener('loadedmetadata', onLoaded)
+      }
+      a.addEventListener('loadedmetadata',onloaded)
+    }
+
 
 
   }
