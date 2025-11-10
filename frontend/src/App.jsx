@@ -5,43 +5,39 @@ import Aside from "./Aside/Aside.jsx";
 import Center from "./Center/Center.jsx";
 import Play from "./Play/Play.jsx";
 import Signing from "./Signing/Signing.jsx";
-import { checkToken, fetchPlaylists, addView } from "./scripts/Fetches.jsx";
-import "./App.css";
-import { useLatest } from "./hooks/useLatest.jsx";
 
+import "./App.css";
+
+import { addView } from "./scripts/Fetches.jsx";
+import { useLatest } from "./hooks/useLatest.jsx";
 import { useAuth } from "./hooks/useAuth.jsx"
+import { useUIState } from "./hooks/useUIState.jsx";
+import { useCurrentVariables } from './hooks/useCurrentVariables.jsx'
 
 
 export default function MiniSpotify() {
-  /*currentSong keeps data about playling right now a song, shows Play Component*/
-  const [currentSong, setCurrentSong] = useState(null);
-  /*currentPlaylist keeps data about songs in the playlists, allows to play it in Play Component*/
-  const [currentPlaylist, setCurrentPlaylist] = useState([]);
-  /*currentPlaylistI saves current iteration/position in the currentPlaylist*/
-  const [currentPlaylistI, setCurrentPlaylistI] = useState(null);
-  /*show allows to controling when the Describe Component is displayed, changes styles in Center Component*/
-  const [show, setShow] = useState(false);
-  /*signing allows to controling when the Signing Component is displayed*/
-  const [signing, setSigning] = useState(false)
-  /*showCreatePlaylistWindow allows to controling when the CreatePlaylist Component is displayed*/
-  const [showCreatePlaylistWindow, setShowCreatePlaylistWindow] = useState(false);
-  /* showContentOfPlaylist allows to controling when the PlaylistDescribing Component is displayed*/
-  const [showPlaylistDescribing, setShowPlaylistDescribing] = useState(false);
-  /*reloadAside reloads Aside Component*/
-  const [reloadAside, setReloadAside] = useState(false)
-  /*reloadApp reloads App Component */
-  const [reloadApp, setReloadApp] = useState(false)
-  /*
-    playlist_id allows to sending data from Aside Component to PlaylistDescripting Component,
-    keeps playlist_id user have clicked
-  */
-  const [playlist_id, setPlaylists_id] = useState(null);
-  /*user_id keeps user's id*/
-  const user_id = Number(localStorage.getItem('user_id'))
+
+
+
 
   const [SONGS, setSONGS] = useState([]);
+
+
   const { latest, latestListened } = useLatest();
   const { isLogedIn, setIsLogedIn, playlists, setPlaylists, fetchAuthState } = useAuth();
+  const { signing, setSigning,
+    showCreatePlaylistWindow, setShowCreatePlaylistWindow,
+    showPlaylistDescribing, setShowPlaylistDescribing,
+    reloadAside, setReloadAside,
+    reloadApp, setReloadApp,
+    show, setShow,
+    clickedAccount } = useUIState();
+    
+  const { currentSong, setCurrentSong,
+    currentPlaylist, setCurrentPlaylist,
+    currentPlaylistI, setCurrentPlaylistI,
+    playlist_id, setPlaylists_id } = useCurrentVariables()
+
 
   async function chooseSong(song_id) {
     const responde = await fetch(`http://localhost:3005/api/getSong?id=${song_id}`)
@@ -56,25 +52,15 @@ export default function MiniSpotify() {
   }
 
 
-
-  // const fetches = async () => {
-  //   const isValidToken = await checkToken();
-  //   setIsLogedIn(isValidToken);
-  //   isValidToken ? setPlaylists(await fetchPlaylists(user_id)) : setPlaylists([])
-  // }
-
   useEffect(() => {
     setIsLogedIn(false);
     setShowCreatePlaylistWindow(false)
     setShowPlaylistDescribing(false)
     fetchAuthState()
-    // fetches()
   }, [reloadAside, reloadApp]);
 
 
-  const clickedAccount = () => {
-    signing ? setSigning(false) : setSigning(true)
-  }
+
 
 
   /*--- RENDER COMPONENTS ---*/
