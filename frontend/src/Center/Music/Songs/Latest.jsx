@@ -1,10 +1,10 @@
-export default function Latest({latest, chooseSong}) {
+export default function Latest({latest, chooseSong, handleSwitchCurrentPlaylist}) {
 
   return (
     <div className="play-lists gap-2 grid grid-cols-3">
       {(latest || []).map((l) => {
         return (
-          <div key={l.id} className="playlist" onClick={()=>{chooseSong(l.id)}}>
+          <div key={l.id} className="playlist" onClick={()=>{chooseSong(l.id) ; handleSwitchCurrentPlaylist()}}>
             <div className="playlist-image-container">
               <img
                 className="playlist__image"

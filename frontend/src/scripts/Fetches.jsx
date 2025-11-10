@@ -53,8 +53,10 @@ export async function checkToken() {
 };
 
 
-export async function addView(id){
-    fetch(`http://localhost:3005/api/${id}/addView`);
-    return 
+export function addView(id) {
+    // fire-and-forget; we don't await or care about the response
+    fetch(`http://localhost:3005/api/${id}/addView`).catch(err => {
+        console.error("Failed to send view:", err);
+    });
 }
 

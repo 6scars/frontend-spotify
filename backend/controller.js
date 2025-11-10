@@ -152,15 +152,16 @@ async function addView(req, res, next) {
     const song_id = req.params.id;
 
     try {
-        const data = await sql`
+        await sql`
         UPDATE songs
         SET views = views + 1
         WHERE id = ${song_id}
         RETURNING views
     `
-        return null
+        return res.sendStatus(204)
     } catch (err) {
         console.error('FUNCTION ERORR addView', err)
+        return res.sendStatus(500);
     }
 
 }
@@ -358,8 +359,10 @@ async function createPlaylist(req, res, next) {
 
 
 async function getPlaylistData(req, res, next) {
+    
     try {
         const id = req.query.id;
+        console.log(id)
         if (!id) {
             throw 'SERVER ERROR GET PLAYLISTS DATA, BAD ID'
         }

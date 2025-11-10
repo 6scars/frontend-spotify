@@ -24,7 +24,8 @@ export default function Center({
   showCreatePlaylistWindow,
   showPlaylistDescribing,
   setReloadAside,
-  setCurrentPlaylist
+  setCurrentPlaylist,
+  setCurrentPlaylistI
 
 }) {
 
@@ -48,7 +49,9 @@ export default function Center({
         playlist_id={playlist_id}
         chooseSong={chooseSong}
         setCurrentPlaylist={setCurrentPlaylist}
-        setCurrentSong={setCurrentSong} />)
+        setCurrentSong={setCurrentSong}
+        setCurrentPlaylistI={setCurrentPlaylistI} 
+        />)
     } else {
       return (<Music
         setCurrentSong={setCurrentSong}
@@ -58,6 +61,8 @@ export default function Center({
         setShow={setShow}
         chooseSong={chooseSong}
         latest={latest}
+        setCurrentPlaylist={setCurrentPlaylist}
+        setCurrentPlaylistI={setCurrentPlaylistI}
       />)
     }
 
