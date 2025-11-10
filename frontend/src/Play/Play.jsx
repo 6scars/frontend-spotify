@@ -1,157 +1,36 @@
-import { useEffect, useState, useRef } from "react";
 import PlayCenterSection from "./PlayCenterSection.jsx";
 import PlayRightSection from "./PlayRightSection.jsx";
 import PlayLeftSection from "./PlayLeftSection.jsx";
 import "./Play.css";
+import { usePlayer } from "../hooks/usePlayer.jsx";
 
 export default function Play({
   chooseSong,
   currentSong,
-  song,
-  author,
   playlists,
-  fetches,
   currentPlaylist,
-  setCurrentPlaylistI,
-  currentPlaylistI
+  setCurrentPlaylistI
 }) {
+  // --- Player Hook ---
+  // in Play.jsx
+  const {
+    audioRef,
+    isPlaying,
+    duration,
+    currentTime,
+    volume,
+    muted,
+    loop,
+    togglePlay,
+    setAudioVolume,
+    toggleMute,
+    toggleLoop,
+    goToNext,
+    goToPrevious
+  } = usePlayer(currentPlaylist, chooseSong, currentSong);
 
 
-  /*---------------- PLAYER CONTROLLER ----------------*/
-  const audioRef = useRef(null);
-
-  const [play, setPlay] = useState(false);
-  const [duration, setDuration] = useState(0);
-  const [current, setCurrent] = useState(0);
-  const [volume, setVolume] = useState(1);
-  const [muted, setMuted] = useState(false);
-  const [loop, setLoop] = useState(false);
-
-  useEffect(() => {
-    const a = audioRef.current;
-    if (!a) return;
-
-    const onLoaded = () => {
-      setDuration(a.duration || 0)
-      a.play()
-    };
-
-    const onEnded = () => goToNextSong() ;
-    const onPlay = () => setPlay(true);
-    const onPause = () => setPlay(false);
-    const onCurrent = () => setCurrent(a.currentTime);
-
-    a.addEventListener("loadedmetadata", onLoaded);
-    a.addEventListener("play", onPlay);
-    a.addEventListener("pause", onPause);
-    a.addEventListener("timeupdate", onCurrent);
-    a.addEventListener("ended", onEnded);
-
-    return () => {
-      a.removeEventListener("loadedmetadata", onLoaded);
-      a.removeEventListener("play", onPlay);
-      a.removeEventListener("pause", onPause);
-      a.removeEventListener("timeupdate", onCurrent);
-      a.removeEventListener("ended", onEnded);
-    };
-  }, [currentPlaylistI, currentPlaylist, chooseSong]);
-
-  function handleVolume(newVolume) {
-    const a = audioRef.current;
-    if (!a) return;
-    if (newVolume >= 0 && newVolume <= 1) {
-      a.volume = newVolume;
-      setVolume(newVolume);
-    }
-  }
-
-  function handlePlay() {
-    const a = audioRef.current;
-    if (!a) return;
-    if (a.paused) {
-      setPlay(true);
-      a.play();
-    } else {
-      setPlay(false);
-      a.pause();
-    }
-  }
-
-  function handleMute() {
-    const a = audioRef.current;
-    if (!a) return;
-    a.muted = !muted;
-    setMuted(!muted);
-  }
-
-  function handleLoop() {
-    const a = audioRef.current;
-    if (!a) return;
-    a.loop = !loop;
-    setLoop(!loop);
-  }
-
-  function goToNextSong() {
-    console.log(currentPlaylistI)
-    if (!currentPlaylist || currentPlaylist.length <= 0 || currentPlaylistI === null || currentPlaylistI === undefined || currentPlaylistI < 0) return
-
-    if (currentPlaylistI < currentPlaylist.length - 1) {
-      const nextIndex = currentPlaylistI + 1;
-      const nextSongId = currentPlaylist[nextIndex].song_id
-      chooseSong(nextSongId)
-      setCurrentPlaylistI(nextIndex)
-      setPlay(true)
-    }
-    if (currentPlaylistI === currentPlaylist.length - 1) {
-      const nextIndex = 0;
-      const nextSongId = currentPlaylist[nextIndex].song_id
-      chooseSong(nextSongId)
-      setCurrentPlaylistI(nextIndex)
-      setPlay(true)
-    }
-
-    const a = audioRef.current
-    if (a) {
-      const onLoaded = () => {
-        a.play();
-        setPlay(true);
-        a.removeEventListener("loadedmetadata", onLoaded);
-      }
-      a.addEventListener("loadedmetadata", onLoaded)
-    }
-  }
-
-  function goToPreviousSong() {
-    console.log(currentPlaylistI)
-    if (!currentPlaylist || currentPlaylist.length <= 0 || currentPlaylistI === null || currentPlaylistI === undefined || currentPlaylistI < 0) return
-
-    let previousIndex = currentPlaylistI - 1;
-    previousIndex = previousIndex < 0
-      ? previousIndex = currentPlaylist.length - 1
-      : previousIndex;
-
-    if (previousIndex > currentPlaylist.length - 1) return
-
-    if (previousIndex >= 0) {
-      chooseSong(currentPlaylist[previousIndex].song_id);
-      setCurrentPlaylistI(previousIndex)
-      setPlay(true)
-    }
-    const a = audioRef.current
-    if(a){
-      const onloaded = ()=>{
-        a.play()
-        setPlay(true)
-        a.removeEventListener('loadedmetadata', onLoaded)
-      }
-      a.addEventListener('loadedmetadata',onloaded)
-    }
-
-
-
-  }
-
-  const progressBar = duration > 0 ? (current / duration) * 100 : 0;
+  const progressBar = duration > 0 ? (currentTime / duration) * 100 : 0;
 
   return (
     <div
@@ -160,33 +39,29 @@ export default function Play({
     >
       <PlayLeftSection
         currentSong={currentSong}
-        song={song}
-        author={author}
         playlists={playlists}
-        fetches={fetches}
       />
 
       <PlayCenterSection
         audioRef={audioRef}
-        handlePlay={handlePlay}
-        play={play}
+        handlePlay={togglePlay}
+        play={isPlaying}
         duration={duration}
-        current={current}
-        setCurrent={setCurrent}
+        current={currentTime}
         progressBar={progressBar}
         loop={loop}
-        handleLoop={handleLoop}
+        handleLoop={toggleLoop}
         currentSong={currentSong}
         currentPlaylist={currentPlaylist}
-        goToNextSong={goToNextSong}
-        goToPreviousSong={goToPreviousSong}
+        goToNextSong={goToNext}
+        goToPreviousSong={goToPrevious}
       />
 
       <PlayRightSection
         volume={volume}
-        handleVolume={handleVolume}
+        handleVolume={setAudioVolume}
         muted={muted}
-        handleMute={handleMute}
+        handleMute={toggleMute}
       />
     </div>
   );
