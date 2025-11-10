@@ -9,7 +9,8 @@ export default function Play({
   currentSong,
   playlists,
   currentPlaylist,
-  setCurrentPlaylistI
+  setCurrentPlaylistI,
+  fetches
 }) {
   // --- Player Hook ---
   // in Play.jsx
@@ -40,6 +41,7 @@ export default function Play({
       <PlayLeftSection
         currentSong={currentSong}
         playlists={playlists}
+        fetches={fetches}
       />
 
       <PlayCenterSection
