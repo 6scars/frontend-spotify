@@ -31,7 +31,10 @@ export default function Play({
     const a = audioRef.current;
     if (!a) return;
 
-    const onLoaded = () => setDuration(a.duration || 0);
+    const onLoaded = () => {
+      setDuration(a.duration || 0)
+      a.play()
+    };
 
     const onEnded = () => { goToNextSong() };
 
