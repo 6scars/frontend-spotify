@@ -1,4 +1,5 @@
 export default function Latest({latest, chooseSong, handleSwitchCurrentPlaylist}) {
+  
 
   return (
     <div className="play-lists gap-2 grid grid-cols-3">

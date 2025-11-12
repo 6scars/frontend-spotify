@@ -36,6 +36,8 @@ export default function Preview({ addSongForm }) {
 
         })
         const data = response.json()
+        console.log(data.message);
+
         return data;
     }
 
@@ -67,7 +69,7 @@ export default function Preview({ addSongForm }) {
                 </div>
 
                 <div className="button-container">
-                    <button onClick={saveSongInBase} className="bg-white" >SEND SONG</button>
+                    <button onClick={saveSongInBase} className="bg-white cursor-pointer" >SEND SONG</button>
 
                 </div>
             </div>

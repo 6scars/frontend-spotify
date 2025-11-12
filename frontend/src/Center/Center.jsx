@@ -1,10 +1,11 @@
 import Music from "./Music/Music.jsx";
 import Description from "./Description.jsx";
-import CreatePlaylist from "./CreatePlaylist.jsx"
+import CreatePlaylist from "./CreatePlaylist/CreatePlaylist.jsx"
 import PlaylistDescribing from "./PlaylistDescribing.jsx";
 import "./Center.css";
 import { fetchSongs } from "../scripts/Fetches.jsx";
 import { useEffect } from "react";
+import { useUIStateContext } from "../contexts/UIStateContext.jsx";
 
 
 
@@ -19,31 +20,27 @@ export default function Center({
   currentSong,
   setSong,
   setAuthor,
-  show,
   setShow,
-  showCreatePlaylistWindow,
-  showPlaylistDescribing,
-  setReloadAside,
   setCurrentPlaylist,
   setCurrentPlaylistI
 
 }) {
+
+  const {show, showCreatePlaylistWindow, showPlaylistDescribing} = useUIStateContext();
 
 
 
   useEffect(() => {
     const fetches = async () => {
       setSONGS(await fetchSongs());
-
     }
-
     fetches();
 
   }, [])
 
   function choosenComponent() {
     if (showCreatePlaylistWindow) {
-      return (<CreatePlaylist SONGS={SONGS} setReloadAside={setReloadAside} />)
+      return (<CreatePlaylist SONGS={SONGS} />)
     } else if (showPlaylistDescribing) {
       return (<PlaylistDescribing
         playlist_id={playlist_id}

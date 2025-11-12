@@ -1,6 +1,6 @@
 import { useState } from 'react'
 
-export default function RenderSongsToAdd({ song, songsToAdd, setSongsToAdd }) {
+export default function RenderSongsToAdd({ song, setSongsToAdd }) {
     const [isAdded, setIsAdded] = useState(false);
 
     const handleAddSong = (song_id) => {
