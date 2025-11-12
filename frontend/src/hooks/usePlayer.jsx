@@ -132,6 +132,7 @@ export function usePlayer(currentPlaylist = [], chooseSongCallback, currentSong 
     volume,
     muted,
     loop,
+    setCurrentTime,
     togglePlay,
     setAudioVolume,
     toggleMute,

@@ -3,15 +3,15 @@ import { useLatest } from "../hooks/useLatest";
 
 const latestContext = createContext();
 
-export function LatestProvider({ children }) {
+export function LatestSongsProvider({ children }) {
     const latest = useLatest();
     return (
-        <latestContext.provider value={latest}>
+        <latestContext.Provider value={latest}>
             {children}
-        </latestContext.provider>
+        </latestContext.Provider>
     )
 }
 
-export function useLatestContext(){
+export function useLatestSongsContext(){
     return useContext(latestContext)
 }
