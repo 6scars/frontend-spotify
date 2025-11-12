@@ -16,10 +16,6 @@ import { useCurrentVariables } from './hooks/useCurrentVariables.jsx'
 
 
 export default function MiniSpotify() {
-
-
-
-
   const [SONGS, setSONGS] = useState([]);
 
 
@@ -32,7 +28,7 @@ export default function MiniSpotify() {
     reloadApp, setReloadApp,
     show, setShow,
     clickedAccount } = useUIState();
-    
+
   const { currentSong, setCurrentSong,
     currentPlaylist, setCurrentPlaylist,
     currentPlaylistI, setCurrentPlaylistI,

@@ -8,8 +8,6 @@ export default function Play({
   chooseSong,
   currentSong,
   playlists,
-  currentPlaylist,
-  setCurrentPlaylistI,
   fetches
 }) {
   // --- Player Hook ---
