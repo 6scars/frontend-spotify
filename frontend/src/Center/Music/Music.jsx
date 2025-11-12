@@ -2,15 +2,10 @@ import "./Music.css";
 import Songs from "./Songs/Songs.jsx";
 import Latest from "./Songs/Latest.jsx";
 import { useCurrentPlaybackContext } from "../../contexts/CurrentPlaybackContext.jsx";
-import { useLatestSongsContext } from "../../contexts/LatestSongsContext.jsx";
 
-export default function Music({
-  SONGS,
-  chooseSong
-}) {
-  const {setCurrentPlaylistI, setCurrentPlaylist} = useCurrentPlaybackContext();
-  const {latest} = useLatestSongsContext();
 
+export default function Music({ SONGS }) {
+  const { setCurrentPlaylistI, setCurrentPlaylist } = useCurrentPlaybackContext();
 
   function handleSwitchCurrentPlaylist() {
     setCurrentPlaylistI(null);
@@ -20,20 +15,17 @@ export default function Music({
 
   return (
     <>
-      <div
-        className="main-type w-full bg-gray-500 sticky top-0 
-            flex gap-10"
-      >
+      <div className="main-type w-full bg-gray-500 sticky top-0 flex gap-10" >
         <button>MUSIC</button>
         <button>PODCASTS</button>
       </div>
       <div className="main-songs ">
-        <Latest latest={latest} chooseSong={chooseSong} handleSwitchCurrentPlaylist={handleSwitchCurrentPlaylist}/>
+        <Latest handleSwitchCurrentPlaylist={handleSwitchCurrentPlaylist} />
         <div className="songs cursor-pointer">
           <div className="songs-title-container text-white font-bold">
             <p className="songs__title">Prepared for You</p>
           </div>
-          <Songs SONGS={SONGS} chooseSong={chooseSong} handleSwitchCurrentPlaylist={handleSwitchCurrentPlaylist}/>
+          <Songs SONGS={SONGS} handleSwitchCurrentPlaylist={handleSwitchCurrentPlaylist} />
         </div>
       </div>
     </>

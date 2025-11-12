@@ -1,11 +1,16 @@
-export default function Latest({latest, chooseSong, handleSwitchCurrentPlaylist}) {
-  
+import { useLatestSongsContext } from "../../../contexts/LatestSongsContext";
+import { usePlayerContext } from "../../../contexts/PlayerContext";
+
+export default function Latest({handleSwitchCurrentPlaylist }) {
+
+  const { latest } = useLatestSongsContext();
+  const { chooseSong } = usePlayerContext();
 
   return (
     <div className="play-lists gap-2 grid grid-cols-3">
       {(latest || []).map((l) => {
         return (
-          <div key={l.id} className="playlist" onClick={()=>{chooseSong(l.id) ; handleSwitchCurrentPlaylist()}}>
+          <div key={l.id} className="playlist" onClick={() => { chooseSong(l.id); handleSwitchCurrentPlaylist() }}>
             <div className="playlist-image-container">
               <img
                 className="playlist__image"

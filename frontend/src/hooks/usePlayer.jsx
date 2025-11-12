@@ -1,8 +1,11 @@
 // src/hooks/usePlayer.jsx
 import { useState, useRef, useEffect } from "react";
 import { addView } from "../scripts/Fetches.jsx";
+import { useCurrentPlaybackContext } from "../contexts/CurrentPlaybackContext.jsx";
+import { useLatestSongsContext } from "../contexts/LatestSongsContext.jsx";
+import { useUIStateContext } from "../contexts/UIStateContext.jsx";
 
-export function usePlayer(currentPlaylist = [], chooseSongCallback, currentSong = null) {
+export function usePlayer() {
   const audioRef = useRef(null);
 
   const [currentIndex, setCurrentIndex] = useState(null);
@@ -12,6 +15,11 @@ export function usePlayer(currentPlaylist = [], chooseSongCallback, currentSong 
   const [volume, setVolume] = useState(1);
   const [muted, setMuted] = useState(false);
   const [loop, setLoop] = useState(false);
+
+  const {currentPlaylist, currentSong, setCurrentSong } = useCurrentPlaybackContext();
+  const {latestListened} = useLatestSongsContext();
+  const {setShow} = useUIStateContext();
+
 
   // --- sync currentIndex when currentSong or playlist changes ---
   useEffect(() => {
@@ -57,7 +65,7 @@ export function usePlayer(currentPlaylist = [], chooseSongCallback, currentSong 
   const togglePlay = () => {
     const audio = audioRef.current;
     if (!audio) return;
-    if (audio.paused) audio.play().catch(() => {});
+    if (audio.paused) audio.play().catch(() => { });
     else audio.pause();
   };
 
@@ -88,14 +96,14 @@ export function usePlayer(currentPlaylist = [], chooseSongCallback, currentSong 
     const song = currentPlaylist[index];
     addView(song.song_id);
     // inform parent to load the song (parent should set currentSong)
-    chooseSongCallback(song.song_id);
+    chooseSong(song.song_id);
     setCurrentIndex(index);
     setIsPlaying(true);
 
     const audio = audioRef.current;
     if (audio) {
       const onLoaded = () => {
-        audio.play().catch(() => {});
+        audio.play().catch(() => { });
         audio.removeEventListener("loadedmetadata", onLoaded);
       };
       audio.addEventListener("loadedmetadata", onLoaded);
@@ -123,6 +131,18 @@ export function usePlayer(currentPlaylist = [], chooseSongCallback, currentSong 
     playAtIndex(prevIndex);
   };
 
+  async function chooseSong(song_id) {
+    const responde = await fetch(`http://localhost:3005/api/getSong?id=${song_id}`)
+    const data = await responde.json();
+    const findedSong = data.data[0];
+    if (findedSong) {
+      addView(song_id)
+      setCurrentSong(findedSong)
+      setShow(true)
+      latestListened(findedSong)
+    }
+  }
+
   return {
     audioRef,
     currentIndex,
@@ -140,6 +160,7 @@ export function usePlayer(currentPlaylist = [], chooseSongCallback, currentSong 
     goToNext,
     goToPrevious,
     playAtIndex,
-    setCurrentIndex
+    setCurrentIndex,
+    chooseSong
   };
 }

@@ -1,5 +1,8 @@
+import { useCurrentPlaybackContext } from "../contexts/CurrentPlaybackContext";
 import "./Description.css";
-export default function Description({ currentSong }) {
+export default function Description() {
+  const {currentSong} = useCurrentPlaybackContext();
+  
   return (
     <>
           <div

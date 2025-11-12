@@ -3,6 +3,7 @@ import PlayRightSection from "./PlayRightSection.jsx";
 import PlayLeftSection from "./PlayLeftSection.jsx";
 import "./Play.css";
 import { usePlayer } from "../hooks/usePlayer.jsx";
+import { usePlayerContext } from "../contexts/PlayerContext.jsx";
 
 export default function Play({
   chooseSong,
@@ -13,6 +14,23 @@ export default function Play({
 }) {
   // --- Player Hook ---
   // in Play.jsx
+  // const {
+    // audioRef,
+    // isPlaying,
+    // duration,
+    // currentTime,
+    // volume,
+    // muted,
+    // loop,
+    // setCurrentTime,
+    // togglePlay,
+    // setAudioVolume,
+    // toggleMute,
+    // toggleLoop,
+    // goToNext,
+    // goToPrevious
+  // } = usePlayer(currentPlaylist, chooseSong, currentSong);
+
   const {
     audioRef,
     isPlaying,
@@ -28,7 +46,7 @@ export default function Play({
     toggleLoop,
     goToNext,
     goToPrevious
-  } = usePlayer(currentPlaylist, chooseSong, currentSong);
+  } = usePlayerContext();
 
 
   const progressBar = duration > 0 ? (currentTime / duration) * 100 : 0;
