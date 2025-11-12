@@ -12,21 +12,12 @@ import { useUIStateContext } from "../contexts/UIStateContext.jsx";
 
 export default function Center({
   setSONGS,
-  latest,
   SONGS,
-  chooseSong,
-  playlist_id,
-  setCurrentSong,
   currentSong,
-  setSong,
-  setAuthor,
-  setShow,
-  setCurrentPlaylist,
-  setCurrentPlaylistI
 
 }) {
 
-  const {show, showCreatePlaylistWindow, showPlaylistDescribing} = useUIStateContext();
+  const { show, showCreatePlaylistWindow, showPlaylistDescribing } = useUIStateContext();
 
 
 
@@ -40,27 +31,10 @@ export default function Center({
 
   function choosenComponent() {
     if (showCreatePlaylistWindow) {
-      return (<CreatePlaylist SONGS={SONGS} />)
+      return <CreatePlaylist SONGS={SONGS} />
     } else if (showPlaylistDescribing) {
-      return (<PlaylistDescribing
-        playlist_id={playlist_id}
-        chooseSong={chooseSong}
-        setCurrentPlaylist={setCurrentPlaylist}
-        setCurrentSong={setCurrentSong}
-        setCurrentPlaylistI={setCurrentPlaylistI}
-      />)
-    } else {
-      return (<Music
-        setCurrentSong={setCurrentSong}
-        SONGS={SONGS}
-        setSong={setSong}
-        setAuthor={setAuthor}
-        setShow={setShow}
-        chooseSong={chooseSong}
-        latest={latest}
-        setCurrentPlaylist={setCurrentPlaylist}
-        setCurrentPlaylistI={setCurrentPlaylistI}
-      />)
+      return <PlaylistDescribing />
+    } else {return <Music SONGS={SONGS} />
     }
 
   }
@@ -75,7 +49,7 @@ export default function Center({
         {choosenComponent()}
       </div>
 
-      {show ? <Description currentSong={currentSong} />  : "" }
+      {show ? <Description currentSong={currentSong} /> : ""}
     </main >
   );
 }

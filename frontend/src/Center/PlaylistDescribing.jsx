@@ -1,11 +1,16 @@
 import { useState, useEffect } from 'react'
 import SongInThePlaylist from "./PlaylistDescribing/SongInThePlaylist"
 import './PlaylistDescribing.css'
+import { useCurrentPlaybackContext } from '../contexts/CurrentPlaybackContext';
+import { usePlayerContext } from '../contexts/PlayerContext';
 
-export default function PlaylistDescribing({ playlist_id, chooseSong, setCurrentPlaylist, setCurrentPlaylistI }) {
+export default function PlaylistDescribing() {
     const [playlist, setPlaylist] = useState([])
     const [isLoading, setIsLoading] = useState(true);
 
+    const {playlist_id, setCurrentPlaylist, setCurrentPlaylistI} = useCurrentPlaybackContext();
+    const {chooseSong} = usePlayerContext();
+    
     useEffect(() => {
         setPlaylist([])
         setIsLoading(true)

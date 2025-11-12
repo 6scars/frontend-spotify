@@ -18,6 +18,7 @@ import { useAuthContext } from "./contexts/AuthContext.jsx";
 import { useLatestSongsContext } from "./contexts/LatestSongsContext.jsx";
 import { useUIStateContext } from "./contexts/UIStateContext.jsx";
 import { useCurrentPlaybackContext } from "./contexts/CurrentPlaybackContext.jsx";
+import { usePlayerContext } from "./contexts/PlayerContext.jsx"
 
 
 export default function MiniSpotify() {
@@ -41,18 +42,8 @@ export default function MiniSpotify() {
     currentPlaylistI, setCurrentPlaylistI,
     playlist_id, setPlaylists_id } = useCurrentPlaybackContext()
 
+  const { chooseSong } = usePlayerContext();
 
-  async function chooseSong(song_id) {
-    const responde = await fetch(`http://localhost:3005/api/getSong?id=${song_id}`)
-    const data = await responde.json();
-    const findedSong = data.data[0];
-    if (findedSong) {
-      addView(song_id)
-      setCurrentSong(findedSong)
-      setShow(true)
-      latestListened(findedSong)
-    }
-  }
 
 
   useEffect(() => {
