@@ -69,12 +69,7 @@ export default function MiniSpotify() {
   /*--- RENDER COMPONENTS ---*/
   const renderHeaderC = () => {
     return (
-      <Header
-        clickedAccount={clickedAccount}
-        isLogedIn={isLogedIn}
-        setIsLogedIn={setIsLogedIn}
-        setReloadApp={setReloadApp}
-      />
+      <Header />
     )
   }
 
