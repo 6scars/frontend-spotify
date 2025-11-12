@@ -10,7 +10,9 @@ export default function ProgressBar({
   handleLoop,
   currentSong,
   goToNextSong,
-  goToPreviousSong
+  goToPreviousSong,
+  setCurrentTime
+
 }) {
   function formatTime(time) {
     const mins = Math.floor(time / 60);
@@ -24,7 +26,7 @@ export default function ProgressBar({
     const prc = clickX / rect.width;
     const newTime = prc * duration;
 
-    setCurrent(newTime);
+    setCurrentTime(newTime);
     audioRef.current.currentTime = newTime;
   }
 

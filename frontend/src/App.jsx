@@ -9,30 +9,37 @@ import Signing from "./Signing/Signing.jsx";
 import "./App.css";
 
 import { addView } from "./scripts/Fetches.jsx";
-import { useLatest } from "./hooks/useLatest.jsx";
-import { useAuth } from "./hooks/useAuth.jsx"
-import { useUIState } from "./hooks/useUIState.jsx";
-import { useCurrentVariables } from './hooks/useCurrentVariables.jsx'
+// import { useLatest } from "./hooks/useLatest.jsx";
+// import { useAuth } from "./hooks/useAuth.jsx"
+// import { useUIState } from "./hooks/useUIState.jsx";
+// import { useCurrentVariables } from './hooks/useCurrentVariables.jsx'
+
+import { useAuthContext } from "./contexts/AuthContext.jsx";
+import { useLatestSongsContext } from "./contexts/LatestSongsContext.jsx";
+import { useUIStateContext } from "./contexts/UIStateContext.jsx";
+import { useCurrentPlaybackContext } from "./contexts/CurrentPlaybackContext.jsx";
 
 
 export default function MiniSpotify() {
   const [SONGS, setSONGS] = useState([]);
 
 
-  const { latest, latestListened } = useLatest();
-  const { isLogedIn, setIsLogedIn, playlists, setPlaylists, fetchAuthState } = useAuth();
+
+
+  const { latest, latestListened } = useLatestSongsContext();
+  const { isLogedIn, setIsLogedIn, playlists, setPlaylists, fetchAuthState } = useAuthContext();
   const { signing, setSigning,
     showCreatePlaylistWindow, setShowCreatePlaylistWindow,
     showPlaylistDescribing, setShowPlaylistDescribing,
     reloadAside, setReloadAside,
     reloadApp, setReloadApp,
     show, setShow,
-    clickedAccount } = useUIState();
+    clickedAccount } = useUIStateContext();
 
   const { currentSong, setCurrentSong,
     currentPlaylist, setCurrentPlaylist,
     currentPlaylistI, setCurrentPlaylistI,
-    playlist_id, setPlaylists_id } = useCurrentVariables()
+    playlist_id, setPlaylists_id } = useCurrentPlaybackContext()
 
 
   async function chooseSong(song_id) {

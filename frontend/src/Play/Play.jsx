@@ -8,6 +8,7 @@ export default function Play({
   chooseSong,
   currentSong,
   playlists,
+  currentPlaylist,
   fetches
 }) {
   // --- Player Hook ---
@@ -20,6 +21,7 @@ export default function Play({
     volume,
     muted,
     loop,
+    setCurrentTime,
     togglePlay,
     setAudioVolume,
     toggleMute,
@@ -43,6 +45,7 @@ export default function Play({
       />
 
       <PlayCenterSection
+        setCurrentTime={setCurrentTime}
         audioRef={audioRef}
         handlePlay={togglePlay}
         play={isPlaying}

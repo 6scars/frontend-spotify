@@ -6,9 +6,9 @@ const UIStateContext = createContext();
 export function UIStateProvider({ children }) {
     const ui = useUIState();
     return (
-        <UIStateContext.provider value={ui}>
+        <UIStateContext.Provider value={ui}>
             {children}
-        </UIStateContext.provider>
+        </UIStateContext.Provider>
     )
 }
 
