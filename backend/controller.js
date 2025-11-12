@@ -263,16 +263,7 @@ export async function saveSongInBase(req, res, next) {
                 upsert: true
             });
         if (imgError) throw imgError;
-
-        // // Get public URLs (use correct filenames)
-        // const { data: { publicUrl: mp3Url } } = supabase.storage
-        //     .from('spotify')
-        //     .getPublicUrl(`songs/${mp3Name}`);
-
-        // const { data: { publicUrl: imgUrl } } = supabase.storage
-        //     .from('spotify')
-        //     .getPublicUrl(`images/songPictures/${imgName}`);
-
+        
         // Insert metadata into DB
         jwt.verify(req.body.token, JWT_SECRET)
 

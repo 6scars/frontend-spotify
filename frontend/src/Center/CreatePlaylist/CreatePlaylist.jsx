@@ -1,10 +1,15 @@
 import { useState } from 'react'
 import './CreatePlaylist.css'
-import RenderSongsToAdd from './CreatePlaylist/RenderSongsToAdd'
+import RenderSongsToAdd from './RenderSongsToAdd'
+import { useUIStateContext } from '../../contexts/UIStateContext';
 
-export default function CreatePlaylist({ SONGS, setReloadAside, isLogedIn }) {
+export default function CreatePlaylist({SONGS}) {
     const [songsToAdd, setSongsToAdd] = useState(new Set());
-    const [playlistName, setPlaylistName] = useState('')
+    const [playlistName, setPlaylistName] = useState('');
+
+    const {setReloadAside} = useUIStateContext();
+
+
     const handleCreateNewPlaylist = async (e) => {
         e.preventDefault();
         if (!playlistName?.length) {

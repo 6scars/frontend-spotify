@@ -1,16 +1,16 @@
 import "./Music.css";
 import Songs from "./Songs/Songs.jsx";
 import Latest from "./Songs/Latest.jsx";
+import { useCurrentPlaybackContext } from "../../contexts/CurrentPlaybackContext.jsx";
+import { useLatestSongsContext } from "../../contexts/LatestSongsContext.jsx";
 
 export default function Music({
   SONGS,
-  songs,
-  authors,
-  latest,
-  chooseSong,
-  setCurrentPlaylist,
-  setCurrentPlaylistI
+  chooseSong
 }) {
+  const {setCurrentPlaylistI, setCurrentPlaylist} = useCurrentPlaybackContext();
+  const {latest} = useLatestSongsContext();
+
 
   function handleSwitchCurrentPlaylist() {
     setCurrentPlaylistI(null);
@@ -33,7 +33,7 @@ export default function Music({
           <div className="songs-title-container text-white font-bold">
             <p className="songs__title">Prepared for You</p>
           </div>
-          <Songs SONGS={SONGS} songs={songs} authors={authors} chooseSong={chooseSong} handleSwitchCurrentPlaylist={handleSwitchCurrentPlaylist}/>
+          <Songs SONGS={SONGS} chooseSong={chooseSong} handleSwitchCurrentPlaylist={handleSwitchCurrentPlaylist}/>
         </div>
       </div>
     </>
