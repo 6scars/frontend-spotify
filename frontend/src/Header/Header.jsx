@@ -1,8 +1,14 @@
+import { useAuthContext } from '../contexts/AuthContext';
+import { useUIStateContext } from '../contexts/UIStateContext'
 import './Header.css'
 import Sing from './Sing'
 
 
-export default function Header({ clickedAccount, isLogedIn, setIsLogedIn, setReloadApp }) {
+export default function Header() {
+
+  const {clickedAccount, setReloadApp} = useUIStateContext();
+  const {isLogedIn, setIsLogedIn} = useAuthContext();
+
   const handleHomeClick = ()=>{setReloadApp(prev => !prev)}
   return (
     <header

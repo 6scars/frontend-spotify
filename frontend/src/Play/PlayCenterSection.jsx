@@ -4,7 +4,6 @@ export default function ProgressBar({
   play,
   duration,
   current,
-  setCurrent,
   progressBar,
   loop,
   handleLoop,
