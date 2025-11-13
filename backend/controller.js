@@ -5,7 +5,9 @@ import fs from 'fs'
 import path from 'path'
 import { sql } from './db.js'
 import { createClient } from '@supabase/supabase-js'
+import './scripts.js';
 env.config()
+
 
 let controller;
 const JWT_SECRET = process.env.JWT_SECRET;
@@ -149,15 +151,35 @@ async function checkToken(req, res, next) {
 
 
 async function addView(req, res, next) {
-    const song_id = req.params.id;
+    const song_id = req.body.song_id;
+    const auth = req.headers.authorization;
+    let user_id = null;
+    let token = auth.split(' ')[1];
 
+    if (token === 'null' || !token) {
+        token = null;
+    }
+    if (token) {
+        const verifiedUserData = jwt.verify(token, JWT_SECRET);
+        console.log(verifiedUserData)
+        user_id = verifiedUserData.id
+    }
     try {
-        await sql`
-        UPDATE songs
-        SET views = views + 1
-        WHERE id = ${song_id}
-        RETURNING views
-    `
+        await sql.begin(async sql => {
+            await sql`
+            UPDATE songs
+            SET views = views + 1
+            WHERE id = ${song_id}
+        `
+            await sql`
+            INSERT INTO views (user_id, song_id)
+            VALUES (${user_id}, ${song_id})
+        `
+
+        })
+
+
+
         return res.sendStatus(204)
     } catch (err) {
         console.error('FUNCTION ERORR addView', err)
@@ -263,7 +285,7 @@ export async function saveSongInBase(req, res, next) {
                 upsert: true
             });
         if (imgError) throw imgError;
-        
+
         // Insert metadata into DB
         jwt.verify(req.body.token, JWT_SECRET)
 
@@ -350,7 +372,7 @@ async function createPlaylist(req, res, next) {
 
 
 async function getPlaylistData(req, res, next) {
-    
+
     try {
         const id = req.query.id;
         console.log(id)

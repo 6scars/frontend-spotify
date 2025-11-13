@@ -5,7 +5,7 @@ export async function fetchSongs() {
 }
 
 export async function fetchPlaylists(id) {
-    if(!id){
+    if (!id) {
         return []
     }
     try {
@@ -53,10 +53,16 @@ export async function checkToken() {
 };
 
 
-export function addView(id) {
-    // fire-and-forget; we don't await or care about the response
-    fetch(`http://localhost:3005/api/${id}/addView`).catch(err => {
-        console.error("Failed to send view:", err);
-    });
+export async function addView(id) {
+    console.log('addView function called...')
+    await fetch(`http://localhost:3005/api/addView`, {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json',
+            'authorization': `Bearer ${localStorage.getItem('jwt')}`
+        },
+        body: JSON.stringify({
+            song_id: id
+        })
+    }).catch((err) => console.error('addView ERROR', err))
 }
-

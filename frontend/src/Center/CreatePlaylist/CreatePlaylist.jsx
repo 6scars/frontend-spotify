@@ -8,7 +8,7 @@ import { useUIStateContext } from '../../contexts/UIStateContext';
 
 
 
-export default function CreatePlaylist({ SONGS }) {
+export default function CreatePlaylist({ songs }) {
     const [songsToAdd, setSongsToAdd] = useState(new Set());
     const [playlistName, setPlaylistName] = useState('');
 
@@ -66,7 +66,7 @@ export default function CreatePlaylist({ SONGS }) {
                 </div>
                 <div className="songs-to-add flex flex-col justify-center items-center gap-5">
                     <span className="text-[var(--main-color)] text-[1.2rem]"> Proposed Songs For you</span>
-                    {SONGS.map((song) => (
+                    {songs.map((song) => (
                         <RenderSongsToAdd key={song.song_id} song={song} songsToAdd={songsToAdd} setSongsToAdd={setSongsToAdd} />
                     ))}
 

@@ -156,7 +156,7 @@ export function usePlayer() {
       const data = await responde.json();
       const findedSong = data.data[0];
       if (findedSong) {
-        addView(song_id) /*add a one to view counter */
+        await addView(song_id) /*add a one to view counter */
         chooseSongSetUI()   /*set UI */
         chooseSongSetData(findedSong)
       }
