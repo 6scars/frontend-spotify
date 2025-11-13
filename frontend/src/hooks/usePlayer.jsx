@@ -30,7 +30,7 @@ export function usePlayer() {
     const onPlay = () => setIsPlaying(true);
     const onPause = () => setIsPlaying(false);
     const onEnded = () => goToNext();
-    const onLoadeddata = () => {audio.play(); setIsPlaying(true); if (!audio) handleError(`onLoadeddata event error in usePlayer component`) }
+    const onLoadeddata = () => { audio.play(); setIsPlaying(true); if (!audio) handleError(`onLoadeddata event error in usePlayer component`) }
 
     audio.addEventListener("loadedmetadata", onLoadedMetadata);
     audio.addEventListener("timeupdate", onTimeUpdate);
@@ -97,13 +97,15 @@ export function usePlayer() {
       const newSong = currentPlaylist[newIndex];
       newSongId = newSong.song_id;
 
-      handleError(`there is no newSongId chooseSong function`, true)
+      if (!newSongId)
+        handleError(`there is no newSongId chooseSong function`, true)
     } else if (newIndex > playlistLen) { /*--when newIndex is at end of array --*/
       newIndex = 0;
       const newSong = currentPlaylist[newIndex];
       newSongId = newSong.song_id;
 
-      handleError(`there is no newSongId chooseSong function `, true)
+      if (!newSongId)
+        handleError(`there is no newSongId chooseSong function `, true)
     }
     setCurrentPlaylistI(newIndex)
     await chooseSong(newSongId)
@@ -120,20 +122,25 @@ export function usePlayer() {
     const prevIndex = currentPlaylistI;
     const playlistLen = currentPlaylist.length - 1;
 
+
+
     let newIndex = prevIndex - 1;
     let newSongId;
 
     if (newIndex >= 0) {        /*--when newIndex is at end or almost begining of array --*/
       const newSong = currentPlaylist[newIndex];
       newSongId = newSong.song_id;
-      handleError(`there is no newSongId chooseSong function`, true)
+
+      if (!newSongId)
+        handleError(`there is no newSongId chooseSong function`, true)
 
     } else if (newIndex < 0) {    /*--when newIndex is at begining of array --*/
       newIndex = playlistLen;
       const newSong = currentPlaylist[newIndex];
       newSongId = newSong.song_id;
 
-      handleError(`there is no newSongId chooseSong function`, true)
+      if (!newSongId)
+        handleError(`there is no newSongId chooseSong function`, true)
     }
 
     setCurrentPlaylistI(newIndex)
@@ -188,7 +195,6 @@ export function usePlayer() {
     toggleLoop,
     goToNext,
     goToPrevious,
-    // playAtIndex,
     setCurrentIndex,
     chooseSong
   };

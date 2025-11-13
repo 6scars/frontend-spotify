@@ -1,6 +1,10 @@
 import { useState, useEffect } from "react"
 
 export default function SongInThePlaylist({ song, handleStartPlaylist }) {
+    if (!song || !handleStartPlaylist) {
+        throw new Error(` there is so 'song' or 'handleStartPlaylist' in 'SongInThePlaylist' component`)
+    }
+
     return (
         <>
 

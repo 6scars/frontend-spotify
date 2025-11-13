@@ -18,7 +18,6 @@ export default function Aside() {
 
       if (!isLogedIn)
         setSigning(true)
-
     }
   }
 
