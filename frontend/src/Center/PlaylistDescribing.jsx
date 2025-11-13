@@ -8,9 +8,9 @@ export default function PlaylistDescribing() {
     const [playlist, setPlaylist] = useState([])
     const [isLoading, setIsLoading] = useState(true);
 
-    const {playlist_id, setCurrentPlaylist, setCurrentPlaylistI} = useCurrentPlaybackContext();
-    const {chooseSong} = usePlayerContext();
-    
+    const { playlist_id, setCurrentPlaylist, setCurrentPlaylistI } = useCurrentPlaybackContext();
+    const { chooseSong } = usePlayerContext();
+
     useEffect(() => {
         setPlaylist([])
         setIsLoading(true)
@@ -26,15 +26,18 @@ export default function PlaylistDescribing() {
 
     }, [playlist_id])
 
-    function handleStartPlaylist(playlist_I = null) {
+    function handleStartPlaylist(song_id = null) {
+        console.log(song_id)
+        console.log(playlist)
         setCurrentPlaylist(playlist)
-        if (playlist_I) {
-            const findedSongI = playlist.findIndex((data) => (playlist_I === data.song_id))
+        if (song_id) {
+            const findedSongI = playlist.findIndex((data) => (song_id === data.song_id))
+            console.log(findedSongI)
             chooseSong(playlist[findedSongI].song_id)
             setCurrentPlaylistI(findedSongI)
         }
 
-        if (!playlist_I) {
+        if (!song_id) {
             chooseSong(playlist[0].song_id)
             setCurrentPlaylistI(0)
         }
@@ -43,8 +46,8 @@ export default function PlaylistDescribing() {
     }
 
     const render = () => {
-        console.log(playlist)
-        console.log(playlist_id)
+        // console.log(playlist)
+        // console.log(playlist_id)
         if (isLoading) {
             return (
                 <div className="text-white">
@@ -53,7 +56,7 @@ export default function PlaylistDescribing() {
             )
         }
         if (!isLoading) {
-            console.log(playlist)
+            // console.log(playlist)
             return (
                 <div className="music red-scroll-bar space-y-4 bg-[#232323] flex-[2] h-full min-w-[500px] overflow-y-auto  rounded-md
                     relative  flex justify-center items-center playlist-describing" >
@@ -72,11 +75,7 @@ export default function PlaylistDescribing() {
                             )
                             )}
                         </div>
-
-
-
                     </div>
-
                 </div>
             )
         }

@@ -1,12 +1,12 @@
 import Image from './Image'
 import { usePlayerContext } from "../../../contexts/PlayerContext.jsx";
 
-export default function Songs({ SONGS, handleSwitchCurrentPlaylist }) {
+export default function Songs({ songs, handleSwitchCurrentPlaylist }) {
   const { chooseSong } = usePlayerContext();
 
   return (
     <div className="songs-container red-scroll-bar h-full">
-      {SONGS.map((song) => {
+      {songs.map((song) => {
 
         return (
           <div

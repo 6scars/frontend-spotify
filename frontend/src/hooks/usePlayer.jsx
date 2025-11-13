@@ -16,23 +16,9 @@ export function usePlayer() {
   const [muted, setMuted] = useState(false);
   const [loop, setLoop] = useState(false);
 
-  const {currentPlaylist, currentSong, setCurrentSong } = useCurrentPlaybackContext();
-  const {latestListened} = useLatestSongsContext();
-  const {setShow} = useUIStateContext();
-
-
-  // --- sync currentIndex when currentSong or playlist changes ---
-  useEffect(() => {
-    if (!currentSong || !currentPlaylist || currentPlaylist.length === 0) return;
-
-    const idx = currentPlaylist.findIndex(
-      s => Number(s.song_id) === Number(currentSong.song_id) || Number(s.id) === Number(currentSong.id)
-    );
-
-    if (idx !== -1) {
-      setCurrentIndex(idx);
-    }
-  }, [currentSong, currentPlaylist]);
+  const { currentPlaylist, currentPlaylistI, currentSong, setCurrentSong, setCurrentPlaylistI } = useCurrentPlaybackContext();
+  const { latestListened } = useLatestSongsContext();
+  const { setShow } = useUIStateContext();
 
   // --- attach audio listeners ---
   useEffect(() => {
@@ -44,12 +30,14 @@ export function usePlayer() {
     const onPlay = () => setIsPlaying(true);
     const onPause = () => setIsPlaying(false);
     const onEnded = () => goToNext();
+    const onLoadeddata = () => {audio.play(); setIsPlaying(true); if (!audio) handleError(`onLoadeddata event error in usePlayer component`) }
 
     audio.addEventListener("loadedmetadata", onLoadedMetadata);
     audio.addEventListener("timeupdate", onTimeUpdate);
     audio.addEventListener("play", onPlay);
     audio.addEventListener("pause", onPause);
     audio.addEventListener("ended", onEnded);
+    audio.addEventListener("loadeddata", onLoadeddata);
 
     return () => {
       audio.removeEventListener("loadedmetadata", onLoadedMetadata);
@@ -57,9 +45,10 @@ export function usePlayer() {
       audio.removeEventListener("play", onPlay);
       audio.removeEventListener("pause", onPause);
       audio.removeEventListener("ended", onEnded);
+      audio.removeEventListener('onLoadeddata', onLoadeddata)
     };
     // note: audioRef.current is not a valid dependency, listeners are attached when audio exists and effect runs
-  }, [currentPlaylist, /* keep stable: don't include chooseSongCallback to avoid reattach */]);
+  }, [currentSong, currentPlaylist]);
 
   // --- playback controls ---
   const togglePlay = () => {
@@ -91,57 +80,97 @@ export function usePlayer() {
     setLoop(!loop);
   };
 
-  const playAtIndex = (index) => {
-    if (!currentPlaylist || !currentPlaylist[index]) return;
-    const song = currentPlaylist[index];
-    addView(song.song_id);
-    // inform parent to load the song (parent should set currentSong)
-    chooseSong(song.song_id);
-    setCurrentIndex(index);
-    setIsPlaying(true);
-
-    const audio = audioRef.current;
-    if (audio) {
-      const onLoaded = () => {
-        audio.play().catch(() => { });
-        audio.removeEventListener("loadedmetadata", onLoaded);
-      };
-      audio.addEventListener("loadedmetadata", onLoaded);
+  const goToNext = async () => {
+    if (currentPlaylist.length <= 0) {  /*-- there is no songs in the currentPlaylist array --*/
+      handleError(`there is no currentPlaylist`)
+      return null
     }
+
+    const prevIndex = currentPlaylistI;
+    const playlistLen = currentPlaylist.length - 1;
+
+    let newIndex = prevIndex + 1;
+    let newSongId;
+
+
+    if (newIndex <= playlistLen) {  /*--when newIndex is at begining of array or almost at the end --*/
+      const newSong = currentPlaylist[newIndex];
+      newSongId = newSong.song_id;
+
+      handleError(`there is no newSongId chooseSong function`, true)
+    } else if (newIndex > playlistLen) { /*--when newIndex is at end of array --*/
+      newIndex = 0;
+      const newSong = currentPlaylist[newIndex];
+      newSongId = newSong.song_id;
+
+      handleError(`there is no newSongId chooseSong function `, true)
+    }
+    setCurrentPlaylistI(newIndex)
+    await chooseSong(newSongId)
+
+    return null
   };
 
-  const goToNext = () => {
-    if (!currentPlaylist || currentPlaylist.length === 0) return;
+  const goToPrevious = async () => {
+    if (currentPlaylist.length <= 0) { /*-- there is no songs in the currentPlaylist array --*/
+      handleError(`there is no currentPlaylist`)
+      return null
+    }
 
-    // if we don't know currentIndex, try to start from 0
-    const nextIndex = currentIndex == null
-      ? 0
-      : (currentIndex + 1) % currentPlaylist.length;
+    const prevIndex = currentPlaylistI;
+    const playlistLen = currentPlaylist.length - 1;
 
-    playAtIndex(nextIndex);
-  };
+    let newIndex = prevIndex - 1;
+    let newSongId;
 
-  const goToPrevious = () => {
-    if (!currentPlaylist || currentPlaylist.length === 0) return;
+    if (newIndex >= 0) {        /*--when newIndex is at end or almost begining of array --*/
+      const newSong = currentPlaylist[newIndex];
+      newSongId = newSong.song_id;
+      handleError(`there is no newSongId chooseSong function`, true)
 
-    const prevIndex = currentIndex == null
-      ? currentPlaylist.length - 1
-      : (currentIndex - 1 + currentPlaylist.length) % currentPlaylist.length;
+    } else if (newIndex < 0) {    /*--when newIndex is at begining of array --*/
+      newIndex = playlistLen;
+      const newSong = currentPlaylist[newIndex];
+      newSongId = newSong.song_id;
 
-    playAtIndex(prevIndex);
+      handleError(`there is no newSongId chooseSong function`, true)
+    }
+
+    setCurrentPlaylistI(newIndex)
+    await chooseSong(newSongId)
+
+
+
   };
 
   async function chooseSong(song_id) {
-    const responde = await fetch(`http://localhost:3005/api/getSong?id=${song_id}`)
-    const data = await responde.json();
-    const findedSong = data.data[0];
-    if (findedSong) {
-      addView(song_id)
-      setCurrentSong(findedSong)
-      setShow(true)
-      latestListened(findedSong)
+    try {
+      const responde = await fetch(`http://localhost:3005/api/getSong?id=${song_id}`)
+      const data = await responde.json();
+      const findedSong = data.data[0];
+      if (findedSong) {
+        addView(song_id) /*add a one to view counter */
+        chooseSongSetUI()   /*set UI */
+        chooseSongSetData(findedSong)
+      }
+    } catch (err) {
+      handleError(`'chooseSong function ${err}`, true)
+      return null
     }
+
+    function chooseSongSetUI() {
+      setShow(true)
+    }
+
+    function chooseSongSetData(findedSong) {
+      latestListened(findedSong)/*handle latest listened*/
+      setCurrentSong(findedSong)/*set data about song */
+    }
+
   }
+
+
+
 
   return {
     audioRef,
@@ -159,8 +188,18 @@ export function usePlayer() {
     toggleLoop,
     goToNext,
     goToPrevious,
-    playAtIndex,
+    // playAtIndex,
     setCurrentIndex,
     chooseSong
   };
 }
+
+
+function handleError(details, throwError = false) {
+  console.error('App Error', details);
+
+  if (throwError) {
+    throw new Error(details)
+  }
+}
+

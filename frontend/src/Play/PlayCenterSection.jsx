@@ -1,3 +1,5 @@
+import { useEffect } from "react";
+
 export default function ProgressBar({
   audioRef,
   handlePlay,
@@ -28,6 +30,8 @@ export default function ProgressBar({
     setCurrentTime(newTime);
     audioRef.current.currentTime = newTime;
   }
+
+
 
   return (
     <div

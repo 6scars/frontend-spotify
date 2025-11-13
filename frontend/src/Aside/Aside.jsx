@@ -1,7 +1,14 @@
+import { useCurrentPlaybackContext } from "../contexts/CurrentPlaybackContext";
+import { useAuthContext } from "../contexts/AuthContext";
+import { useUIStateContext } from "../contexts/UIStateContext";
 import "./Aside.css";
 import Playlists from './PlayLists'
 
-export default function Aside({ setPlaylists_id, show, songs, playlists, showCreatePlaylistWindow, setShowCreatePlaylistWindow, setShowPlaylistDescribing, isLogedIn, setSigning }) {
+export default function Aside() {
+  const { show, showCreatePlaylistWindow, isLogedIn, setShowCreatePlaylistWindow, setShowPlaylistDescribing, setSigning } = useUIStateContext();
+  const { setPlaylists_id } = useCurrentPlaybackContext();
+  const { playlists } = useAuthContext();
+
   const displayCreatingPlaylistWindow = () => {
     if (showCreatePlaylistWindow) {
       setShowCreatePlaylistWindow(false)
@@ -17,8 +24,7 @@ export default function Aside({ setPlaylists_id, show, songs, playlists, showCre
 
   const choosePlaylist = (playlist_id) => {
     setPlaylists_id(playlist_id);
-    setShowPlaylistDescribing(true)
-    /*--remove previous songs*/
+    setShowPlaylistDescribing(true);
   };
   return (
     <aside
@@ -35,7 +41,6 @@ export default function Aside({ setPlaylists_id, show, songs, playlists, showCre
           key={playlist.playlist_id}
           playlist={playlist}
           choosePlaylist={choosePlaylist}
-          songs={songs}
         />
       ))}
     </aside>

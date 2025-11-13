@@ -1,14 +1,18 @@
 import { useState } from 'react'
-import './CreatePlaylist.css'
+
 import RenderSongsToAdd from './RenderSongsToAdd'
+
+import './CreatePlaylist.css'
+
 import { useUIStateContext } from '../../contexts/UIStateContext';
 
-export default function CreatePlaylist({SONGS}) {
+
+
+export default function CreatePlaylist({ SONGS }) {
     const [songsToAdd, setSongsToAdd] = useState(new Set());
     const [playlistName, setPlaylistName] = useState('');
 
-    const {setReloadAside} = useUIStateContext();
-
+    const { setReloadAside } = useUIStateContext();
 
     const handleCreateNewPlaylist = async (e) => {
         e.preventDefault();
@@ -23,7 +27,7 @@ export default function CreatePlaylist({SONGS}) {
                 "method": 'POST',
                 "headers": {
                     'Content-Type': 'application/json',
-                    'Authorization':`Bearer ${localStorage.getItem('jwt')}`
+                    'Authorization': `Bearer ${localStorage.getItem('jwt')}`
                 },
                 "body": JSON.stringify({
                     playlistName,
@@ -31,16 +35,15 @@ export default function CreatePlaylist({SONGS}) {
                 })
             })
             const data = await responde.json();
-            if(responde.ok){
-                setReloadAside(prev=> !prev)
+            if (responde.ok) {
+                setReloadAside(prev => !prev)
             }
             console.log(data.message)
         } catch (err) {
             console.err("HANDLECREATE NEW PLAYLIST ERROR", err)
-            return {message: err}
+            return { message: err }
         }
     }
-
 
     return (
         <>

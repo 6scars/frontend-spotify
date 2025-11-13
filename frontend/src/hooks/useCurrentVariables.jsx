@@ -1,4 +1,5 @@
 import {useState} from 'react'
+
 export function useCurrentVariables() {
     /*currentSong keeps data about playling right now a song, shows Play Component*/
     const [currentSong, setCurrentSong] = useState(null);
@@ -7,6 +8,11 @@ export function useCurrentVariables() {
     /*currentPlaylistI saves current iteration/position in the currentPlaylist*/
     const [currentPlaylistI, setCurrentPlaylistI] = useState(null);
     const [playlist_id, setPlaylists_id] = useState(null);
+
+    // const handleSetCurrentPlaylist = ()=>{setCurrentPlaylist()}
+
+    // const handleSetCurrentPlaylistI = ()=>{}
+    
 
     return {
         currentSong, setCurrentSong,
