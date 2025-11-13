@@ -7,6 +7,9 @@ export function useUIState() {
     const [reloadApp, setReloadApp] = useState(false)
     const [show, setShow] = useState(false);
 
+
+    const [isLoading, setIsLoading] = useState(true); /* is used in playlistDescribing, if the Playlist is loading then isLoading = true */ 
+
     const clickedAccount = () => {
         signing ? setSigning(false) : setSigning(true)
     }
@@ -19,6 +22,7 @@ export function useUIState() {
             reloadAside, setReloadAside,
             reloadApp, setReloadApp,
             show, setShow,
+            isLoading, setIsLoading,
 
 
             clickedAccount

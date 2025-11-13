@@ -1,53 +1,31 @@
-import { useState, useEffect } from 'react'
+import { useEffect } from 'react'
+
 import SongInThePlaylist from "./PlaylistDescribing/SongInThePlaylist"
+
 import './PlaylistDescribing.css'
+
 import { useCurrentPlaybackContext } from '../contexts/CurrentPlaybackContext';
-import { usePlayerContext } from '../contexts/PlayerContext';
+import { useUIStateContext } from '../contexts/UIStateContext';
+
+import usePlaylists from '../hooks/usePlaylists'
 
 export default function PlaylistDescribing() {
-    const [playlist, setPlaylist] = useState([])
-    const [isLoading, setIsLoading] = useState(true);
-
-    const { playlist_id, setCurrentPlaylist, setCurrentPlaylistI } = useCurrentPlaybackContext();
-    const { chooseSong } = usePlayerContext();
+    const { playlist_id } = useCurrentPlaybackContext();
+    const { isLoading, setIsLoading } = useUIStateContext();
+    const { playlist, setPlaylist, fetchThePlaylistData, handleStartPlaylist } = usePlaylists();
 
     useEffect(() => {
         setPlaylist([])
         setIsLoading(true)
-        const fetchThePlaylistData = async () => {
-            const response = await fetch(`http://localhost:3005/api/getPlaylistData?id=${playlist_id}`);
-            const data = await response.json();
-            setPlaylist(data.data)
-            setIsLoading(false);
+        const fetch = async () => {
+            await fetchThePlaylistData(); /* get data about the playlist we clicked */
         }
-        if (playlist_id !== null && playlist_id !== undefined) {
-            fetchThePlaylistData();
-        }
-
+        fetch()
     }, [playlist_id])
 
-    function handleStartPlaylist(song_id = null) {
-        console.log(song_id)
-        console.log(playlist)
-        setCurrentPlaylist(playlist)
-        if (song_id) {
-            const findedSongI = playlist.findIndex((data) => (song_id === data.song_id))
-            console.log(findedSongI)
-            chooseSong(playlist[findedSongI].song_id)
-            setCurrentPlaylistI(findedSongI)
-        }
 
-        if (!song_id) {
-            chooseSong(playlist[0].song_id)
-            setCurrentPlaylistI(0)
-        }
-
-
-    }
 
     const render = () => {
-        // console.log(playlist)
-        // console.log(playlist_id)
         if (isLoading) {
             return (
                 <div className="text-white">
@@ -56,7 +34,6 @@ export default function PlaylistDescribing() {
             )
         }
         if (!isLoading) {
-            // console.log(playlist)
             return (
                 <div className="music red-scroll-bar space-y-4 bg-[#232323] flex-[2] h-full min-w-[500px] overflow-y-auto  rounded-md
                     relative  flex justify-center items-center playlist-describing" >

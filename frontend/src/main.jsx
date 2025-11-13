@@ -11,7 +11,7 @@ import { AuthProvider } from "./contexts/AuthContext.jsx";
 import { UIStateProvider } from "./contexts/UIStateContext.jsx";
 import { CurrentPlaybackProvider } from "./contexts/CurrentPlaybackContext.jsx";
 import { LatestSongsProvider } from "./contexts/LatestSongsContext.jsx";
-import { PlayerProvider } from './contexts/PlayerContext.jsx'
+import { PlayerProvider } from './contexts/PlayerContext.jsx';
 
 
 createRoot(document.getElementById('root')).render(
@@ -26,12 +26,12 @@ createRoot(document.getElementById('root')).render(
         <UIStateProvider>
           <CurrentPlaybackProvider>
             <LatestSongsProvider>
-              <PlayerProvider>
-                <Routes>
-                  <Route path="/addSong" element={<AddSong />} />
-                  <Route path="/" element={<App />} />
-                </Routes>
-              </PlayerProvider>
+                <PlayerProvider>
+                  <Routes>
+                    <Route path="/addSong" element={<AddSong />} />
+                    <Route path="/" element={<App />} />
+                  </Routes>
+                </PlayerProvider>
             </LatestSongsProvider>
           </CurrentPlaybackProvider>
         </UIStateProvider>
