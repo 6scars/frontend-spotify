@@ -3,14 +3,18 @@ import SignIn from './SignIn.jsx'
 import SignUp from './SignUp.jsx'
 import AccountOptions from "./AccountOptions/AccountOptions"
 import "./Signing.css"
+import { useAuthContext } from '../contexts/AuthContext.jsx'
+import { useUIStateContext } from '../contexts/UIStateContext.jsx'
 
-export default function Signing({ setIsLogedIn, clickedAccount, isLogedIn }) {
+export default function Signing() {
     const [formValue, setFormValue] = useState({
         email: '',
         password: ''
     })
     const [switchForm, setSwitchForm] = useState(false);
 
+    const { isLogedIn, setIsLogedIn } = useAuthContext();
+    const { clickedAccount } = useUIStateContext();
     const signForm = (e) => {
         setFormValue((prev) => ({
             ...prev,
@@ -55,11 +59,9 @@ export default function Signing({ setIsLogedIn, clickedAccount, isLogedIn }) {
         } catch (err) {
             console.error("SEND FORM ERROR: ", err)
         }
-
-
-
-
     }
+
+
 
     return (
         <>

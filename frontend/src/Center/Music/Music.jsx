@@ -4,7 +4,7 @@ import Latest from "./Songs/Latest.jsx";
 import { useCurrentPlaybackContext } from "../../contexts/CurrentPlaybackContext.jsx";
 
 
-export default function Music({ SONGS }) {
+export default function Music({ songs }) {
   const { setCurrentPlaylistI, setCurrentPlaylist } = useCurrentPlaybackContext();
 
   function handleSwitchCurrentPlaylist() {
@@ -25,7 +25,7 @@ export default function Music({ SONGS }) {
           <div className="songs-title-container text-white font-bold">
             <p className="songs__title">Prepared for You</p>
           </div>
-          <Songs SONGS={SONGS} handleSwitchCurrentPlaylist={handleSwitchCurrentPlaylist} />
+          <Songs songs={songs} handleSwitchCurrentPlaylist={handleSwitchCurrentPlaylist} />
         </div>
       </div>
     </>

@@ -1,7 +1,11 @@
 import { useState, useEffect } from 'react'
-import "./AddSong.css";
+
 import LeftSide from "./AddSong/LeftSide.jsx"
 import RightSide from "./AddSong/RightSide.jsx"
+
+import "./AddSong.css";
+
+
 export default function AddSong() {
     const [tabName, setTabName] = useState('INFORMATION');
     const [addSongForm, setAddSongForm] = useState({
@@ -34,9 +38,7 @@ export default function AddSong() {
     return (
         <>
             <div className="add-song-container flex items-center justify-center w-full h-full ">
-                <div className="w-[90vw] h-[75vh] bg-[var(--background-color)]
-                    rounded-3xl overflow-hidden flex 
-                ">
+                <div className="w-[90vw] h-[75vh] bg-[var(--background-color)] rounded-3xl overflow-hidden flex  ">
                     <LeftSide tabName={tabName} setTabName={setTabName} addSongForm={addSongForm} />
                     <RightSide
                         albumsInfo={albumsInfo}
@@ -44,7 +46,6 @@ export default function AddSong() {
                         addSongForm={addSongForm}
                         setAddSongForm={setAddSongForm}
                     />
-
                 </div>
             </div>
 
