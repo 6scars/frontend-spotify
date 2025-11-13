@@ -23,7 +23,7 @@ router.post('/signin', controller.signIn)
 router.post('/playlists', controller.playlists)
 router.post('/checkToken', controller.checkToken)
 router.get('/fetchSongs', controller.fetchSongs)
-router.get('/:id/addView', controller.addView)
+router.post('/addView', controller.addView)
 router.get('/getAuthorsAlbums', controller.getDataFromToken, controller.getAuthorsAlbums)
 router.post(
   '/saveSongInBase',

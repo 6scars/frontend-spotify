@@ -5,13 +5,14 @@ import "./Aside.css";
 import Playlists from './PlayLists'
 
 export default function Aside() {
-  const { show, showCreatePlaylistWindow, isLogedIn, setShowCreatePlaylistWindow, setShowPlaylistDescribing, setSigning } = useUIStateContext();
+  const { show, showCreatePlaylistWindow, setShowCreatePlaylistWindow, setShowPlaylistDescribing, setSigning } = useUIStateContext();
   const { setPlaylists_id } = useCurrentPlaybackContext();
-  const { playlists } = useAuthContext();
+  const { playlists, isLogedIn } = useAuthContext();
 
   const displayCreatingPlaylistWindow = () => {
     if (showCreatePlaylistWindow) {
       setShowCreatePlaylistWindow(false)
+      setShowPlaylistDescribing(false)
     } else {
       if (isLogedIn)
         setShowCreatePlaylistWindow(true)

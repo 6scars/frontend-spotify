@@ -22,7 +22,11 @@ export default function MiniSpotify() {
     setIsLogedIn(false);
     setShowCreatePlaylistWindow(false)
     setShowPlaylistDescribing(false)
-    fetchAuthState()
+
+    const fetch = async () => {
+      await fetchAuthState()
+    }
+    fetch();
   }, [reloadAside, reloadApp]);
 
 
@@ -30,9 +34,9 @@ export default function MiniSpotify() {
     <>
       <Header />
       <Center />
-      {currentSong ?  <Play /> : null}
+      {currentSong ? <Play /> : null}
       {playlists ? <Aside /> : null}
-      {signing ?  <Signing /> : null}
+      {signing ? <Signing /> : null}
 
     </>
   );

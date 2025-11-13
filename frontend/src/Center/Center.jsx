@@ -8,7 +8,6 @@ import PlaylistDescribing from "./PlaylistDescribing.jsx";
 
 import "./Center.css";
 
-import { fetchSongs } from "../scripts/Fetches.jsx";
 import { useUIStateContext } from "../contexts/UIStateContext.jsx";
 import { useAuthContext } from "../contexts/AuthContext.jsx";
 
