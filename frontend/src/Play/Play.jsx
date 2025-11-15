@@ -24,7 +24,7 @@ export default function Play() {
     goToPrevious
   } = usePlayerContext();
 
-  const { currentSong, playlists, currentPlaylist } = useCurrentPlaybackContext();
+  const { currentSong, currentPlaylist } = useCurrentPlaybackContext();
   const { fetchAuthState } = useAuthContext();
 
 
@@ -37,7 +37,6 @@ export default function Play() {
     >
       <PlayLeftSection
         currentSong={currentSong}
-        playlists={playlists}
         fetchAuthState={fetchAuthState}
       />
 
