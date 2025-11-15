@@ -1,7 +1,9 @@
 import { useState } from 'react'
 import Playlist from "./Playlist"
+import { useAuthContext } from '../../contexts/AuthContext';
 
-export default function AddSong({ currentSong, showAddSong, playlists, fetches }) {
+export default function AddSong({ currentSong, showAddSong, fetchAuthState }) {
+    const { playlists } = useAuthContext()
 
     async function handleAddSong(song_id, playlist_id) {
         try {
@@ -18,7 +20,7 @@ export default function AddSong({ currentSong, showAddSong, playlists, fetches }
             })
             const data = await response.json();
             console.log(data)
-            fetches()
+            fetchAuthState()
             return null
         } catch (err) {
             console.error(err)
@@ -41,7 +43,7 @@ export default function AddSong({ currentSong, showAddSong, playlists, fetches }
             })
             const data = await response.json();
             console.log(data)
-            fetches()
+            fetchAuthState()
             return null
         } catch (err) {
             console.error(err)
