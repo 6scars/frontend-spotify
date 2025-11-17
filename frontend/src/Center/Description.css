@@ -3,7 +3,7 @@
 
 
 .description {
-    @apply px-[25px] py-[10px];
+    @apply px-[25px] py-[10px] h-full flex-1 min-w-[500px] overflow-y-auto grow flex flex-col gap-[1.5rem];
     background-color: var(--background-color);
 
 }
@@ -21,8 +21,8 @@
     @apply p-[1rem] bg-[var(--accent-color3)]
 }
 
-.description .song-infromations-wrapper{
-    padding-left:1rem;
+.description .song-infromations-wrapper {
+    padding-left: 1rem;
 }
 
 .description .title__paragraph {
@@ -50,8 +50,12 @@
 }
 
 .description .credit-container {
-    @apply p-3
+    @apply p-3 bg-[var(--help-color2)] text-white rounded-xl flex flex-col justify-center items-center;
 }
+
+
+
+/*------------------WINDOW ADJUST---------------------*/
 
 @media (max-width:1130px) {
 
@@ -89,4 +93,27 @@
         font-size: 0.7rem;
     }
 
+}
+
+@media(max-width:930px) {
+    .description {
+        min-width: 120px
+    }
+
+
+    /*----CREDIT-----*/
+    .description .credit-container {
+        @apply p-0 m-0 h-auto w-[full]  grow flex-1 flex flex-col gap-[1.5rem];
+        background-color: var(--help-color2);
+        overflow-y: visible;
+        
+    }
+
+    .description .credit-text-container {
+        width: 100%;
+        padding:5px;
+        font-size: 0.7rem;
+        word-break:break-all;
+
+    }
 }

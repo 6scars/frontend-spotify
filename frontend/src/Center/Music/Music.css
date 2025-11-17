@@ -2,7 +2,15 @@
 
 
 /*------------------music----------------*/
+.Center .music {
+  @apply space-y-4 bg-[#232323] flex-[2] h-full min-w-[500px] overflow-y-auto rounded-md relative;
+}
 
+@media (max-width:930px) {
+  .Center .music {
+    min-width: 250px;
+  }
+}
 
 /*-----main-type-----*/
 .music .main-type {
@@ -111,7 +119,7 @@
 .song-image-container {
   height: 75%;
   /* or min-height */
-    overflow: hidden;
+  overflow: hidden;
   position: relative;
 }
 
