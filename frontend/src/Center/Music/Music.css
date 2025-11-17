@@ -48,6 +48,7 @@
 .music .playlist-image-container {
   flex: 2.13;
   height: 100%;
+  min-width: 27px;
   border-radius: inherit;
   border-radius: var(--border) 0px 0px var(--border);
   overflow: hidden;
@@ -70,6 +71,13 @@
   @apply pl-[1rem] font-bold text-white;
 }
 
+@media (max-width:930px){
+  .music .playlist__title{
+    font-size: 0.6rem;
+    padding-left:0.5rem;
+  }
+  
+}
 /*--------songs--------*/
 
 .music .songs {

@@ -11,6 +11,7 @@ Header {
 
 /*------mid-section-------*/
 Header .search__bar {
+  width: 100%;
   padding: 10px;
   padding-left: 20px;
   margin-left: 10px;
