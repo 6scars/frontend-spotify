@@ -2,41 +2,91 @@
 
 
 
-.description{
+.description {
     @apply px-[25px] py-[10px];
-    background-color:var(--background-color)
+    background-color: var(--background-color);
+
 }
 
-.description .about-artist-text-container{
+.description .description-img-container {
+    @apply w-full h-[521px] flex justify-center;
+}
+
+
+.description .about-artist-text-container {
     @apply p-[12px];
 }
 
-.description .title__paragraph{
-    color:var(--main-color);
-}
-
-.description .author-title{
+.description .author-title {
     @apply p-[1rem] bg-[var(--accent-color3)]
-
 }
 
-.description .description-about{
-    background-color:var(--accent-color3)
+.description .song-infromations-wrapper{
+    padding-left:1rem;
 }
 
-.description .followers{
-    font-weight:500;
-    color:var(--help-color);
-    font-size:1.1rem;
+.description .title__paragraph {
+    color: var(--main-color);
 }
 
-.description .follow__button{
+
+
+.description .description-about {
+    background-color: var(--accent-color3)
+}
+
+.description .followers {
+    font-weight: 500;
+    color: var(--help-color);
+    font-size: 1.1rem;
+}
+
+.description .follow__button {
     @apply px-3 py-1
 }
-.description .follow__button:hover{
+
+.description .follow__button:hover {
     @apply bg-[var(--accent-color2)] cursor-pointer
 }
 
-.description .credit-container{
+.description .credit-container {
     @apply p-3
+}
+
+@media (max-width:1130px) {
+
+    /*-DESCRIPTION-*/
+    .description {
+        min-width: 300px;
+    }
+
+
+    /*--IMG SECTION --  */
+    .description .description-img-container {
+        min-height: 150px;
+        max-height: 250px;
+
+        min-width: 100px;
+        max-width: 100%;
+
+        overflow: hidden;
+    }
+
+    .description .description-img-container img {
+        height: 100%;
+        width: 100%;
+        object-fit: cover;
+    }
+
+    /*---SONG INFORMATIION----*/
+    .description .author-title {
+        font-size: 0.7rem;
+    }
+
+
+    /*----CREDIT-----*/
+    .description .credit-text-container {
+        font-size: 0.7rem;
+    }
+
 }
