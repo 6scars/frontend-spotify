@@ -6,8 +6,7 @@ export default function Description() {
   return (
     <>
       <div
-        className="description red-scroll-bar h-full flex-1 min-w-[500px] overflow-y-auto grow flex flex-col gap-[1.5rem]
-          
+        className="description red-scroll-bar
       "
       >
         <div className="description-img-container ">
@@ -54,9 +53,7 @@ export default function Description() {
           </div>
 
         </div>
-        <div className="credit-container bg-[var(--help-color2)] text-white rounded-xl
-        flex flex-col justify-center items-center
-      ">
+        <div className="credit-container   ">
           <p>CREDIT</p>
           <div className="credit-text-container">
             {currentSong.credit}

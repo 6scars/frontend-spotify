@@ -1,7 +1,9 @@
 @import "tailwindcss";
 /*-----------------------MAIN---------------------------*/
 .Center{
-    @apply fixed left-[116px] top-[var(--height-of-header)] right-0  bottom-[0px] rounded-md flex items-center gap-3 
+    @apply fixed left-[116px] top-[var(--height-of-header)] right-0  bottom-[0px] 
+    rounded-md
+     lex items-center gap-3 
 }
 
 
