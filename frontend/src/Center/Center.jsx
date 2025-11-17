@@ -28,7 +28,7 @@ export default function Center() {
   }
 
   return (
-    <main className={`Center fixed left-[116px] top-[89px] right-0  bottom-[0px] rounded-md flex items-center gap-3 ${show ? "show" : ""} `} >
+    <main className={`Center ${show ? "show" : ""} `} >
       <div className="music red-scroll-bar space-y-4 bg-[#232323] flex-[2] h-full min-w-[500px] overflow-y-auto  rounded-md
           relative " >
         {choosenComponent()}

@@ -1,6 +1,10 @@
 @import "tailwindcss";
 
+.play {
+    @apply  fixed bottom-0 left-0 right-0 bg-black h-[var(--height-of-player)]
+      flex justify-between;
 
+}
 .play .play-left-section
 {
  @apply p-[25px];

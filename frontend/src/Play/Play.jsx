@@ -32,8 +32,7 @@ export default function Play() {
 
   return (
     <div
-      className="play fixed bottom-0 left-0 right-0 bg-black h-[120px]
-      flex justify-between"
+      className="play"
     >
       <PlayLeftSection
         currentSong={currentSong}
