@@ -1,9 +1,7 @@
 @import "tailwindcss";
 /*-----------------------MAIN---------------------------*/
-:root {
-  --padding-main-type: 20px;
-  --padding-left-main-type: 35px;
+.Center{
+    @apply fixed left-[116px] top-[var(--height-of-header)] right-0  bottom-[0px] rounded-md flex items-center gap-3 
 }
-
 
 

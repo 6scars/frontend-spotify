@@ -1,16 +1,5 @@
 @import "tailwindcss";
 
-:root {
-  --height-of-header: 78px;
-  --width-of-left-bar: 96px;
-  --height-of-player: 120px;
-
-  --margin-bottom-header: 11px;
-  --margin-right-left-bar: 20px;
-  --padding-left-of-outer-borderline: 8px;
-}
-
-
 
 /*-----------------------HEADER-----------------------*/
 Header {
@@ -18,13 +7,15 @@ Header {
   right: var(--padding-left-of-outer-borderline);
 }
 
-/*------mid-section-------*/
-Header .search__bar{
-  padding:10px;
-  padding-left:20px;
-  margin-left:10px;
-  background:#454545;
-  color:#E0E0E0;
 
-  border-radius:25px;
+
+/*------mid-section-------*/
+Header .search__bar {
+  padding: 10px;
+  padding-left: 20px;
+  margin-left: 10px;
+  background: #454545;
+  color: #E0E0E0;
+
+  border-radius: 25px;
 }

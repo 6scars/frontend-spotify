@@ -2,7 +2,10 @@
  
 /*-----------------------LEFTBAR-----------------------*/
 .leftBar {
-    @apply pt-[14px];
+    @apply pt-[14px] fixed top-[var(--height-of-header)] bottom-[0px] bg-gray-900 rounded-xl
+            flex flex-col items-center gap-[10px] 
+            overflow-y-auto;
+            
     width: var(--width-of-left-bar);
 }
 

@@ -43,7 +43,31 @@ body {
   --margin-bottom-header: 11px;
   --margin-right-left-bar: 20px;
   --padding-left-of-outer-borderline: 8px;
+
+  /*-center-*/
+  --padding-main-type: 20px;
+  --padding-left-main-type: 35px;
+
 }
+
+@media (max-width:1130px) {
+  :root {
+    --height-of-header: 58px;
+    --width-of-left-bar: 96px;
+    --height-of-player: 80px;
+
+    --margin-bottom-header: 11px;
+    --margin-right-left-bar: 20px;
+    --padding-left-of-outer-borderline: 8px;
+
+    /*-center-*/
+    --padding-main-type: 20px;
+    --padding-left-main-type: 35px;
+
+  }
+}
+
+
 
 /*-----------------------PRESTYLES-----------------------*/
 :is(.leftBar, Header) {
@@ -77,5 +101,5 @@ body {
 /*---------------------SHOW--------------------------------*/
 
 .show {
-  bottom: 120px;
+  bottom: var(--height-of-player);
 }
