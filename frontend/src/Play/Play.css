@@ -5,14 +5,7 @@
       flex justify-between;
 
 }
-.play .play-left-section
-{
- @apply p-[25px];
-}
 
-.play .play-left-section .song__image{
-    @apply w-50 h-50
-}
 
 .play .title-authors{
     @apply pl-[10px] pt-[3px]

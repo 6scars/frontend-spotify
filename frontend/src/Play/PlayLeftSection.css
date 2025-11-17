@@ -1,20 +1,51 @@
 @import 'tailwindcss';
 
-.play-left-section .show-add-song-container{
-    @apply w-70 h-40 bg-black text-[var(--main-color)] fixed left-45 bottom-25 overflow-y-scroll rounded-md  
-        flex flex-col justify-center items-center gap-3
-        border-1 border-solid  border-[var(--help-color2)];
-        box-shadow: 0px 0px 10px 5px rgba(0, 0, 0, 0.709);
+
+.play .play-left-section {
+    @apply p-[25px];
 }
 
 
-.play-left-section .add-song-playlist{
-    @apply cursor-pointer w-[90%] p-1 flex justify-between items-center  border-1 border-solid border-[var(--help-color2)] rounded-md 
-        hover:border-[var(--accent-color)] active:border-[var(--accent-color3)]
-
+.play-left-section .show-add-song-container {
+    @apply w-70 h-40 bg-black text-[var(--main-color)] fixed left-45 bottom-25 overflow-y-scroll rounded-md flex flex-col justify-center items-center gap-3 border-1 border-solid border-[var(--help-color2)];
+    box-shadow: 0px 0px 10px 5px rgba(0, 0, 0, 0.709);
 }
 
 
-.play-left-section .include{
+.play-left-section .add-song-playlist {
+    @apply cursor-pointer w-[90%] p-1 flex justify-between items-center border-1 border-solid border-[var(--help-color2)] rounded-md hover:border-[var(--accent-color)] active:border-[var(--accent-color3)]
+}
+
+
+
+.play-left-section .song__image {
+    @apply w-50 h-50
+}
+
+
+.play-left-section .include {
     @apply border-red-500
+}
+
+.play-left-section .song-image-container {
+    @apply w-[70px] h-full border-1 flex;
+}
+
+@media (max-width:1130px) {
+
+    /*------LEFT SECTION---------*/
+    .play .play-left-section {
+        padding: 15px
+    }
+
+
+
+    /*-SONG INFOROMATION-*/
+    .play .play-left-section .title {
+        font-size: 0.8rem;
+    }
+
+    .play .play-left-section .authors {
+        font-size: 0.7rem;
+    }
 }

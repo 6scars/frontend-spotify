@@ -25,11 +25,9 @@ export default function PlayLeftSection({ currentSong,  fetchAuthState }) {
     }
     if (!isLoading) {
       return (
-        <div className="play-left-section h-full w-[300px] min-w-[300px] max-w-[300px] flex">
+        <div className="play-left-section h-full w-[300px] flex">
           <div
-            className="song-image-container w-[70px] h-full border-1
-          flex
-        "
+            className="song-image-container "
           >
             <img
               alt="song-image"
