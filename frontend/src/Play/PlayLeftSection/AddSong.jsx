@@ -1,6 +1,8 @@
 import Playlist from "./Playlist"
 import { useAuthContext } from '../../contexts/AuthContext';
 
+import './AddSong.css';
+
 export default function AddSong({ currentSong, showAddSong, fetchAuthState }) {
     const { playlists } = useAuthContext()
 
