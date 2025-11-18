@@ -14,6 +14,10 @@
     @apply pl-5
 }
 
+.music .song-to-add-container {
+    @apply overflow-hidden bg-black/80 rounded-xl w-100 h-20 flex items-center
+}
+
 
 /*-----if added song || if not added song------*/
 .music .added-song {
@@ -22,4 +26,17 @@
 
 .music .not-added-song {
     @apply bg-[var(--help-color3)] hover:bg-[var(--accent-color)]
+}
+
+@media(max-width:490px) {
+    .music .song-to-add-container {
+        width: 200px;
+    }
+
+    .music .create__playlist__form .name__input {
+        width:50px;
+        font-size:0.8rem;
+        padding: 0px;
+        padding-left:10px;
+    }
 }

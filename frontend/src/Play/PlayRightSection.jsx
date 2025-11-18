@@ -10,8 +10,7 @@ export default function PlayRightSection({ volume, handleVolume, muted,  handleM
 
   return (
     <div
-      className="play-right-section h-full w-[300px] min-[150px]
-       flex justify-center items-center"
+      className="play-right-section "
     >
       <div className="volume-container">
         <div className="volume-icon-container">
@@ -26,7 +25,7 @@ export default function PlayRightSection({ volume, handleVolume, muted,  handleM
           onClick={(event) => {
             changeVolume(event);
           }}
-          className="volume w-full bg-[var(--help-color2)] h-[10px] rounded-md overflow-hidden"
+          className="volume min-w-[35px] w-full bg-[var(--help-color2)] h-[10px] rounded-md overflow-hidden"
         >
           <div
             style={{ width: `${volume * 100}%` }}

@@ -1,4 +1,5 @@
-import { useEffect } from "react";
+
+import './PlayCenterSection.css'
 
 export default function ProgressBar({
   audioRef,
@@ -35,11 +36,9 @@ export default function ProgressBar({
 
   return (
     <div
-      className="play-center-section h-full w-[400px] min-w-[200px] max-w-[600px]
-        flex flex-col items-center
-      "
+      className="play-center-section  "
     >
-      <div className="w-full flex-1 flex justify-center items-center gap-5">
+      <div className="controll-buttons-container">
         <button>
           <img
             onClick={handleLoop}
@@ -83,10 +82,10 @@ export default function ProgressBar({
       </div>
 
       <div className="w-full flex-1 flex justify-center items-center">
-        <div className="text-red-500 min-w-[50px]">{formatTime(current)}</div>
+        <div className="format-current-time ">{formatTime(current)}</div>
         <div
           onClick={(event) => onSeek(event)}
-          className="w-[300px] h-[15px] bg-[var(--help-color2)] rounded-full overflow-hidden"
+          className="loading-bar-gray"
         >
           <div
             style={{ width: `${progressBar}%` }}
@@ -98,7 +97,7 @@ export default function ProgressBar({
           src={`https://rgmmwhkixprkskznqjcy.supabase.co/storage/v1/object/public/spotify/songs/${currentSong.file}`}
           preload="metadata"
         />
-        <div className="text-red-500  min-w-[50px]">{formatTime(duration)}</div>
+        <div className="format-current-time ">{formatTime(duration)}</div>
       </div>
     </div>
   );

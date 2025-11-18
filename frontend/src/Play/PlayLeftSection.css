@@ -38,8 +38,6 @@
         padding: 15px
     }
 
-
-
     /*-SONG INFOROMATION-*/
     .play .play-left-section .title {
         font-size: 0.8rem;
@@ -47,5 +45,22 @@
 
     .play .play-left-section .authors {
         font-size: 0.7rem;
+    }
+}
+
+@media (max-width:490px) {
+
+    /*------LEFT SECTION---------*/
+    .play .play-left-section {
+        padding: 10px
+    }
+
+    /*-SONG INFOROMATION-*/
+    .play .play-left-section .title {
+        font-size: 0.4rem;
+    }
+
+    .play .play-left-section .authors {
+        font-size: 0.4rem;
     }
 }
