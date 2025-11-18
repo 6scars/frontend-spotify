@@ -10,6 +10,7 @@
 
 /*-----main-type-----*/
 .music .main-type {
+  z-index: 100;
   background-color: rgba(0, 0, 0, 0.382);
   padding: var(--padding-main-type);
   padding-left: var(--padding-left-main-type);
@@ -37,9 +38,7 @@
 
 
 /*------playlist--------*/
-:root {
-  --border: 16px;
-}
+
 
 .music .playlist {
   @apply bg-gray-900 flex items-center;
