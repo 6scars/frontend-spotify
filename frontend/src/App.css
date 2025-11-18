@@ -80,6 +80,12 @@ body {
   left: var(--padding-left-of-outer-borderline);
 }
 
+@media(max-width:490px) {
+  :is(.leftBar, Header) {
+    left: calc(var(--padding-left-of-outer-borderline) - 8px);
+  }
+}
+
 
 
 

@@ -30,7 +30,7 @@ export default function Aside() {
     <aside
       className={`leftBar  red-scroll-bar  ${show ? "show" : ""}`}
     >
-      <div onClick={displayCreatingPlaylistWindow} className="text-nowrap text-[0.8rem] text-red-500 hover:text-white cursor-pointer">
+      <div onClick={displayCreatingPlaylistWindow} className="create_playlist_button">
         <span>create playlist</span>
       </div>
       {playlists?.map((playlist) => (
