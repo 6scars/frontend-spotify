@@ -1,9 +1,21 @@
 @import "tailwindcss";
 
+
 .Preview .button-container {
-    margin-top:50px
+    margin-top: 50px
 }
 
-.Preview .button-container button{
+.Preview .importedMp3-container {
+    width: 250px;
+}
+
+.Preview .button-container button {
     @apply p-2 rounded-xl bg-[var(--accent-color)] hover:bg-[var(--accent-color2)]
+}
+
+
+@media (max-width:490px) {
+    .Preview .importedMp3-container {
+        width: 120px;
+    }
 }

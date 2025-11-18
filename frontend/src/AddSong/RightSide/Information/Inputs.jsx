@@ -7,25 +7,25 @@ export default function Inputs({ albumsInfo, addSongForm, setAddSongForm }) {
         }))
     }
     return (
-        <div className="details  flex flex-1 flex-col justify-evenly">
+        <div className="details   flex flex-1 flex-col justify-evenly">
             <div>
-                <span className="text-[1.6rem]">Title Of Your Song</span>
+                <span className="max-[690px]:text-[0.9rem] text-[1.6rem]">Title Of Your Song</span>
                 <input onChange={() => handleAddSongForm(event)} name="song_name" type="text" placeholder={`${addSongForm.song_name || 'Title'}`} />
 
             </div>
             <div>
-                <span className="text-[1.6rem]">Credit</span>
+                <span className="max-[690px]:text-[0.9rem] text-[1.6rem]">Credit</span>
                 <input onChange={() => handleAddSongForm(event)} name="credit" type="text" placeholder={`${addSongForm.credit || 'Credit'}`} />
 
             </div>
             <div>
-                <span className="text-[1.6rem]">Choose Your Album If You Want</span>
-                <select name="album_id" onChange={() => handleAddSongForm(event)} value={`${addSongForm.album_id || null}`}>
+                <span className="max-[690px]:text-[0.9rem] text-[1.6rem]">Choose Your Album If You Want</span>
+                <select   name="album_id" onChange={() => handleAddSongForm(event)} value={`${addSongForm.album_id || null}`}>
 
                     <option value="" disabled hidden>--choose album you want to connect---</option>
-                    <option value="dont connect">don't connect</option>
+                    <option  className="max-[690px]:text-[0.5rem] w-[100px]" value="dont connect">don't connect</option>
                     {albumsInfo?.map((albumInfo) => (
-                        <option key={albumInfo.id} value={`${albumInfo.id}`}>
+                        <option className="max-[690px]:text-[0.5rem] w-[100px]" key={albumInfo.id} value={`${albumInfo.id}`}>
                             {`${albumInfo.album_name}`}
                         </option>
                     ))}

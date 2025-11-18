@@ -5,7 +5,7 @@ export default function Image({ imgUrl }) {
       <img
         src={imgUrl}
         alt="Uploaded song cover"
-        className="w-full h-full object-contain object-center"  // <-- this makes it "cover"
+        className="w-full h-full object-contain object-center" 
       />
     </div>
   )

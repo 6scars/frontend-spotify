@@ -2,7 +2,7 @@
 
 /*--------------------INPUTS/left-------------------*/
 .right-side .form-container {
-    @apply text-white  h-full w-full ml-5 mr-20 p-10;
+    @apply text-white h-full w-full ml-5 p-10;
 }
 
 .right-side input {
@@ -13,16 +13,23 @@
     @apply text-[1.4rem] text-white
 }
 
-.right-side  select {
+.right-side select {
     @apply w-full p-2 border-1 border-white rounded-md text-[1.4rem]
 }
 
-.right-side  select:hover{
+.right-side select:hover {
     @apply bg-black
 }
 
 
 /*--------------------RIGHT------------------------*/
-.right-side  .import-photo {
-    @apply  flex-2 p-2
+.right-side .import-photo {
+    @apply flex-2 p-2
+}
+
+@media(max-width:490px) {
+    .right-side .form-container {
+        margin:0px;
+        padding: 0px;
+    }
 }

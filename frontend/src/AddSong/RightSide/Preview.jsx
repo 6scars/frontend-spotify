@@ -64,7 +64,7 @@ export default function Preview({ addSongForm }) {
                     </p>
                 </div>
 
-                <div>
+                <div className="importedMp3-container">
                     <ImportedMp3 addSongForm={addSongForm} />
                 </div>
 
