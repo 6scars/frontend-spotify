@@ -1,15 +1,27 @@
 @import "tailwindcss";
- 
+
 /*-----------------------LEFTBAR-----------------------*/
 .leftBar {
-    @apply pt-[14px] fixed top-[var(--height-of-header)] bottom-[0px] bg-gray-900 rounded-xl
-            flex flex-col items-center gap-[10px] 
-            overflow-y-auto;
-            
+    @apply pt-[14px]  fixed top-[var(--height-of-header)] bottom-[0px] bg-gray-900 rounded-xl flex flex-col items-center gap-[10px] overflow-y-auto;
+    overflow-x:hidden;
     width: var(--width-of-left-bar);
 }
 
+.leftBar .create_playlist_button{
+    @apply text-nowrap text-[0.8rem] text-red-500 hover:text-white cursor-pointer;
+}
 
-.playlist__paragraph{
+
+.playlist__paragraph {
     color: var(--main-color)
+}
+
+@media(max-width:490px) {
+    .leftBar {
+        width: calc(var(--width-of-left-bar) - 20px);
+    }
+    .leftBar .create_playlist_button {
+        font-size: 0.5rem;
+    }
+
 }

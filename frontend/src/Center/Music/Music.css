@@ -6,11 +6,7 @@
   @apply space-y-4 bg-[#232323] flex-[2] h-full min-w-[500px] overflow-y-auto rounded-md relative;
 }
 
-@media (max-width:930px) {
-  .Center .music {
-    min-width: 250px;
-  }
-}
+
 
 /*-----main-type-----*/
 .music .main-type {
@@ -38,6 +34,8 @@
     padding-right: calc(var(--padding-left-main-type)-5px);
   }
 }
+
+@media
 
 /*------playlist--------*/
 :root {
@@ -79,13 +77,7 @@
   @apply pl-[1rem] font-bold text-white;
 }
 
-@media (max-width:930px) {
-  .music .playlist__title {
-    font-size: 0.6rem;
-    padding-left: 0.5rem;
-  }
 
-}
 
 /*--------songs--------*/
 
@@ -193,4 +185,35 @@
 
 .music .authors__text {
   color: var(--help-color3);
+}
+
+
+
+@media (max-width:930px) {
+  .Center .music {
+    min-width: 250px;
+  }
+
+  .music .playlist__title {
+    font-size: 0.6rem;
+    padding-left: 0.5rem;
+  }
+
+}
+
+
+
+
+@media(max-width:490px) {
+  .Center .music {
+    width: 100%;
+  }
+
+  /*-----main-type-----*/
+  .music .main-type {
+    font-size: 0.6rem;
+    padding: calc(var(--padding-main-type) - 10px);
+    padding-left: calc(var(--padding-left-main-type) - 15 px);
+  }
+
 }
