@@ -35,6 +35,10 @@
     background-color: var(--accent-color3)
 }
 
+.description .about-artist-text-container {
+    @apply flex flex-col gap-4;
+}
+
 .description .followers {
     font-weight: 500;
     color: var(--help-color);
@@ -103,17 +107,48 @@
 
     /*----CREDIT-----*/
     .description .credit-container {
-        @apply p-0 m-0 h-auto w-[full]  grow flex-1 flex flex-col gap-[1.5rem];
+        @apply p-0 m-0 h-auto w-[full] grow flex-1 flex flex-col gap-[1.5rem];
         background-color: var(--help-color2);
         overflow-y: visible;
-        
+
     }
 
     .description .credit-text-container {
         width: 100%;
-        padding:5px;
+        padding: 5px;
         font-size: 0.7rem;
-        word-break:break-all;
+        word-break: break-all;
 
     }
+}
+
+
+@media(max-width:690px) {
+    .description {
+        padding: 0px;
+        gap: 2px
+    }
+
+    /*--about-author--*/
+    .description .about-artist-text-container .artist-follow {
+        @apply flex flex-col
+    }
+
+    .description .author-title {
+        font-size: 0.5rem;
+    }
+
+    .description .about-artist-text-container {
+        font-size: 0.7rem;
+    }
+
+    .description .artist-follow {
+        font-size: 0.6rem;
+    }
+
+    .description .followers {
+        font-size: 0.8rem;
+    }
+
+
 }

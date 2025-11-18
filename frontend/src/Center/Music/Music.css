@@ -31,6 +31,14 @@
   padding-right: var(--padding-left-main-type);
 }
 
+@media(max-width:690px) {
+
+  .main-songs {
+    padding-left: calc(var(--padding-left-main-type)-5px);
+    padding-right: calc(var(--padding-left-main-type)-5px);
+  }
+}
+
 /*------playlist--------*/
 :root {
   --border: 16px;
@@ -118,15 +126,27 @@
     display: flex;
   }
 
-  
+  .music .song-container-inner {
+    @apply hover:bg-[var(--help-color2)];
+    padding: 8px;
+    width: 160px;
+  }
 
-
-.music .song-container-inner {
-  @apply hover:bg-[var(--help-color2)];
-  padding: 8px;
-  width: 160px;
 }
 
+@media (max-width:680px) {
+  .music .songs-container {
+    height: 50%;
+    width: auto;
+    overflow-x: scroll;
+    display: flex;
+  }
+
+  .music .song-container-inner {
+    @apply hover:bg-[var(--help-color2)];
+    padding: 6px;
+    width: 100px;
+  }
 }
 
 .music .song-container {

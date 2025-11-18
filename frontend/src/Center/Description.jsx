@@ -34,7 +34,7 @@ export default function Description() {
               className="artist__image w-full  h-[200px] object-cover"
             />
           </div>
-          <div className="about-artist-text-container flex flex-col gap-4">
+          <div className="about-artist-text-container">
             <div className="artist-name text-white font-bold">
               {currentSong.song_name}
             </div>
