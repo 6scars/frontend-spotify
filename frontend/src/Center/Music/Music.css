@@ -71,13 +71,14 @@
   @apply pl-[1rem] font-bold text-white;
 }
 
-@media (max-width:930px){
-  .music .playlist__title{
+@media (max-width:930px) {
+  .music .playlist__title {
     font-size: 0.6rem;
-    padding-left:0.5rem;
+    padding-left: 0.5rem;
   }
-  
+
 }
+
 /*--------songs--------*/
 
 .music .songs {
@@ -96,14 +97,36 @@
   height: 80%;
   width: auto;
   overflow-x: scroll;
+  overflow-y: hidden;
   display: flex;
 }
+
+
 
 
 .music .song-container-inner {
   @apply hover:bg-[var(--help-color2)];
   padding: 20px;
   width: 200px;
+}
+
+@media (max-width:930px) {
+  .music .songs-container {
+    height: 60%;
+    width: auto;
+    overflow-x: scroll;
+    display: flex;
+  }
+
+  
+
+
+.music .song-container-inner {
+  @apply hover:bg-[var(--help-color2)];
+  padding: 8px;
+  width: 160px;
+}
+
 }
 
 .music .song-container {
