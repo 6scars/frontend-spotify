@@ -8,7 +8,7 @@ export default function SingIn({ signForm, setSwitchForm, clickedAccount, sendFo
                 <div className="fixed left-0 top-0 right-0 bottom-0  bg-transparent rounded-2xl shadow-lg p-8 w-full  z-[25]
                         flex justify-center items-center
                     ">
-                    <div className="Sign-container w-[50%] h-[50%] bg-[var(--background-color)] rounded-xl
+                    <div className="Sign-container w-[50%] mini-h-[50%] bg-[var(--background-color)] rounded-xl
                             text-white
                         ">
                         <div className="Sign_in_text_container h-[20%]">

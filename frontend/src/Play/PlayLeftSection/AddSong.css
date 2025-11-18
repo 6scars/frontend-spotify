@@ -1,0 +1,22 @@
+@import 'tailwindcss';
+
+.play-left-section .show-add-song-container {
+    @apply w-70 h-40 bg-black text-[var(--main-color)] fixed left-45 bottom-25 overflow-y-scroll rounded-md flex flex-col justify-center items-center gap-3 border-1 border-solid border-[var(--help-color2)];
+    box-shadow: 0px 0px 10px 5px rgba(0, 0, 0, 0.709);
+}
+
+.play-left-section .add-song-playlist {
+    @apply cursor-pointer w-[90%] p-1 flex justify-between items-center border-1 border-solid border-[var(--help-color2)] rounded-md hover:border-[var(--accent-color)] active:border-[var(--accent-color3)]
+}
+
+@media(max-width:690px) {
+    .play-left-section .show-add-song-container {
+        height: 20%;
+        width: 30%;
+        left: 110px;
+        bottom: 60px;
+    }
+    .play-left-section .add-song-playlist{
+        font-size:0.6rem;
+    }
+}
