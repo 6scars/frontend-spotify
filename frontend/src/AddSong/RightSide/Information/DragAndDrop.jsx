@@ -40,7 +40,7 @@ export default function DragAndDrop({ addSongForm, setAddSongForm }) {
     return (
         <div
             ref={dragAndDropEl}
-            className="import-photo flex items-center justify-center flex-1 w-full  overflow-hidden"
+            className="import-photo flex items-center justify-center flex-1 min-h-[250px] min-w-[250px] w-full  overflow-hidden"
         >
             <label className="h-full w-full" htmlFor="input-file" id="img-view">
                 <div className="song-container-inner w-full h-full  flex items-center justify-center flex-col rounded-xl ">

@@ -24,10 +24,10 @@ export default function LeftSide({ tabName, setTabName, addSongForm }) {
   }, [])
 
   return (
-    <div className="left-side flex-3 text-[var(--help-color)]">
+    <div className="left-side flex-3 text-[var(--help-color)]  ">
       <div
         onClick={chooseTab}
-        className="left-tab INFORMATION active-tab information-tab h-[25%]"
+        className="left-tab INFORMATION active-tab information-tab h-[25%]  "
       >
         <span>INFORMATION</span>
       </div>

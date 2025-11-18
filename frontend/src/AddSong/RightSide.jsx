@@ -9,7 +9,7 @@ export default function RightSide({albumsInfo, tabName, addSongForm, setAddSongF
         PREVIEW: <Preview addSongForm={addSongForm} />
     }
     return (
-        <div className="right-side flex-10">
+        <div className="right-side">
             {tabs[tabName]}
         </div>
     )

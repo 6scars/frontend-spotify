@@ -77,14 +77,10 @@ export default function ImportedMp3({ addSongForm }) {
     const progressBar = (current / duration) * 100;
     return (
 
-        <div
-            className="play-center-section h-full w-[400px] min-w-[200px] max-w-[600px]
-        flex flex-col items-center text-[var(--main-color)]
-      "
-        >
+        <div className="w-full h-full">
             <div>{addSongForm.importedSongNameFile}</div>
-           {addSongForm.importedSongUrlBlob ? <span>Saved</span> : ''}
-            <div className="w-full flex-1 flex justify-center items-center gap-5">
+            {addSongForm.importedSongUrlBlob ? <span>Saved</span> : ''}
+            <div className="w-full flex-1 flex justify-center items-center gap-5 max-[490px]:gap-0">
                 <button>
                     <img
                         onClick={handleLoop}
@@ -128,7 +124,7 @@ export default function ImportedMp3({ addSongForm }) {
             </div>
 
             <div className="w-full flex-1 flex justify-center items-center">
-                <div className="text-red-500 min-w-[50px]">{formatTime(current)}</div>
+                <div className="text-red-500 min-w-[50px] max-[490px]:text-[0.6rem] max-[490px]:min-w-[25px] ">{formatTime(current)}</div>
                 <div
                     onClick={(event) => onSeek(event)}
                     className="w-[300px] h-[15px] bg-[var(--help-color2)] rounded-full overflow-hidden"
@@ -143,7 +139,7 @@ export default function ImportedMp3({ addSongForm }) {
                     src={addSongForm.importedSongUrlBlob}
                     preload="metadata"
                 />
-                <div className="text-red-500  min-w-[50px]">{formatTime(duration)}</div>
+                <div className="text-red-500  min-w-[50px] max-[490px]:text-[0.6rem] max-[490px]:min-w-[25px]">{formatTime(duration)}</div>
 
             </div>
         </div>
