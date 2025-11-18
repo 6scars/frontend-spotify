@@ -5,7 +5,11 @@
 }
 
 .playlist-describing-wrapper .playlist-songs-container {
-    @apply mt-10  pb-20;
+    @apply mt-10 pb-20;
+}
+
+.playlist-describing-wrapper .playlist_name_text {
+    @apply text-[3rem] text-[var(--main-color)] font-bold h-25
 }
 
 .playlist-describing-wrapper .song-information-container {
@@ -17,11 +21,16 @@
 }
 
 .playlist-describing-wrapper .song-description-container {
-    @apply w-full h-15 rounded-md text-[var(--main-color)] overflow-hidden my-1 bg-[var(--background-color2)]/80
-    
-    flex justify-between items-center;
+    @apply w-full h-15 rounded-md text-[var(--main-color)] overflow-hidden my-1 bg-[var(--background-color2)]/80 flex justify-between items-center;
 }
 
-.playlist-describing-wrapper .song-controll-container{
+.playlist-describing-wrapper .song-controll-container {
     @apply mr-3;
+}
+
+
+@media(max-width:490px) {
+    .playlist-describing-wrapper .playlist_name_text {
+        font-size: 1.5rem;
+    }
 }

@@ -1,30 +1,48 @@
 @import "tailwindcss";
-.Sign_in_text_container{
-    display:flex;
+
+.Sign_in_text_container {
+    display: flex;
 
 }
 
 .sign_in {
     @apply text-2xl font-bold flex justify-center items-center;
-    padding-top:2rem;
-    padding-bottom:2rem;
+    padding-top: 2rem;
+    padding-bottom: 2rem;
     font-size: 2.5rem;
 }
 
 .devider {
     width: 100%;
-    border:1px solid rgb(78, 75, 75)
+    border: 1px solid rgb(78, 75, 75)
 }
 
 
-.form__input{
+.form__input {
     @apply border min-w-[100%] border-gray-300 rounded px-4 py-2 focus:outline-none focus:ring-2 focus:ring-blue-500;
 }
 
-.form__button{
+.form__button {
     @apply bg-[var(--accent-color3)] text-white rounded px-4 py-2 hover:bg-[var(--accent-color)] transition;
 }
 
-.form__button__cancel{
+.form__button__cancel {
     @apply text-gray-500 hover:text-gray-700 transition;
+}
+
+@media (max-width:690px) {
+    .sign_in {
+        padding-top: 1rem;
+        padding-bottom: 1rem;
+        font-size: 1.5rem;
+    }
+
+
+}
+
+
+@media(max-width:490px) {
+    .sign_in  .form__input{
+        width: 15px;
+    }
 }

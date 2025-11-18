@@ -55,11 +55,11 @@ export default function CreatePlaylist({ songs }) {
                 <div className="create-playlist">
                     <form className="create__playlist__form">
                         <div className="flex flex-row justify-center items-center gap-5 text-[1.2rem]">
-                            <label className="text-[var(--main-color)]">
+                            <label className="max-[490px]:text-[0.8rem] text-[var(--main-color)]">
                                 NAME:
                             </label>
                             <input onChange={(e) => setPlaylistName(e.target.value)} className="name__input bg-black text-[var(--main-color)]" name="name" placeholder="name" type='text' />
-                            <button onClick={handleCreateNewPlaylist} className="text-[var(--main-color)] cursor-pointer">create</button>
+                            <button onClick={handleCreateNewPlaylist} className="max-[490px]:text-[0.8rem] text-[var(--main-color)] cursor-pointer">create</button>
                         </div>
 
                     </form>

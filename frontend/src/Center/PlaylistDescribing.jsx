@@ -39,7 +39,7 @@ export default function PlaylistDescribing() {
                     relative  flex justify-center items-center playlist-describing" >
                     <div className="playlist-describing-wrapper w-[90%] h-[95%]  ">
                         <div className="playlist-name-container flex justify-start items-center ">
-                            <span className="text-[3rem] text-[var(--main-color)] font-bold h-25">{playlist[0].name}</span>
+                            <span className="playlist_name_text">{playlist[0].name}</span>
                         </div>
 
                         <div className="playlist-controlls flex justify-end items-center ">

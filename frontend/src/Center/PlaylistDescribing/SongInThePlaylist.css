@@ -1,0 +1,30 @@
+@import 'tailwindcss';
+
+
+@media(max-width:930px) {
+    .song_button {
+        font-size: 0.8rem
+    }
+}
+
+@media(max-width:690px) {
+    .song-information-container {
+        width: 50%;
+        font-size: 0.8rem;
+    }
+
+    .song_button {
+        font-size: 0.6rem
+    }
+}
+
+@media(max-width:490px) {
+    .song-information-container {
+        width: 35%;
+        font-size: 0.6rem;
+    }
+
+    .song_button {
+        font-size: 0.3rem
+    }
+}

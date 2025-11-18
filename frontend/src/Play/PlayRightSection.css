@@ -1,5 +1,9 @@
 @import 'tailwindcss';
 
+.play-right-section {
+    @apply h-full w-[300px] flex justify-center items-center;
+}
+
 .volume-container {
     @apply w-full h-full flex items-center gap-5;
     padding-right: 50px;
@@ -22,4 +26,13 @@
         height: 0px;
         display: hidden;
     }
+}
+
+
+@media (max-width:490px) {
+    .volume-container {
+        gap: 0px;
+    }
+
+
 }

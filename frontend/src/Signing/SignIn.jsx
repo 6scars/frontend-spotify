@@ -25,7 +25,7 @@ export default function SingIn({ signForm, setSwitchForm, clickedAccount, sendFo
 
                         <div className="devider" />
                         <div className="Sign-form-Wrapper w-[100%] h-[79%] align-middle flex justify-center items-center">
-                            <form onSubmit={sendForm} className="flex flex-col gap-5">
+                            <form onSubmit={sendForm} className="w-full flex flex-col gap-5">
                                 <input
                                     type="email"
                                     name="email"
