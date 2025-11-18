@@ -13,7 +13,7 @@ export default function PlayRightSection({ volume, handleVolume, muted,  handleM
       className="play-right-section h-full w-[300px] min-[150px]
        flex justify-center items-center"
     >
-      <div className="volume-container w-full h-full flex items-center gap-5">
+      <div className="volume-container">
         <div className="volume-icon-container">
           <img
             className="cursor-pointer"
