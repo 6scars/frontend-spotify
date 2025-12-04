@@ -21,7 +21,7 @@ export default function AddSong() {
 
     useEffect(() => {
         const getAuthorsAlbums = async () => {
-            const response = await fetch('https://spotify-backend-1-olcd.onrender.com/api/fetchSongs/api/getAuthorsAlbums', {
+            const response = await fetch('https://spotify-backend-1-olcd.onrender.com/api/getAuthorsAlbums', {
                 method: "GET",
                 headers: {
                     "Authorization": `Bearer ${localStorage.getItem('jwt')}`,
