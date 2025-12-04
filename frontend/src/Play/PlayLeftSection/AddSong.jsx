@@ -8,7 +8,7 @@ export default function AddSong({ currentSong, showAddSong, fetchAuthState }) {
 
     async function handleAddSong(song_id, playlist_id) {
         try {
-            const response = await fetch('https://spotify-backend-1-olcd.onrender.com/api/addSongToPlaylist', {
+            const response = await fetch(`${import.meta.env.VITE_BACKEND_URL}/api/addSongToPlaylist`, {
                 "method": "POST",
                 "headers": {
                     'Content-type': 'application/json',
@@ -31,7 +31,7 @@ export default function AddSong({ currentSong, showAddSong, fetchAuthState }) {
 
     async function handleRemoveSong(song_id, playlist_id) {
         try {
-            const response = await fetch('https://spotify-backend-1-olcd.onrender.com/api/handleRemoveSong', {
+            const response = await fetch(`${import.meta.env.VITE_BACKEND_URL}/api/handleRemoveSong`, {
                 "method": "POST",
                 "headers": {
                     'Content-type': 'application/json',
