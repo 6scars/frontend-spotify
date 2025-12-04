@@ -27,7 +27,7 @@ export default function Signing() {
         let response;
         try {
             if (switchForm) {
-                response = await fetch("https://spotify-backend-1-olcd.onrender.com/api/fetchSongs/api/newAccount", {
+                response = await fetch("https://spotify-backend-1-olcd.onrender.com/api/newAccount", {
                     "method": "POST",
                     "headers": {
                         "Content-Type": "application/json"
@@ -38,7 +38,7 @@ export default function Signing() {
                     })
                 })
             } else {
-                response = await fetch("https://spotify-backend-1-olcd.onrender.com/api/fetchSongs/api/signin", {
+                response = await fetch("https://spotify-backend-1-olcd.onrender.com/api/signin", {
                     "method": "post",
                     "headers": {
                         "Content-Type": "application/json"
