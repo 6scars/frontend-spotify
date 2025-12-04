@@ -30,7 +30,7 @@ export default function Preview({ addSongForm }) {
         formData.append('img', imgBlob, 'cover.jpg');
         formData.append('addSongForm', JSON.stringify(addSongForm))
         formData.append('token', localStorage.getItem('jwt'))
-        const response = await fetch('http://localhost:3005/api/saveSongInBase', {
+        const response = await fetch('https://spotify-backend-1-olcd.onrender.com/api/fetchSongs/api/saveSongInBase', {
             method: 'POST',
             body: formData
 

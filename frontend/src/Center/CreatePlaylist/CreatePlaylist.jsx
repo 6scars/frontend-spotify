@@ -23,7 +23,7 @@ export default function CreatePlaylist({ songs }) {
         }
         try {
             const songsToAddArray = Array.from(songsToAdd);
-            const responde = await fetch('http://localhost:3005/api/createPlaylist', {
+            const responde = await fetch('https://spotify-backend-1-olcd.onrender.com/api/fetchSongs/api/createPlaylist', {
                 "method": 'POST',
                 "headers": {
                     'Content-Type': 'application/json',
