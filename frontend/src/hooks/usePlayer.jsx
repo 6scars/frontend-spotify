@@ -152,7 +152,7 @@ export function usePlayer() {
 
   async function chooseSong(song_id) {
     try {
-      const responde = await fetch(`http://localhost:3005/api/getSong?id=${song_id}`)
+      const responde = await fetch(`https://spotify-backend-1-olcd.onrender.com/api/fetchSongs/api/getSong?id=${song_id}`)
       const data = await responde.json();
       const findedSong = data.data[0];
       if (findedSong) {

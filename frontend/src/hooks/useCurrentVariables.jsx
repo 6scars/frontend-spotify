@@ -9,10 +9,6 @@ export function useCurrentVariables() {
     const [currentPlaylistI, setCurrentPlaylistI] = useState(null);
     const [playlist_id, setPlaylists_id] = useState(null);
 
-    // const handleSetCurrentPlaylist = ()=>{setCurrentPlaylist()}
-
-    // const handleSetCurrentPlaylistI = ()=>{}
-    
 
     return {
         currentSong, setCurrentSong,

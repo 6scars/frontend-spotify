@@ -16,7 +16,7 @@ function usePlaylists() {
     const fetchThePlaylistData = async () => {
         console.log('fetch')
         if (playlist_id !== null && playlist_id !== undefined) {
-            const response = await fetch(`http://localhost:3005/api/getPlaylistData?id=${playlist_id}`);
+            const response = await fetch(`https://spotify-backend-1-olcd.onrender.com/api/fetchSongs/api/getPlaylistData?id=${playlist_id}`);
             const data = await response.json();
             setPlaylist(data.data)
             setIsLoading(false);
