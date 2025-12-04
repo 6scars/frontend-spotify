@@ -1,5 +1,8 @@
+
+
 export async function fetchSongs() {
-    const response = await fetch('https://spotify-backend-1-olcd.onrender.com/api/fetchSongs');
+    console.log(import.meta.env.VITE_BACKEND_URL)
+    const response = await fetch(`${import.meta.env.VITE_BACKEND_URL}/api/fetchSongs`);
     const data = await response.json();
     return data.data
 }
@@ -9,7 +12,7 @@ export async function fetchPlaylists(id) {
         return []
     }
     try {
-        const playlistsResponse = await fetch('https://spotify-backend-1-olcd.onrender.com/api/playlists', {
+        const playlistsResponse = await fetch(`${import.meta.env.VITE_BACKEND_URL}/api/playlists`, {
             method: 'POST',
             headers: {
                 'Content-Type': "application/json"
@@ -31,7 +34,7 @@ export async function fetchPlaylists(id) {
 
 export async function checkToken() {
     try {
-        const dataUserResponse = await fetch('https://spotify-backend-1-olcd.onrender.com/api/checkToken', {
+        const dataUserResponse = await fetch(`${import.meta.env.VITE_BACKEND_URL}/api/checkToken`, {
             method: 'POST',
             headers: {
                 'Authorization': `Bearer ${localStorage.getItem('jwt')}`,
@@ -55,7 +58,7 @@ export async function checkToken() {
 
 export async function addView(id) {
     console.log('addView function called...')
-    await fetch(`https://spotify-backend-1-olcd.onrender.com/api/addView`, {
+    await fetch(`${import.meta.env.VITE_BACKEND_URL}/api/addView`, {
         method: 'POST',
         headers: {
             'Content-Type': 'application/json',
