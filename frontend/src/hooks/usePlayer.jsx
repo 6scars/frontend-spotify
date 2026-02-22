@@ -81,11 +81,14 @@ export function usePlayer() {
   };
 
   const goToNext = async () => {
+    /*---------------------EARLY RETURN---------------------*/
     if (currentPlaylist.length <= 0) {  /*-- there is no songs in the currentPlaylist array --*/
       handleError(`there is no currentPlaylist`)
       return null
     }
+    
 
+    /*---------------------VARIABLES---------------------*/
     const prevIndex = currentPlaylistI;
     const playlistLen = currentPlaylist.length - 1;
 
@@ -93,13 +96,15 @@ export function usePlayer() {
     let newSongId;
 
 
-    if (newIndex <= playlistLen) {  /*--when newIndex is at begining of array or almost at the end --*/
+    /*---------------------EDGE CASES---------------------*/
+    /*--when newIndex is at BEGINNING of the array or almost at the end of the array--*/
+    if (newIndex <= playlistLen) {  
       const newSong = currentPlaylist[newIndex];
       newSongId = newSong.song_id;
 
       if (!newSongId)
         handleError(`there is no newSongId chooseSong function`, true)
-    } else if (newIndex > playlistLen) { /*--when newIndex is at end of array --*/
+    } else if (newIndex > playlistLen) { /*--when newIndex is at END of the array --*/
       newIndex = 0;
       const newSong = currentPlaylist[newIndex];
       newSongId = newSong.song_id;
@@ -107,6 +112,9 @@ export function usePlayer() {
       if (!newSongId)
         handleError(`there is no newSongId chooseSong function `, true)
     }
+
+
+    /*---------------------FINAL EXECUTION---------------------*/
     setCurrentPlaylistI(newIndex)
     await chooseSong(newSongId)
 
@@ -114,20 +122,24 @@ export function usePlayer() {
   };
 
   const goToPrevious = async () => {
+    /*---------------------EARLY RETURN---------------------*/
     if (currentPlaylist.length <= 0) { /*-- there is no songs in the currentPlaylist array --*/
       handleError(`there is no currentPlaylist`)
       return null
     }
 
+     /*---------------------VARIABLES---------------------*/
     const prevIndex = currentPlaylistI;
     const playlistLen = currentPlaylist.length - 1;
-
-
 
     let newIndex = prevIndex - 1;
     let newSongId;
 
-    if (newIndex >= 0) {        /*--when newIndex is at end or almost begining of array --*/
+
+
+    /*---------------------EDGE CASES---------------------*/
+    /*--when newIndex is at end of the array or almost at begining of the array --*/
+    if (newIndex >= 0) {       
       const newSong = currentPlaylist[newIndex];
       newSongId = newSong.song_id;
 
@@ -143,6 +155,7 @@ export function usePlayer() {
         handleError(`there is no newSongId chooseSong function`, true)
     }
 
+    /*---------------------FINAL EXECUTION---------------------*/
     setCurrentPlaylistI(newIndex)
     await chooseSong(newSongId)
 
