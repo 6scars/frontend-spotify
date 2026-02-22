@@ -5,6 +5,7 @@ import fs from 'fs'
 import path from 'path'
 import { sql } from '../config/db.js'
 import { createClient } from '@supabase/supabase-js'
+import signIn from '../middleware/signIn.controller.js'
 import '../utils/utils.js';
 env.config()
 
@@ -16,37 +17,6 @@ const supabase = createClient(
     process.env.SUPABASE_KEY
 )
 
-async function signIn(req, res, next) {
-    const { email, password } = req.body;
-    try {
-        const data = await sql`
-            SELECT id, email, password
-            FROM authors
-            WHERE authors.email = ${email}
-        `;
-        const userPassword = data[0].password;
-        const userId = data[0].id
-        const userEmail = data[0].email
-
-        const isMatch = await bcrypt.compare(password, userPassword);
-        if (isMatch) {
-            const token = await jwt.sign({
-                id: userId,
-                email: userEmail
-            },
-                JWT_SECRET,
-                { expiresIn: '1h' }
-            )
-
-            return res.status(201).json({ message: 'logedIn', user_id: userId, token })
-        } else {
-            throw 'wrong password'
-        }
-
-    } catch (err) {
-        return res.status(401).json({ message: 'wrongPassword' })
-    }
-}
 
 async function signUp(req, res, next) {
     const saltRounds = 10;
@@ -178,8 +148,6 @@ async function addView(req, res, next) {
 
         })
 
-
-
         return res.sendStatus(204)
     } catch (err) {
         console.error('FUNCTION ERORR addView', err)
@@ -190,26 +158,8 @@ async function addView(req, res, next) {
 
 
 
-async function getDataFromToken(req, res, next) {
-    try {
-        const authHeader = req.headers.authorization;
-
-        if (!authHeader || !authHeader.startsWith("Bearer ")) {
-            return res.status(401).json({ message: "Missing or invalid token" });
-        }
-        const token = authHeader.split(" ")[1];
-        const decodedData = jwt.decode(token);
-        req.decodedData = decodedData;
-        next();
-
-    } catch (error) {
-        console.error(error);
-        return res.status(500).json({ message: "Server error" });
-    }
-}
-
 async function getAuthorsAlbums(req, res, next) {
-    const { id, email } = req.decodedData;
+    const { id, email } = req.payloadJWT;
     try {
         const response = await sql`
         SELECT album_name, album.id
@@ -289,7 +239,7 @@ export async function saveSongInBase(req, res, next) {
         // Insert metadata into DB
         jwt.verify(req.body.token, JWT_SECRET)
 
-        const decodedToken = jwt.decode(req.body.token); // use verify if you need to validate signature
+        const decodedToken = jwt.decode(req.body.token); 
         const { song_name, credit, album_id } = addSongForm;
         const albumIdValue = album_id && album_id !== '' ? album_id : null;
 
@@ -439,25 +389,11 @@ export async function getSong(req, res, next) {
 }
 
 
-export function verifyToken(req, res, next) {
-    try {
-        const authHeader = req.headers.authorization;
-        if (!authHeader)
-            return res.status(401).json({ error: 'Missing token' });
-        const token = authHeader.split(' ')[1];
-        const d = jwt.verify(token, JWT_SECRET)
-        req.d = d;
-        next()
-    } catch (err) {
-        console.err(err)
-        return res.status(500).json({ message: 'SERVER PROBLEM' })
-    }
-}
 
 export async function addSongToPlaylist(req, res, next) {
     try {
         const { playlist_id, song_id } = req.body
-        const user_id = req.d.id
+        const user_id = req.payloadJWT.id
 
         const data = await sql`
             INSERT INTO playlists_songs (playlist_id, song_id)
@@ -480,7 +416,7 @@ export async function addSongToPlaylist(req, res, next) {
 export async function handleRemoveSong(req, res, next) {
     try {
         const { playlist_id, song_id } = req.body
-        const user_id = req.d.id
+        const user_id = req.payloadJWT.id
         await sql`
             DELETE FROM playlists_songs
             USING playlists
@@ -498,7 +434,6 @@ export async function handleRemoveSong(req, res, next) {
 }
 
 export default controller = {
-    verifyToken,
 
     handleRemoveSong,
     addSongToPlaylist,
@@ -508,7 +443,6 @@ export default controller = {
     checkToken,
     fetchSongs,
     addView,
-    getDataFromToken,
     getAuthorsAlbums,
     saveSongInBase,
     createPlaylist,
