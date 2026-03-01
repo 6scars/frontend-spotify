@@ -16,7 +16,7 @@ export default function Songs({ songs, handleSwitchCurrentPlaylist }) {
               handleSwitchCurrentPlaylist()
             }}
             key={song.song_id}
-            className="song-container-outer bg-transparent flex justify-center"
+            className="song-container-outer bg-transparent flex justify-center cursor-pointer"
           >
             <div className="song-container-inner  rounded-xl ">
               <Image song_image={song.song_image} />

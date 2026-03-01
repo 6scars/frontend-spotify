@@ -21,7 +21,7 @@ export default function Music({ songs }) {
       </div>
       <div className="main-songs ">
         <Latest handleSwitchCurrentPlaylist={handleSwitchCurrentPlaylist} />
-        <div className="songs cursor-pointer">
+        <div className="songs">
           <div className="songs-title-container text-white font-bold">
             <p className="songs__title">Prepared for You</p>
           </div>

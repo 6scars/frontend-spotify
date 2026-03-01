@@ -12,7 +12,7 @@ export default function Latest({handleSwitchCurrentPlaylist }) {
       {(latest || []).map((l) => {
         return (
           <div key={l.id} className="playlist" onClick={() => { chooseSong(l.id); handleSwitchCurrentPlaylist() }}>
-            <div className="playlist-image-container">
+            <div className="playlist-image-container h-full">
               <LatestImg img={l.song_image}/>
             </div>
             <div className="playlist-title-container">
