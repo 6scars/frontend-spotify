@@ -1,15 +1,15 @@
 
-import { useEffect } from "react";
+import { useEffect }          from "react";
 
-import Music from "./Music/Music.jsx";
-import Description from "./Description.jsx";
-import CreatePlaylist from "./CreatePlaylist/CreatePlaylist.jsx"
-import PlaylistDescribing from "./PlaylistDescribing.jsx";
+import Music                  from "./Music/Music.jsx";
+import Description            from "./Description.jsx";
+import CreatePlaylist         from "./CreatePlaylist/CreatePlaylist.jsx"
+import PlaylistDescribing     from "./PlaylistDescribing.jsx";
 
 import "./Center.css";
 
-import { useUIStateContext } from "../contexts/UIStateContext.jsx";
-import { useAuthContext } from "../contexts/AuthContext.jsx";
+import { useUIStateContext }  from "../contexts/UIStateContext.jsx";
+import { useAuthContext }     from "../contexts/AuthContext.jsx";
 
 
 

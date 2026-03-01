@@ -1,14 +1,15 @@
-import {useState} from "react"
+import {useState}       from "react"
+
 export default function Image({ song_image }) {
-    const [loaded, setLoaded] = useState(false)
-    
+    const [loaded, setLoaded]   = useState(false)
+    const [src, setSrc]         = useState(`${import.meta.env.VITE_SUPA_B_STOR}/images/songPictures/${song_image}`)
     return (
         <div className="song-image-container h-[75%] ">
             <img
                 className={`song__image ${loaded ? "loaded" : "notLoaded"}`}
                 onLoad={() => setLoaded(true)}
-                onError={() => console.error("Failed to load image")}
-                src={`https://rgmmwhkixprkskznqjcy.supabase.co/storage/v1/object/public/spotify/images/songPictures/${song_image}`}
+                onError={() => setSrc(`${import.meta.env.VITE_SUPA_B_STOR}/images/NOTFOUND.jpeg`)}
+                src={src}
             ></img>
         </div>
     )

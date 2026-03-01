@@ -1,7 +1,7 @@
-import "./Music.css";
-import Songs from "./Songs/Songs.jsx";
-import Latest from "./Songs/Latest.jsx";
-import { useCurrentPlaybackContext } from "../../contexts/CurrentPlaybackContext.jsx";
+import                                        "./Music.css";
+import Songs                            from  "./Songs/Songs.jsx";
+import Latest                           from  "./Songs/Latest/Latest.jsx";
+import { useCurrentPlaybackContext }    from  "../../contexts/CurrentPlaybackContext.jsx";
 
 
 export default function Music({ songs }) {
