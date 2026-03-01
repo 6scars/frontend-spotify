@@ -50,6 +50,9 @@ export default function Signing() {
                 })
             }
             const data = await response.json();
+            console.log(data)
+            if(response.ok === false) throw new Error(data.message, response.status)
+            
             if (data.token) {
                 localStorage.setItem('jwt', data.token)
                 localStorage.setItem('user_id', data.user_id)
@@ -57,7 +60,7 @@ export default function Signing() {
             }
 
         } catch (err) {
-            console.error("SEND FORM ERROR: ", err)
+            console.error(err)
         }
     }
 

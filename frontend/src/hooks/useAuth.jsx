@@ -19,6 +19,7 @@ export function useAuth() {
 
     async function fetchAuthState() {
         const valid = await checkToken();
+        console.log(valid)
         if (valid) {
             setIsLogedIn(valid)
             setPlaylists(await fetchPlaylists(user_id) || [])

@@ -1,5 +1,6 @@
-import Image from './Image'
-import { usePlayerContext } from "../../../contexts/PlayerContext.jsx";
+import Image                  from './Image'
+import { usePlayerContext }   from "../../../contexts/PlayerContext.jsx";
+
 
 export default function Songs({ songs, handleSwitchCurrentPlaylist }) {
   const { chooseSong } = usePlayerContext();
