@@ -1,15 +1,21 @@
-import express from 'express';
-import cors from 'cors';
-import router from './routes/router.js';
-import env from 'dotenv';
-env.config();
+import                       './config/env.js'
+import express          from 'express';
+import cors             from 'cors';
+import router           from './router.js';
+import morgan           from 'morgan'
+import {errorHandler}   from './config/errorHandler/errorHandler.js'
 
 
-const app = express();
-const PORT = process.env.PORT || 3005;
-app.use(express.json());
-app.use(cors());
-app.use("/api", router);
+
+
+
+const app       = express();
+const PORT      = process.env.PORT || 3005;
+
+app.use(express.json()  );
+app.use(cors()          );
+app.use(morgan("tiny")  );
+app.use("/api", router  );
 
 
 app.listen(PORT, () => {
@@ -26,3 +32,6 @@ app.use("/api/health",(req,res)=>{
   console.log(`health check`);
   return res.status(200).send("ok")
 })
+
+
+app.use(errorHandler);
