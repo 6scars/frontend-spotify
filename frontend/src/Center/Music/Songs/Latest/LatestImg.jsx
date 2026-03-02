@@ -1,5 +1,4 @@
 import { useState } from "react"
-import                   "./latestImg.css"
 
 
 export default function LatestImg({img}){
@@ -10,7 +9,7 @@ export default function LatestImg({img}){
         return(
             <div className="w-full h-full">
                 {!loaded && (
-                        <div className=" h-full w-full shimmer"></div>
+                        <div className="h-full w-full shimmer"></div>
                     )}
                 <img
                     className="playlist__image"
