@@ -1,10 +1,14 @@
 import {useState}       from "react"
+import                       "./Image.css"
 
 export default function Image({ song_image }) {
     const [loaded, setLoaded]   = useState(false)
     const [src, setSrc]         = useState(`${import.meta.env.VITE_SUPA_B_STOR}/images/songPictures/${song_image}`)
     return (
-        <div className="song-image-container h-[75%] ">
+        <div className="song-image-container h-[75%] w-full">
+            {!loaded && (
+                <div className="h-full w-full shimmer"> </div>
+                )}
             <img
                 className={`song__image ${loaded ? "loaded" : "notLoaded"}`}
                 onLoad={() => setLoaded(true)}
