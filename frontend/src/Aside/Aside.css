@@ -13,7 +13,11 @@
 
 
 .playlist__paragraph {
+    @apply w-full
+    text-[9px] font-bold  text-center text-white break-words text-center line-clamp-2 
+    p-1 text-shadow-lg;
     color: var(--main-color)
+
 }
 
 @media(max-width:490px) {
