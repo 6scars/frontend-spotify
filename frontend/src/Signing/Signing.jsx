@@ -1,20 +1,23 @@
-import { useState } from 'react'
-import SignIn from './SignIn.jsx'
-import SignUp from './SignUp.jsx'
-import AccountOptions from "./AccountOptions/AccountOptions"
-import "./Signing.css"
-import { useAuthContext } from '../contexts/AuthContext.jsx'
-import { useUIStateContext } from '../contexts/UIStateContext.jsx'
+import { useState }                     from 'react'
+import SignIn                           from './SignIn.jsx'
+import SignUp                           from './SignUp.jsx'
+import AccountOptions                   from "./AccountOptions/AccountOptions"
+import                                       "./Signing.css"
+import { useAuthContext }               from '../contexts/AuthContext.jsx'
+import { useUIStateContext }            from '../contexts/UIStateContext.jsx'
 
 export default function Signing() {
-    const [formValue, setFormValue] = useState({
+    const [fetchRespond, setFetchResponde]  = useState(null);
+    const [formValue, setFormValue]         = useState({
         email: '',
         password: ''
     })
-    const [switchForm, setSwitchForm] = useState(false);
+    
+    const [switchForm, setSwitchForm]       = useState(false);
 
-    const { isLogedIn, setIsLogedIn } = useAuthContext();
-    const { clickedAccount } = useUIStateContext();
+    const { isLogedIn, setIsLogedIn }       = useAuthContext();
+    const { clickedAccount }                = useUIStateContext();
+
     const signForm = (e) => {
         setFormValue((prev) => ({
             ...prev,
@@ -50,7 +53,6 @@ export default function Signing() {
                 })
             }
             const data = await response.json();
-            console.log(data)
             if(response.ok === false) throw new Error(data.message, response.status)
             
             if (data.token) {
@@ -60,7 +62,8 @@ export default function Signing() {
             }
 
         } catch (err) {
-            console.error(err)
+            console.error(err.message)
+            setFetchResponde(err.message)
         }
     }
 
@@ -80,11 +83,13 @@ export default function Signing() {
                             clickedAccount={clickedAccount}
                             sendForm={sendForm}
                             isLogedIn={isLogedIn}
+                            fetchRespond={fetchRespond}
                         />) : (<SignUp
                             signForm={signForm}
                             setSwitchForm={setSwitchForm}
                             clickedAccount={clickedAccount}
                             sendForm={sendForm}
+                            fetchRespond={fetchRespond}
                         />)
             }
         </>

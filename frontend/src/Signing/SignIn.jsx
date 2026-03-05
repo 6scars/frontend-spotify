@@ -1,4 +1,4 @@
-export default function SingIn({ signForm, setSwitchForm, clickedAccount, sendForm }) {
+export default function SingIn({ signForm, setSwitchForm, clickedAccount, sendForm, fetchRespond }) {
 
     return (
         <>
@@ -17,9 +17,6 @@ export default function SingIn({ signForm, setSwitchForm, clickedAccount, sendFo
                             <div onClick={() => clickedAccount(false)} className="cancel-button-wrapper cursor-pointer hover:bg-[var(--help-color2)] h-full flex-1 text-[2rem]
                                 flex justify-center items-center gap-[10px]
                             ">X</div>
-
-
-
                         </div>
 
                         <div className="devider" />
@@ -39,6 +36,9 @@ export default function SingIn({ signForm, setSwitchForm, clickedAccount, sendFo
                                     className="form__input "
                                     onChange={() => signForm(event)}
                                 />
+                                <div className="error_container text-xs text-center">
+                                    <p>{fetchRespond}</p>
+                                </div>
                                 <button
                                     type="submit"
                                     className="form__button"

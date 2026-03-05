@@ -1,7 +1,6 @@
-export default function SignUp({ signForm, setSwitchForm, clickedAccount, sendForm }) {
+export default function SignUp({ signForm, setSwitchForm, clickedAccount, sendForm, fetchRespond }) {
 
     return (
-
         <>
             <div className="fixed inset-0 bg-black opacity-50 flex items-center justify-center z-[20]" />
             <div className="flex w-[100%] h-[100%]">
@@ -34,6 +33,9 @@ export default function SignUp({ signForm, setSwitchForm, clickedAccount, sendFo
                                     className="form__input "
                                     onChange={() => signForm(event)}
                                 />
+                                <div className="error_container text-xs text-center">
+                                    <p>{fetchRespond}</p>
+                                </div>
                                 <button type="submit" className="form__button "  >
                                     Sign Up
                                 </button>
