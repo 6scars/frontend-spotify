@@ -11,7 +11,7 @@ export default function SignUp({ signForm, setSwitchForm, clickedAccount, sendFo
                             text-white ">
                         <div className="Sign_in_text_container h-[20%]">
                             <div className="h-full flex-1 text-[2rem]gap-[10px] "></div>
-                            <h3 className="sign_in  h-full flex-10">Register</h3>
+                            <h3 className="sign_in  h-full flex-10">Sign Up</h3>
                             <div onClick={() => clickedAccount(false)} className="cancel-button-wrapper cursor-pointer hover:bg-[var(--help-color2)] h-full flex-1 text-[2rem] flex justify-center items-center gap-[10px]">
                                 X
                             </div>
@@ -19,7 +19,7 @@ export default function SignUp({ signForm, setSwitchForm, clickedAccount, sendFo
 
                         <div className="devider" />
                         <div className="Sign-form-Wrapper w-[100%] h-[79%] align-middle flex justify-center items-center">
-                            <form onSubmit={sendForm} className="w-full flex flex-col gap-5">
+                            <form onSubmit={sendForm} className="w-full flex flex-col gap-5 flex items-center">
                                 <input
                                     type="email"
                                     name="email"
@@ -35,13 +35,13 @@ export default function SignUp({ signForm, setSwitchForm, clickedAccount, sendFo
                                     onChange={() => signForm(event)}
                                 />
                                 <button type="submit" className="form__button "  >
-                                    Register
+                                    Sign Up
                                 </button>
                                 <button type="button" onClick={clickedAccount} className="form__button__cancel ">
                                     Cancel
                                 </button>
                                 <div>
-                                    Don't you have account? <a onClick={() => setSwitchForm(false)} className="text-blue-500 cursor-pointer hover:text-amber-500">LoginIn</a>
+                                    Don't you have account? <a onClick={() => setSwitchForm(false)} className="text-blue-500 cursor-pointer hover:text-amber-500">Sign In</a>
                                 </div>
                             </form>
                         </div>

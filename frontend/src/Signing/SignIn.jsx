@@ -1,5 +1,4 @@
 export default function SingIn({ signForm, setSwitchForm, clickedAccount, sendForm }) {
-    console.log(localStorage.getItem('jwt'))
 
     return (
         <>
@@ -24,8 +23,8 @@ export default function SingIn({ signForm, setSwitchForm, clickedAccount, sendFo
                         </div>
 
                         <div className="devider" />
-                        <div className="Sign-form-Wrapper w-[100%] h-[79%] align-middle flex justify-center items-center">
-                            <form onSubmit={sendForm} className="w-full flex flex-col gap-5">
+                        <div className="Sign-form-Wrapper ">
+                            <form onSubmit={sendForm} className="w-full flex flex-col gap-5 flex items-center">
                                 <input
                                     type="email"
                                     name="email"
@@ -42,7 +41,7 @@ export default function SingIn({ signForm, setSwitchForm, clickedAccount, sendFo
                                 />
                                 <button
                                     type="submit"
-                                    className="form__button "
+                                    className="form__button"
                                 >
                                     Sign In
                                 </button>
@@ -53,8 +52,8 @@ export default function SingIn({ signForm, setSwitchForm, clickedAccount, sendFo
                                 >
                                     Cancel
                                 </button>
-                                <div className="w-[100%]">
-                                    Don't you have account? <a onClick={() => setSwitchForm(true)} className="text-blue-500 cursor-pointer hover:text-amber-500">Register</a>
+                                <div>
+                                    Don't you have account? <a onClick={() => setSwitchForm(true)} className="text-blue-500 cursor-pointer hover:text-amber-500">SignUp</a>
 
                                 </div>
                             </form>
