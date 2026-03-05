@@ -8,7 +8,6 @@ export default function Aside() {
   const { show, showCreatePlaylistWindow, setShowCreatePlaylistWindow, setShowPlaylistDescribing, setSigning } = useUIStateContext();
   const { setPlaylists_id } = useCurrentPlaybackContext();
   const { playlists, isLogedIn } = useAuthContext();
-  console.log(playlists)
 
   const displayCreatingPlaylistWindow = () => {
     if (showCreatePlaylistWindow) {
