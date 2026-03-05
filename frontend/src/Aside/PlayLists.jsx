@@ -1,16 +1,25 @@
+
+
+
 export default function PlayLists({ playlist, choosePlaylist }) {
   const song_ids = playlist.song_ids;
+
+
+
   return (
     <div
       key={playlist.id}
       onClick={() => {
         choosePlaylist(playlist.playlist_id);
       }}
-      className="playlists-container bg-red-700 w-[75%] h-[150px] cursor-pointer
-            flex flex-col
+      className="playlists-container bg-red-700 w-[75%] min-h-[120px] cursor-pointer
+            flex flex-col 
+            border-solid rounded-md overflow-hidden
+            hover:scale-120 transform duration-150
+            hover:shadow-[10px_10px_5px_5px_rgba(0,0,0,0.50)]
             "
     >
-      <div className="img-container h-[70px] grid grid-rows-2 grid-cols-2 gap-[1px]">
+      <div className="img-container h-[70px] grid grid-rows-2 grid-cols-2">
         {song_ids[0] != 'NULL' ? song_ids.slice(0,4).map((_, i) => (
             <img
               key={playlist.song_ids[i]}
@@ -20,8 +29,8 @@ export default function PlayLists({ playlist, choosePlaylist }) {
             />          
         )):null}
       </div>
-      <div className="playlist-paragraph-container w-full">
-        <p className="playlist__paragraph text-white text-[12px] font-bold text-bold text-center w-full">
+      <div className="playlist-paragraph-container w-full min-h-[50px] max-h-[50] flex items-center ">
+        <p className="playlist__paragraph ">
           {playlist.playlist_name}
         </p>
       </div>
