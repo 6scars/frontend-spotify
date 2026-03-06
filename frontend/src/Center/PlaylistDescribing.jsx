@@ -43,6 +43,9 @@ export default function PlaylistDescribing() {
                     </div>
                 </div>
             )
+        }else if(!isLoading  && Array.isArray(playlist) && playlist.length === 0){
+            console.log("this playlist is empty: ", playlist)
+
         }
     }
     return (
