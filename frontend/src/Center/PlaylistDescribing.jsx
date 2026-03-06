@@ -22,6 +22,9 @@ export default function PlaylistDescribing() {
 
     const render = () => {
         if (!isLoading  && Array.isArray(playlist) && playlist.length > 0 ) {
+
+            //if playlist[].song_id - is empty then there is no songs in playlist
+            
             return (
                 <div className="music red-scroll-bar space-y-4 bg-[#232323] flex-[2] h-full min-w-[500px] overflow-y-auto  rounded-md
                     relative  flex justify-center items-center playlist-describing" >
@@ -35,17 +38,20 @@ export default function PlaylistDescribing() {
                         </div>
                         <div className="devider" />
                         <div className="playlist-songs-container flex flex-col justify-center items-center w-full">
-                            {playlist.map((song) => (
-                                <SongInThePlaylist key={song.song_id} song={song} handleStartPlaylist={handleStartPlaylist} isLoading={isLoading}/>
-                            )
-                            )}
+                            {   
+                                playlist[0].song_id ? ( 
+                                    playlist.map((song) => (
+                                            <SongInThePlaylist key={song.song_id} song={song} handleStartPlaylist={handleStartPlaylist} isLoading={isLoading}/>
+                                        ))
+                                    ) : (
+                                        <div className="w-full h-[250px] flex items-center justify-center bg-black rounded-md text-[var(--help-color)]">There is no songs in playlist</div>
+                                    )
+                            }
+                             
                         </div>
                     </div>
                 </div>
             )
-        }else if(!isLoading  && Array.isArray(playlist) && playlist.length === 0){
-            console.log("this playlist is empty: ", playlist)
-
         }
     }
     return (
