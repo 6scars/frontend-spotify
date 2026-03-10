@@ -1,16 +1,17 @@
 import { useState, useEffect } from "react";
 
-import Header from "./Header/Header.jsx";
-import Aside from "./Aside/Aside.jsx";
-import Center from "./Center/Center.jsx";
-import Play from "./Play/Play.jsx";
-import Signing from "./Signing/Signing.jsx";
+import Header       from "./Header/Header.jsx";
+import Aside        from "./Aside/Aside.jsx";
+import Center       from "./Center/Center.jsx";
+import Play         from "./Play/Play.jsx";
+import Signing      from "./Signing/Signing.jsx";
+// import ErrorPopUp   from "./ErrorPopUp/ErrorPopUp.jsx";
 
 import "./App.css";
 
-import { useAuthContext } from "./contexts/AuthContext.jsx";
-import { useUIStateContext } from "./contexts/UIStateContext.jsx";
-import { useCurrentPlaybackContext } from "./contexts/CurrentPlaybackContext.jsx";
+import { useAuthContext }             from "./contexts/AuthContext.jsx";
+import { useUIStateContext }          from "./contexts/UIStateContext.jsx";
+import { useCurrentPlaybackContext }  from "./contexts/CurrentPlaybackContext.jsx";
 
 
 export default function MiniSpotify() {
