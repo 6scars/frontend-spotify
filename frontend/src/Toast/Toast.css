@@ -1,0 +1,43 @@
+@import 'tailwindcss';
+
+.notification-container{
+    @apply bottom-25 right-0 fixed z-1000 
+    h-[125px] w-[255px] 
+    bg-[var(--accent-color3)]
+    shadow-[0_0_15px_5px_rgba(255,255,255,0.2)]
+    rounded-l-md
+    ring-1 ring-white
+    flex items-center justify-center
+    ;
+    animation: slideIn 1s ease forwards,
+               slideOut 1s ease 5s forwards 
+    ;
+}
+
+.notification-container p{
+    @apply text-[var(--main-color)]  text-shadow-lg/25  text-center;
+    
+}
+
+@keyframes slideIn{
+    from{
+        opacity: 0;
+        transform: translateX(100%);
+    }
+    to{
+        opacity:1;
+        transform: translateX(0);
+    }
+}
+
+@keyframes slideOut {
+    from{
+        opacity:1;
+        transform: translateX(0);
+    }
+    to{
+        opacity:0;
+        transform: translateX(100%);
+    }
+    
+}
