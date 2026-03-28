@@ -2,7 +2,7 @@ import { useState }                         from 'react'
 import { useCurrentPlaybackContext }        from '../contexts/CurrentPlaybackContext';
 import { usePlayerContext }                 from '../contexts/PlayerContext';
 import { useUIStateContext }                from '../contexts/UIStateContext'
-import ErrorPopUp                           from '../ErrorPopUp/ErrorPopUp.jsx'
+import {useToastContext}                           from '../contexts/ToastContext'
 
 
 function usePlaylists() {
@@ -11,7 +11,7 @@ function usePlaylists() {
     const { playlist_id, setCurrentPlaylist, setCurrentPlaylistI }  = useCurrentPlaybackContext();
     const { chooseSong }                                            = usePlayerContext();
     const { isLoading, setIsLoading }                               = useUIStateContext();
-
+    const {showError}                                               = useToastContext();
 
     const fetchThePlaylistData = async () => {
         if (playlist_id !== null && playlist_id !== undefined) {
@@ -27,16 +27,16 @@ function usePlaylists() {
     async function handleStartPlaylist(song_id = null) {
         setCurrentPlaylist(playlist)
         if (song_id) {
-            const findedSongI   = playlist.findIndex((data) => (song_id === data.song_id))
-            const songId         = playlist[findedSongI].song_id
+            const findedSongI       = playlist.findIndex((data) => (song_id === data.song_id))
+            const songId            = playlist[findedSongI].song_id
             await chooseSong(songId)
             setCurrentPlaylistI(findedSongI)
         }
 
         if (!song_id) {
             if(!playlist[0].song_id) {
-                ErrorPopUp()
-                throw "there is no songs in playlist"
+                showError("there is no song in playlist")
+                return null
             }
             const songId = playlist[0].song_id
             await chooseSong(songId)

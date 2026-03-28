@@ -5,7 +5,6 @@ import Aside        from "./Aside/Aside.jsx";
 import Center       from "./Center/Center.jsx";
 import Play         from "./Play/Play.jsx";
 import Signing      from "./Signing/Signing.jsx";
-// import ErrorPopUp   from "./ErrorPopUp/ErrorPopUp.jsx";
 
 import "./App.css";
 

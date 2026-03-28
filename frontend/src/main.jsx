@@ -13,27 +13,28 @@ import { UIStateProvider }                  from "./contexts/UIStateContext.jsx"
 import { CurrentPlaybackProvider }          from "./contexts/CurrentPlaybackContext.jsx";
 import { LatestSongsProvider }              from "./contexts/LatestSongsContext.jsx";
 import { PlayerProvider }                   from './contexts/PlayerContext.jsx';
+import { ToastProvider }                    from './contexts/ToastContext.jsx'
 
 
 createRoot(document.getElementById('root')).render(
   <StrictMode>
     <BrowserRouter basename="/mini-spotify">
-
-      <AuthProvider>
-        <UIStateProvider>
-          <CurrentPlaybackProvider>
-            <LatestSongsProvider>
-                <PlayerProvider>
-                  <Routes>
-                    <Route path="/addSong" element={<AddSong />} />
-                    <Route path="/" element={<App />} />
-                  </Routes>
-                </PlayerProvider>
-            </LatestSongsProvider>
-          </CurrentPlaybackProvider>
-        </UIStateProvider>
-      </AuthProvider>
-
+      <ToastProvider >
+        <AuthProvider>
+          <UIStateProvider>
+            <CurrentPlaybackProvider>
+              <LatestSongsProvider>
+                  <PlayerProvider>
+                    <Routes>
+                      <Route path="/addSong" element={<AddSong />} />
+                      <Route path="/" element={<App />} />
+                    </Routes>
+                  </PlayerProvider>
+              </LatestSongsProvider>
+            </CurrentPlaybackProvider>
+          </UIStateProvider>
+        </AuthProvider>
+      </ToastProvider >
     </BrowserRouter>
   </StrictMode>
 )
