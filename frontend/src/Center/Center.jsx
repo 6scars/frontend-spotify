@@ -8,6 +8,7 @@ import "./Center.css";
 
 import { useUIStateContext }  from "../contexts/UIStateContext.jsx";
 import { useAuthContext }     from "../contexts/AuthContext.jsx";
+import { useMovingPanels }    from "../hooks/useMovingPanels.jsx"
 
 
 
@@ -15,6 +16,7 @@ import { useAuthContext }     from "../contexts/AuthContext.jsx";
 export default function Center() {
   const { show, showCreatePlaylistWindow, showPlaylistDescribing } = useUIStateContext();
   const { songs } = useAuthContext();
+  const { leftWidth, onMouseDown, rectObject, leftObject } = useMovingPanels()
 
   function choosenComponent() {
     if (showCreatePlaylistWindow)
@@ -22,14 +24,18 @@ export default function Center() {
     else if (showPlaylistDescribing)
       return <PlaylistDescribing />
     else
-      return <Music songs={songs} />
+      return <Music songs={songs}/>
   }
 
   return (
-    <main className={`Center ${show ? "show" : ""} `} >
-      <div className="music red-scroll-bar " >
+    <main 
+      className={`Center ${show ? "show" : ""} `} 
+      ref={rectObject} 
+     >
+      <div className="music red-scroll-bar" style={{flexBasis:`${leftWidth}%`}} ref={leftObject} >
         {choosenComponent()}
       </div>
+      {show ? <div className="resizer"  onMouseDown={onMouseDown}/> : ""}
       {show ? <Description /> : ""}
     </main >
   );

@@ -3,7 +3,7 @@
 
 
 .description {
-    @apply px-[25px] py-[10px] h-full flex-1 min-w-[500px] overflow-y-auto grow flex flex-col gap-[1.5rem];
+    @apply px-[25px] py-[10px] h-full  min-w-[250px] overflow-y-auto grow flex flex-1 flex-col gap-[1.5rem];
     background-color: var(--background-color);
 
 }

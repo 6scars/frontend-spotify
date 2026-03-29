@@ -8,8 +8,7 @@ export default function Description() {
   return (
     <>
       <div
-        className="description red-scroll-bar
-      "
+        className="description red-scroll-bar"
       >
         <div onClick={()=>setShow(false)}>close</div>
         <div className="description-img-container ">
