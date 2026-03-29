@@ -1,7 +1,7 @@
 @import "tailwindcss";
 
 .play {
-    @apply  fixed bottom-0 left-0 right-0 bg-black h-[var(--height-of-player)]
+    @apply  fixed z-10 bottom-0 left-0 right-0 bg-black h-[var(--height-of-player)]
       flex justify-between;
 
 }

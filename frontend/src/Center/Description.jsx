@@ -1,7 +1,9 @@
-import { useCurrentPlaybackContext } from "../contexts/CurrentPlaybackContext";
+import { useCurrentPlaybackContext }        from "../contexts/CurrentPlaybackContext";
+import { useUIStateContext }                from "../contexts/UIStateContext"
 import "./Description.css";
 export default function Description() {
-  const { currentSong } = useCurrentPlaybackContext();
+  const { currentSong }     = useCurrentPlaybackContext();
+  const { setShow }         = useUIStateContext()
 
   return (
     <>
@@ -9,6 +11,7 @@ export default function Description() {
         className="description red-scroll-bar
       "
       >
+        <div onClick={()=>setShow(false)}>close</div>
         <div className="description-img-container ">
           <img
             alt="description-img"
