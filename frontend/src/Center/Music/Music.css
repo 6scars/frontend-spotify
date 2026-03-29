@@ -3,7 +3,7 @@
 
 /*------------------music----------------*/
 .Center .music {
-  @apply space-y-4 bg-[#232323] flex-[2] h-full min-w-[500px] overflow-y-auto rounded-md relative;
+  @apply space-y-4 bg-[#232323] w-[100%] h-full  overflow-y-auto rounded-md relative;
 }
 
 
