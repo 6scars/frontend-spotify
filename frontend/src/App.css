@@ -16,6 +16,10 @@ body {
   height: 100vh;
 }
 
+body.dragging {
+  user-select: none
+}
+
 #root {
   width: 100%;
   height: 100%;
