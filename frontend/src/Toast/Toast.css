@@ -1,14 +1,17 @@
 @import 'tailwindcss';
 
 .notification-container{
-    @apply bottom-25 right-0 fixed z-1000 
-    h-[125px] w-[255px] 
-    bg-[var(--accent-color3)]
-    shadow-[0_0_15px_5px_rgba(255,255,255,0.2)]
-    rounded-l-md
-    ring-1 ring-white
-    flex items-center justify-center
-    ;
+    @apply 
+        bottom-25 right-0 
+        h-[95px] w-[205px] 
+        px-10
+        fixed z-1000 
+        bg-[var(--accent-color3)]
+        shadow-[0_0_15px_5px_rgba(255,255,255,0.2)]
+        rounded-l-md
+        flex items-center justify-center;
+
+
     animation: slideIn 1s ease forwards,
                slideOut 1s ease 5s forwards 
     ;
