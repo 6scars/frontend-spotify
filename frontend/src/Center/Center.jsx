@@ -1,6 +1,4 @@
 
-import { useEffect }          from "react";
-
 import Music                  from "./Music/Music.jsx";
 import Description            from "./Description.jsx";
 import CreatePlaylist         from "./CreatePlaylist/CreatePlaylist.jsx"
