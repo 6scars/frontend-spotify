@@ -18,6 +18,8 @@ export default function Center() {
   const { songs } = useAuthContext();
   const { leftWidth, onMouseDown, rectObject, leftObject } = useMovingPanels()
 
+  const effectiveWidth = show ? leftWidth : 100;
+
   function choosenComponent() {
     if (showCreatePlaylistWindow)
       return <CreatePlaylist songs={songs} />
@@ -32,7 +34,7 @@ export default function Center() {
       className={`Center ${show ? "show" : ""} `} 
       ref={rectObject} 
      >
-      <div className="music red-scroll-bar" style={{flexBasis:`${leftWidth}%`}} ref={leftObject} >
+      <div className="music red-scroll-bar" style={{flexBasis:`${effectiveWidth}%`}} ref={leftObject} >
         {choosenComponent()}
       </div>
       {show ? <div className="resizer"  onMouseDown={onMouseDown}/> : ""}
