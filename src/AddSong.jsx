@@ -2,6 +2,7 @@ import { useState, useEffect } from 'react'
 
 import LeftSide from "./AddSong/LeftSide.jsx"
 import RightSide from "./AddSong/RightSide.jsx"
+import { BACKEND_URL } from "./config.js"
 
 import "./AddSong.css";
 
@@ -21,7 +22,7 @@ export default function AddSong() {
 
     useEffect(() => {
         const getAuthorsAlbums = async () => {
-            const response = await fetch(`${import.meta.env.VITE_BACKEND_URL}/api/getAuthorsAlbums`, {
+            const response = await fetch(`${BACKEND_URL}/api/getAuthorsAlbums`, {
                 method: "GET",
                 headers: {
                     "Authorization": `Bearer ${localStorage.getItem('jwt')}`,

@@ -5,6 +5,7 @@ import AccountOptions                   from "./AccountOptions/AccountOptions"
 import                                       "./Signing.css"
 import { useAuthContext }               from '../contexts/AuthContext.jsx'
 import { useUIStateContext }            from '../contexts/UIStateContext.jsx'
+import { BACKEND_URL }                  from '../config.js'
 
 export default function Signing() {
     const [fetchRespond, setFetchResponde]  = useState(null);
@@ -30,7 +31,7 @@ export default function Signing() {
         let response;
         try {
             if (switchForm) {
-                response = await fetch(`${import.meta.env.VITE_BACKEND_URL}/api/newAccount`, {
+                response = await fetch(`${BACKEND_URL}/api/newAccount`, {
                     "method": "POST",
                     "headers": {
                         "Content-Type": "application/json"
@@ -41,7 +42,7 @@ export default function Signing() {
                     })
                 })
             } else {
-                response = await fetch(`${import.meta.env.VITE_BACKEND_URL}/api/signin`, {
+                response = await fetch(`${BACKEND_URL}/api/signin`, {
                     "method": "post",
                     "headers": {
                         "Content-Type": "application/json"

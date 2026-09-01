@@ -4,6 +4,7 @@ import { addView } from "../scripts/Fetches.jsx";
 import { useCurrentPlaybackContext } from "../contexts/CurrentPlaybackContext.jsx";
 import { useLatestSongsContext } from "../contexts/LatestSongsContext.jsx";
 import { useUIStateContext } from "../contexts/UIStateContext.jsx";
+import { BACKEND_URL } from "../config.js";
 
 export function usePlayer() {
   const audioRef = useRef(null);
@@ -165,7 +166,7 @@ export function usePlayer() {
 
   async function chooseSong(song_id) {
     try {
-      const responde = await fetch(`${import.meta.env.VITE_BACKEND_URL}/api/getSong?id=${song_id}`)
+      const responde = await fetch(`${BACKEND_URL}/api/getSong?id=${song_id}`)
       const data = await responde.json();
       const findedSong = data.data[0];
       if (findedSong) {
@@ -221,4 +222,3 @@ function handleError(details, throwError = false) {
     throw new Error(details)
   }
 }
-

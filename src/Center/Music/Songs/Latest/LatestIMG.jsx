@@ -1,9 +1,10 @@
 import { useState } from "react"
+import { SUPABASE_STORAGE_URL } from "../../../../config.js"
 
 
 export default function LatestImg({img}){
     const [loaded, setLoaded]       = useState(false)
-    const [src, setSrc]             = useState(`${import.meta.env.VITE_SUPA_B_STOR}/images/songPictures/${img}`)
+    const [src, setSrc]             = useState(`${SUPABASE_STORAGE_URL}/images/songPictures/${img}`)
 
     function render(){
         return(
@@ -14,7 +15,7 @@ export default function LatestImg({img}){
                 <img
                     className="playlist__image"
                     onLoad={()=>setLoaded(true)}
-                    onError={()=>{setSrc(`${import.meta.env.VITE_SUPA_B_STOR}/images/NOTFOUND.jpeg`);}}
+                    onError={()=>{setSrc(`${SUPABASE_STORAGE_URL}/images/NOTFOUND.jpeg`);}}
                     src={src}
                 />
             </div>

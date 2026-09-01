@@ -5,6 +5,7 @@ import RenderSongsToAdd from './RenderSongsToAdd'
 import './CreatePlaylist.css'
 
 import { useUIStateContext } from '../../contexts/UIStateContext';
+import { BACKEND_URL } from '../../config.js';
 
 
 
@@ -23,7 +24,7 @@ export default function CreatePlaylist({ songs }) {
         }
         try {
             const songsToAddArray = Array.from(songsToAdd);
-            const responde = await fetch(`${import.meta.env.VITE_BACKEND_URL}/api/createPlaylist`, {
+            const responde = await fetch(`${BACKEND_URL}/api/createPlaylist`, {
                 "method": 'POST',
                 "headers": {
                     'Content-Type': 'application/json',

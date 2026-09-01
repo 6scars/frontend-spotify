@@ -1,5 +1,6 @@
 import Image from './Information/Image'
 import ImportedMp3 from './File/ImportedMp3'
+import { BACKEND_URL } from '../../config.js'
 import './Preview.css';
 export default function Preview({ addSongForm }) {
     async function blobFromUrl(blobUrl) {
@@ -30,7 +31,7 @@ export default function Preview({ addSongForm }) {
         formData.append('img', imgBlob, 'cover.jpg');
         formData.append('addSongForm', JSON.stringify(addSongForm))
         formData.append('token', localStorage.getItem('jwt'))
-        const response = await fetch(`${import.meta.env.VITE_BACKEND_URL}/api/saveSongInBase`, {
+        const response = await fetch(`${BACKEND_URL}/api/saveSongInBase`, {
             method: 'POST',
             body: formData
 

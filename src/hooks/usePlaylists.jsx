@@ -3,6 +3,7 @@ import { useCurrentPlaybackContext }        from '../contexts/CurrentPlaybackCon
 import { usePlayerContext }                 from '../contexts/PlayerContext';
 import { useUIStateContext }                from '../contexts/UIStateContext'
 import {useToastContext}                           from '../contexts/ToastContext'
+import { BACKEND_URL }                             from '../config.js'
 
 
 function usePlaylists() {
@@ -15,7 +16,7 @@ function usePlaylists() {
 
     const fetchThePlaylistData = async () => {
         if (playlist_id !== null && playlist_id !== undefined) {
-            const response      = await fetch(`${import.meta.env.VITE_BACKEND_URL}/api/getPlaylistData?id=${playlist_id}`);
+            const response      = await fetch(`${BACKEND_URL}/api/getPlaylistData?id=${playlist_id}`);
             const data          = await response.json();
             setPlaylist(data.data)
             setIsLoading(false);

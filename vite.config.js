@@ -6,7 +6,7 @@ export default defineConfig({
     react(),
     tailwindcss()
   ],
-  base: '/mini-spotify',
+  base: '/',
   server:{
     port:3001
   }

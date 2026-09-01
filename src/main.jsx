@@ -18,7 +18,7 @@ import { ToastProvider }                    from './contexts/ToastContext.jsx'
 
 createRoot(document.getElementById('root')).render(
   <StrictMode>
-    <BrowserRouter basename="/mini-spotify">
+    <BrowserRouter>
       <ToastProvider >
         <AuthProvider>
           <UIStateProvider>
