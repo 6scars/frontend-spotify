@@ -35,10 +35,11 @@ function usePlaylists() {
         }
 
         if (!song_id) {
-            if(!playlist[0].song_id) {
-                showError("there is no song in playlist")
-                return null
+            if (!Array.isArray(playlist) || playlist.length === 0) {
+                showError("Playlist is empty")
+                return
             }
+
             const songId = playlist[0].song_id
             await chooseSong(songId)
             setCurrentPlaylistI(0)
