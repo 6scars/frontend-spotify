@@ -11,7 +11,7 @@ export default function Toast({message}) {
 
   return ReactDOM.createPortal(
     <div className={"notification-container"}>
-        <p>here is the error {message}</p>
+        <p>{message}</p>
     </div>,
     container
   )
