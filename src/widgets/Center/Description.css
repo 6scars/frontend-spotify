@@ -162,3 +162,16 @@
         width:70%;
     }
 }
+.description-close {
+  align-self: flex-end;
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-pill);
+  background: var(--color-surface-raised);
+  color: var(--color-text-primary);
+  cursor: pointer;
+  padding: 0.55rem 0.9rem;
+}
+
+.description-close:hover {
+  border-color: var(--color-accent);
+}

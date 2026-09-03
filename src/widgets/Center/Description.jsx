@@ -10,7 +10,7 @@ export default function Description() {
       <div
         className="description red-scroll-bar"
       >
-        <div onClick={()=>setShow(false)}>close</div>
+        <button className="description-close" onClick={() => setShow(false)} type="button">Zamknij</button>
         <div className="description-img-container ">
           <img
             alt="description-img"

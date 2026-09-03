@@ -6,6 +6,20 @@
 
 }
 
+.play {
+    z-index: 30;
+    height: var(--player-height);
+    padding: var(--space-3) var(--space-5);
+    align-items: center;
+    border: 1px solid var(--color-line-strong);
+    border-radius: var(--radius-md) var(--radius-md) 0 0;
+    background: rgba(15,15,18,.96);
+    box-shadow: 0 -12px 36px rgba(0,0,0,.3);
+    backdrop-filter: blur(20px);
+}
+
+@media (max-width: 690px) { .play { padding: var(--space-2); } }
+
 
 .play .title-authors{
     @apply pl-[10px] pt-[3px]

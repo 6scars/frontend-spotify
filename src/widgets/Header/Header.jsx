@@ -1,42 +1,28 @@
 import { useAuthContext } from '../../modules/Auth/useAuthContext.js';
 import { useUIStateContext } from '../../modules/UIState/useUIStateContext.js'
+import { useNavigate } from 'react-router-dom'
+import Icon from '../../shared/ui/Icon.jsx'
 import './Header.css'
 import Sing from './Sing'
 
 
 export default function Header() {
 
-  const { clickedAccount, setReloadApp } = useUIStateContext();
+  const { clickedAccount } = useUIStateContext();
   const { isLogedIn } = useAuthContext();
+  const navigate = useNavigate()
 
-  const handleHomeClick = () => { setReloadApp(prev => !prev) }
   return (
-    <header
-      className="fixed top-0 flex justify-between">
-      <div className="left-header">
-        <div className="logo-container h-full w-[96px] flex justify-center items-center">
-          <img alt="logo" src="https://rgmmwhkixprkskznqjcy.supabase.co/storage/v1/object/public/spotify/images/logos/logo1.svg" className="h-[90%] " />
-        </div>
-      </div>
-      <div
-        className="mid-header bg-black flex-1 h-[full] flex justify-center ">
-        <div
-          className="home-search min-w-[200px] flex align-center justify-center
-        "
-        >
-          <div className="h-full min-w-[43.5px] flex justify-center items-center">
-            <img onClick={handleHomeClick} alt="home" src="https://rgmmwhkixprkskznqjcy.supabase.co/storage/v1/object/public/spotify/images/logos/logohome.svg" className="h-[75%] cursor-pointer"></img>
-          </div>
-          <div className="h-full min-w-[20px] flex justify-center items-center ">
-            <input type="text" placeholder="Search" className="search__bar" />
-          </div>
-        </div>
-      </div>
-      <div className="right-header  min-w-[60px] h-full">
-        <div className=" flex justify-end tems-center h-full text-white">
-
-          <Sing clickedAccount={clickedAccount} isLogedIn={isLogedIn} />
-        </div>
+    <header className="app-header">
+      <label className="app-header__search">
+        <Icon name="search" size={18} />
+        <span className="sr-only">Szukaj</span>
+        <input placeholder="Szukaj muzyki" type="search" />
+      </label>
+      <div className="app-header__actions">
+        <button aria-label="Wstecz" className="icon-button" onClick={() => navigate(-1)} type="button"><Icon name="chevronLeft" /></button>
+        <button aria-label="Dalej" className="icon-button" onClick={() => navigate(1)} type="button"><Icon name="chevronRight" /></button>
+        <Sing clickedAccount={clickedAccount} isLogedIn={isLogedIn} />
       </div>
     </header>
   );

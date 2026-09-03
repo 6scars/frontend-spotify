@@ -57,3 +57,16 @@
         font-size: 0.4rem;
     }
 }
+
+.play .play-left-section { width: min(300px, 27vw); padding: var(--space-2); gap: var(--space-3); align-items: center; }
+.play-left-section .song-image-container { width: 64px; height: 64px; flex: 0 0 64px; border: 0; border-radius: 6px; }
+.play-left-section .title-authors { min-width: 0; padding: 0; border: 0; justify-content: center; }
+.play-left-section .title, .play-left-section .authors { overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+.play-left-section .title { font-size: .82rem; }.play-left-section .authors { font-size: .72rem; }
+.play-left-section > div:last-child img { width: 25px; height: 25px; opacity: .76; }
+
+@media (max-width: 620px) {
+    .play .play-left-section { width: 150px; }
+    .play-left-section .song-image-container { width: 48px; height: 48px; flex-basis: 48px; }
+    .play-left-section > div:last-child { display: none; }
+}

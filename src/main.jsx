@@ -5,6 +5,7 @@ import { BrowserRouter, Routes, Route }     from 'react-router-dom'
 
 import App              from './App.jsx'
 import AddSong          from './widgets/AddSong/AddSong.jsx'
+import './App.css'
 
 
 

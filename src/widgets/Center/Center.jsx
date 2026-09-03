@@ -16,7 +16,7 @@ import { useMovingPanels }    from "./hooks/useMovingPanels.jsx"
 export default function Center() {
   const { show, showCreatePlaylistWindow, showPlaylistDescribing } = useUIStateContext();
   const { songs } = useAuthContext();
-  const { leftWidth, onMouseDown, rectObject, leftObject } = useMovingPanels()
+  const { leftWidth, onMouseDown, rectObject } = useMovingPanels(68)
 
   const effectiveWidth = show ? leftWidth : 100;
 
@@ -30,14 +30,15 @@ export default function Center() {
   }
 
   return (
-    <main 
-      className={`Center ${show ? "show" : ""} `} 
+    <main
+      className="Center"
       ref={rectObject} 
+      style={{ '--center-primary-width': `${effectiveWidth}%` }}
      >
-      <div className="music red-scroll-bar" style={{flexBasis:`${effectiveWidth}%`}} ref={leftObject} >
+      <div className="music center-primary red-scroll-bar">
         {choosenComponent()}
       </div>
-      {show ? <div className="resizer"  onMouseDown={onMouseDown}/> : ""}
+      {show ? <div aria-label="Zmień szerokość panelu" className="resizer" onMouseDown={onMouseDown} role="separator" /> : null}
       {show ? <Description /> : ""}
     </main >
   );

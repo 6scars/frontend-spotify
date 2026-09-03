@@ -36,3 +36,11 @@
 
 
 }
+
+.play-right-section { width: min(250px, 23vw); }
+.volume-container { gap: var(--space-3); padding-right: 0; }
+.volume-container .volume { height: 4px; background: var(--color-line-strong); cursor: pointer; }
+.volume-container .volume > div { background: var(--color-accent); }
+.volume__text { min-width: 34px; color: var(--color-text-muted); font-size: .66rem; }
+
+@media (max-width: 620px) { .play-right-section { display: none; } }

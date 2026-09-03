@@ -4,9 +4,9 @@ export default function Sign({ isLogedIn, clickedAccount }) {
     return (
         <>
             {isLogedIn ?
-                <button alt="account" className="flex items-center h-[90%] cursor-pointer" onClick={clickedAccount}> ACCOUNT</button>
+                <button className="account-button" onClick={clickedAccount} type="button"><span>K</span> Konto</button>
                 :
-                <button alt="account" className="flex items-center h-[90%] cursor-pointer" onClick={clickedAccount}> SIGN UP</button>
+                <button className="account-button account-button--guest" onClick={clickedAccount} type="button">Zaloguj się</button>
 
 
             }
