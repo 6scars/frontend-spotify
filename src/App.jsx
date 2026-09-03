@@ -1,4 +1,5 @@
 import { useEffect } from "react";
+import { Outlet } from 'react-router-dom'
 
 import AppShell     from "./app/AppShell.jsx";
 import Header       from "./widgets/Header/Header.jsx";
@@ -38,7 +39,7 @@ export default function MiniSpotify() {
       queue={<QueuePanel />}
       sidebar={playlists ? <Aside /> : null}
     >
-      <Center />
+      <Center><Outlet /></Center>
     </AppShell>
   );
 }

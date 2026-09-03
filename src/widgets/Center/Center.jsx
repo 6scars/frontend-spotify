@@ -1,5 +1,4 @@
 
-import Music                  from "./Music/Music.jsx";
 import Description            from "./Description.jsx";
 import CreatePlaylist         from "./CreatePlaylist/CreatePlaylist.jsx"
 import PlaylistDescribing     from "./PlaylistDescribing.jsx";
@@ -13,7 +12,7 @@ import { useMovingPanels }    from "./hooks/useMovingPanels.jsx"
 
 
 
-export default function Center() {
+export default function Center({ children }) {
   const { show, showCreatePlaylistWindow, showPlaylistDescribing } = useUIStateContext();
   const { songs } = useAuthContext();
   const { leftWidth, onMouseDown, rectObject } = useMovingPanels(68)
@@ -26,7 +25,7 @@ export default function Center() {
     else if (showPlaylistDescribing)
       return <PlaylistDescribing />
     else
-      return <Music songs={songs}/>
+      return children
   }
 
   return (
