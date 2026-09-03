@@ -4,16 +4,16 @@ import { BrowserRouter, Routes, Route }     from 'react-router-dom'
 
 
 import App              from './App.jsx'
-import AddSong          from './AddSong.jsx'
+import AddSong          from './widgets/AddSong/AddSong.jsx'
 
 
 
-import { AuthProvider }                     from "./contexts/AuthContext.jsx";
-import { UIStateProvider }                  from "./contexts/UIStateContext.jsx";
-import { CurrentPlaybackProvider }          from "./contexts/CurrentPlaybackContext.jsx";
-import { LatestSongsProvider }              from "./contexts/LatestSongsContext.jsx";
-import { PlayerProvider }                   from './contexts/PlayerContext.jsx';
-import { ToastProvider }                    from './contexts/ToastContext.jsx'
+import { AuthProvider }                     from "./modules/Auth/AuthProvider.jsx";
+import { UIStateProvider }                  from "./modules/UIState/UIStateProvider.jsx";
+import { CurrentPlaybackProvider }          from "./modules/CurrentPlayback/CurrentPlaybackProvider.jsx";
+import { LatestSongsProvider }              from "./modules/LatestSongs/LatestSongsProvider.jsx";
+import { PlayerProvider }                   from './modules/Player/PlayerProvider.jsx';
+import { ToastProvider }                    from './modules/Toast/ToastProvider.jsx'
 
 
 createRoot(document.getElementById('root')).render(

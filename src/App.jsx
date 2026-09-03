@@ -1,21 +1,21 @@
-import { useState, useEffect } from "react";
+import { useEffect } from "react";
 
-import Header       from "./Header/Header.jsx";
-import Aside        from "./Aside/Aside.jsx";
-import Center       from "./Center/Center.jsx";
-import Play         from "./Play/Play.jsx";
-import Signing      from "./Signing/Signing.jsx";
+import Header       from "./widgets/Header/Header.jsx";
+import Aside        from "./widgets/Aside/Aside.jsx";
+import Center       from "./widgets/Center/Center.jsx";
+import Play         from "./widgets/Play/Play.jsx";
+import Signing      from "./widgets/Signing/Signing.jsx";
 
 import "./App.css";
 
-import { useAuthContext }             from "./contexts/AuthContext.jsx";
-import { useUIStateContext }          from "./contexts/UIStateContext.jsx";
-import { useCurrentPlaybackContext }  from "./contexts/CurrentPlaybackContext.jsx";
+import { useAuthContext }             from "./modules/Auth/useAuthContext.js";
+import { useUIStateContext }          from "./modules/UIState/useUIStateContext.js";
+import { useCurrentPlaybackContext }  from "./modules/CurrentPlayback/useCurrentPlaybackContext.js";
 
 
 export default function MiniSpotify() {
-  const { isLogedIn, setIsLogedIn, playlists, fetchAuthState } = useAuthContext();
-  const { signing, setShowCreatePlaylistWindow, setShowPlaylistDescribing, reloadAside, reloadApp, clickedAccount } = useUIStateContext();
+  const { setIsLogedIn, playlists, fetchAuthState } = useAuthContext();
+  const { signing, setShowCreatePlaylistWindow, setShowPlaylistDescribing, reloadAside, reloadApp } = useUIStateContext();
   const { currentSong } = useCurrentPlaybackContext()
 
   useEffect(() => {
