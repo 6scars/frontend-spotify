@@ -1,12 +1,4 @@
-export function getSongId(song) {
-  return song?.song_id ?? song?.id ?? null
-}
-
-const storageUrl = 'https://rgmmwhkixprkskznqjcy.supabase.co/storage/v1/object/public/spotify/images/songPictures'
-
-export function getArtworkUrl(song) {
-  return song?.song_image ? `${storageUrl}/${encodeURIComponent(song.song_image)}` : null
-}
+import { getSongId } from '../Catalog/song.js'
 
 export function buildHomeModel(songsValue, latestValue) {
   const songs = Array.isArray(songsValue) ? songsValue.filter(Boolean) : []

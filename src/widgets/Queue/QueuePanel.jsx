@@ -2,7 +2,7 @@ import { useAuthContext } from '../../modules/Auth/useAuthContext.js'
 import { useCurrentPlaybackContext } from '../../modules/CurrentPlayback/useCurrentPlaybackContext.js'
 import { usePlayerContext } from '../../modules/Player/usePlayerContext.js'
 import Icon from '../../shared/ui/Icon.jsx'
-import { getArtworkUrl, getSongId } from '../../modules/Home/home-model.js'
+import { getArtworkUrl, getSongId } from '../../modules/Catalog/song.js'
 import './QueuePanel.css'
 
 export default function QueuePanel() {

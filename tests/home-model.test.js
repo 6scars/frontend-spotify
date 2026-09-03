@@ -1,7 +1,8 @@
 import test from 'node:test'
 import assert from 'node:assert/strict'
 
-import { buildHomeModel, getSongId } from '../src/modules/Home/home-model.js'
+import { getSongId } from '../src/modules/Catalog/song.js'
+import { buildHomeModel } from '../src/modules/Home/home-model.js'
 
 const songs = Array.from({ length: 9 }, (_, index) => ({
   song_id: index + 1,

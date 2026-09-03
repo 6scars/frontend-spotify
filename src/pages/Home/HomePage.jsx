@@ -5,7 +5,8 @@ import { useCurrentPlaybackContext } from '../../modules/CurrentPlayback/useCurr
 import { useLatestSongsContext } from '../../modules/LatestSongs/useLatestSongsContext.js'
 import { usePlayerContext } from '../../modules/Player/usePlayerContext.js'
 import Icon from '../../shared/ui/Icon.jsx'
-import { buildHomeModel, getArtworkUrl, getSongId } from '../../modules/Home/home-model.js'
+import { getArtworkUrl, getSongId } from '../../modules/Catalog/song.js'
+import { buildHomeModel } from '../../modules/Home/home-model.js'
 import './HomePage.css'
 
 function Artwork({ song, className = '' }) {
