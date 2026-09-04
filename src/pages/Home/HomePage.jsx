@@ -102,8 +102,9 @@ export default function HomePage({ songs: songsFromParent }) {
   const playSong = (song) => {
     const id = getSongId(song)
     if (id === null) return
-    setCurrentPlaylist([])
-    setCurrentPlaylistI(null)
+    const index = model.selected.findIndex((item) => getSongId(item) === id)
+    setCurrentPlaylist(model.selected)
+    setCurrentPlaylistI(index >= 0 ? index : 0)
     chooseSong(id)
   }
 

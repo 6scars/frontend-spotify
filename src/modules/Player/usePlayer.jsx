@@ -4,6 +4,7 @@ import { useCurrentPlaybackContext } from "../CurrentPlayback/useCurrentPlayback
 import { useLatestSongsContext } from "../LatestSongs/useLatestSongsContext.js";
 import { useUIStateContext } from "../UIState/useUIStateContext.js";
 import { BACKEND_URL } from "../../config.js";
+import { getSongId } from '../Catalog/song.js'
 
 export function usePlayer() {
   const audioRef = useRef(null);
@@ -100,14 +101,14 @@ export function usePlayer() {
     /*--when newIndex is at BEGINNING of the array or almost at the end of the array--*/
     if (newIndex <= playlistLen) {  
       const newSong = currentPlaylist[newIndex];
-      newSongId = newSong.song_id;
+      newSongId = getSongId(newSong);
 
       if (!newSongId)
         handleError(`there is no newSongId chooseSong function`, true)
     } else if (newIndex > playlistLen) { /*--when newIndex is at END of the array --*/
       newIndex = 0;
       const newSong = currentPlaylist[newIndex];
-      newSongId = newSong.song_id;
+      newSongId = getSongId(newSong);
 
       if (!newSongId)
         handleError(`there is no newSongId chooseSong function `, true)
@@ -141,7 +142,7 @@ export function usePlayer() {
     /*--when newIndex is at end of the array or almost at begining of the array --*/
     if (newIndex >= 0) {       
       const newSong = currentPlaylist[newIndex];
-      newSongId = newSong.song_id;
+      newSongId = getSongId(newSong);
 
       if (!newSongId)
         handleError(`there is no newSongId chooseSong function`, true)
@@ -149,7 +150,7 @@ export function usePlayer() {
     } else if (newIndex < 0) {    /*--when newIndex is at begining of array --*/
       newIndex = playlistLen;
       const newSong = currentPlaylist[newIndex];
-      newSongId = newSong.song_id;
+      newSongId = getSongId(newSong);
 
       if (!newSongId)
         handleError(`there is no newSongId chooseSong function`, true)
