@@ -13,7 +13,7 @@ const navigation = [
   { icon: 'library', label: 'Biblioteka', to: APP_ROUTES.library },
   { icon: 'heart', label: 'Ulubione' },
   { icon: 'playlists', label: 'Playlisty', to: APP_ROUTES.playlists },
-  { icon: 'radio', label: 'Radio' },
+  { icon: 'radio', label: 'Radio', to: APP_ROUTES.radio },
 ]
 
 export default function Aside() {

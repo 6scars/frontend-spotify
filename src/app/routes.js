@@ -4,6 +4,7 @@ export const APP_ROUTES = Object.freeze({
   library: '/library',
   playlists: '/playlists',
   playlist: '/playlists/:playlistId',
+  radio: '/radio',
   addSong: '/addSong',
 })
 

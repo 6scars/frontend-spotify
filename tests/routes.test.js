@@ -10,6 +10,7 @@ test('podstawowe trasy zachowują Home i istniejący formularz dodawania utworu'
     library: '/library',
     playlists: '/playlists',
     playlist: '/playlists/:playlistId',
+    radio: '/radio',
     addSong: '/addSong',
   })
 })

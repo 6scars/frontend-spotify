@@ -37,13 +37,13 @@
 .Center .center-primary {
     min-width: 0;
     height: 100%;
-    flex-grow: 1;
+    width: var(--center-primary-width);
+    flex: 0 0 var(--center-primary-width);
     overflow-y: auto;
     border-radius: 0;
     background: transparent;
     scrollbar-width: thin;
     scrollbar-color: var(--color-line-strong) transparent;
-    flex-basis: 100%;
 }
 
 .Center > .description {
