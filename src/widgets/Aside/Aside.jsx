@@ -10,7 +10,7 @@ import Playlists from './PlayLists'
 const navigation = [
   { icon: 'home', label: 'Dla Ciebie', to: APP_ROUTES.home },
   { icon: 'discover', label: 'Odkrywaj', to: APP_ROUTES.discover },
-  { icon: 'library', label: 'Biblioteka' },
+  { icon: 'library', label: 'Biblioteka', to: APP_ROUTES.library },
   { icon: 'heart', label: 'Ulubione' },
   { icon: 'playlists', label: 'Playlisty' },
   { icon: 'radio', label: 'Radio' },

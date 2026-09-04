@@ -19,3 +19,4 @@
 
 .filter-tab:hover { border-color: var(--color-text-subtle); color: var(--color-text); }
 .filter-tab--active { border-color: rgba(223, 57, 61, 0.44); background: rgba(126, 31, 38, 0.38); color: var(--color-text); }
+.filter-tab:disabled { cursor: not-allowed; opacity: .46; }

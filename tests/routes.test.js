@@ -7,6 +7,7 @@ test('podstawowe trasy zachowują Home i istniejący formularz dodawania utworu'
   assert.deepEqual(APP_ROUTES, {
     home: '/',
     discover: '/discover',
+    library: '/library',
     addSong: '/addSong',
   })
 })
