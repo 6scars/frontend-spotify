@@ -1,53 +1,19 @@
-import { useState, useEffect } from 'react'
-export default function Playlist({ handleRemoveSong, handleAddSong, currentSong, playlist }) {
-       const [isLoading, setIsloading] = useState(true);
-       const [isSongIncluded, setIsSongIncluded] = useState(false);
+import { playlistContainsSong } from '../../../modules/Playlists/playlist-collection.js'
+import Icon from '../../../shared/ui/Icon.jsx'
 
-       useEffect(() => {
-              setIsSongIncluded(false)
-              setIsloading(true)
-              if (currentSong && playlist) {
-                     const allSongIds = playlist.song_ids;
-                     const findedId = allSongIds.find((id) => id === currentSong.id)
-                     if (findedId) {
-                            setIsSongIncluded(true)
-                     }
-                     setIsloading(false)
-              }
-              /*--currentSong rerender Playlist Component every time the song have changed, */
-       }, [currentSong, playlist])
+export default function Playlist({ currentSong, isPending, onToggle, playlist }) {
+  const isIncluded = playlistContainsSong(playlist, currentSong)
 
-       const render = () => {
-              if (!isLoading) {
-                     if (isSongIncluded) {
-                            return (
-                                   <>
-
-                                          <div onClick={() => handleRemoveSong(currentSong.id, playlist.playlist_id)} className={`add-song-playlist include`}>
-                                                 {playlist.playlist_name}
-                                                 
-                                          <div className="w-5 h-5 bg-red-500"/>
-                                          </div>
-
-                                   </>
-                            )
-                     } else {
-                            return (
-                                   <div onClick={() => handleAddSong(currentSong.id, playlist.playlist_id)} className={`add-song-playlist`}> {playlist.playlist_name}</div>
-                            )
-                     }
-
-
-              } else {
-                     return (
-                            <div>is loading ...</div>
-                     )
-              }
-       }
-       return (
-              <>
-                     {render()}
-              </>
-
-       )
+  return (
+    <button
+      aria-pressed={isIncluded}
+      className={isIncluded ? 'add-song-playlist add-song-playlist--included' : 'add-song-playlist'}
+      disabled={isPending}
+      onClick={() => onToggle(playlist, isIncluded)}
+      type="button"
+    >
+      <span><strong>{playlist.playlist_name}</strong><small>{isIncluded ? 'Utwór jest na tej playliście' : 'Dodaj do playlisty'}</small></span>
+      <span className="add-song-playlist__status">{isPending ? '…' : <Icon name={isIncluded ? 'heart' : 'plus'} size={16} />}</span>
+    </button>
+  )
 }

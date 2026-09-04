@@ -1,5 +1,6 @@
 import { useState, useEffect } from 'react';
 import AddSong from './PlayLeftSection/AddSong';
+import Icon from '../../shared/ui/Icon.jsx'
 import './PlayLeftSection.css'
 
 
@@ -48,13 +49,8 @@ export default function PlayLeftSection({ currentSong,  fetchAuthState }) {
               {currentSong.author}
             </a>
           </div>
-          <div className="relative flex  items-center">
-            <img
-              onClick={handleShowAddSong}
-              className="h-[35px] cursor-pointer"
-              alt="add-to-favorite"
-              src="https://rgmmwhkixprkskznqjcy.supabase.co/storage/v1/object/public/spotify/images/logos/addToFavoriteSong.svg"
-            />
+          <div className="relative flex items-center">
+            <button aria-expanded={showAddSong} aria-label="Dodaj utwór do playlisty" className="play-left-section__add icon-button" onClick={handleShowAddSong} type="button"><Icon name="plus" size={17} /></button>
             
               <AddSong  fetchAuthState={fetchAuthState} currentSong={currentSong} showAddSong={showAddSong}/>
             

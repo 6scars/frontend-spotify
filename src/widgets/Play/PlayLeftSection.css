@@ -63,7 +63,8 @@
 .play-left-section .title-authors { min-width: 0; padding: 0; border: 0; justify-content: center; }
 .play-left-section .title, .play-left-section .authors { overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
 .play-left-section .title { font-size: .82rem; }.play-left-section .authors { font-size: .72rem; }
-.play-left-section > div:last-child img { width: 25px; height: 25px; opacity: .76; }
+.play-left-section__add { color: var(--color-text-muted); }
+.play-left-section__add[aria-expanded="true"] { border-color: rgba(239,74,78,.34); background: rgba(126,31,34,.14); color: var(--color-accent-bright); }
 
 @media (max-width: 620px) {
     .play .play-left-section { width: 150px; }

@@ -2,7 +2,7 @@ import test from 'node:test'
 import assert from 'node:assert/strict'
 
 import { buildLibraryModel } from '../src/modules/Library/library-model.js'
-import { getPlaylistSongCount } from '../src/modules/Playlists/playlist-collection.js'
+import { getPlaylistSongCount, playlistContainsSong } from '../src/modules/Playlists/playlist-collection.js'
 
 const playlists = [
   { playlist_id: 2, playlist_name: 'Żar', song_ids: [4, 5], song_images: ['zar.jpg'] },
@@ -28,6 +28,12 @@ test('licznik playlisty rozpoznaje sentinel pustej listy', () => {
   assert.equal(getPlaylistSongCount(playlists[0]), 2)
   assert.equal(getPlaylistSongCount(playlists[1]), 0)
   assert.equal(getPlaylistSongCount(null), 0)
+})
+
+test('członkostwo utworu w playliście nie zależy od typu identyfikatora', () => {
+  assert.equal(playlistContainsSong({ song_ids: [4, '5'] }, { id: 5 }), true)
+  assert.equal(playlistContainsSong({ song_ids: ['NULL'] }, { song_id: 5 }), false)
+  assert.equal(playlistContainsSong(null, { id: 5 }), false)
 })
 
 test('biblioteka bez danych zwraca bezpieczny pusty model', () => {
