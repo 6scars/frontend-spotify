@@ -66,7 +66,7 @@ export default function Aside() {
       </div>
       <div className="sidebar-footer">
         <button onClick={displayCreatingPlaylistWindow} className="create_playlist_button" type="button"><Icon name="plus" size={19} /><span>Stwórz playlistę</span></button>
-        <button className="sidebar-profile" onClick={() => setSigning(true)} type="button">
+        <button className="sidebar-profile" onClick={() => isLogedIn ? navigate(APP_ROUTES.account) : setSigning(true)} type="button">
           <span className="sidebar-profile__avatar">{isLogedIn ? 'K' : '?'}</span>
           <span>{isLogedIn ? 'Konto' : 'Zaloguj się'}</span>
           <Icon name="chevronRight" size={16} />

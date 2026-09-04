@@ -2,6 +2,7 @@ import { useAuthContext } from '../../modules/Auth/useAuthContext.js';
 import { useUIStateContext } from '../../modules/UIState/useUIStateContext.js'
 import { useNavigate } from 'react-router-dom'
 import Icon from '../../shared/ui/Icon.jsx'
+import { APP_ROUTES } from '../../app/routes.js'
 import './Header.css'
 import Sing from './Sing'
 
@@ -22,7 +23,7 @@ export default function Header() {
       <div className="app-header__actions">
         <button aria-label="Wstecz" className="icon-button" onClick={() => navigate(-1)} type="button"><Icon name="chevronLeft" /></button>
         <button aria-label="Dalej" className="icon-button" onClick={() => navigate(1)} type="button"><Icon name="chevronRight" /></button>
-        <Sing clickedAccount={clickedAccount} isLogedIn={isLogedIn} />
+        <Sing clickedAccount={isLogedIn ? () => navigate(APP_ROUTES.account) : clickedAccount} isLogedIn={isLogedIn} />
       </div>
     </header>
   );
