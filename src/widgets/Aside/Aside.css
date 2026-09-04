@@ -48,7 +48,8 @@
 .brand-mark { width: 42px; height: 42px; display: grid; place-items: center; margin: 0 0 var(--space-6) var(--space-2); border: 0; border-radius: 50%; background: transparent; cursor: pointer; }
 .brand-mark > span { width: 28px; height: 28px; display: block; border-radius: 50%; background: radial-gradient(circle at 32% 28%, #2e2d31 0 10%, #09090b 42%, #df393d 72%, #7f171b 100%); box-shadow: 0 0 20px rgba(223,57,61,.24); }
 .main-navigation { display: flex; flex-direction: column; gap: var(--space-2); }
-.navigation-item { width: 100%; min-height: 46px; display: flex; align-items: center; gap: var(--space-4); padding: 0 var(--space-4); border: 1px solid transparent; border-radius: var(--radius-sm); background: transparent; color: var(--color-text-muted); text-align: left; cursor: default; transition: color var(--motion-fast), background-color var(--motion-fast), border-color var(--motion-fast); }
+.navigation-item { width: 100%; min-height: 46px; display: flex; align-items: center; gap: var(--space-4); padding: 0 var(--space-4); border: 1px solid transparent; border-radius: var(--radius-sm); background: transparent; color: var(--color-text-muted); text-align: left; text-decoration: none; cursor: pointer; transition: color var(--motion-fast), background-color var(--motion-fast), border-color var(--motion-fast); }
+.navigation-item:disabled { cursor: not-allowed; opacity: .58; }
 .navigation-item--active { border-color: rgba(223,57,61,.24); background: linear-gradient(90deg, rgba(158,30,34,.38), rgba(21,18,20,.56)); color: var(--color-text); cursor: pointer; }
 .navigation-item--active:hover { background: linear-gradient(90deg, rgba(178,37,41,.48), rgba(25,21,23,.7)); }
 .navigation-item span { font-size: .82rem; }

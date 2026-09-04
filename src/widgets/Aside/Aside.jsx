@@ -2,16 +2,18 @@ import { useCurrentPlaybackContext } from "../../modules/CurrentPlayback/useCurr
 import { useAuthContext } from "../../modules/Auth/useAuthContext.js";
 import { useUIStateContext } from "../../modules/UIState/useUIStateContext.js";
 import Icon from '../../shared/ui/Icon.jsx'
+import { NavLink } from 'react-router-dom'
+import { APP_ROUTES } from '../../app/routes.js'
 import "./Aside.css";
 import Playlists from './PlayLists'
 
 const navigation = [
-  ['home', 'Dla Ciebie', true],
-  ['discover', 'Odkrywaj', false],
-  ['library', 'Biblioteka', false],
-  ['heart', 'Ulubione', false],
-  ['playlists', 'Playlisty', false],
-  ['radio', 'Radio', false],
+  { icon: 'home', label: 'Dla Ciebie', to: APP_ROUTES.home },
+  { icon: 'discover', label: 'Odkrywaj', to: APP_ROUTES.discover },
+  { icon: 'library', label: 'Biblioteka' },
+  { icon: 'heart', label: 'Ulubione' },
+  { icon: 'playlists', label: 'Playlisty' },
+  { icon: 'radio', label: 'Radio' },
 ]
 
 export default function Aside() {
@@ -46,17 +48,12 @@ export default function Aside() {
     <aside className="leftBar">
       <button aria-label="Strona główna" className="brand-mark" onClick={showHome} type="button"><span /></button>
       <nav aria-label="Główna nawigacja" className="main-navigation">
-        {navigation.map(([icon, label, active]) => (
-          <button
-            aria-current={active ? 'page' : undefined}
-            className={active ? 'navigation-item navigation-item--active' : 'navigation-item'}
-            disabled={!active}
-            key={label}
-            onClick={active ? showHome : undefined}
-            type="button"
-          >
+        {navigation.map(({ icon, label, to }) => to ? (
+          <NavLink className={({ isActive }) => isActive ? 'navigation-item navigation-item--active' : 'navigation-item'} end={to === APP_ROUTES.home} key={label} onClick={showHome} to={to}>
             <Icon name={icon} size={21} /><span>{label}</span>
-          </button>
+          </NavLink>
+        ) : (
+          <button className="navigation-item" disabled key={label} type="button"><Icon name={icon} size={21} /><span>{label}</span></button>
         ))}
       </nav>
       <div className="sidebar-playlists red-scroll-bar">

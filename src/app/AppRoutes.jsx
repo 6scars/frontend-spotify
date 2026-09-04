@@ -1,6 +1,7 @@
 import { Route, Routes } from 'react-router-dom'
 
 import MiniSpotify from '../App.jsx'
+import DiscoverPage from '../pages/Discover/DiscoverPage.jsx'
 import HomePage from '../pages/Home/HomePage.jsx'
 import NotFoundPage from '../pages/NotFound/NotFoundPage.jsx'
 import AddSong from '../widgets/AddSong/AddSong.jsx'
@@ -11,6 +12,7 @@ export default function AppRoutes() {
     <Routes>
       <Route element={<MiniSpotify />}>
         <Route index element={<HomePage />} />
+        <Route element={<DiscoverPage />} path={APP_ROUTES.discover} />
         <Route path="*" element={<NotFoundPage />} />
       </Route>
       <Route element={<AddSong />} path={APP_ROUTES.addSong} />
