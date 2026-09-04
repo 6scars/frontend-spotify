@@ -3,6 +3,7 @@ import { Route, Routes } from 'react-router-dom'
 import MiniSpotify from '../App.jsx'
 import AccountPage from '../pages/Account/AccountPage.jsx'
 import ArtistPage from '../pages/Artist/ArtistPage.jsx'
+import AuthPage from '../pages/Auth/AuthPage.jsx'
 import DiscoverPage from '../pages/Discover/DiscoverPage.jsx'
 import FavoritesPage from '../pages/Favorites/FavoritesPage.jsx'
 import HomePage from '../pages/Home/HomePage.jsx'
@@ -33,6 +34,8 @@ export default function AppRoutes() {
         <Route element={<SettingsPage />} path={APP_ROUTES.settings} />
         <Route path="*" element={<NotFoundPage />} />
       </Route>
+      <Route element={<AuthPage mode="signin" />} path={APP_ROUTES.signIn} />
+      <Route element={<AuthPage mode="signup" />} path={APP_ROUTES.signUp} />
       <Route element={<AddSong />} path={APP_ROUTES.addSong} />
     </Routes>
   )

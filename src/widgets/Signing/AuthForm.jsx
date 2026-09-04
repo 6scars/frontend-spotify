@@ -2,6 +2,7 @@ import Icon from '../../shared/ui/Icon.jsx'
 
 export default function AuthForm({
   clickedAccount,
+  embedded = false,
   fetchRespond,
   formValue,
   isSubmitting,
@@ -13,7 +14,7 @@ export default function AuthForm({
   const isSignUp = mode === 'signup'
 
   return (
-    <div aria-labelledby="auth-title" aria-modal="true" className="auth-dialog" role="dialog">
+    <div aria-labelledby="auth-title" aria-modal={embedded ? undefined : 'true'} className={embedded ? 'auth-dialog auth-dialog--page' : 'auth-dialog'} role={embedded ? undefined : 'dialog'}>
       <button aria-label="Zamknij formularz" className="auth-dialog__close icon-button" onClick={clickedAccount} type="button"><Icon name="plus" size={20} /></button>
       <div className="auth-dialog__brand"><span /><strong>NOIR</strong></div>
       <span className="auth-dialog__eyebrow">{isSignUp ? 'NOWE KONTO' : 'WITAJ PONOWNIE'}</span>

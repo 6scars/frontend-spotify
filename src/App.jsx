@@ -28,7 +28,7 @@ export default function MiniSpotify() {
       await fetchAuthState()
     }
     fetch();
-  }, [reloadAside, reloadApp]);
+  }, [fetchAuthState, reloadAside, reloadApp, setIsLogedIn, setShowCreatePlaylistWindow, setShowPlaylistDescribing]);
 
 
   return (

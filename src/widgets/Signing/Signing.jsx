@@ -8,21 +8,26 @@ import SignIn from './SignIn.jsx'
 import SignUp from './SignUp.jsx'
 import './Signing.css'
 
-export default function Signing() {
+export default function Signing({ defaultMode = 'signin', onClose, onModeChange, presentation = 'overlay' }) {
   const [fetchRespond, setFetchRespond] = useState(null)
   const [formValue, setFormValue] = useState({ email: '', password: '' })
   const [isSubmitting, setIsSubmitting] = useState(false)
-  const [switchForm, setSwitchForm] = useState(false)
+  const [switchForm, setSwitchForm] = useState(defaultMode === 'signup')
   const { isLogedIn } = useAuthContext()
   const { clickedAccount } = useUIStateContext()
+  const close = onClose || clickedAccount
+
+  useEffect(() => {
+    setSwitchForm(defaultMode === 'signup')
+  }, [defaultMode])
 
   useEffect(() => {
     const closeOnEscape = (event) => {
-      if (event.key === 'Escape') clickedAccount()
+      if (event.key === 'Escape') close()
     }
     window.addEventListener('keydown', closeOnEscape)
     return () => window.removeEventListener('keydown', closeOnEscape)
-  }, [clickedAccount])
+  }, [close])
 
   const signForm = (event) => {
     setFetchRespond(null)
@@ -31,7 +36,8 @@ export default function Signing() {
 
   const changeForm = (nextValue) => {
     setFetchRespond(null)
-    setSwitchForm(nextValue)
+    if (onModeChange) onModeChange(nextValue ? 'signup' : 'signin')
+    else setSwitchForm(nextValue)
   }
 
   const sendForm = async (event) => {
@@ -65,10 +71,11 @@ export default function Signing() {
     }
   }
 
-  if (isLogedIn) return <div className="auth-overlay"><button aria-label="Zamknij menu konta" className="auth-overlay__backdrop" onClick={clickedAccount} type="button" /><AccountOptions clickedAccount={clickedAccount} /></div>
+  if (isLogedIn) return <div className="auth-overlay"><button aria-label="Zamknij menu konta" className="auth-overlay__backdrop" onClick={close} type="button" /><AccountOptions clickedAccount={close} /></div>
 
   const formProps = {
-    clickedAccount,
+    clickedAccount: close,
+    embedded: presentation === 'page',
     fetchRespond,
     formValue,
     isSubmitting,
@@ -77,5 +84,11 @@ export default function Signing() {
     signForm,
   }
 
-  return <div className="auth-overlay"><button aria-label="Zamknij formularz" className="auth-overlay__backdrop" onClick={clickedAccount} type="button" />{switchForm ? <SignUp {...formProps} /> : <SignIn {...formProps} />}</div>
+  const form = switchForm ? <SignUp {...formProps} /> : <SignIn {...formProps} />
+
+  if (presentation === 'page') {
+    return <div className="auth-page"><section className="auth-page__visual"><div className="auth-page__brand"><span /><strong>NOIR</strong></div><div><span>{switchForm ? 'NOWY ROZDZIAŁ' : 'TWOJA MUZYKA'}</span><h1>{switchForm ? 'Zacznij słuchać po swojemu.' : 'Wróć do dźwięków, które są Twoje.'}</h1><p>Ciemna przestrzeń dla muzyki, bez zbędnego hałasu.</p></div><i aria-hidden="true" /></section><main className="auth-page__form">{form}</main></div>
+  }
+
+  return <div className="auth-overlay"><button aria-label="Zamknij formularz" className="auth-overlay__backdrop" onClick={close} type="button" />{form}</div>
 }

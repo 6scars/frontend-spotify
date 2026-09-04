@@ -1,13 +1,10 @@
 import { checkToken, fetchPlaylists, fetchSongs } from "../../scripts/Fetches.jsx";
-import { useEffect, useState } from 'react'
+import { useCallback, useEffect, useState } from 'react'
 
 export function useAuth() {
     const [isLogedIn, setIsLogedIn] = useState(false);
     const [playlists, setPlaylists] = useState([]);
     const [songs, setSongs] = useState([])
-    const user_id = Number(localStorage.getItem('user_id'))
-
-
     useEffect(() => {
         const fetches = async () => {
             const fetchedSongs = await fetchSongs();
@@ -17,15 +14,15 @@ export function useAuth() {
     }, [])
 
 
-    async function fetchAuthState() {
+    const fetchAuthState = useCallback(async () => {
         const valid = await checkToken();
         console.log(valid)
         if (valid) {
             setIsLogedIn(valid)
-            setPlaylists(await fetchPlaylists(user_id) || [])
+            const userId = Number(localStorage.getItem('user_id'))
+            setPlaylists(await fetchPlaylists(userId) || [])
         }
-
-    }
+    }, [])
 
 
 
