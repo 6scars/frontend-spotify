@@ -1,0 +1,46 @@
+@import 'tailwindcss';
+
+.play-right-section {
+    @apply h-full w-[300px] flex justify-center items-center;
+}
+
+.volume-container {
+    @apply w-full h-full flex items-center gap-5;
+    padding-right: 50px;
+}
+
+
+@media(max-width:690px) {
+    .volume-icon-container {
+        width: 0px;
+        height: 0px;
+        display: hidden;
+    }
+
+    .volume-container {
+        padding-right: 0px;
+    }
+
+    .volume__text {
+        width: 0px;
+        height: 0px;
+        display: hidden;
+    }
+}
+
+
+@media (max-width:490px) {
+    .volume-container {
+        gap: 0px;
+    }
+
+
+}
+
+.play-right-section { width: min(250px, 23vw); }
+.volume-container { gap: var(--space-3); padding-right: 0; }
+.volume-container .volume { height: 4px; background: var(--color-line-strong); cursor: pointer; }
+.volume-container .volume > div { background: var(--color-accent); }
+.volume__text { min-width: 34px; color: var(--color-text-muted); font-size: .66rem; }
+
+@media (max-width: 620px) { .play-right-section { display: none; } }

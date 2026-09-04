@@ -1,0 +1,60 @@
+@import 'tailwindcss';
+
+
+.play-center-section {
+    @apply h-full w-[400px] min-w-[250px] max-w-[600px] flex flex-col items-center;
+}
+
+.play-center-section .controll-buttons-container {
+    @apply w-full flex-1 flex justify-center items-center gap-5
+}
+
+.play-center-section .loading-bar-gray {
+    @apply min-w-[150px] max-w-[300px] h-[15px] bg-[var(--help-color2)] rounded-full overflow-hidden
+}
+
+.play-center-section .format-duration-time {
+    @apply text-red-500 min-w-[50px]
+}
+
+
+.play-center-section .format-current-time {
+    @apply text-red-500 min-w-[50px]
+}
+
+@media(max-width:490px) {
+    .play-center-section {
+        min-width: 100px;
+    }
+
+    .play-center-section .controll-buttons-container {
+        gap: 0px;
+    }
+
+    .play-center-section .loading-bar-gray {
+        min-width: 75px;        
+    }
+
+    .play-center-section .format-current-time,
+    .play-center-section .format-duration-time {
+        min-width: auto;
+        font-size: 0.5rem
+    }
+}
+
+.play-center-section { width: min(520px, 46vw); max-width: 620px; min-width: 260px; }
+.play-center-section .controll-buttons-container { gap: var(--space-4); }
+.play-center-section .controll-buttons-container button { width: 34px; height: 34px; display: grid; place-items: center; border: 0; background: transparent; opacity: .82; transition: opacity var(--motion-fast), transform var(--motion-fast); }
+.play-center-section .controll-buttons-container button:hover { opacity: 1; transform: translateY(-1px); }
+.play-center-section .controll-buttons-container button:nth-child(3) { width: 46px; height: 46px; border-radius: 50%; background: var(--color-accent); opacity: 1; }
+.play-center-section .controll-buttons-container img { width: 28px; height: 28px; }
+.play-center-section .controll-buttons-container button:nth-child(3) img { width: 34px; height: 34px; }
+.play-center-section .loading-bar-gray { min-width: 130px; max-width: none; height: 4px; background: var(--color-line-strong); cursor: pointer; }
+.play-center-section .loading-bar-gray > div { background: var(--color-accent); }
+.play-center-section .format-current-time { min-width: 45px; color: var(--color-text-muted); font-size: .66rem; }
+
+@media (max-width: 620px) {
+    .play-center-section { width: auto; min-width: 150px; flex: 1; }
+    .play-center-section .controll-buttons-container button:first-child, .play-center-section .controll-buttons-container button:last-child { display: none; }
+    .play-center-section .controll-buttons-container { gap: var(--space-2); }
+}
