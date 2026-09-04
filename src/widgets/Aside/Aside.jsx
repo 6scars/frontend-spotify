@@ -2,8 +2,8 @@ import { useCurrentPlaybackContext } from "../../modules/CurrentPlayback/useCurr
 import { useAuthContext } from "../../modules/Auth/useAuthContext.js";
 import { useUIStateContext } from "../../modules/UIState/useUIStateContext.js";
 import Icon from '../../shared/ui/Icon.jsx'
-import { NavLink } from 'react-router-dom'
-import { APP_ROUTES } from '../../app/routes.js'
+import { NavLink, useNavigate } from 'react-router-dom'
+import { APP_ROUTES, getPlaylistRoute } from '../../app/routes.js'
 import "./Aside.css";
 import Playlists from './PlayLists'
 
@@ -17,6 +17,7 @@ const navigation = [
 ]
 
 export default function Aside() {
+  const navigate = useNavigate()
   const { showCreatePlaylistWindow, setShowCreatePlaylistWindow, setShowPlaylistDescribing, setSigning } = useUIStateContext();
   const { setPlaylists_id } = useCurrentPlaybackContext();
   const { playlists, isLogedIn } = useAuthContext();
@@ -36,7 +37,9 @@ export default function Aside() {
 
   const choosePlaylist = (playlist_id) => {
     setPlaylists_id(playlist_id);
-    setShowPlaylistDescribing(true);
+    setShowCreatePlaylistWindow(false)
+    setShowPlaylistDescribing(false);
+    navigate(getPlaylistRoute(playlist_id))
   };
 
   const showHome = () => {

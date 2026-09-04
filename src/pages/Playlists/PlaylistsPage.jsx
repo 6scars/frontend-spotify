@@ -1,5 +1,7 @@
 import { useMemo, useState } from 'react'
+import { useNavigate } from 'react-router-dom'
 
+import { getPlaylistRoute } from '../../app/routes.js'
 import { useAuthContext } from '../../modules/Auth/useAuthContext.js'
 import { getArtworkUrl } from '../../modules/Catalog/song.js'
 import { useCurrentPlaybackContext } from '../../modules/CurrentPlayback/useCurrentPlaybackContext.js'
@@ -17,6 +19,7 @@ const playlistTabs = [
 ]
 
 export default function PlaylistsPage() {
+  const navigate = useNavigate()
   const { isLogedIn, playlists } = useAuthContext()
   const { setPlaylists_id } = useCurrentPlaybackContext()
   const { setShowCreatePlaylistWindow, setShowPlaylistDescribing, setSigning } = useUIStateContext()
@@ -26,7 +29,8 @@ export default function PlaylistsPage() {
   const openPlaylist = (playlistId) => {
     setPlaylists_id(playlistId)
     setShowCreatePlaylistWindow(false)
-    setShowPlaylistDescribing(true)
+    setShowPlaylistDescribing(false)
+    navigate(getPlaylistRoute(playlistId))
   }
 
   const createPlaylist = () => {

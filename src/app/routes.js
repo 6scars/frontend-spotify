@@ -3,5 +3,10 @@ export const APP_ROUTES = Object.freeze({
   discover: '/discover',
   library: '/library',
   playlists: '/playlists',
+  playlist: '/playlists/:playlistId',
   addSong: '/addSong',
 })
+
+export function getPlaylistRoute(playlistId) {
+  return `${APP_ROUTES.playlists}/${encodeURIComponent(String(playlistId))}`
+}
