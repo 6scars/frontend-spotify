@@ -12,7 +12,7 @@ const navigation = [
   { icon: 'discover', label: 'Odkrywaj', to: APP_ROUTES.discover },
   { icon: 'library', label: 'Biblioteka', to: APP_ROUTES.library },
   { icon: 'heart', label: 'Ulubione' },
-  { icon: 'playlists', label: 'Playlisty' },
+  { icon: 'playlists', label: 'Playlisty', to: APP_ROUTES.playlists },
   { icon: 'radio', label: 'Radio' },
 ]
 
