@@ -1,3 +1,6 @@
+import { Link } from 'react-router-dom'
+
+import { getArtistRoute } from '../../app/routes.js'
 import { useCurrentPlaybackContext }        from "../../modules/CurrentPlayback/useCurrentPlaybackContext.js";
 import { useUIStateContext }                from "../../modules/UIState/useUIStateContext.js"
 import "./Description.css";
@@ -37,9 +40,9 @@ export default function Description() {
             />
           </div>
           <div className="about-artist-text-container">
-            <div className="artist-name text-white font-bold">
-              {currentSong.song_name}
-            </div>
+            <Link className="artist-name text-white font-bold" to={getArtistRoute(currentSong.author)}>
+              {currentSong.author}
+            </Link>
             <div className="artist-follow flex">
               <div className="followers flex-1 flex items-center">
                 {currentSong.follows} right now follows

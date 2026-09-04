@@ -1,3 +1,6 @@
+import { Link } from 'react-router-dom'
+
+import { getArtistRoute } from '../../app/routes.js'
 import { useAuthContext } from '../../modules/Auth/useAuthContext.js'
 import { getArtworkUrl, getSongId } from '../../modules/Catalog/song.js'
 import { useCurrentPlaybackContext } from '../../modules/CurrentPlayback/useCurrentPlaybackContext.js'
@@ -33,11 +36,10 @@ export default function DiscoverPage() {
   const artistCards = (
     <div className="discover-artists">
       {model.artists.map((artist) => (
-        <button className="discover-artist" key={artist.name.toLocaleLowerCase('pl')} onClick={() => playTrack(getSongId(artist.song))} type="button">
-          <span className="discover-artist__avatar">{artist.name.slice(0, 1)}</span>
-          <span><strong>{artist.name}</strong><small>Wykonawca w Twoim katalogu</small></span>
-          <Icon name="chevronRight" size={17} />
-        </button>
+        <div className="discover-artist" key={artist.name.toLocaleLowerCase('pl')}>
+          <Link to={getArtistRoute(artist.name)}><span className="discover-artist__avatar">{artist.name.slice(0, 1)}</span><span><strong>{artist.name}</strong><small>Wykonawca w Twoim katalogu</small></span></Link>
+          <button aria-label={`Odtwórz utwory: ${artist.name}`} className="icon-button" onClick={() => playTrack(getSongId(artist.song))} type="button"><Icon name="play" size={15} /></button>
+        </div>
       ))}
     </div>
   )

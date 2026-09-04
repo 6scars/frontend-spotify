@@ -1,7 +1,7 @@
 import test from 'node:test'
 import assert from 'node:assert/strict'
 
-import { APP_ROUTES, getPlaylistRoute } from '../src/app/routes.js'
+import { APP_ROUTES, getArtistRoute, getPlaylistRoute } from '../src/app/routes.js'
 
 test('podstawowe trasy zachowują Home i istniejący formularz dodawania utworu', () => {
   assert.deepEqual(APP_ROUTES, {
@@ -14,8 +14,13 @@ test('podstawowe trasy zachowują Home i istniejący formularz dodawania utworu'
     radio: '/radio',
     account: '/account',
     settings: '/settings',
+    artist: '/artists/:artistName',
     addSong: '/addSong',
   })
+})
+
+test('profil twórcy koduje nazwę wykonawcy w adresie', () => {
+  assert.equal(getArtistRoute('Karaś/Rogucki'), '/artists/Kara%C5%9B%2FRogucki')
 })
 
 test('szczegóły playlisty używają stabilnego i bezpiecznego identyfikatora', () => {

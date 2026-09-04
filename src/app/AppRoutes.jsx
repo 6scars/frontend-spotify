@@ -2,6 +2,7 @@ import { Route, Routes } from 'react-router-dom'
 
 import MiniSpotify from '../App.jsx'
 import AccountPage from '../pages/Account/AccountPage.jsx'
+import ArtistPage from '../pages/Artist/ArtistPage.jsx'
 import DiscoverPage from '../pages/Discover/DiscoverPage.jsx'
 import FavoritesPage from '../pages/Favorites/FavoritesPage.jsx'
 import HomePage from '../pages/Home/HomePage.jsx'
@@ -20,6 +21,7 @@ export default function AppRoutes() {
       <Route element={<MiniSpotify />}>
         <Route index element={<HomePage />} />
         <Route element={<AccountPage />} path={APP_ROUTES.account} />
+        <Route element={<ArtistPage />} path={APP_ROUTES.artist} />
         <Route element={<DiscoverPage />} path={APP_ROUTES.discover} />
         <Route element={<FavoritesPage />} path={APP_ROUTES.favorites} />
         <Route element={<LibraryPage />} path={APP_ROUTES.library} />

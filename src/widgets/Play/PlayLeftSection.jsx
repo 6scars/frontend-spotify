@@ -1,5 +1,7 @@
 import { useState, useEffect } from 'react';
+import { Link } from 'react-router-dom'
 import AddSong from './PlayLeftSection/AddSong';
+import { getArtistRoute } from '../../app/routes.js'
 import Icon from '../../shared/ui/Icon.jsx'
 import './PlayLeftSection.css'
 
@@ -45,9 +47,9 @@ export default function PlayLeftSection({ currentSong,  fetchAuthState }) {
             <a className="title text-white cursor-pointer hover:underline">
               {currentSong.song_name}
             </a>
-            <a className="authors text-[var(--help-color)] cursor-pointer hover:underline ">
+            <Link className="authors text-[var(--help-color)] cursor-pointer hover:underline" to={getArtistRoute(currentSong.author)}>
               {currentSong.author}
-            </a>
+            </Link>
           </div>
           <div className="relative flex items-center">
             <button aria-expanded={showAddSong} aria-label="Dodaj utwór do playlisty" className="play-left-section__add icon-button" onClick={handleShowAddSong} type="button"><Icon name="plus" size={17} /></button>

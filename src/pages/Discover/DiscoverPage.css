@@ -22,14 +22,15 @@
 .discover-card strong { margin-top: var(--space-3); font-size: .82rem; }
 .discover-card small { margin-top: 4px; color: var(--color-text-muted); font-size: .7rem; }
 .discover-artists { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: var(--space-3); }
-.discover-artist { min-width: 0; display: flex; align-items: center; gap: var(--space-3); padding: var(--space-3); border: 1px solid var(--color-line); border-radius: var(--radius-md); background: var(--color-surface); color: var(--color-text); text-align: left; cursor: pointer; transition: border-color var(--motion-fast), background-color var(--motion-fast); }
+.discover-artist { min-width: 0; display: flex; align-items: center; gap: var(--space-3); padding: var(--space-3); border: 1px solid var(--color-line); border-radius: var(--radius-md); background: var(--color-surface); color: var(--color-text); text-align: left; transition: border-color var(--motion-fast), background-color var(--motion-fast); }
 .discover-artist:hover { border-color: var(--color-line-strong); background: var(--color-surface-raised); }
+.discover-artist > a { min-width: 0; display: flex; flex: 1; align-items: center; gap: var(--space-3); color: inherit; text-decoration: none; }
 .discover-artist__avatar { width: 44px; height: 44px; flex: 0 0 auto; display: grid; place-items: center; border-radius: 50%; background: radial-gradient(circle at 30% 25%, #843138, #1c1114 70%); color: var(--color-text); font-weight: 700; }
-.discover-artist > span:nth-child(2) { min-width: 0; }
+.discover-artist > a > span:nth-child(2) { min-width: 0; }
 .discover-artist strong, .discover-artist small { display: block; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
 .discover-artist strong { font-size: .8rem; }
 .discover-artist small { margin-top: 4px; color: var(--color-text-muted); font-size: .66rem; }
-.discover-artist > .ui-icon { margin-left: auto; color: var(--color-text-muted); }
+.discover-artist > button { margin-left: auto; color: var(--color-text-muted); }
 
 @media (max-width: 900px) {
   .discover-page { padding: var(--space-5); }

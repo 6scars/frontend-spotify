@@ -8,9 +8,14 @@ export const APP_ROUTES = Object.freeze({
   radio: '/radio',
   account: '/account',
   settings: '/settings',
+  artist: '/artists/:artistName',
   addSong: '/addSong',
 })
 
 export function getPlaylistRoute(playlistId) {
   return `${APP_ROUTES.playlists}/${encodeURIComponent(String(playlistId))}`
+}
+
+export function getArtistRoute(artistName) {
+  return `/artists/${encodeURIComponent(String(artistName))}`
 }
