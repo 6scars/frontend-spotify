@@ -1,7 +1,7 @@
 import { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom'
 import AddSong from './PlayLeftSection/AddSong';
-import { getArtistRoute } from '../../app/routes.js'
+import { APP_ROUTES, getArtistRoute } from '../../app/routes.js'
 import Icon from '../../shared/ui/Icon.jsx'
 import './PlayLeftSection.css'
 
@@ -44,9 +44,9 @@ export default function PlayLeftSection({ currentSong,  fetchAuthState }) {
           flex flex-col
         "
           >
-            <a className="title text-white cursor-pointer hover:underline">
+            <Link className="title text-white cursor-pointer hover:underline" to={APP_ROUTES.nowPlaying}>
               {currentSong.song_name}
-            </a>
+            </Link>
             <Link className="authors text-[var(--help-color)] cursor-pointer hover:underline" to={getArtistRoute(currentSong.author)}>
               {currentSong.author}
             </Link>

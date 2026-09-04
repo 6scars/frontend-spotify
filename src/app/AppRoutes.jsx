@@ -7,6 +7,7 @@ import DiscoverPage from '../pages/Discover/DiscoverPage.jsx'
 import FavoritesPage from '../pages/Favorites/FavoritesPage.jsx'
 import HomePage from '../pages/Home/HomePage.jsx'
 import LibraryPage from '../pages/Library/LibraryPage.jsx'
+import NowPlayingPage from '../pages/NowPlaying/NowPlayingPage.jsx'
 import PlaylistPage from '../pages/Playlist/PlaylistPage.jsx'
 import PlaylistsPage from '../pages/Playlists/PlaylistsPage.jsx'
 import RadioPage from '../pages/Radio/RadioPage.jsx'
@@ -25,6 +26,7 @@ export default function AppRoutes() {
         <Route element={<DiscoverPage />} path={APP_ROUTES.discover} />
         <Route element={<FavoritesPage />} path={APP_ROUTES.favorites} />
         <Route element={<LibraryPage />} path={APP_ROUTES.library} />
+        <Route element={<NowPlayingPage />} path={APP_ROUTES.nowPlaying} />
         <Route element={<PlaylistsPage />} path={APP_ROUTES.playlists} />
         <Route element={<PlaylistPage />} path={APP_ROUTES.playlist} />
         <Route element={<RadioPage />} path={APP_ROUTES.radio} />

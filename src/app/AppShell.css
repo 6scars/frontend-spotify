@@ -34,6 +34,29 @@
   border-left: 1px solid var(--color-line);
 }
 
+.app-shell--immersive {
+  grid-template-columns: minmax(0, 1fr);
+  padding-bottom: 0;
+}
+
+.app-shell--immersive .app-shell__sidebar,
+.app-shell--immersive .app-header,
+.app-shell--immersive .app-shell__queue,
+.app-shell--immersive > .play,
+.app-shell--immersive .Center > .description,
+.app-shell--immersive .Center > .resizer {
+  display: none;
+}
+
+.app-shell--immersive .app-shell__workspace {
+  grid-template-rows: minmax(0, 1fr);
+}
+
+.app-shell--immersive .Center .center-primary {
+  width: 100%;
+  flex-basis: 100%;
+}
+
 @media (max-width: 1180px) {
   .app-shell {
     grid-template-columns: var(--sidebar-width) minmax(0, 1fr);

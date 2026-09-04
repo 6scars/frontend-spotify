@@ -6,6 +6,7 @@ export const APP_ROUTES = Object.freeze({
   playlists: '/playlists',
   playlist: '/playlists/:playlistId',
   radio: '/radio',
+  nowPlaying: '/now-playing',
   account: '/account',
   settings: '/settings',
   artist: '/artists/:artistName',

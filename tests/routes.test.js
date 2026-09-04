@@ -12,6 +12,7 @@ test('podstawowe trasy zachowują Home i istniejący formularz dodawania utworu'
     playlists: '/playlists',
     playlist: '/playlists/:playlistId',
     radio: '/radio',
+    nowPlaying: '/now-playing',
     account: '/account',
     settings: '/settings',
     artist: '/artists/:artistName',
