@@ -8,6 +8,7 @@ test('podstawowe trasy zachowują Home i istniejący formularz dodawania utworu'
     home: '/',
     discover: '/discover',
     library: '/library',
+    favorites: '/favorites',
     playlists: '/playlists',
     playlist: '/playlists/:playlistId',
     radio: '/radio',

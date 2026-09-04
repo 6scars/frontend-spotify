@@ -11,7 +11,7 @@ const navigation = [
   { icon: 'home', label: 'Dla Ciebie', to: APP_ROUTES.home },
   { icon: 'discover', label: 'Odkrywaj', to: APP_ROUTES.discover },
   { icon: 'library', label: 'Biblioteka', to: APP_ROUTES.library },
-  { icon: 'heart', label: 'Ulubione' },
+  { icon: 'heart', label: 'Ulubione', to: APP_ROUTES.favorites },
   { icon: 'playlists', label: 'Playlisty', to: APP_ROUTES.playlists },
   { icon: 'radio', label: 'Radio', to: APP_ROUTES.radio },
 ]

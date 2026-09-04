@@ -2,6 +2,7 @@ export const APP_ROUTES = Object.freeze({
   home: '/',
   discover: '/discover',
   library: '/library',
+  favorites: '/favorites',
   playlists: '/playlists',
   playlist: '/playlists/:playlistId',
   radio: '/radio',
