@@ -127,7 +127,7 @@
 .home-section { margin-top: var(--space-6); }
 .home-section__heading { display: flex; align-items: center; justify-content: space-between; margin-bottom: var(--space-3); }
 .home-section__heading h2 { font-size: 1.05rem; letter-spacing: -0.015em; }
-.home-section__link { border: 0; background: transparent; color: var(--color-accent); font: inherit; font-size: 0.76rem; cursor: pointer; }
+.home-section__link { border: 0; background: transparent; color: var(--color-accent); font: inherit; font-size: 0.76rem; cursor: pointer; text-decoration: none; }
 .home-section__link:hover { color: var(--color-accent-bright); }
 
 .home-cards {

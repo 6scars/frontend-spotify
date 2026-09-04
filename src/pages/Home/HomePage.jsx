@@ -1,5 +1,7 @@
 import { useMemo } from 'react'
+import { Link } from 'react-router-dom'
 
+import { APP_ROUTES } from '../../app/routes.js'
 import { useAuthContext } from '../../modules/Auth/useAuthContext.js'
 import { useCurrentPlaybackContext } from '../../modules/CurrentPlayback/useCurrentPlaybackContext.js'
 import { useLatestSongsContext } from '../../modules/LatestSongs/useLatestSongsContext.js'
@@ -35,7 +37,7 @@ function HomeHero({ song, onPlay }) {
           <button className="button button--primary" disabled={!song} onClick={() => onPlay(song)} type="button">
             <Icon name="play" size={17} /> Odtwórz
           </button>
-          <button className="button button--quiet" disabled title="Zapisywanie utworów zostanie dodane w kolejnym etapie" type="button">Zapisz</button>
+          <button className="button button--quiet" disabled title="Backend nie udostępnia jeszcze zapisywania ulubionych" type="button">Zapisz</button>
         </div>
       </div>
       <div aria-hidden="true" className="home-hero__pager"><i /><i /><i /><i /></div>
@@ -48,7 +50,7 @@ function MediaShelf({ songs, onPlay }) {
     <section className="home-section" aria-labelledby="selected-title">
       <div className="home-section__heading">
         <h2 id="selected-title">Wybrane dla Ciebie</h2>
-        <button className="home-section__link" disabled title="Pełny widok kolekcji zostanie dodany w kolejnym etapie" type="button">Pokaż wszystko</button>
+        <Link className="home-section__link" to={APP_ROUTES.discover}>Pokaż wszystko</Link>
       </div>
       <div className="home-cards">
         {songs.map((song, index) => (
@@ -72,7 +74,7 @@ function MixShelf({ mixes, onPlay }) {
     <section className="home-section" aria-labelledby="mixes-title">
       <div className="home-section__heading">
         <h2 id="mixes-title">Twoje miksy</h2>
-        <button className="home-section__link" disabled title="Pełny widok miksów zostanie dodany w kolejnym etapie" type="button">Pokaż wszystko</button>
+        <Link className="home-section__link" to={APP_ROUTES.radio}>Pokaż wszystko</Link>
       </div>
       <div className="home-mixes">
         {mixes.map((mix, index) => (
