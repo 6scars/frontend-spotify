@@ -1,7 +1,8 @@
 import test from 'node:test'
 import assert from 'node:assert/strict'
 
-import { buildLibraryModel, getPlaylistSongCount } from '../src/modules/Library/library-model.js'
+import { buildLibraryModel } from '../src/modules/Library/library-model.js'
+import { getPlaylistSongCount } from '../src/modules/Playlists/playlist-collection.js'
 
 const playlists = [
   { playlist_id: 2, playlist_name: 'Żar', song_ids: [4, 5], song_images: ['zar.jpg'] },
