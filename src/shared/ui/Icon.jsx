@@ -10,6 +10,7 @@ const paths = {
   plus: ['M12 5v14', 'M5 12h14'],
   chevronLeft: ['m15 18-6-6 6-6'],
   chevronRight: ['m9 18 6-6-6-6'],
+  chevronDown: ['m6 9 6 6 6-6'],
   play: ['m9 7 8 5-8 5V7Z'],
   pause: ['M9 7v10', 'M15 7v10'],
   previous: ['M7 6v12', 'm17 7-8 5 8 5V7Z'],
@@ -17,6 +18,8 @@ const paths = {
   repeat: ['M17 2l3 3-3 3', 'M3 11V9a4 4 0 0 1 4-4h13', 'M7 22l-3-3 3-3', 'M21 13v2a4 4 0 0 1-4 4H4'],
   shuffle: ['M16 3h5v5', 'M4 20 21 3', 'M21 16v5h-5', 'm15 15 6 6', 'M4 4l5 5'],
   volume: ['M11 5 6 9H3v6h3l5 4V5Z', 'M15 9a4 4 0 0 1 0 6', 'M18 6a8 8 0 0 1 0 12'],
+  volumeMuted: ['M11 5 6 9H3v6h3l5 4V5Z', 'm16 10 4 4', 'm20 10-4 4'],
+  expand: ['M8 3H3v5', 'M16 3h5v5', 'M8 21H3v-5', 'M16 21h5v-5'],
   more: ['M5 12h.01', 'M12 12h.01', 'M19 12h.01'],
 }
 
