@@ -1,60 +1,66 @@
-import { useAuthContext } from '../../modules/Auth/useAuthContext.js'
-import { useCurrentPlaybackContext } from '../../modules/CurrentPlayback/useCurrentPlaybackContext.js'
-import { usePlayerContext } from '../../modules/Player/usePlayerContext.js'
 import Icon from '../../shared/ui/Icon.jsx'
 import { getArtworkUrl, getSongId } from '../../modules/Catalog/song.js'
+import { formatQueueCount } from '../../modules/Player/playback-queue.js'
 import './QueuePanel.css'
 
-export default function QueuePanel() {
-  const { songs } = useAuthContext()
-  const { currentSong, currentPlaylist, setCurrentPlaylist, setCurrentPlaylistI } = useCurrentPlaybackContext()
-  const { chooseSong } = usePlayerContext()
-  const queue = currentPlaylist.length ? currentPlaylist : (songs || []).slice(0, 7)
-  const nowPlaying = currentSong || queue[0]
+function QueueSong({ song, active, onPlay }) {
+  return (
+    <button className={`queue-song ${active ? 'queue-song--active' : ''}`} onClick={onPlay}
+      aria-label={`Odtwórz ${song.song_name} — ${song.author}`} aria-current={active ? 'true' : undefined} type="button">
+      <span className="queue-song__cover">{getArtworkUrl(song) ? <img alt="" src={getArtworkUrl(song)} loading="lazy" /> : null}</span>
+      <span><strong>{song.song_name}</strong><small>{song.author}</small></span>
+      <Icon name="play" size={18} />
+    </button>
+  )
+}
 
-  const playFromQueue = (song, index) => {
-    const id = getSongId(song)
-    if (id === null) return
-    setCurrentPlaylist(queue)
-    setCurrentPlaylistI(index)
-    chooseSong(id)
-  }
-
-  const clearQueue = () => {
-    setCurrentPlaylist([])
-    setCurrentPlaylistI(null)
-  }
+export default function QueuePanel({ playback, onClose, closeRef }) {
+  const { queue, suggestions, currentSong, isPlaying, playFromQueue, clearQueue } = playback
 
   return (
     <aside className="queue-panel" aria-label="Kolejka odtwarzania">
       <div className="queue-panel__title">
         <h2>Teraz gra</h2>
-        <span className="queue-panel__meter" aria-hidden="true"><i /><i /><i /></span>
+        <button ref={closeRef} className="queue-panel__close" onClick={onClose} aria-label="Zwiń kolejkę" type="button">
+          <Icon name="chevronRight" size={20} />
+        </button>
       </div>
       <div className="queue-panel__current">
-        <span className="queue-panel__eyebrow">Teraz odtwarzane</span>
-        {nowPlaying ? (
+        <span className="queue-panel__eyebrow">{currentSong ? (isPlaying ? 'Teraz odtwarzane' : 'Wstrzymano') : 'Twoja muzyka'}</span>
+        {currentSong ? (
           <div className="queue-song queue-song--current">
-            <div className="queue-song__cover">{getArtworkUrl(nowPlaying) ? <img alt="" src={getArtworkUrl(nowPlaying)} /> : null}</div>
-            <span><strong>{nowPlaying.song_name}</strong><small>{nowPlaying.author}</small></span>
-            <span className="queue-equalizer" aria-label="Odtwarzanie"><i /><i /><i /></span>
+            <div className="queue-song__cover">{getArtworkUrl(currentSong) ? <img alt="" src={getArtworkUrl(currentSong)} /> : null}</div>
+            <span><strong>{currentSong.song_name}</strong><small>{currentSong.author}</small></span>
+            <span className={`queue-equalizer ${isPlaying ? '' : 'queue-equalizer--paused'}`} aria-hidden="true"><i /><i /><i /></span>
           </div>
         ) : <p className="queue-panel__empty">Wybierz utwór, aby rozpocząć.</p>}
       </div>
       <div className="queue-panel__bar">
         <h3>Kolejka</h3>
-        <button onClick={clearQueue} type="button">Wyczyść</button>
+        <button onClick={clearQueue} disabled={!queue.length} type="button">Wyczyść</button>
       </div>
       <div className="queue-panel__list">
-        {queue.map((song, index) => (
-          <button className="queue-song" key={`${getSongId(song)}-${index}`} onClick={() => playFromQueue(song, index)} type="button">
-            <span className="queue-song__cover">{getArtworkUrl(song) ? <img alt="" src={getArtworkUrl(song)} /> : null}</span>
-            <span><strong>{song.song_name}</strong><small>{song.author}</small></span>
-            <Icon name="more" size={17} />
-          </button>
-        ))}
+        {queue.length ? queue.map((song, index) => (
+          <QueueSong key={`${getSongId(song)}-${index}`} song={song}
+            active={String(getSongId(song)) === String(getSongId(currentSong))}
+            onPlay={() => playFromQueue(index)} />
+        )) : (
+          <div className="queue-panel__empty-state">
+            <Icon name="queue" size={28} />
+            <p>Kolejka jest pusta</p>
+            <small>Włącz utwór lub playlistę, aby dodać muzykę do kolejki.</small>
+          </div>
+        )}
+        {suggestions.length ? (
+          <section className="queue-panel__suggestions" aria-label="Propozycje dla Ciebie">
+            <h3>Propozycje dla Ciebie</h3>
+            {suggestions.map((song, index) => (
+              <QueueSong key={`${getSongId(song)}-${index}`} song={song} onPlay={() => playFromQueue(index, true)} />
+            ))}
+          </section>
+        ) : null}
       </div>
-      <p className="queue-panel__duration">{queue.length ? `${queue.length} utworów w kolejce` : 'Kolejka jest pusta'}</p>
+      <p className="queue-panel__duration" role="status">{formatQueueCount(queue.length)}</p>
     </aside>
   )
 }

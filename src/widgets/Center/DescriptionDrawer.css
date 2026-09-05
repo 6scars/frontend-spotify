@@ -1,0 +1,78 @@
+.description-drawer {
+  min-width: 0;
+  min-height: 0;
+  height: 100%;
+  width: min(var(--description-width), 38vw);
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+  border-left: 1px solid var(--color-line);
+  background: var(--color-canvas);
+  color: var(--color-text);
+  transform: translateX(100%);
+  visibility: hidden;
+  transition: transform var(--description-motion) var(--ease-out), visibility 0s var(--description-motion);
+}
+
+.description-drawer--open {
+  transform: translateX(0);
+  visibility: visible;
+  transition-delay: 0s;
+}
+
+.description-drawer__header {
+  min-height: 76px;
+  flex: 0 0 auto;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--space-3);
+  padding: var(--space-3) var(--space-5);
+  border-bottom: 1px solid var(--color-line);
+  background: var(--color-canvas);
+}
+
+.description-drawer__header h2 { font-size: 1rem; font-weight: 600; white-space: nowrap; }
+.description-close {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: row-reverse;
+  gap: var(--space-1);
+  min-height: 44px;
+  padding: var(--space-2);
+  border: 1px solid transparent;
+  border-radius: var(--radius-sm);
+  background: transparent;
+  color: var(--color-text-subtle);
+  font-size: .8rem;
+  cursor: pointer;
+}
+.description-close:hover { background: var(--color-surface-hover); color: var(--color-text); }
+.description-drawer__scroll {
+  min-height: 0;
+  flex: 1;
+  overflow-y: auto;
+  overscroll-behavior: contain;
+  scrollbar-width: thin;
+  scrollbar-color: var(--color-line-strong) transparent;
+}
+.description-drawer :is(button, a):focus-visible { outline: 2px solid var(--color-accent-bright); outline-offset: 3px; }
+
+@media (width < 768px) {
+  .description-drawer {
+    position: fixed;
+    inset: 0 0 var(--queue-player-offset);
+    height: auto;
+    width: 100%;
+    border: 0;
+    z-index: var(--description-layer);
+  }
+  .description-drawer__header { min-height: 64px; padding: var(--space-2) var(--space-4); }
+  .description-drawer__header h2 { position: absolute; left: 50%; transform: translateX(-50%); font-size: .9rem; }
+  .description-close { flex-direction: row; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .description-drawer { transition: none; }
+}

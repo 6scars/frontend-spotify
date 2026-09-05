@@ -58,16 +58,25 @@
     }
 }
 
-.play .play-left-section { width: min(300px, 27vw); padding: var(--space-2); gap: var(--space-3); align-items: center; }
+.play .play-left-section { display: flex; min-width: 0; width: min(300px, 27vw); padding: var(--space-2); gap: var(--space-3); align-items: center; }
 .play-left-section .song-image-container { width: 64px; height: 64px; flex: 0 0 64px; border: 0; border-radius: 6px; }
 .play-left-section .title-authors { min-width: 0; padding: 0; border: 0; justify-content: center; }
 .play-left-section .title, .play-left-section .authors { overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
 .play-left-section .title { font-size: .82rem; }.play-left-section .authors { font-size: .72rem; }
 .play-left-section__add { color: var(--color-text-muted); }
+.play-left-section .song-image-container { align-items: center; justify-content: center; overflow: hidden; background: var(--color-surface-raised); color: var(--color-text); padding: 0; cursor: pointer; }
+.play-left-section .song-image-container img { width: 100%; height: 100%; object-fit: cover; }
+.play-left-section .title-authors { display: flex; flex: 1; flex-direction: column; }
+.play-left-section .title { min-height: 44px; border: 0; background: transparent; color: var(--color-text); text-align: left; cursor: pointer; }
+.play-left-section .title:hover { text-decoration: underline; }
+.play-left-section .authors { color: var(--color-text-muted); }
+.play-left-section__playlist { position: relative; display: flex; align-items: center; }
 .play-left-section__add[aria-expanded="true"] { border-color: rgba(239,74,78,.34); background: rgba(126,31,34,.14); color: var(--color-accent-bright); }
 
 @media (max-width: 620px) {
-    .play .play-left-section { width: 150px; }
+    .play .play-left-section { width: 50%; padding: 0; }
+    .play .play-left-section .title { font-size: .8rem; }
+    .play .play-left-section .authors { font-size: .68rem; }
     .play-left-section .song-image-container { width: 48px; height: 48px; flex-basis: 48px; }
     .play-left-section > div:last-child { display: none; }
 }

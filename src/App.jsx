@@ -6,7 +6,7 @@ import Header       from "./widgets/Header/Header.jsx";
 import Aside        from "./widgets/Aside/Aside.jsx";
 import Center       from "./widgets/Center/Center.jsx";
 import Play         from "./widgets/Play/Play.jsx";
-import QueuePanel   from "./widgets/Queue/QueuePanel.jsx";
+import QueueDrawer  from "./widgets/Queue/QueueDrawer.jsx";
 import Signing      from "./widgets/Signing/Signing.jsx";
 
 import { useAuthContext }             from "./modules/Auth/useAuthContext.js";
@@ -36,7 +36,7 @@ export default function MiniSpotify() {
       header={<Header />}
       overlay={signing ? <Signing /> : null}
       player={currentSong ? <Play /> : null}
-      queue={<QueuePanel />}
+      queue={<QueueDrawer />}
       sidebar={playlists ? <Aside /> : null}
     >
       <Center><Outlet /></Center>

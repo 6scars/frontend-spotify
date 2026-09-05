@@ -190,9 +190,15 @@ body.dragging {
   --sidebar-width: 208px;
   --sidebar-width-compact: 78px;
   --queue-width: 340px;
+  --queue-handle-width: 48px;
+  --queue-motion: 220ms;
+  --queue-layer: 25;
   --player-height: 112px;
   --motion-fast: 150ms;
   --motion-medium: 240ms;
+  --description-width: 380px;
+  --description-motion: 280ms;
+  --description-layer: 24;
   --motion-slow: 420ms;
   --ease-out: cubic-bezier(0.22, 1, 0.36, 1);
   --background-color: var(--color-surface);
@@ -218,7 +224,7 @@ button:focus-visible, input:focus-visible, [role="separator"]:focus-visible { ou
 .ui-icon { display: block; flex: 0 0 auto; }
 
 @media (max-width: 760px) {
-  :root { --sidebar-width: var(--sidebar-width-compact); --queue-width: 0px; --player-height: 94px; }
+  :root { --sidebar-width: var(--sidebar-width-compact); --queue-handle-width: 44px; --player-height: 94px; }
 }
 
 @media (prefers-reduced-motion: reduce) {
