@@ -5,6 +5,7 @@ import "./Play.css";
 import { usePlayerContext } from "../../modules/Player/usePlayerContext.js";
 import { useCurrentPlaybackContext } from "../../modules/CurrentPlayback/useCurrentPlaybackContext.js";
 import { useAuthContext } from "../../modules/Auth/useAuthContext.js";
+import { getPlayerProgress } from "../../modules/Player/player-display.js";
 
 export default function Play() {
   const {
@@ -28,7 +29,7 @@ export default function Play() {
   const { fetchAuthState } = useAuthContext();
 
 
-  const progressBar = duration > 0 ? (currentTime / duration) * 100 : 0;
+  const progressBar = getPlayerProgress(currentTime, duration);
 
   return (
     <div

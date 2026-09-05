@@ -5,6 +5,7 @@ import { useLatestSongsContext } from "../LatestSongs/useLatestSongsContext.js";
 import { useUIStateContext } from "../UIState/useUIStateContext.js";
 import { BACKEND_URL } from "../../config.js";
 import { getSongId } from '../Catalog/song.js'
+import { isCompactLayout } from '../../shared/hooks/useCompactLayout.js'
 
 export function usePlayer() {
   const audioRef = useRef(null);
@@ -117,7 +118,7 @@ export function usePlayer() {
 
     /*---------------------FINAL EXECUTION---------------------*/
     setCurrentPlaylistI(newIndex)
-    await chooseSong(newSongId)
+    await chooseSong(newSongId, { revealDetails: false })
 
     return null
   };
@@ -158,13 +159,13 @@ export function usePlayer() {
 
     /*---------------------FINAL EXECUTION---------------------*/
     setCurrentPlaylistI(newIndex)
-    await chooseSong(newSongId)
+    await chooseSong(newSongId, { revealDetails: false })
 
 
 
   };
 
-  async function chooseSong(song_id) {
+  async function chooseSong(song_id, { revealDetails = true } = {}) {
     try {
       const responde = await fetch(`${BACKEND_URL}/api/getSong?id=${song_id}`)
       const data = await responde.json();
@@ -180,7 +181,7 @@ export function usePlayer() {
     }
 
     function chooseSongSetUI() {
-      setShow(true)
+      if (revealDetails && !isCompactLayout()) setShow(true)
     }
 
     function chooseSongSetData(findedSong) {

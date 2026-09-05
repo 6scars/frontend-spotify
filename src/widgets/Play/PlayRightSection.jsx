@@ -1,40 +1,39 @@
-import "./PlayRightSection.css";
+import { Link } from 'react-router-dom'
 
-export default function PlayRightSection({ volume, handleVolume, muted,  handleMute }) {
+import { APP_ROUTES } from '../../app/routes.js'
+import Icon from '../../shared/ui/Icon.jsx'
+import './PlayRightSection.css'
 
-  function changeVolume(e) {
-    const rect = e.currentTarget.getBoundingClientRect();
-    const prc = (e.clientX - rect.left) / rect.width;
-    handleVolume(prc);
-  }
+export default function PlayRightSection({ volume, handleVolume, muted, handleMute }) {
+  const audibleVolume = muted ? 0 : volume
 
   return (
-    <div
-      className="play-right-section "
-    >
+    <div className="play-right-section">
       <div className="volume-container">
-        <div className="volume-icon-container">
-          <img
-            className="cursor-pointer"
-            onClick={handleMute}
-            alt="speaker-volume"
-            src={`https://rgmmwhkixprkskznqjcy.supabase.co/storage/v1/object/public/spotify/images/logos/speaker${muted ? 'Crossed' : ''}Song.svg`}
-          />
-        </div>
-        <div
-          onClick={(event) => {
-            changeVolume(event);
-          }}
-          className="volume min-w-[35px] w-full bg-[var(--help-color2)] h-[10px] rounded-md overflow-hidden"
+        <button
+          aria-label={muted ? 'W\u0142\u0105cz d\u017awi\u0119k' : 'Wycisz'}
+          aria-pressed={muted}
+          className="player-utility-button"
+          onClick={handleMute}
+          type="button"
         >
-          <div
-            style={{ width: `${volume * 100}%` }}
-            className="h-full bg-white"
-          ></div>
-          
-        </div>
-        <div className="volume__text text-red-500">{volume.toFixed(2)}</div>
+          <Icon name={muted ? 'volumeMuted' : 'volume'} size={20} />
+        </button>
+        <input
+          aria-label="G\u0142o\u015bno\u015b\u0107"
+          className="volume-slider"
+          max="1"
+          min="0"
+          onChange={(event) => handleVolume(Number(event.currentTarget.value))}
+          step="0.01"
+          style={{ '--volume-progress': String(audibleVolume * 100) + '%' }}
+          type="range"
+          value={audibleVolume}
+        />
+        <Link aria-label="Otw\u00f3rz pe\u0142ny odtwarzacz" className="player-utility-button" to={APP_ROUTES.nowPlaying}>
+          <Icon name="expand" size={19} />
+        </Link>
       </div>
     </div>
-  );
+  )
 }

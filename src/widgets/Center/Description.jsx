@@ -1,70 +1,79 @@
+import { useState } from 'react'
 import { Link } from 'react-router-dom'
 
-import { getArtistRoute } from '../../app/routes.js'
-import { useCurrentPlaybackContext }        from "../../modules/CurrentPlayback/useCurrentPlaybackContext.js";
-import { useUIStateContext }                from "../../modules/UIState/useUIStateContext.js"
-import "./Description.css";
-export default function Description() {
-  const { currentSong }     = useCurrentPlaybackContext();
-  const { setShow }         = useUIStateContext()
+import { APP_ROUTES, getArtistRoute } from '../../app/routes.js'
+import { getArtworkUrl, getArtistArtworkUrl } from '../../modules/Catalog/song.js'
+import { useAuthContext } from '../../modules/Auth/useAuthContext.js'
+import { usePlayerContext } from '../../modules/Player/usePlayerContext.js'
+import Icon from '../../shared/ui/Icon.jsx'
+import AddSong from '../Play/PlayLeftSection/AddSong.jsx'
+import './Description.css'
+
+function DescriptionArtwork({ src, label, className }) {
+  const [failed, setFailed] = useState(false)
+  return (
+    <div className={className}>
+      {src && !failed ? <img alt={label} src={src} onError={() => setFailed(true)} />
+        : <span aria-label={label} role="img"><Icon name="radio" size={40} /></span>}
+    </div>
+  )
+}
+
+export default function Description({ song, onNavigate }) {
+  const { duration } = usePlayerContext()
+  const { isLogedIn, fetchAuthState } = useAuthContext()
+  const [showPlaylists, setShowPlaylists] = useState(false)
+  const durationText = duration > 0 && Number.isFinite(duration)
+    ? `${Math.floor(duration / 60)}:${Math.floor(duration % 60).toString().padStart(2, '0')}` : null
+  const views = song.views == null ? null : Number(song.views)
 
   return (
-    <>
-      <div
-        className="description red-scroll-bar"
-      >
-        <button className="description-close" onClick={() => setShow(false)} type="button">Zamknij</button>
-        <div className="description-img-container ">
-          <img
-            alt="description-img"
-            src={`https://rgmmwhkixprkskznqjcy.supabase.co/storage/v1/object/public/spotify/images/songPictures/${currentSong.song_image}`}
-            className="rounded-xl h-[521px] object-cover"
-          ></img>
+    <div className="description">
+      <DescriptionArtwork className="description__cover" label={`Okładka utworu ${song.song_name}`} src={getArtworkUrl(song)} />
+      <section className="description__track" aria-labelledby="description-track-title">
+        <span className="description__eyebrow">TERAZ SŁUCHASZ</span>
+        <h3 id="description-track-title">{song.song_name}</h3>
+        <Link onClick={onNavigate} to={getArtistRoute(song.author)}>{song.author}</Link>
+        <div className="description__metadata">
+          {views !== null && Number.isFinite(views) ? <span>{views.toLocaleString('pl-PL')} odtworzeń</span> : null}
+          {durationText ? <time>{durationText}</time> : null}
         </div>
-        <div className="author-title w-full rounded-xl">
-          <span>Song Informations: </span>
-          <div className="song-infromations-wrapper">
-            <p className="title__paragraph font-bold">Name: {currentSong.song_name}</p>
-            <p className="aritst__name__paragraph font-bold">Author: {currentSong.author}</p>
-            <p className="aritst__name__paragraph font-bold text-black">Views:{currentSong.views} views</p>
-          </div>
-
+        <div className="description__actions">
+          {isLogedIn ? (
+            <button aria-expanded={showPlaylists} className="description__playlist-button" onClick={() => setShowPlaylists(!showPlaylists)} type="button">
+              <Icon name="plus" size={18} /> {showPlaylists ? 'Zamknij wybór' : 'Dodaj do playlisty'}
+            </button>
+          ) : <Link className="description__playlist-button" onClick={onNavigate} to={APP_ROUTES.signIn}><Icon name="plus" size={18} /> Zaloguj się, aby zapisać</Link>}
+          <button aria-label="Ulubione — funkcja jeszcze niedostępna" className="description__favorite" disabled title="Zapisywanie ulubionych nie jest jeszcze obsługiwane" type="button"><Icon name="heart" size={20} /></button>
         </div>
-
-        <div className="description-about w-full rounded-xl ">
-          <div className="about-artist-image-container rounded-tl-xl rounded-tr-xl overflow-hidden">
-            <img
-              alt="artist-image"
-              src={`https://rgmmwhkixprkskznqjcy.supabase.co/storage/v1/object/public/spotify/images/authorPictures/${currentSong.author_image}`}
-              className="artist__image w-full  h-[200px] object-cover"
-            />
+        {showPlaylists ? (
+          <div className="description__playlists" onKeyDown={(event) => {
+            if (event.key === 'Escape') {
+              event.preventDefault()
+              event.stopPropagation()
+              setShowPlaylists(false)
+              event.currentTarget.previousElementSibling?.querySelector('button')?.focus()
+            }
+          }}>
+            <AddSong currentSong={song} fetchAuthState={fetchAuthState} showAddSong />
           </div>
-          <div className="about-artist-text-container">
-            <Link className="artist-name text-white font-bold" to={getArtistRoute(currentSong.author)}>
-              {currentSong.author}
-            </Link>
-            <div className="artist-follow flex">
-              <div className="followers flex-1 flex items-center">
-                {currentSong.follows} right now follows
-              </div>
-              <div className="follow flex-1 flex justify-center">
-                <button className="follow__button border-1 border-white rounded-full">
-                  {" "}
-                  Follow
-                </button>
-              </div>
-            </div>
-            <div className="artist-short-desc">{currentSong.biograph}</div>
-          </div>
-
-        </div>
-        <div className="credit-container   ">
-          <p>CREDIT</p>
-          <div className="credit-text-container">
-            {currentSong.credit}
-          </div>
-        </div>
-      </div>
-    </>
-  );
+        ) : null}
+      </section>
+      <section className="description__artist" aria-labelledby="description-artist-heading">
+        <div className="description__section-heading"><h3 id="description-artist-heading">O wykonawcy</h3><span>ARTYSTA</span></div>
+        <Link className="description__artist-link" onClick={onNavigate} to={getArtistRoute(song.author)}>
+          <DescriptionArtwork className="description__avatar" label="" src={getArtistArtworkUrl(song)} />
+          <span><strong>{song.author}</strong><small>Zobacz profil wykonawcy</small></span>
+          <Icon name="chevronRight" size={18} />
+        </Link>
+        <p>{song.biograph || 'Wykonawca nie dodał jeszcze opisu.'}</p>
+        {song.follows != null && Number.isFinite(Number(song.follows)) ? <small>Obserwujący: {Number(song.follows).toLocaleString('pl-PL')}</small> : null}
+      </section>
+      <section className="description__credits" aria-labelledby="description-credits-heading">
+        <div className="description__section-heading"><h3 id="description-credits-heading">Twórcy i prawa</h3><span>CREDITS</span></div>
+        <p>{song.credit || 'Informacje o autorstwie nie zostały jeszcze udostępnione.'}</p>
+      </section>
+      <Link className="description__full-player" onClick={onNavigate} to={APP_ROUTES.nowPlaying}>Pełny odtwarzacz <Icon name="chevronRight" size={17} /></Link>
+    </div>
+  )
 }

@@ -114,6 +114,7 @@ the local backend.
 | `npm run build` | Create a production build in `dist/` |
 | `npm run preview` | Preview the production build locally |
 | `npm run lint` | Run ESLint across the project |
+| `npm test` | Run the automated unit tests |
 
 ## Backend integration
 
@@ -168,11 +169,30 @@ refresh. Configure `VITE_BACKEND_URL` and `VITE_SUPA_B_STOR` in the deployment
 environment before building if the default deployed services should not be
 used.
 
+## Track details panel
+
+On screens at least 768 px wide, selecting a track opens a docked panel on
+the right. Below 768 px, selecting a track only starts playback; its artwork
+or title in the bottom player opens the details view, sliding in from the right.
+The back/collapse button stays visible while the details scroll. Closing the
+panel preserves the underlying page and its scroll position without restarting
+the audio. Escape also closes the panel and restores keyboard focus.
+
+The panel uses the existing artist routes and playlist API. Missing artwork,
+biography and credits have explicit fallback states. Favorites remain disabled
+until the backend supports them. The full player is available through the link
+at the bottom of the details panel.
+
+`src/widgets/Center/DescriptionDrawer.jsx` owns panel behavior and focus;
+`Description.jsx` renders track details and playlist actions. `AppShell` owns
+the docked layout. Global styling controls live in `src/App.css`:
+`--description-width`, `--description-motion` and `--description-layer`.
+Reduced-motion preferences disable the sliding animation.
+
 ## Current limitations
 
 - The frontend requires the separate backend for real data and mutations.
 - Podcast functionality is not implemented.
 - Authentication state is stored in `localStorage`.
-- Automated tests are not configured in the current package scripts.
-- The production build succeeds, but ESLint currently reports existing errors
-  and warnings in the application source.
+- The production build and unit tests pass; ESLint reports existing hook
+  dependency warnings in the application source.

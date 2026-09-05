@@ -2,7 +2,9 @@
   height: 100dvh;
   min-height: 100dvh;
   display: grid;
-  grid-template-columns: var(--sidebar-width) minmax(0, 1fr) var(--queue-width);
+  grid-template-columns: var(--sidebar-width) minmax(0, 1fr) 0px;
+  transition: grid-template-columns var(--description-motion) var(--ease-out);
+  --queue-player-offset: 0px;
   grid-template-rows: minmax(0, 1fr);
   background: var(--color-canvas);
   color: var(--color-text);
@@ -10,12 +12,13 @@
 }
 
 .app-shell--playing {
+  --queue-player-offset: var(--player-height);
   padding-bottom: var(--player-height);
 }
 
 .app-shell__sidebar,
-.app-shell__workspace,
-.app-shell__queue {
+.app-shell__workspace {
+  container: workspace / inline-size;
   min-width: 0;
   min-height: 0;
 }
@@ -25,13 +28,10 @@
 }
 
 .app-shell__workspace {
+  padding-right: calc(var(--queue-handle-width) + var(--space-2));
   display: grid;
   grid-template-rows: auto minmax(0, 1fr);
   overflow: hidden;
-}
-
-.app-shell__queue {
-  border-left: 1px solid var(--color-line);
 }
 
 .app-shell--immersive {
@@ -41,14 +41,20 @@
 
 .app-shell--immersive .app-shell__sidebar,
 .app-shell--immersive .app-header,
-.app-shell--immersive .app-shell__queue,
 .app-shell--immersive > .play,
-.app-shell--immersive .Center > .description,
-.app-shell--immersive .Center > .resizer {
+.app-shell--immersive > .description-drawer {
   display: none;
 }
 
+.app-shell--details-open {
+  grid-template-columns: var(--sidebar-width) minmax(0, 1fr) min(var(--description-width), 38vw);
+}
+
+.app-shell--details-open .app-shell__workspace { padding-right: 0; }
+.app-shell--details-open > .queue-drawer { visibility: hidden; pointer-events: none; }
+
 .app-shell--immersive .app-shell__workspace {
+  padding-right: 0;
   grid-template-rows: minmax(0, 1fr);
 }
 
@@ -57,26 +63,15 @@
   flex-basis: 100%;
 }
 
-@media (max-width: 1180px) {
-  .app-shell {
-    grid-template-columns: var(--sidebar-width) minmax(0, 1fr);
-  }
-
-  .app-shell__queue {
-    display: none;
-  }
-}
-
 @media (max-width: 760px) {
-  .app-shell {
+  .app-shell:not(.app-shell--immersive) {
     grid-template-columns: var(--sidebar-width-compact) minmax(0, 1fr);
   }
 }
 
 @media (max-width: 560px) {
   .app-shell {
-    display: block;
-    overflow-y: auto;
+    grid-template-columns: minmax(0, 1fr) 0px;
   }
 
   .app-shell__sidebar {
@@ -84,6 +79,24 @@
   }
 
   .app-shell__workspace {
-    min-height: calc(100dvh - var(--player-height));
+    min-height: 0;
   }
+}
+
+@media (width < 768px) {
+  .app-shell--details-open:not(.app-shell--immersive) {
+    grid-template-columns: var(--sidebar-width) minmax(0, 1fr) 0px;
+  }
+  .app-shell--details-open .app-shell__workspace {
+    padding-right: calc(var(--queue-handle-width) + var(--space-2));
+  }
+}
+
+@media (max-width: 560px) {
+  .app-shell:not(.app-shell--immersive),
+  .app-shell--details-open:not(.app-shell--immersive) { grid-template-columns: minmax(0, 1fr) 0px; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .app-shell { transition: none; }
 }

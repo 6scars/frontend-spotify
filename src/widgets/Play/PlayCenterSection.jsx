@@ -1,7 +1,10 @@
-
+import { formatPlayerTime } from '../../modules/Player/player-display.js'
+import Icon from '../../shared/ui/Icon.jsx'
 import './PlayCenterSection.css'
 
-export default function ProgressBar({
+const songsStorageUrl = 'https://rgmmwhkixprkskznqjcy.supabase.co/storage/v1/object/public/spotify/songs'
+
+export default function PlayCenterSection({
   audioRef,
   handlePlay,
   play,
@@ -13,92 +16,81 @@ export default function ProgressBar({
   currentSong,
   goToNextSong,
   goToPreviousSong,
-  setCurrentTime
-
+  setCurrentTime,
 }) {
-  function formatTime(time) {
-    const mins = Math.floor(time / 60);
-    const secs = Math.floor(time % 60);
-    return `${mins}:${secs.toString().padStart(2, "0")}`;
+  const hasSong = Boolean(currentSong?.file)
+  const safeDuration = Number.isFinite(duration) && duration > 0 ? duration : 0
+
+  const onSeek = (event) => {
+    const nextTime = Number(event.currentTarget.value)
+    setCurrentTime(nextTime)
+    if (audioRef.current) audioRef.current.currentTime = nextTime
   }
-
-  function onSeek(e) {
-    const rect = e.currentTarget.getBoundingClientRect();
-    const clickX = e.clientX - rect.left;
-    const prc = clickX / rect.width;
-    const newTime = prc * duration;
-
-    setCurrentTime(newTime);
-    audioRef.current.currentTime = newTime;
-  }
-
-
 
   return (
-    <div
-      className="play-center-section  "
-    >
-      <div className="controll-buttons-container">
-        <button>
-          <img
-            onClick={handleLoop}
-            className="h-[35px]  cursor-pointer"
-            alt="loop-song"
-            src={`https://rgmmwhkixprkskznqjcy.supabase.co/storage/v1/object/public/spotify/images/logos/loop${loop ? "" : "Crossed"
-              }Song.svg`}
-          />
+    <div className="play-center-section">
+      <div aria-label="Sterowanie odtwarzaniem" className="player-controls" role="group">
+        <button
+          aria-label="Poprzedni utw\u00f3r"
+          className="player-control"
+          disabled={!hasSong}
+          onClick={goToPreviousSong}
+          type="button"
+        >
+          <Icon name="previous" size={20} />
         </button>
-        <button onClick={goToPreviousSong}>
-          <img
-            alt="start-music"
-            src="https://rgmmwhkixprkskznqjcy.supabase.co/storage/v1/object/public/spotify/images/logos/previousSong.svg"
-            className="w-10 h-full cursor-pointer"
-          />
+        <button
+          aria-label={play ? 'Wstrzymaj' : 'Odtw\u00f3rz'}
+          className="player-control player-control--primary"
+          disabled={!hasSong}
+          onClick={handlePlay}
+          type="button"
+        >
+          <Icon name={play ? 'pause' : 'play'} size={24} />
         </button>
-        <button onClick={handlePlay}>
-          <img
-            alt="start-music"
-            src={`https://rgmmwhkixprkskznqjcy.supabase.co/storage/v1/object/public/spotify/images/logos/${play ? "pause" : "start"
-              }Song.svg`}
-            className="w-10 h-full cursor-pointer"
-          />
+        <button
+          aria-label="Nast\u0119pny utw\u00f3r"
+          className="player-control"
+          disabled={!hasSong}
+          onClick={goToNextSong}
+          type="button"
+        >
+          <Icon name="next" size={20} />
         </button>
-        <button onClick={goToNextSong}>
-          <img
-            alt="start-music"
-            src={`https://rgmmwhkixprkskznqjcy.supabase.co/storage/v1/object/public/spotify/images/logos/nextSong.svg`}
-            className="w-10 h-full cursor-pointer"
-          />
-        </button>
-        <button>
-          <img
-            onClick={handleLoop}
-            className="h-[35px]  cursor-pointer"
-            alt="loop-song"
-            src={`https://rgmmwhkixprkskznqjcy.supabase.co/storage/v1/object/public/spotify/images/logos/loop${loop ? "" : "Crossed"
-              }Song.svg`}
-          />
+        <button
+          aria-label={loop ? 'Wy\u0142\u0105cz zap\u0119tlenie' : 'W\u0142\u0105cz zap\u0119tlenie'}
+          aria-pressed={loop}
+          className="player-control player-control--repeat"
+          disabled={!hasSong}
+          onClick={handleLoop}
+          type="button"
+        >
+          <Icon name="repeat" size={19} />
         </button>
       </div>
 
-      <div className="w-full flex-1 flex justify-center items-center">
-        <div className="format-current-time ">{formatTime(current)}</div>
-        <div
-          onClick={(event) => onSeek(event)}
-          className="loading-bar-gray"
-        >
-          <div
-            style={{ width: `${progressBar}%` }}
-            className="h-full bg-white transition-all duration-300"
-          />
-        </div>
-        <audio
-          ref={audioRef}
-          src={`https://rgmmwhkixprkskznqjcy.supabase.co/storage/v1/object/public/spotify/songs/${currentSong.file}`}
-          preload="metadata"
+      <div className="player-progress">
+        <span className="player-progress__time">{formatPlayerTime(current)}</span>
+        <input
+          aria-label="Pozycja utworu"
+          className="player-progress__input"
+          disabled={!hasSong || safeDuration === 0}
+          max={safeDuration}
+          min="0"
+          onChange={onSeek}
+          step="0.1"
+          style={{ '--player-progress': String(progressBar) + '%' }}
+          type="range"
+          value={Math.min(Math.max(current || 0, 0), safeDuration)}
         />
-        <div className="format-current-time ">{formatTime(duration)}</div>
+        <span className="player-progress__time">{formatPlayerTime(duration)}</span>
       </div>
+
+      <audio
+        ref={audioRef}
+        src={hasSong ? songsStorageUrl + '/' + currentSong.file : undefined}
+        preload="metadata"
+      />
     </div>
-  );
+  )
 }
