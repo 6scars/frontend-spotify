@@ -117,7 +117,7 @@ export default function AddSong() {
 
   return (
     <main className="song-upload">
-      <aside className="song-upload__sidebar"><Link aria-label="Wróć do aplikacji" className="song-upload__back" to={APP_ROUTES.account}><Icon name="chevronLeft" size={18} /></Link><div className="song-upload__brand"><span /><strong>NOIR</strong></div><nav aria-label="Etapy dodawania utworu">{steps.map((step, index) => <button aria-current={activeStep === step.id ? 'step' : undefined} key={step.id} onClick={() => setActiveStep(step.id)} type="button"><span>0{index + 1}</span>{step.label}</button>)}</nav><small>MP3 · JPG · PNG</small></aside>
+      <aside className="song-upload__sidebar"><Link aria-label="Wróć do aplikacji" className="song-upload__back" to={APP_ROUTES.account}><Icon name="chevronLeft" size={18} /></Link><div className="song-upload__brand"><span /><strong>NORII</strong></div><nav aria-label="Etapy dodawania utworu">{steps.map((step, index) => <button aria-current={activeStep === step.id ? 'step' : undefined} key={step.id} onClick={() => setActiveStep(step.id)} type="button"><span>0{index + 1}</span>{step.label}</button>)}</nav><small>MP3 · JPG · PNG</small></aside>
       <section className="song-upload__workspace">
         <header><span>DODAJ NOWY UTWÓR</span><h1>Opublikuj muzykę</h1><p>Przygotuj informacje, pliki i sprawdź podgląd przed wysłaniem.</p></header>
 
