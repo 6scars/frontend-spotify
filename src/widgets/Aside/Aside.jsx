@@ -1,11 +1,14 @@
-import { useCurrentPlaybackContext } from "../../modules/CurrentPlayback/useCurrentPlaybackContext.js";
-import { useAuthContext } from "../../modules/Auth/useAuthContext.js";
-import { useUIStateContext } from "../../modules/UIState/useUIStateContext.js";
-import Icon from '../../shared/ui/Icon.jsx'
-import { NavLink, useNavigate } from 'react-router-dom'
+import { useEffect } from 'react'
+import { NavLink, useLocation, useNavigate } from 'react-router-dom'
+
+import { useAuthContext } from '../../modules/Auth/useAuthContext.js'
+import { useCurrentPlaybackContext } from '../../modules/CurrentPlayback/useCurrentPlaybackContext.js'
+import { useUIStateContext } from '../../modules/UIState/useUIStateContext.js'
 import { APP_ROUTES, getPlaylistRoute } from '../../app/routes.js'
-import "./Aside.css";
-import Playlists from './PlayLists'
+import { useCompactLayout } from '../../shared/hooks/useCompactLayout.js'
+import Icon from '../../shared/ui/Icon.jsx'
+import Playlists from './PlayLists.jsx'
+import './Aside.css'
 
 const navigation = [
   { icon: 'home', label: 'Dla Ciebie', to: APP_ROUTES.home },
@@ -18,60 +21,129 @@ const navigation = [
 
 export default function Aside() {
   const navigate = useNavigate()
-  const { showCreatePlaylistWindow, setShowCreatePlaylistWindow, setShowPlaylistDescribing, setSigning } = useUIStateContext();
-  const { setPlaylists_id } = useCurrentPlaybackContext();
-  const { playlists, isLogedIn } = useAuthContext();
+  const { pathname } = useLocation()
+  const compact = useCompactLayout()
+  const {
+    setQueueOpen,
+    setShowCreatePlaylistWindow,
+    setShowPlaylistDescribing,
+    setSidebarOpen,
+    setSigning,
+    show,
+    showCreatePlaylistWindow,
+    sidebarOpen,
+  } = useUIStateContext()
+  const { setPlaylists_id } = useCurrentPlaybackContext()
+  const { playlists, isLogedIn } = useAuthContext()
+
+  useEffect(() => {
+    setSidebarOpen(false)
+  }, [pathname, setSidebarOpen])
+
+  useEffect(() => {
+    if (show || !compact) setSidebarOpen(false)
+  }, [compact, setSidebarOpen, show])
+
+  useEffect(() => {
+    if (!sidebarOpen) return
+    const handleKeyDown = (event) => {
+      if (event.key !== 'Escape' || event.defaultPrevented) return
+      event.preventDefault()
+      setSidebarOpen(false)
+    }
+    document.addEventListener('keydown', handleKeyDown)
+    return () => document.removeEventListener('keydown', handleKeyDown)
+  }, [setSidebarOpen, sidebarOpen])
+
+  const closeSidebar = () => setSidebarOpen(false)
+
+  const toggleSidebar = () => {
+    const nextOpen = !sidebarOpen
+    setSidebarOpen(nextOpen)
+    if (nextOpen) setQueueOpen(false)
+  }
 
   const displayCreatingPlaylistWindow = () => {
+    closeSidebar()
     if (showCreatePlaylistWindow) {
       setShowCreatePlaylistWindow(false)
       setShowPlaylistDescribing(false)
     } else {
-      if (isLogedIn)
-        setShowCreatePlaylistWindow(true)
-
-      if (!isLogedIn)
-        setSigning(true)
+      if (isLogedIn) setShowCreatePlaylistWindow(true)
+      if (!isLogedIn) setSigning(true)
     }
   }
 
-  const choosePlaylist = (playlist_id) => {
-    setPlaylists_id(playlist_id);
+  const choosePlaylist = (playlistId) => {
+    setPlaylists_id(playlistId)
     setShowCreatePlaylistWindow(false)
-    setShowPlaylistDescribing(false);
-    navigate(getPlaylistRoute(playlist_id))
-  };
+    setShowPlaylistDescribing(false)
+    closeSidebar()
+    navigate(getPlaylistRoute(playlistId))
+  }
 
   const showHome = () => {
     setShowCreatePlaylistWindow(false)
     setShowPlaylistDescribing(false)
+    closeSidebar()
+  }
+
+  const showAccount = () => {
+    closeSidebar()
+    if (isLogedIn) navigate(APP_ROUTES.account)
+    else setSigning(true)
   }
 
   return (
-    <aside className="leftBar">
-      <button aria-label="Strona główna" className="brand-mark" onClick={showHome} type="button"><span /></button>
-      <nav aria-label="Główna nawigacja" className="main-navigation">
-        {navigation.map(({ icon, label, to }) => to ? (
-          <NavLink className={({ isActive }) => isActive ? 'navigation-item navigation-item--active' : 'navigation-item'} end={to === APP_ROUTES.home} key={label} onClick={showHome} to={to}>
-            <Icon name={icon} size={21} /><span>{label}</span>
-          </NavLink>
-        ) : (
-          <button className="navigation-item" disabled key={label} type="button"><Icon name={icon} size={21} /><span>{label}</span></button>
-        ))}
-      </nav>
-      <div className="sidebar-playlists red-scroll-bar">
-        {playlists?.map((playlist) => (
-          <Playlists key={playlist.playlist_id} playlist={playlist} choosePlaylist={choosePlaylist} />
-        ))}
-      </div>
-      <div className="sidebar-footer">
-        <button onClick={displayCreatingPlaylistWindow} className="create_playlist_button" type="button"><Icon name="plus" size={19} /><span>Stwórz playlistę</span></button>
-        <button className="sidebar-profile" onClick={() => isLogedIn ? navigate(APP_ROUTES.account) : setSigning(true)} type="button">
-          <span className="sidebar-profile__avatar">{isLogedIn ? 'K' : '?'}</span>
-          <span>{isLogedIn ? 'Konto' : 'Zaloguj się'}</span>
-          <Icon name="chevronRight" size={16} />
-        </button>
-      </div>
-    </aside>
-  );
+    <div className={`aside-drawer ${sidebarOpen ? 'aside-drawer--open' : ''}`}>
+      <aside
+        id="app-navigation"
+        aria-hidden={compact && !sidebarOpen}
+        className="leftBar aside-drawer__surface"
+        inert={compact && !sidebarOpen}
+      >
+        <button aria-label="Strona główna" className="brand-mark" onClick={showHome} type="button"><span /></button>
+        <nav aria-label="Główna nawigacja" className="main-navigation">
+          {navigation.map(({ icon, label, to }) => (
+            <NavLink
+              className={({ isActive }) => isActive ? 'navigation-item navigation-item--active' : 'navigation-item'}
+              end={to === APP_ROUTES.home}
+              key={label}
+              onClick={showHome}
+              to={to}
+            >
+              <Icon name={icon} size={21} />
+              <span>{label}</span>
+            </NavLink>
+          ))}
+        </nav>
+        <div className="sidebar-playlists red-scroll-bar">
+          {playlists?.map((playlist) => (
+            <Playlists key={playlist.playlist_id} playlist={playlist} choosePlaylist={choosePlaylist} />
+          ))}
+        </div>
+        <div className="sidebar-footer">
+          <button onClick={displayCreatingPlaylistWindow} className="create_playlist_button" type="button">
+            <Icon name="plus" size={19} />
+            <span>Stwórz playlistę</span>
+          </button>
+          <button className="sidebar-profile" onClick={showAccount} type="button">
+            <span className="sidebar-profile__avatar">{isLogedIn ? 'K' : '?'}</span>
+            <span>{isLogedIn ? 'Konto' : 'Zaloguj się'}</span>
+            <Icon name="chevronRight" size={16} />
+          </button>
+        </div>
+      </aside>
+      <button
+        aria-controls="app-navigation"
+        aria-expanded={sidebarOpen}
+        aria-label={sidebarOpen ? 'Zwiń menu' : 'Otwórz menu'}
+        className="aside-drawer__trigger"
+        onClick={toggleSidebar}
+        type="button"
+      >
+        <span aria-hidden="true"><i /><i /><i /></span>
+      </button>
+    </div>
+  )
 }

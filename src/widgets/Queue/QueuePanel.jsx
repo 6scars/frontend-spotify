@@ -14,16 +14,13 @@ function QueueSong({ song, active, onPlay }) {
   )
 }
 
-export default function QueuePanel({ playback, onClose, closeRef }) {
+export default function QueuePanel({ playback }) {
   const { queue, suggestions, currentSong, isPlaying, playFromQueue, clearQueue } = playback
 
   return (
     <aside className="queue-panel" aria-label="Kolejka odtwarzania">
       <div className="queue-panel__title">
         <h2>Teraz gra</h2>
-        <button ref={closeRef} className="queue-panel__close" onClick={onClose} aria-label="Zwiń kolejkę" type="button">
-          <Icon name="chevronRight" size={20} />
-        </button>
       </div>
       <div className="queue-panel__current">
         <span className="queue-panel__eyebrow">{currentSong ? (isPlaying ? 'Teraz odtwarzane' : 'Wstrzymano') : 'Twoja muzyka'}</span>
