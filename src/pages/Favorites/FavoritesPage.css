@@ -15,6 +15,6 @@
 .favorites-page--guest .favorites-page__heart { width: 72px; height: 72px; display: grid; place-items: center; border: 1px solid rgba(239,74,78,.24); border-radius: 50%; background: rgba(223,57,61,.09); color: var(--color-accent-bright); }
 .favorites-page--guest h1 { margin-top: var(--space-5); font-size: 1.6rem; }
 .favorites-page--guest p { max-width: 470px; margin: var(--space-3) 0 var(--space-5); color: var(--color-text-muted); line-height: 1.6; }
-@media (max-width: 760px) { .favorites-page { padding: var(--space-5); } }
-@media (max-width: 560px) { .favorites-page { padding: var(--space-4); } .favorites-hero { align-items: flex-start; flex-direction: column; padding: var(--space-5); } .favorites-hero__icon { width: 112px; height: 112px; } }
+@media (width < 768px) { .favorites-page { padding: var(--space-5); } }
+@media (width < 560px) { .favorites-page { padding: var(--space-4); } .favorites-hero { align-items: flex-start; flex-direction: column; padding: var(--space-5); } .favorites-hero__icon { width: 112px; height: 112px; } }
 @media (prefers-reduced-motion: reduce) { .favorites-page { animation: none; } }

@@ -63,13 +63,13 @@
   flex-basis: 100%;
 }
 
-@media (max-width: 760px) {
+@media (width < 768px) {
   .app-shell:not(.app-shell--immersive) {
     grid-template-columns: var(--sidebar-width-compact) minmax(0, 1fr);
   }
 }
 
-@media (max-width: 560px) {
+@media (width < 560px) {
   .app-shell {
     grid-template-columns: minmax(0, 1fr) 0px;
   }
@@ -92,7 +92,7 @@
   }
 }
 
-@media (max-width: 560px) {
+@media (width < 560px) {
   .app-shell:not(.app-shell--immersive),
   .app-shell--details-open:not(.app-shell--immersive) { grid-template-columns: minmax(0, 1fr) 0px; }
 }

@@ -16,5 +16,5 @@
 .show-add-song-container__empty { padding: var(--space-6) var(--space-4); color: var(--color-text-muted); font-size: .68rem; text-align: center; }
 .show-add-song-container__error { margin: 0 var(--space-3) var(--space-3); padding: var(--space-2) var(--space-3); border-radius: var(--radius-sm); background: rgba(126,31,34,.15); color: #f1a2a4; font-size: .64rem; }
 @keyframes playlist-popover-enter { from { opacity: 0; transform: translateY(8px) scale(.985); } to { opacity: 1; transform: none; } }
-@media (max-width: 620px) { .play-left-section .show-add-song-container { left: 12px; bottom: var(--player-height); } }
+@media (width < 768px) { .play-left-section .show-add-song-container { left: 12px; bottom: var(--player-height); } }
 @media (prefers-reduced-motion: reduce) { .play-left-section .show-add-song-container { animation: none; } }

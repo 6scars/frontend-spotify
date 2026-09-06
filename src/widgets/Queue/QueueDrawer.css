@@ -68,7 +68,7 @@
   transition-delay: 0s;
 }
 .queue-drawer--open .queue-drawer__trigger { visibility: hidden; pointer-events: none; }
-@media (max-width: 560px) {
+@media (width < 560px) {
   .queue-drawer__trigger { min-height: 112px; gap: var(--space-3); }
 }
 @media (prefers-reduced-motion: reduce) {

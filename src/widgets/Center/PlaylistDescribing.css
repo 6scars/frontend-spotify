@@ -29,7 +29,7 @@
 }
 
 
-@media(max-width:490px) {
+@media(width < 560px) {
     .playlist-describing-wrapper .playlist_name_text {
         font-size: 1.5rem;
     }

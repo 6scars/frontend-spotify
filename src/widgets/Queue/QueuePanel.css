@@ -55,7 +55,7 @@
 .queue-panel__suggestions { padding-top: var(--space-4); border-top: 1px solid var(--color-line); }
 .queue-panel__suggestions h3 { margin: 0 var(--space-2) var(--space-3); color: var(--color-text-subtle); }
 @keyframes queue-wave { to { height: 17px; } }
-@media (max-width: 560px), (max-height: 620px) {
+@media (width < 560px), (max-height: 620px) {
   .queue-panel { padding: var(--space-3); }
   .queue-panel__current { margin-top: var(--space-2); padding: var(--space-3); }
   .queue-panel__bar { margin-top: var(--space-2); }

@@ -117,7 +117,7 @@
   }
 }
 
-@media (width < 370px) {
+@media (width < 560px) {
   .play-left-section .song-image-container {
     width: 46px;
     height: 46px;

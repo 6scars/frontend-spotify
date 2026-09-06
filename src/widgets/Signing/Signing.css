@@ -19,5 +19,5 @@
 .auth-dialog__switch button { padding: 0; border: 0; background: transparent; color: var(--color-text); font-weight: 650; cursor: pointer; }
 .auth-dialog__switch button:hover { color: var(--color-accent-bright); }
 @keyframes auth-enter { from { opacity: 0; transform: translateY(12px) scale(.985); } to { opacity: 1; transform: none; } }
-@media (max-width: 560px) { .auth-overlay { padding: var(--space-3); } .auth-dialog { padding: var(--space-7) var(--space-5); } }
+@media (width < 560px) { .auth-overlay { padding: var(--space-3); } .auth-dialog { padding: var(--space-7) var(--space-5); } }
 @media (prefers-reduced-motion: reduce) { .auth-dialog { animation: none; } }

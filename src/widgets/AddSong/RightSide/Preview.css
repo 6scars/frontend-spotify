@@ -14,7 +14,7 @@
 }
 
 
-@media (max-width:490px) {
+@media (width < 560px) {
     .Preview .importedMp3-container {
         width: 120px;
     }

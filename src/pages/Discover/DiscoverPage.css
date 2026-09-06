@@ -32,12 +32,12 @@
 .discover-artist small { margin-top: 4px; color: var(--color-text-muted); font-size: .66rem; }
 .discover-artist > button { margin-left: auto; color: var(--color-text-muted); }
 
-@media (max-width: 900px) {
+@media (width < 1024px) {
   .discover-page { padding: var(--space-5); }
   .discover-artists { grid-template-columns: 1fr 1fr; }
 }
 
-@media (max-width: 620px) {
+@media (width < 768px) {
   .discover-page { padding: var(--space-4); }
   .discover-hero { min-height: 310px; }
   .discover-hero > img { inset: 0; width: 100%; opacity: .42; }
