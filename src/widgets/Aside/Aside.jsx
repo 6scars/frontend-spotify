@@ -126,11 +126,7 @@ export default function Aside() {
             <Icon name="plus" size={19} />
             <span>Stwórz playlistę</span>
           </button>
-          <button className="sidebar-profile" onClick={showAccount} type="button">
-            <span className="sidebar-profile__avatar">{isLogedIn ? 'K' : '?'}</span>
-            <span>{isLogedIn ? 'Konto' : 'Zaloguj się'}</span>
-            <Icon name="chevronRight" size={16} />
-          </button>
+        
         </div>
       </aside>
       <button
