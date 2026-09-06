@@ -28,7 +28,7 @@
     @apply bg-[var(--help-color3)] hover:bg-[var(--accent-color)]
 }
 
-@media(max-width:490px) {
+@media(width < 560px) {
     .music .song-to-add-container {
         width: 200px;
     }

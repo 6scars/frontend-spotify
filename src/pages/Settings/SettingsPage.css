@@ -22,6 +22,6 @@
 .settings-page--guest { min-height: 58vh; display: grid; place-content: center; justify-items: center; text-align: center; }
 .settings-page--guest > .ui-icon { color: var(--color-accent-bright); }
 .settings-page--guest h1 { margin: var(--space-4) 0 var(--space-5); font-size: 1.5rem; }
-@media (max-width: 760px) { .settings-page { padding: var(--space-5); } }
-@media (max-width: 560px) { .settings-page { padding: var(--space-4); } .settings-row, .settings-account-actions { align-items: flex-start; flex-direction: column; } }
+@media (width < 768px) { .settings-page { padding: var(--space-5); } }
+@media (width < 560px) { .settings-page { padding: var(--space-4); } .settings-row, .settings-account-actions { align-items: flex-start; flex-direction: column; } }
 @media (prefers-reduced-motion: reduce) { .settings-page { animation: none; } }

@@ -33,6 +33,6 @@
 .radio-page--empty h1 { margin-top: var(--space-4); font-size: 1.5rem; }
 .radio-page--empty p { max-width: 440px; margin-top: var(--space-3); color: var(--color-text-muted); line-height: 1.6; }
 @keyframes radio-wave { from { transform: scaleY(.55); opacity: .6; } to { transform: scaleY(1); opacity: 1; } }
-@media (max-width: 900px) { .radio-page { padding: var(--space-5); } .radio-stations__grid { grid-template-columns: 1fr 1fr; } }
-@media (max-width: 620px) { .radio-page { padding: var(--space-4); } .radio-stations__grid { grid-template-columns: 1fr; } .radio-queue { padding: var(--space-4); } .radio-queue__intro { align-items: flex-start; flex-direction: column; } }
+@media (width < 1024px) { .radio-page { padding: var(--space-5); } .radio-stations__grid { grid-template-columns: 1fr 1fr; } }
+@media (width < 768px) { .radio-page { padding: var(--space-4); } .radio-stations__grid { grid-template-columns: 1fr; } .radio-queue { padding: var(--space-4); } .radio-queue__intro { align-items: flex-start; flex-direction: column; } }
 @media (prefers-reduced-motion: reduce) { .radio-page, .radio-station, .radio-station__wave i { animation: none; transition: none; } }

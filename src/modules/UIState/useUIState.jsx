@@ -6,6 +6,8 @@ export function useUIState() {
     const [reloadAside, setReloadAside] = useState(false)
     const [reloadApp, setReloadApp] = useState(false)
     const [show, setShow] = useState(false);
+    const [sidebarOpen, setSidebarOpen] = useState(false)
+    const [queueOpen, setQueueOpen] = useState(false)
 
 
     const [isLoading, setIsLoading] = useState(true); /* is used in playlistDescribing, if the Playlist is loading then isLoading = true */ 
@@ -22,6 +24,8 @@ export function useUIState() {
             reloadAside, setReloadAside,
             reloadApp, setReloadApp,
             show, setShow,
+            sidebarOpen, setSidebarOpen,
+            queueOpen, setQueueOpen,
             isLoading, setIsLoading,
 
 

@@ -16,7 +16,7 @@ export default function AuthForm({
   return (
     <div aria-labelledby="auth-title" aria-modal={embedded ? undefined : 'true'} className={embedded ? 'auth-dialog auth-dialog--page' : 'auth-dialog'} role={embedded ? undefined : 'dialog'}>
       <button aria-label="Zamknij formularz" className="auth-dialog__close icon-button" onClick={clickedAccount} type="button"><Icon name="plus" size={20} /></button>
-      <div className="auth-dialog__brand"><span /><strong>NOIR</strong></div>
+      <div className="auth-dialog__brand"><span /><strong>NORII</strong></div>
       <span className="auth-dialog__eyebrow">{isSignUp ? 'NOWE KONTO' : 'WITAJ PONOWNIE'}</span>
       <h2 id="auth-title">{isSignUp ? 'Zarejestruj się' : 'Zaloguj się'}</h2>
       <p className="auth-dialog__intro">{isSignUp ? 'Utwórz konto i buduj własne playlisty.' : 'Wróć do swojej muzyki i zapisanych kolekcji.'}</p>

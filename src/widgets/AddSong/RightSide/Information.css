@@ -27,7 +27,7 @@
     @apply flex-2 p-2
 }
 
-@media(max-width:490px) {
+@media(width < 560px) {
     .right-side .form-container {
         margin:0px;
         padding: 0px;

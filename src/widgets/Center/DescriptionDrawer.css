@@ -186,7 +186,7 @@
   }
 }
 
-@media (width < 420px) {
+@media (width < 560px) {
   .description-drawer {
     inset-right: var(--space-2);
     inset-left: var(--space-2);
