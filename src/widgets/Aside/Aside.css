@@ -225,6 +225,7 @@
 
   .aside-drawer--open .aside-drawer__surface {
     transform: translateX(0);
+    border-right: 1px solid var(--color-line);
   }
 
   .aside-drawer__trigger {

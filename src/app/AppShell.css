@@ -126,6 +126,7 @@
     left: 0;
     width: 78vw;
     overflow: visible;
+    border-right: none;
   }
 
   .app-shell__workspace {
