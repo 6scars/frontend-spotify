@@ -102,7 +102,6 @@ export default function Aside() {
         className="leftBar aside-drawer__surface"
         inert={compact && !sidebarOpen}
       >
-        <button aria-label="Strona główna" className="brand-mark" onClick={showHome} type="button"><span /></button>
         <nav aria-label="Główna nawigacja" className="main-navigation">
           {navigation.map(({ icon, label, to }) => (
             <NavLink

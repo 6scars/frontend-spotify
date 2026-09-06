@@ -15,6 +15,7 @@ export default function Header() {
 
   return (
     <header className="app-header">
+       <button aria-label="Strona główna" className="app-header__brand" onClick={() => navigate(APP_ROUTES.home)} type="button"><span /></button>
       <label className="app-header__search">
         <Icon name="search" size={18} />
         <span className="sr-only">Szukaj</span>
@@ -24,6 +25,7 @@ export default function Header() {
         <button aria-label="Wstecz" className="icon-button" onClick={() => navigate(-1)} type="button"><Icon name="chevronLeft" /></button>
         <button aria-label="Dalej" className="icon-button" onClick={() => navigate(1)} type="button"><Icon name="chevronRight" /></button>
         <Sing clickedAccount={isLogedIn ? () => navigate(APP_ROUTES.account) : clickedAccount} isLogedIn={isLogedIn} />
+       
       </div>
     </header>
   );

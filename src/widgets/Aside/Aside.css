@@ -24,27 +24,6 @@
   background: linear-gradient(180deg, #08080a, #060608);
 }
 
-.brand-mark {
-  width: 42px;
-  height: 42px;
-  display: grid;
-  place-items: center;
-  margin: 0 0 var(--space-6) var(--space-2);
-  border: 0;
-  border-radius: 50%;
-  background: transparent;
-  cursor: pointer;
-}
-
-.brand-mark > span {
-  width: 28px;
-  height: 28px;
-  display: block;
-  border-radius: 50%;
-  background: radial-gradient(circle at 32% 28%, #2e2d31 0 10%, #09090b 42%, #df393d 72%, #7f171b 100%);
-  box-shadow: 0 0 20px rgba(223, 57, 61, .24);
-}
-
 .main-navigation {
   display: flex;
   flex-direction: column;
@@ -210,11 +189,6 @@
     box-shadow: 14px 0 34px rgba(0, 0, 0, .28);
   }
 
-  .brand-mark {
-    margin-right: auto;
-    margin-left: auto;
-  }
-
   .navigation-item,
   .sidebar-profile,
   .leftBar .create_playlist_button {
@@ -298,10 +272,6 @@
   .leftBar {
     padding: var(--space-4);
     box-shadow: 18px 0 48px rgba(0, 0, 0, .5);
-  }
-
-  .brand-mark {
-    margin-left: var(--space-2);
   }
 
   .navigation-item,

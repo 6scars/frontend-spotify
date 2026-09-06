@@ -10,10 +10,14 @@ const readSource = (relativePath) => readFileSync(
 
 test('header spans the viewport while side panels stay outside the central layout flow', () => {
   const shell = readSource('src/app/AppShell.css')
+  const header = readSource('src/widgets/Header/Header.jsx')
+  const aside = readSource('src/widgets/Aside/Aside.jsx')
 
   assert.match(shell, /\.app-shell__header\s*\{[^}]*grid-column:\s*1\s*\/\s*-1/s)
   assert.doesNotMatch(shell, /padding-right:\s*calc\(var\(--queue-handle-width\)/)
   assert.match(shell, /@media \(width < 1280px\)[\s\S]*\.app-shell__sidebar\s*\{[^}]*position:\s*fixed/)
+  assert.match(header, /className="app-header__brand"/)
+  assert.doesNotMatch(aside, /className="brand-mark"/)
 })
 
 test('small-screen aside is a toggleable overlay sized independently from the workspace', () => {
