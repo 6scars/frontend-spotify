@@ -4,7 +4,6 @@ import { useNavigate } from 'react-router-dom'
 import { getPlaylistRoute } from '../../app/routes.js'
 import { useAuthContext } from '../../modules/Auth/useAuthContext.js'
 import { getArtworkUrl } from '../../modules/Catalog/song.js'
-import { useCurrentPlaybackContext } from '../../modules/CurrentPlayback/useCurrentPlaybackContext.js'
 import { getPlaylistSongCount } from '../../modules/Playlists/playlist-collection.js'
 import { buildPlaylistOverview } from '../../modules/Playlists/playlist-overview.js'
 import { useUIStateContext } from '../../modules/UIState/useUIStateContext.js'
@@ -21,20 +20,16 @@ const playlistTabs = [
 export default function PlaylistsPage() {
   const navigate = useNavigate()
   const { isLogedIn, playlists } = useAuthContext()
-  const { setPlaylists_id } = useCurrentPlaybackContext()
-  const { setShowCreatePlaylistWindow, setShowPlaylistDescribing, setSigning } = useUIStateContext()
+  const { setShowCreatePlaylistWindow, setSigning } = useUIStateContext()
   const [query, setQuery] = useState('')
   const model = useMemo(() => buildPlaylistOverview(playlists, query), [playlists, query])
 
   const openPlaylist = (playlistId) => {
-    setPlaylists_id(playlistId)
     setShowCreatePlaylistWindow(false)
-    setShowPlaylistDescribing(false)
     navigate(getPlaylistRoute(playlistId))
   }
 
   const createPlaylist = () => {
-    setShowPlaylistDescribing(false)
     if (isLogedIn) setShowCreatePlaylistWindow(true)
     else setSigning(true)
   }

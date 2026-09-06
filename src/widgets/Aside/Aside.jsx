@@ -2,7 +2,6 @@ import { useEffect } from 'react'
 import { NavLink, useLocation, useNavigate } from 'react-router-dom'
 
 import { useAuthContext } from '../../modules/Auth/useAuthContext.js'
-import { useCurrentPlaybackContext } from '../../modules/CurrentPlayback/useCurrentPlaybackContext.js'
 import { useUIStateContext } from '../../modules/UIState/useUIStateContext.js'
 import { APP_ROUTES, getPlaylistRoute } from '../../app/routes.js'
 import { useCompactLayout } from '../../shared/hooks/useCompactLayout.js'
@@ -26,14 +25,12 @@ export default function Aside() {
   const {
     setQueueOpen,
     setShowCreatePlaylistWindow,
-    setShowPlaylistDescribing,
     setSidebarOpen,
     setSigning,
     show,
     showCreatePlaylistWindow,
     sidebarOpen,
   } = useUIStateContext()
-  const { setPlaylists_id } = useCurrentPlaybackContext()
   const { playlists, isLogedIn } = useAuthContext()
 
   useEffect(() => {
@@ -67,7 +64,6 @@ export default function Aside() {
     closeSidebar()
     if (showCreatePlaylistWindow) {
       setShowCreatePlaylistWindow(false)
-      setShowPlaylistDescribing(false)
     } else {
       if (isLogedIn) setShowCreatePlaylistWindow(true)
       if (!isLogedIn) setSigning(true)
@@ -75,23 +71,14 @@ export default function Aside() {
   }
 
   const choosePlaylist = (playlistId) => {
-    setPlaylists_id(playlistId)
     setShowCreatePlaylistWindow(false)
-    setShowPlaylistDescribing(false)
     closeSidebar()
     navigate(getPlaylistRoute(playlistId))
   }
 
   const showHome = () => {
     setShowCreatePlaylistWindow(false)
-    setShowPlaylistDescribing(false)
     closeSidebar()
-  }
-
-  const showAccount = () => {
-    closeSidebar()
-    if (isLogedIn) navigate(APP_ROUTES.account)
-    else setSigning(true)
   }
 
   return (

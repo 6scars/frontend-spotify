@@ -3,7 +3,6 @@ import { useNavigate } from 'react-router-dom'
 import { getPlaylistRoute } from '../../app/routes.js'
 import { useAuthContext } from '../../modules/Auth/useAuthContext.js'
 import { getArtworkUrl } from '../../modules/Catalog/song.js'
-import { useCurrentPlaybackContext } from '../../modules/CurrentPlayback/useCurrentPlaybackContext.js'
 import { useLibrary } from '../../modules/Library/useLibrary.js'
 import { getPlaylistSongCount } from '../../modules/Playlists/playlist-collection.js'
 import { useUIStateContext } from '../../modules/UIState/useUIStateContext.js'
@@ -21,19 +20,15 @@ const libraryFilters = [
 export default function LibraryPage() {
   const navigate = useNavigate()
   const { isLogedIn, playlists } = useAuthContext()
-  const { setPlaylists_id } = useCurrentPlaybackContext()
-  const { setShowCreatePlaylistWindow, setShowPlaylistDescribing, setSigning } = useUIStateContext()
+  const { setShowCreatePlaylistWindow, setSigning } = useUIStateContext()
   const { layout, model, query, setLayout, setQuery, setSort, sort } = useLibrary(playlists)
 
   const openPlaylist = (playlistId) => {
-    setPlaylists_id(playlistId)
     setShowCreatePlaylistWindow(false)
-    setShowPlaylistDescribing(false)
     navigate(getPlaylistRoute(playlistId))
   }
 
   const createPlaylist = () => {
-    setShowPlaylistDescribing(false)
     if (isLogedIn) setShowCreatePlaylistWindow(true)
     else setSigning(true)
   }

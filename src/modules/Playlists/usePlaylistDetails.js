@@ -10,7 +10,7 @@ export function usePlaylistDetails(playlistId) {
   const [playlistData, setPlaylistData] = useState([])
   const [isLoading, setIsLoading] = useState(true)
   const [error, setError] = useState(null)
-  const { currentSong, setCurrentPlaylist, setCurrentPlaylistI, setPlaylists_id } = useCurrentPlaybackContext()
+  const { currentSong, setCurrentPlaylist, setCurrentPlaylistI } = useCurrentPlaybackContext()
   const { chooseSong } = usePlayerContext()
   const model = useMemo(() => buildPlaylistPageModel(playlistData), [playlistData])
 
@@ -21,8 +21,6 @@ export function usePlaylistDetails(playlistId) {
       setIsLoading(true)
       setError(null)
       setPlaylistData([])
-      setPlaylists_id(playlistId)
-
       try {
         const response = await fetch(`${BACKEND_URL}/api/getPlaylistData?id=${encodeURIComponent(playlistId)}`, {
           signal: controller.signal,
@@ -39,7 +37,7 @@ export function usePlaylistDetails(playlistId) {
 
     loadPlaylist()
     return () => controller.abort()
-  }, [playlistId, setPlaylists_id])
+  }, [playlistId])
 
   const playTrack = async (songId) => {
     const index = model.tracks.findIndex((track) => String(getSongId(track)) === String(songId))

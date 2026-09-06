@@ -16,19 +16,17 @@ import { useCurrentPlaybackContext }  from "./modules/CurrentPlayback/useCurrent
 
 export default function MiniSpotify() {
   const { setIsLogedIn, playlists, fetchAuthState } = useAuthContext();
-  const { signing, setShowCreatePlaylistWindow, setShowPlaylistDescribing, reloadAside, reloadApp } = useUIStateContext();
+  const { signing, setShowCreatePlaylistWindow, reloadAside } = useUIStateContext();
   const { currentSong } = useCurrentPlaybackContext()
 
   useEffect(() => {
     setIsLogedIn(false);
     setShowCreatePlaylistWindow(false)
-    setShowPlaylistDescribing(false)
-
     const fetch = async () => {
       await fetchAuthState()
     }
     fetch();
-  }, [fetchAuthState, reloadAside, reloadApp, setIsLogedIn, setShowCreatePlaylistWindow, setShowPlaylistDescribing]);
+  }, [fetchAuthState, reloadAside, setIsLogedIn, setShowCreatePlaylistWindow]);
 
 
   return (

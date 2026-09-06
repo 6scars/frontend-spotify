@@ -7,13 +7,9 @@ export function useCurrentVariables() {
     const [currentPlaylist, setCurrentPlaylist] = useState([]);
     /*currentPlaylistI saves current iteration/position in the currentPlaylist*/
     const [currentPlaylistI, setCurrentPlaylistI] = useState(null);
-    const [playlist_id, setPlaylists_id] = useState(null);
-
-
     return {
         currentSong, setCurrentSong,
         currentPlaylist, setCurrentPlaylist,
-        currentPlaylistI, setCurrentPlaylistI,
-        playlist_id, setPlaylists_id
+        currentPlaylistI, setCurrentPlaylistI
     }
 }
